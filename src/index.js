@@ -1,4 +1,4 @@
-import basic1 from './basic1'
-import basic2 from './basic2'
+import dummy1 from './dummy1'
+import dummy2 from './dummy2'
 
-export default [basic1, basic2]
+export default [dummy1, dummy2]
