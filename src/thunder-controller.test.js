@@ -24,8 +24,8 @@ export default {
         const expectedKeys = {
           callsign: 'string',
           locator: 'string',
-          autostart: 'boolean', // deliberately failing this one for demo purposes
-          classname: 'boolean', // deliberately failing this one for demo purposes
+          //autostart: 'boolean', // deliberately failing this one for demo purposes
+          classname: 'string', // deliberately failing this one for demo purposes
           state: 'string',
           processedrequests: 'number',
           processedobjects: 'number',
