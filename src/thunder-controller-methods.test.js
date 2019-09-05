@@ -11,7 +11,6 @@ export default {
           this.$log(`Found ${result.length} plugins`)
           return result
         }).catch( err => err )
-        console.log('Whooo')
       },
       validate(result) {
         return this.$expect(result).to.be.array() === true
