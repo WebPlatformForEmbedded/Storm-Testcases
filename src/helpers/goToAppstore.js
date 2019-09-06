@@ -1,5 +1,4 @@
 export default function(appStoreUrl) {
-  console.log(appStoreUrl)
   return this.$sequence([
     () =>
       this.$thunder.api.Controller.activate({ callsign: 'WebKitBrowser' })
