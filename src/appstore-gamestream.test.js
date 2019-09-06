@@ -7,12 +7,30 @@ export default {
   title: 'App Store - Game Stream',
   description: 'Navigate through the App Store and open the Gamestream App',
   setup() {
+    this.$thunder.api.WebKitBrowser.on('urlchange', data => {
+      this.$data.write('currentUrl', data.url)
+    })
     return goToAppStore.call(this, appStoreUrl)
   },
   steps: [
     {
-      description: 'Navigate to Weather App',
-      sleep: 2,
+      description: 'Navigate to Gamestream App',
+      sleep() {
+        // sleep until the app store has loaded ...
+        return new Promise((resolve, reject) => {
+          let attempts = 0
+          const interval = setInterval(() => {
+            attempts++
+            if (this.$data.read('currentUrl') === appStoreUrl) {
+              clearInterval(interval)
+              resolve()
+            } else if (attempts > 10) {
+              clearInterval(interval)
+              reject('Appstore not loaded within time limit')
+            }
+          }, 1000)
+        })
+      },
       test() {
         return this.$thunder.remoteControl.right(5)
       },
@@ -27,7 +45,24 @@ export default {
     },
     {
       description: 'Navigate to a game',
-      sleep: 10,
+      sleep() {
+        // sleep until the app has loaded ...
+        return new Promise((resolve, reject) => {
+          let attempts = 0
+          const interval = setInterval(() => {
+            attempts++
+            if (
+              this.$data.read('currentUrl').indexOf('app:com.metrological.app.GameStreams') > -1
+            ) {
+              clearInterval(interval)
+              resolve()
+            } else if (attempts > 10) {
+              clearInterval(interval)
+              reject('App not loaded within time limit')
+            }
+          }, 1000)
+        })
+      },
       test() {
         return this.$thunder.remoteControl
           .right()

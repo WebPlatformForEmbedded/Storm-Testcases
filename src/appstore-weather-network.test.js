@@ -7,12 +7,30 @@ export default {
   title: 'App Store - Weather network',
   description: 'Navigate through the App Store and open the Weather network App',
   setup() {
+    this.$thunder.api.WebKitBrowser.on('urlchange', data => {
+      this.$data.write('currentUrl', data.url)
+    })
     return goToAppStore.call(this, appStoreUrl)
   },
   steps: [
     {
       description: 'Navigate to Weather App',
-      sleep: 2,
+      sleep() {
+        // sleep until the app store has loaded ...
+        return new Promise((resolve, reject) => {
+          let attempts = 0
+          const interval = setInterval(() => {
+            attempts++
+            if (this.$data.read('currentUrl') === appStoreUrl) {
+              clearInterval(interval)
+              resolve()
+            } else if (attempts > 10) {
+              clearInterval(interval)
+              reject('Appstore not loaded within time limit')
+            }
+          }, 1000)
+        })
+      },
       test() {
         return this.$thunder.remoteControl.right(6)
       },
@@ -27,7 +45,22 @@ export default {
     },
     {
       description: 'Click ok and open the first video',
-      sleep: 10,
+      sleep() {
+        // sleep until the app has loaded ...
+        return new Promise((resolve, reject) => {
+          let attempts = 0
+          const interval = setInterval(() => {
+            attempts++
+            if (this.$data.read('currentUrl').indexOf('com.metrological.app.WeatherNetwork') > -1) {
+              clearInterval(interval)
+              resolve()
+            } else if (attempts > 10) {
+              clearInterval(interval)
+              reject('App not loaded within time limit')
+            }
+          }, 1000)
+        })
+      },
       test() {
         return this.$thunder.remoteControl.ok()
       },
