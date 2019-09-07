@@ -3,14 +3,19 @@ import goToAppStore from './helpers/goToAppstore'
 const appStoreUrl =
   'http://widgets.metrological.com/lightning/metrological/8c166615d232122a553531608270e5f3?direct=true&texture#boot'
 
+let listener
+
 export default {
   title: 'App Store - Weather network',
   description: 'Navigate through the App Store and open the Weather network App',
   setup() {
-    this.$thunder.api.WebKitBrowser.on('urlchange', data => {
+    listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
       this.$data.write('currentUrl', data.url)
     })
     return goToAppStore.call(this, appStoreUrl)
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {
@@ -107,6 +112,8 @@ export default {
     },
   ],
   validate() {
-    return this.$thunder.WebKitBrowser.url().then(url => this.$expect(url) === appStoreUrl)
+    return this.$thunder.api.WebKitBrowser.url().then(
+      url => this.$expect(url).equal(appStoreUrl) === true
+    )
   },
 }

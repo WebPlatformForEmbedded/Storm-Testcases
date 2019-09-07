@@ -3,14 +3,19 @@ import goToAppStore from './helpers/goToAppstore'
 const appStoreUrl =
   'http://widgets.metrological.com/lightning/metrological/8c166615d232122a553531608270e5f3?direct=true&texture#boot'
 
+let listener
+
 export default {
   title: 'App Store - Game Stream',
   description: 'Navigate through the App Store and open the Gamestream App',
   setup() {
-    this.$thunder.api.WebKitBrowser.on('urlchange', data => {
+    listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
       this.$data.write('currentUrl', data.url)
     })
     return goToAppStore.call(this, appStoreUrl)
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {
@@ -92,7 +97,7 @@ export default {
     },
     {
       description: 'Exit the App after watching the video for 30 seconds',
-      sleep: 30,
+      sleep: 10,
       test() {
         return this.$thunder.remoteControl.exit()
       },
@@ -100,6 +105,8 @@ export default {
     },
   ],
   validate() {
-    return this.$thunder.WebKitBrowser.url().then(url => this.$expect(url) === appStoreUrl)
+    return this.$thunder.api.WebKitBrowser.url().then(
+      url => this.$expect(url).equal(appStoreUrl) === true
+    )
   },
 }
