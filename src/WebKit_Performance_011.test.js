@@ -12,7 +12,7 @@ const resultURL = 'http://peacekeeper.futuremark.com/results'
 
 export default {
   title: 'WPEWebkit Peacekeeper Benchmark test',
-  description: 'Loads the Peacekeeper Benchmark test and get the results123456',
+  description: 'Loads the Peacekeeper Benchmark test and get the results',
   steps: [
     {
       description: 'Deactivating monitor',
