@@ -5,13 +5,13 @@ export default {
     return this.$thunder.api
       .call('Controller', 'status')
       .then(result => {
-        const selectedPlugin = result.filter(_p => {
+        const selectedPlugin = result.filter(plugin => {
           // pick a relatively low-impact plugin
           if (
-            (_p.callsign === 'DeviceInfo' ||
-              _p.callsign === 'WebServer' ||
-              _p.callsign === 'Dictionary') &&
-            _p.state === 'activated'
+            (plugin.callsign === 'DeviceInfo' ||
+              plugin.callsign === 'WebServer' ||
+              plugin.callsign === 'Dictionary') &&
+            plugin.state === 'activated'
           )
             return true
         })[0].callsign
@@ -28,13 +28,13 @@ export default {
       description: 'Deactivate plugin',
       test() {
         return new Promise((resolve, reject) => {
-          let _callsign = this.$data.read('selectedPlugin')
+          let callsign = this.$data.read('selectedPlugin')
 
-          let _checkEvent = event => {
+          let checkEvent = event => {
             if (event.data === undefined) return
 
             let data = event.data
-            if (event.callsign === _callsign && data.state === 'deactivated') {
+            if (event.callsign === callsign && data.state === 'deactivated') {
               this.$log('Plugin is deactivated')
               listener.dispose()
               resolve(true)
@@ -42,9 +42,9 @@ export default {
           }
 
           //check notification for deactivation
-          let listener = this.$thunder.api.on('Controller', 'all', _checkEvent)
+          let listener = this.$thunder.api.on('Controller', 'all', checkEvent)
           this.$thunder.api
-            .call('Controller', 'deactivate', { callsign: _callsign })
+            .call('Controller', 'deactivate', { callsign: callsign })
             .then(() => true)
             .catch(err => {
               reject(err)
@@ -56,11 +56,11 @@ export default {
     {
       description: 'Check if plugin deactivated from status',
       test() {
-        let _callsign = this.$data.read('selectedPlugin')
+        let callsign = this.$data.read('selectedPlugin')
         return this.$thunder.api.call('Controller', 'status').then(result => {
           return (
             result.filter(p => {
-              if (p.callsign === _callsign && p.state === 'deactivated') return true
+              if (p.callsign === callsign && p.state === 'deactivated') return true
               else return false
             }).length === 1
           )
@@ -72,13 +72,13 @@ export default {
       description: 'Activate plugin',
       test() {
         return new Promise((resolve, reject) => {
-          let _callsign = this.$data.read('selectedPlugin')
+          let callsign = this.$data.read('selectedPlugin')
 
-          let _checkEvent = event => {
+          let checkEvent = event => {
             if (event.data === undefined) return
 
             let data = event.data
-            if (event.callsign === _callsign && data.state === 'activated') {
+            if (event.callsign === callsign && data.state === 'activated') {
               this.$log('Plugin is deactivated')
               listener.dispose()
               resolve(true)
@@ -86,9 +86,9 @@ export default {
           }
 
           //check notification for deactivation
-          let listener = this.$thunder.api.on('Controller', 'all', _checkEvent)
+          let listener = this.$thunder.api.on('Controller', 'all', checkEvent)
           this.$thunder.api
-            .call('Controller', 'activate', { callsign: _callsign })
+            .call('Controller', 'activate', { callsign: callsign })
             .then(() => true)
             .catch(err => {
               reject(err)
@@ -100,11 +100,11 @@ export default {
     {
       description: 'Check if plugin activated from status',
       test() {
-        let _callsign = this.$data.read('selectedPlugin')
+        let callsign = this.$data.read('selectedPlugin')
         return this.$thunder.api.call('Controller', 'status').then(result => {
           return (
             result.filter(p => {
-              if (p.callsign === _callsign && p.state === 'activated') return true
+              if (p.callsign === callsign && p.state === 'activated') return true
               else return false
             }).length === 1
           )

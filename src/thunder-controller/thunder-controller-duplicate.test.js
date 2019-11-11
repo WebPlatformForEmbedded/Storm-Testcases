@@ -13,21 +13,21 @@ export default {
           .catch(err => err)
       },
       validate(result) {
-        let _foundPlugins = []
-        if (this.$expect(result).to.be.array() === true) {
-          return (
-            result.filter(p => {
-              if (_foundPlugins.indexOf(p.callsign === -1)) {
-                _foundPlugins.push(p.callsign)
-                return false
-              } else {
-                return true
-              }
-            }).length === 0
-          )
-        } else {
+        const foundPlugins = []
+        if (this.$expect(result).to.be.array() === false) {
           return false
         }
+
+        return (
+          result.filter(p => {
+            if (foundPlugins.indexOf(p.callsign === -1)) {
+              foundPlugins.push(p.callsign)
+              return false
+            } else {
+              return true
+            }
+          }).length === 0
+        )
       },
     },
   ],

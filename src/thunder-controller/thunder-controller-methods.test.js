@@ -21,14 +21,14 @@ export default {
     {
       description: 'Select a plugin and activate/deactivate it, check if notifications work',
       test() {
-        let _plugins = this.$data.read('status')
+        let plugins = this.$data.read('status')
 
-        const selectedPlugin = _plugins.filter(_p => {
+        const selectedPlugin = plugins.filter(plugin => {
           // pick a relatively low-impact plugin
           if (
-            _p.callsign === 'DeviceInfo' ||
-            _p.callsign === 'WebServer' ||
-            _p.callsign === 'Dictionary'
+            plugin.callsign === 'DeviceInfo' ||
+            plugin.callsign === 'WebServer' ||
+            plugin.callsign === 'Dictionary'
           )
             return true
         })[0].callsign

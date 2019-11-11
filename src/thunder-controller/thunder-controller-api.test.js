@@ -60,14 +60,14 @@ export default {
     {
       description: 'Send custom call to Thunder',
       test() {
-        let _calls = this.$data.read('calls')
-        let _current = _calls.pop()
-        this.$data.write('calls', _calls)
+        const calls = this.$data.read('calls')
+        const current = calls.pop()
+        this.$data.write('calls', calls)
 
-        this.$log('Sending', _current)
+        this.$log('Sending', current)
 
         return this.$thunder.api
-          .call(_current.plugin, _current.method, _current.params)
+          .call(current.plugin, current.method, current.params)
           .then(() => true)
           .catch(err => {
             this.$log('Thunder response', err)
