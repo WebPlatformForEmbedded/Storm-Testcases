@@ -5,9 +5,10 @@ export default {
     {
       description: 'Getting Device Info',
       test() {
-        return this.$thunder.DeviceInfo.systeminfo()
+        return this.$thunder.api.DeviceInfo.systeminfo()
       },
       validate(result) {
+        console.log(result)
         if (this.$expect(result).to.be.object() !== true) {
           return false
         }
@@ -29,7 +30,7 @@ export default {
     {
       description: 'Activating the Webkit plugin',
       test() {
-        return this.$thunder.Controller.activate({ callsign: 'WebKitBrowser' })
+        return this.$thunder.api.Controller.activate({ callsign: 'WebKitBrowser' })
           .then(() => true)
           .catch(err => err)
       },
@@ -38,7 +39,7 @@ export default {
     {
       description: 'Setting the URL to metrological.com',
       test(url) {
-        return this.$thunder.WebKitBrowser.url(url)
+        return this.$thunder.api.WebKitBrowser.url(url)
           .then(() => {
             this.$log('Set url to ' + url)
             return true
@@ -52,7 +53,7 @@ export default {
       description: 'Confirming the URL is set to metrological.com',
       sleep: 2,
       test() {
-        return this.$thunder.WebKitBrowser.url()
+        return this.$thunder.api.WebKitBrowser.url()
           .then(result => result)
           .catch(err => err)
       },
