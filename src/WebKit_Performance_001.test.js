@@ -1,88 +1,69 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  webKitBrowserActions,
-  settingUrl,
-} from './commonMethods/commonFunctions'
-import {
-  validateFPS,
-  initializeSamplesArray,
-  fetchFPS,
-  calcAvgFPS,
-} from './commonMethods/webKitPerformanceCommonFunctions'
+import { setWebKitUrl, calcAvgFPS, webKitBrowserOps } from './commonMethods/commonFunctions'
+import { fetchWebKitFPS } from './commonMethods/webKitPerformanceCommonFunctions'
 import constants from './commonMethods/constants'
 
-const URL = 'http://webkit.org/blog-files/3d-transforms/poster-circle.html'
-let minFPS = 40
+let URL = 'http://webkit.org/blog-files/3d-transforms/poster-circle.html'
+let listener
 
 export default {
   setup() {
-    initializeSamplesArray()
+    this.$data.write('samples', [])
+    return this.$sequence([
+      () => webKitBrowserOps.call(this),
+      () =>
+        (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
+          this.$data.write('currentUrl', data.url)
+        })),
+    ])
+  },
+  teardown() {
+    setWebKitUrl.call(this, constants.blankUrl)
+    listener.dispose()
+  },
+  context: {
+    minFPS: 40,
   },
   title: 'WPEWebkit performance poster circle',
   description: 'Loads the Poster Circle CSS3 animation and measures its performance',
   steps: [
     {
-      description: 'Deactivating monitor',
-      test: pluginDeactivate,
-      params: constants.monitorPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Deactivating WebKitBrowser',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activating WebKitBrowser',
-      test: pluginActivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'suspended',
-    },
-    {
-      description: 'Resuming WebKitBrowser',
-      test: webKitBrowserActions,
-      params: constants.resume,
-      assert: 'resumed',
-    },
-    {
       description: 'Navigating to Poster Circle URL',
-      test: settingUrl,
+      test: setWebKitUrl,
       params: URL,
       assert: URL,
     },
     {
-      description: 'Sleeping for 5 seconds',
-      sleep: 5,
-      test() {
-        this.$log('Sleeping for 5 seconds')
+      description: 'Sleep until URL is loaded',
+      sleep() {
+        // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
+        return new Promise((resolve, reject) => {
+          let attempts = 0
+          const interval = setInterval(() => {
+            attempts++
+            if (this.$data.read('currentUrl') === URL) {
+              clearInterval(interval)
+              resolve()
+            } else if (attempts > 10) {
+              clearInterval(interval)
+              reject('URL not loaded within time limit')
+            }
+          }, 1000)
+        })
       },
     },
     {
       description: 'Fetch FPS',
       repeat: 11,
-      test: fetchFPS,
+      test: fetchWebKitFPS,
       //Assertion is not required as it is handled in fetchFPS function
     },
     {
       description: 'Calculate average FPS',
       test: calcAvgFPS,
-      validate(results) {
-        validateFPS(results, minFPS)
-      },
-    },
-    {
-      description: 'Activating Monitor Plugin',
-      test: pluginActivate,
-      params: constants.monitorPlugin,
-      assert: 'activated',
-    },
-    {
-      description: 'Setting the URL to Blank',
-      test: settingUrl,
-      params: constants.blankUrl,
-      assert: constants.blankUrl,
     },
   ],
+  validate() {
+    let average = this.$data.read('average')
+    return this.$expect(Math.ceil(average)).to.be.greaterThan(this.$context.read('minFPS'))
+  },
 }

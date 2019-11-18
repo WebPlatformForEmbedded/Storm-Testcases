@@ -58,21 +58,37 @@ export const webKitBrowserActions = function(action) {
  * @param URL
  * @returns URL
  */
-export const settingUrl = function(URL) {
+export const setWebKitUrl = function(URL) {
   return this.$thunder.api.WebKitBrowser.url(URL)
     .then(() => this.$thunder.api.WebKitBrowser.url().then(url => url))
     .catch(err => err)
 }
 
 /**
- * This function checks whether URL is loaded or not
- * @param URL
- * @returns {PromiseLike<boolean> | Promise<boolean>}
+ * This function calculates the average of FPS samples collected in fetchFPS function
+ * @returns {results}
  */
-export const isUrlLoaded = function(URL) {
-  return this.$thunder.api.WebKitBrowser.url()
-    .then(url => {
-      return url === URL
-    })
-    .catch(err => err)
+export const calcAvgFPS = function() {
+  let sum = 0
+  let average
+  let samples = this.$data.read('samples')
+  for (let i = 0; i < samples.length; i++) {
+    sum += samples[i]
+  }
+  average = sum / samples.length
+  average = average.toFixed(2)
+  this.$data.write('average', average)
+}
+/**
+ * This function performs below operations on WebKitBrowser Plugin
+ *  - Deactivate
+ *  - Activate
+ *  - Resume
+ */
+export const webKitBrowserOps = function() {
+  return this.$sequence([
+    () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
+    () => pluginActivate.call(this, constants.webKitBrowserPlugin),
+    () => webKitBrowserActions.call(this, constants.resume),
+  ])
 }

@@ -1,83 +1,79 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  webKitBrowserActions,
-  settingUrl,
-  isUrlLoaded,
-} from './commonMethods/commonFunctions'
+import { setWebKitUrl, webKitBrowserOps } from './commonMethods/commonFunctions'
 import constants from './commonMethods/constants'
 
 const URL = 'http://peacekeeper.futuremark.com/run.action'
-const resultURL = 'http://peacekeeper.futuremark.com/results'
+let listener
 
 export default {
   title: 'WPEWebkit Peacekeeper Benchmark test',
   description: 'Loads the Peacekeeper Benchmark test and get the results',
+  context: {
+    resultURL: 'http://peacekeeper.futuremark.com/results',
+  },
+  setup() {
+    return this.$sequence([
+      () => webKitBrowserOps.call(this),
+      () =>
+        (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
+          this.$data.write('currentUrl', data.url)
+        })),
+    ])
+  },
+  teardown() {
+    setWebKitUrl.call(this, constants.blankUrl)
+    listener.dispose()
+  },
   steps: [
     {
-      description: 'Deactivating monitor',
-      test: pluginDeactivate,
-      params: constants.monitorPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Deactivating WebKitBrowser',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activating WebKitBrowser',
-      test: pluginActivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'suspended',
-    },
-    {
-      description: 'Resuming WebKitBrowser',
-      test: webKitBrowserActions,
-      params: constants.resume,
-      assert: 'resumed',
-    },
-    {
       description: 'Navigating to Load http://peacekeeper.futuremark.com/run.action',
-      test: settingUrl,
+      test: setWebKitUrl,
       params: URL,
       assert: URL,
     },
     {
-      description: 'Check if URL is loaded',
-      sleep: 15,
-      test: isUrlLoaded,
-      params: URL,
-      assert: true,
+      description: 'Sleep until URL is loaded',
+      sleep() {
+        // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
+        return new Promise((resolve, reject) => {
+          let attempts = 0
+          const interval = setInterval(() => {
+            attempts++
+            if (this.$data.read('currentUrl') === URL) {
+              clearInterval(interval)
+              resolve()
+            } else if (attempts > 10) {
+              clearInterval(interval)
+              reject('URL not loaded within time limit')
+            }
+          }, 1000)
+        })
+      },
     },
     {
       description: 'Validate the test by verifying if the url is still loaded',
-      sleep: 480,
+      sleep() {
+        // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
+        return new Promise((resolve, reject) => {
+          const interval = setInterval(() => {
+            if (this.$data.read('currentUrl') === this.$context.read('resultURL')) {
+              clearInterval(interval)
+              resolve()
+            }
+            reject('URL not loaded within time limit')
+          }, 480000)
+        })
+      },
       test() {
         this.$thunder.api.WebKitBrowser.url().then(url => {
           let PeacekeeperUrl = url.split('?')
-          let result = PeacekeeperUrl[0]
-          if (result === resultURL) return true
-          else {
-            throw (new Error(`Expected ${result} while result was ${URL}`),
-            this.$log(`Expected ${result} while result was ${URL}`))
-          }
+          this.$data.write('result', PeacekeeperUrl[0])
         })
       },
-      assert: true,
-    },
-    {
-      description: 'Setting the URL to Blank',
-      test: settingUrl,
-      params: constants.blankUrl,
-      assert: constants.blankUrl,
-    },
-    {
-      description: 'Activating Monitor Plugin',
-      test: pluginActivate,
-      params: constants.monitorPlugin,
-      assert: 'activated',
     },
   ],
+  validate() {
+    let result = this.$data.read('result')
+    if (result === this.$context.read('resultURL')) return true
+    else return false
+  },
 }
