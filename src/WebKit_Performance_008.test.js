@@ -1,7 +1,7 @@
 import baseTest from './WebKit_Performance_001.test.js'
 import { setWebKitUrl } from './commonMethods/commonFunctions'
 
-const URL = 'http://helloracer.com/webgl/'
+const URL = 'https://www.websocket.org/demos/racer/run/'
 
 export default {
   ...baseTest,
@@ -9,7 +9,7 @@ export default {
     title: 'WPEWebkit performance helloracer',
     description: 'Loads the Helloracer WebGL animation and measures its performance',
     steps: baseTest.steps.map((step, index) => {
-      if (index === 1) {
+      if (index === 0) {
         return {
           description: 'Navigating to Helloracer WebGL',
           test: setWebKitUrl,
@@ -17,7 +17,7 @@ export default {
           assert: URL,
         }
       }
-      if (index === 2) {
+      if (index === 1) {
         return {
           description: 'Sleep until URL is loaded',
           sleep() {

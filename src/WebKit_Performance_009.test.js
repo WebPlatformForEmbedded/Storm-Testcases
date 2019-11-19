@@ -12,7 +12,7 @@ export default {
       minFPS: 5,
     },
     steps: baseTest.steps.map((step, index) => {
-      if (index === 1) {
+      if (index === 0) {
         return {
           description: 'Navigating to pasta WebGL',
           test: setWebKitUrl,
@@ -20,7 +20,7 @@ export default {
           assert: URL,
         }
       }
-      if (index === 2) {
+      if (index === 1) {
         return {
           description: 'Sleep until URL is loaded',
           sleep() {

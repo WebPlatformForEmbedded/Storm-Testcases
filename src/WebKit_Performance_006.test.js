@@ -1,7 +1,7 @@
 import baseTest from './WebKit_Performance_001.test.js'
 import { setWebKitUrl } from './commonMethods/commonFunctions'
 
-const URL = 'http://ie.microsoft.com/testdrive/performance/fishietank/'
+const URL = 'https://testdrive-archive.azurewebsites.net/Performance/FishIETank/Default.html'
 
 export default {
   ...baseTest,
@@ -12,7 +12,7 @@ export default {
       minFPS: 2,
     },
     steps: baseTest.steps.map((step, index) => {
-      if (index === 1) {
+      if (index === 0) {
         return {
           description: 'Navigating to Fish IE tank canvas',
           test: setWebKitUrl,
@@ -20,7 +20,7 @@ export default {
           assert: URL,
         }
       }
-      if (index === 2) {
+      if (index === 1) {
         return {
           description: 'Sleep until URL is loaded',
           sleep() {
