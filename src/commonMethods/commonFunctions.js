@@ -1,6 +1,6 @@
-import constants from '../commonMethods/constants'
+import constants from './constants'
 import moment from 'moment'
-const httpreq = require('http')
+const _http = require('http')
 const Client = require('ssh2').Client
 const URL = require('url')
 const http = require('http')
@@ -118,41 +118,44 @@ export const checkIfProcessIsRunning = function(process) {
  * @param opts
  * @param cb
  */
-export const exec = function(opts, cb) {
+export const exec = async function(opts) {
   var conn = new Client()
-  conn
-    .on('ready', function() {
-      conn.exec(opts.cmd, function(err, stream) {
-        var res = ''
-        if (err) throw new Error(`Error starting ${opts.cmd}: ${err}`)
-        if (opts.cbWhenStarted === true) cb()
-
-        stream
-          .on('close', function(code, signal) {
-            stream.end()
-            conn.end()
-            if (opts.cbWhenStarted !== true) cb(res)
-          })
-          .on('data', function(data) {
-            res += data
-          })
-          .stderr.on('data', function(data) {})
+  let execCmd = new Promise((resolve, reject) => {
+    conn
+      .on('ready', function() {
+        return conn.exec(opts.cmd, function(err, stream) {
+          var res = ''
+          if (err) reject(err)
+          if (opts.cbWhenStarted === true) resolve(true)
+          stream
+            .on('close', function(code, signal) {
+              stream.end()
+              conn.end()
+              if (opts.cbWhenStarted !== true) resolve(res)
+            })
+            .on('data', function(data) {
+              res += data
+            })
+            .stderr.on('data', function(data) {})
+        })
       })
-    })
-    .connect({
-      host: constants.host,
-      port: 22,
-      username: 'root',
-      password: 'root',
+      .connect({
+        host: constants.host,
+        port: 22,
+        username: 'root',
+        password: 'root',
+      })
+    conn.on('timeout', function(e) {
+      throw new Error(`{opts.cmd}: Timeout while connecting to ${constants.host}`)
     })
 
-  conn.on('timeout', function(e) {
-    throw new Error(`{opts.cmd}: Timeout while connecting to ${constants.host}`)
+    conn.on('error', function(err) {
+      throw new Error(`${opts.cmd}:  ${err}`)
+    })
   })
 
-  conn.on('error', function(err) {
-    throw new Error(`${opts.cmd}:  ${err}`)
-  })
+  let result = await execCmd
+  return result
 }
 
 /**
@@ -179,7 +182,7 @@ export const screenshot = async function() {
   let url = `http://${constants.host}:80/Service/Snapshot/Capture?${moment().valueOf()}`
   // create a new promise inside of the async function
   let bufferData = new Promise((resolve, reject) => {
-    httpreq
+    _http
       .get(url, function(res) {
         if (res.headers['content-length'] === undefined)
           this.$log(
@@ -217,18 +220,18 @@ export const killProcess = function(process) {
 }
 
 /**
- * This function is used to start the framework
+ * This function is used to stop the process
+ * @param process
  */
-export const startFramework = function() {
-  exec({ cmd: 'nohup WPEFramework WPEProcess -b &', cbWhenStarted: true }, err => {
+export const stopProcess = function(process) {
+  return exec({ cmd: `killall ${process}` }, () => {
     return true
   })
 }
+export const startFramework = function() {
+  return exec({ cmd: 'nohup WPEFramework WPEProcess -b &', cbWhenStarted: true })
+}
 
-/**
- * This function is used to create the server
- * @param requestFunction
- */
 export const startHttpServer = function(requestFunction) {
   let data = this.$data.read('app')
   let server = http.createServer(function(req, res) {
@@ -241,10 +244,6 @@ export const startHttpServer = function(requestFunction) {
   })
 }
 
-/**
- * This function is used to match the IP range of local server and the RbPi
- * @returns {*}
- */
 export const matchIpRange = function() {
   let ip = constants.host
   let localInterfaces = os.networkInterfaces()
@@ -345,9 +344,18 @@ export const getControllerPluginData = function() {
  * @param plugin
  * @returns {Promise<AxiosResponse<any>>}
  */
-export const putRequestForPlugin = function(plugin, cb) {
-  this.$http
+export const putRequestForPlugin = function() {
+  return this.$http
     .put(`http://${constants.host}:80/Service/Provisioning`)
     .then(result => result)
     .catch(err => err)
+}
+
+/**
+ * This function stops the WPE Framework Process
+ * @returns {boolean}
+ */
+export const stopWPEFramework = function() {
+  stopProcess('WPEFramework')
+  return true
 }

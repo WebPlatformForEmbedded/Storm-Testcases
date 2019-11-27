@@ -15,6 +15,7 @@ export default {
   webServerPlugin: 'WebServer',
   webServerImplementation: 'WebServerImplementation',
   provisioningPlugin: 'Provisioning',
+  WPEProcess: 'WPEProcess',
 
   //Plugin states
   activate: 'activate',
