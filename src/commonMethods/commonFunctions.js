@@ -352,6 +352,42 @@ export const putRequestForPlugin = function() {
 }
 
 /**
+ * This function is used to perform GET request operation on the URL
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getReqURL = function(URL) {
+  return this.$http
+    .get(URL)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get response from URL based on the Method type
+ * @param methodType
+ * @param url
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getResponseForURLRequest = function(methodType, url) {
+  if (methodType === 'GET') {
+    return getReqURL.call(this, url)
+  } else if (methodType === 'PUT') {
+    return putReqURL.call(this, url)
+  }
+}
+
+/**
+ * This function is used to perform {PUT} request operation on the URL
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const putReqURL = function(URL) {
+  return this.$http
+    .put(URL)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
  * This function stops the WPE Framework Process
  * @returns {boolean}
  */
