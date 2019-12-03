@@ -208,7 +208,6 @@ export const screenshot = async function() {
   let result = await bufferData
   this.$data.write('screenshotResult', result)
 }
-
 /**
  * This function is used to kill the process
  * @param process
