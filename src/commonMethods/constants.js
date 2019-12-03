@@ -16,6 +16,7 @@ export default {
   webServerImplementation: 'WebServerImplementation',
   provisioningPlugin: 'Provisioning',
   WPEProcess: 'WPEProcess',
+  remoteControlPlugin: 'RemoteControl',
 
   //Plugin states
   activate: 'activate',
