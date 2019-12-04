@@ -35,7 +35,7 @@ export default {
   },
   teardown() {
     listener.dispose()
-    // restartFramework.call(this)
+    restartFramework.call(this)
   },
   steps: [
     {
