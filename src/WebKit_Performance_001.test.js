@@ -2,10 +2,13 @@ import { setWebKitUrl, calcAvgFPS, webKitBrowserOps } from './commonMethods/comm
 import { fetchWebKitFPS } from './commonMethods/webKitPerformanceCommonFunctions'
 import constants from './commonMethods/constants'
 
-let URL = 'http://webkit.org/blog-files/3d-transforms/poster-circle.html'
 let listener
 
 export default {
+  context: {
+    minFPS: 40,
+    url: 'http://webkit.org/blog-files/3d-transforms/poster-circle.html',
+  },
   setup() {
     this.$data.write('samples', [])
     return this.$sequence([
@@ -20,17 +23,18 @@ export default {
     setWebKitUrl.call(this, constants.blankUrl)
     listener.dispose()
   },
-  context: {
-    minFPS: 40,
-  },
   title: 'WPEWebkit performance poster circle',
   description: 'Loads the Poster Circle CSS3 animation and measures its performance',
   steps: [
     {
       description: 'Navigating to Poster Circle URL',
-      test: setWebKitUrl,
-      params: URL,
-      assert: URL,
+      test() {
+        this.$log(this.$context.read('url'))
+        return setWebKitUrl.call(this, this.$context.read('url'))
+      },
+      validate(url) {
+        return url === this.$context.read('url')
+      },
     },
     {
       description: 'Sleep until URL is loaded',
@@ -40,7 +44,7 @@ export default {
           let attempts = 0
           const interval = setInterval(() => {
             attempts++
-            if (this.$data.read('currentUrl') === URL) {
+            if (this.$data.read('currentUrl') === this.$context.read('url')) {
               clearInterval(interval)
               resolve()
             } else if (attempts > 10) {
@@ -55,7 +59,6 @@ export default {
       description: 'Fetch FPS',
       repeat: 11,
       test: fetchWebKitFPS,
-      //Assertion is not required as it is handled in fetchFPS function
     },
     {
       description: 'Calculate average FPS',
@@ -64,6 +67,7 @@ export default {
   ],
   validate() {
     let average = this.$data.read('average')
+    this.$log('Average FPS ' + average)
     return this.$expect(Math.ceil(average)).to.be.greaterThan(this.$context.read('minFPS'))
   },
 }
