@@ -1,6 +1,5 @@
 import { getPluginInfo, pluginDeactivate, pluginActivate } from '../commonMethods/commonFunctions'
 import constants from '../commonMethods/constants'
-import { restartFramework1 } from '../../../../src/commonFunctions1'
 
 export default {
   title: 'Framework Device Info test',
