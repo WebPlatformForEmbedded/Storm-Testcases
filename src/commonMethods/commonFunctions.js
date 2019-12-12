@@ -287,7 +287,7 @@ export const restartFramework = function() {
  *  - Activate
  *  - Resume
  */
-export const webKitBrowserOps = function() {
+export const webKitBrowserStartAndResume = function() {
   return this.$sequence([
     () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
     () => pluginActivate.call(this, constants.webKitBrowserPlugin),

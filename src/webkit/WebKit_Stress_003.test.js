@@ -1,5 +1,5 @@
 import baseTest from './WebKit_Stress_001.test'
-import { setWebKitUrl, webKitBrowserOps, restartFramework } from '../commonMethods/commonFunctions'
+import { setWebKitUrl, webKitBrowserOps } from '../commonMethods/commonFunctions'
 import fs from 'fs'
 const url = require('url')
 
@@ -26,7 +26,6 @@ export default {
     },
     teardown() {
       listener.dispose()
-      restartFramework.call(this)
     },
     steps: baseTest.steps.map((step, index) => {
       if (index === 3) {
