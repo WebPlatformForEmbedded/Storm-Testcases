@@ -1,4 +1,8 @@
-import { setWebKitUrl, webKitBrowserOps, getPluginInfo } from '../commonMethods/commonFunctions'
+import {
+  setWebKitUrl,
+  webKitBrowserStartAndResume,
+  getPluginInfo,
+} from '../commonMethods/commonFunctions'
 import constants from '../commonMethods/constants'
 
 let listener
@@ -10,7 +14,7 @@ export default {
   setup() {
     this.$data.write('samples', [])
     return this.$sequence([
-      () => webKitBrowserOps.call(this),
+      () => webKitBrowserStartAndResume.call(this),
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)

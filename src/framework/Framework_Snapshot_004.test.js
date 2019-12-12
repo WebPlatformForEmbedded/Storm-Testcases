@@ -1,9 +1,8 @@
 import {
   pluginActivate,
   pluginDeactivate,
-  restartFramework,
   screenshot,
-  webKitBrowserOps,
+  webKitBrowserStartAndResume,
   getPluginInfo,
   setWebKitUrl,
 } from '../commonMethods/commonFunctions'
@@ -20,7 +19,7 @@ export default {
   },
   setup() {
     return this.$sequence([
-      () => webKitBrowserOps.call(this),
+      () => webKitBrowserStartAndResume.call(this),
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)
@@ -29,7 +28,6 @@ export default {
   },
   teardown() {
     listener.dispose()
-    restartFramework.call(this)
   },
   steps: [
     {

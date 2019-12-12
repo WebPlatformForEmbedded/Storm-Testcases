@@ -2,8 +2,7 @@ import {
   setWebKitUrl,
   startHttpServer,
   matchIpRange,
-  webKitBrowserOps,
-  restartFramework,
+  webKitBrowserStartAndResume,
 } from '../commonMethods/commonFunctions'
 
 let listener
@@ -14,7 +13,7 @@ export default {
     'Stress loads the system by setting the URL in a loop and see if the Framework process continues to operate nominally',
   setup() {
     return this.$sequence([
-      () => webKitBrowserOps.call(this),
+      () => webKitBrowserStartAndResume.call(this),
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)
@@ -25,9 +24,6 @@ export default {
   context: {
     html:
       '<html><head><title>Hello! This is a set url test</title></head><body><p style="position: absolute; left: 150px; top: 150px">Framework Set URL test</p><script>console.log("Page loaded succesfully")</script></body></html>',
-  },
-  teardown() {
-    restartFramework.call(this)
   },
   steps: [
     {

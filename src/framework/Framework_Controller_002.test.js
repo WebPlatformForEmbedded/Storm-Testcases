@@ -2,13 +2,11 @@ import {
   getControllerPluginData,
   pluginActivate,
   pluginDeactivate,
-  restartFramework,
 } from '../commonMethods/commonFunctions'
 
 export default {
   title: 'Framework Controller test 02',
   description: 'Tests basic functionality of the controller module',
-  teardown: restartFramework,
   steps: [
     {
       description: 'Get /Service/Controller and validate whether it is Object or not',

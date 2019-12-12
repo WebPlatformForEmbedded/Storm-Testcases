@@ -1,10 +1,9 @@
-import { getControllerUI, getPluginInfo, restartFramework } from '../commonMethods/commonFunctions'
+import { getControllerUI, getPluginInfo } from '../commonMethods/commonFunctions'
 import constants from '../commonMethods/constants'
 
 export default {
   title: 'Framework Controller test 01',
   description: 'Tests basic functionality of the controller module',
-  teardown: restartFramework,
   steps: [
     {
       description: 'Check if response is a JSON response',

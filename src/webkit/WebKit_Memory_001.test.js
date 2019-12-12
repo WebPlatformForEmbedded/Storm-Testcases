@@ -1,4 +1,8 @@
-import { setWebKitUrl, webKitBrowserOps, getPluginInfo } from '../commonMethods/commonFunctions'
+import {
+  setWebKitUrl,
+  webKitBrowserStartAndResume,
+  getPluginInfo,
+} from '../commonMethods/commonFunctions'
 import constants from '../commonMethods/constants'
 
 let listener
@@ -7,7 +11,7 @@ export default {
   description: 'Loads about blank and checks the memory usage',
   setup() {
     return this.$sequence([
-      () => webKitBrowserOps.call(this),
+      () => webKitBrowserStartAndResume.call(this),
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)

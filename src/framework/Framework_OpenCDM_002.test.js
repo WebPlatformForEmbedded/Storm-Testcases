@@ -1,7 +1,6 @@
 import {
   checkIfProcessIsRunning,
   pluginActivate,
-  restartFramework,
   startFramework,
   stopWPEFramework,
 } from '../commonMethods/commonFunctions'
@@ -11,7 +10,6 @@ export default {
   title: 'OCDM shutdown of Framework robustness test',
   description: 'Starts OCDM and stops Framework. Checks if everything is shutdown correctly',
   repeat: 30,
-  teardown: restartFramework,
   context: {
     cpuLoad: 90,
   },

@@ -2,8 +2,7 @@ import {
   pluginDeactivate,
   checkIfProcessIsRunning,
   getCpuLoad,
-  restartFramework,
-  webKitBrowserOps,
+  webKitBrowserStartAndResume,
 } from '../commonMethods/commonFunctions'
 import constants from '../commonMethods/constants'
 
@@ -12,7 +11,6 @@ export default {
   description:
     'Starts and stops the WPEWebkit plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
-  teardown: restartFramework,
   context: {
     cpuLoad: 90,
   },
@@ -31,7 +29,7 @@ export default {
     },
     {
       description: 'Activating WebKit Browser Plugin',
-      test: webKitBrowserOps,
+      test: webKitBrowserStartAndResume,
       assert: 'resumed',
     },
     {

@@ -3,7 +3,6 @@ import {
   checkIfProcessIsRunning,
   pluginActivate,
   getCpuLoad,
-  restartFramework,
 } from '../commonMethods/commonFunctions'
 import constants from '../commonMethods/constants'
 
@@ -12,7 +11,6 @@ export default {
   description:
     'Starts and stops the webserver plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
-  teardown: restartFramework,
   context: {
     cpuLoad: 90,
   },

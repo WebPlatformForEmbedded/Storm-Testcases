@@ -1,15 +1,9 @@
-import {
-  getPluginInfo,
-  pluginDeactivate,
-  pluginActivate,
-  restartFramework,
-} from '../commonMethods/commonFunctions'
+import { getPluginInfo, pluginDeactivate, pluginActivate } from '../commonMethods/commonFunctions'
 import constants from '../commonMethods/constants'
 
 export default {
   title: 'Framework provision test 001',
   description: 'Tests if the Framework provision module works',
-  teardown: restartFramework,
   steps: [
     {
       description: 'Deactivating Provisioning and check whether deactivated or not',

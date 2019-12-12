@@ -1,8 +1,7 @@
 import {
   pluginDeactivate,
   checkIfProcessIsRunning,
-  restartFramework,
-  webKitBrowserOps,
+  webKitBrowserStartAndResume,
   stopWPEFramework,
   startFramework,
 } from '../commonMethods/commonFunctions'
@@ -18,11 +17,10 @@ export default {
       () => pluginDeactivate.call(this, constants.netFlixPlugin),
     ])
   },
-  teardown: restartFramework,
   steps: [
     {
       description: 'Activate WebKit Plugin and check whether it is resumed correctly',
-      test: webKitBrowserOps,
+      test: webKitBrowserStartAndResume,
       assert: 'resumed',
     },
     {

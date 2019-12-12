@@ -2,7 +2,6 @@ import {
   getPluginInfo,
   pluginDeactivate,
   pluginActivate,
-  restartFramework,
   putRequestForPlugin,
 } from '../commonMethods/commonFunctions'
 import constants from '../commonMethods/constants'
@@ -10,7 +9,6 @@ import constants from '../commonMethods/constants'
 export default {
   title: 'Framework request provision stress test',
   description: 'Perform multiple device provision requests and see if it is still running',
-  teardown: restartFramework,
   steps: [
     {
       description: 'Deactivating Provisioning and check whether deactivated or not',

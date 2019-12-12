@@ -1,15 +1,10 @@
-import {
-  getPluginInfo,
-  getResponseForURLRequest,
-  restartFramework,
-} from '../commonMethods/commonFunctions'
+import { getPluginInfo, getResponseForURLRequest } from '../commonMethods/commonFunctions'
 import constants from '../commonMethods/constants'
 
 let count = 0
 export default {
   title: 'Validate cache headers on all plugins',
   description: 'Iterate over all plugins and verify their cache headers when activated',
-  teardown: restartFramework,
   steps: [
     {
       description: 'Check if response is a JSON response',

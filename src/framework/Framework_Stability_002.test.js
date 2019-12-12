@@ -2,8 +2,7 @@ import {
   setWebKitUrl,
   startHttpServer,
   matchIpRange,
-  webKitBrowserOps,
-  restartFramework,
+  webKitBrowserStartAndResume,
 } from '../commonMethods/commonFunctions'
 import fs from 'fs'
 
@@ -18,7 +17,7 @@ export default {
     'Stress loads the system with keys and see if the Framework process continues to operate nominally',
   setup() {
     return this.$sequence([
-      () => webKitBrowserOps.call(this),
+      () => webKitBrowserStartAndResume.call(this),
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)
@@ -31,7 +30,6 @@ export default {
   },
   teardown() {
     listener.dispose()
-    restartFramework.call(this)
   },
   steps: [
     {

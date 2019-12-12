@@ -2,8 +2,7 @@ import {
   setWebKitUrl,
   startHttpServer,
   matchIpRange,
-  webKitBrowserOps,
-  restartFramework,
+  webKitBrowserStartAndResume,
   getPluginState,
   getCpuLoad,
   getPluginInfo,
@@ -20,7 +19,7 @@ export default {
     'Stress loads the system with xmlhttprequests and see if the WPEWebkit process continues to operate nominally',
   setup() {
     return this.$sequence([
-      () => webKitBrowserOps.call(this),
+      () => webKitBrowserStartAndResume.call(this),
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)
@@ -35,7 +34,6 @@ export default {
   },
   teardown() {
     listener.dispose()
-    restartFramework.call(this)
   },
   steps: [
     {

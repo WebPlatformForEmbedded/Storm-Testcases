@@ -1,6 +1,5 @@
 import {
   checkIfProcessIsRunning,
-  restartFramework,
   stopWPEFramework,
   startFramework,
   pluginActivate,
@@ -11,7 +10,6 @@ export default {
   title: 'WebServer shutdown of Framework robustness test',
   description: 'Starts WebServer and stops Framework. Checks if everything is shutdown correctly',
   repeat: 30,
-  teardown: restartFramework,
   steps: [
     {
       description: 'Activating Web Server Plugin',

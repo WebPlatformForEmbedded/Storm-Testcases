@@ -2,8 +2,7 @@ import {
   setWebKitUrl,
   startHttpServer,
   matchIpRange,
-  webKitBrowserOps,
-  restartFramework,
+  webKitBrowserStartAndResume,
   pluginDeactivate,
   pluginActivate,
 } from '../commonMethods/commonFunctions'
@@ -20,7 +19,7 @@ export default {
   description: 'Sends and verifies key through the remote control plugin',
   setup() {
     return this.$sequence([
-      () => webKitBrowserOps.call(this),
+      () => webKitBrowserStartAndResume.call(this),
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)
@@ -33,7 +32,6 @@ export default {
   },
   teardown() {
     listener.dispose()
-    restartFramework.call(this)
   },
   steps: [
     {

@@ -2,7 +2,6 @@ import {
   getPluginInfo,
   pluginDeactivate,
   pluginActivate,
-  restartFramework,
   putRequestForPlugin,
 } from '../commonMethods/commonFunctions'
 import constants from '../commonMethods/constants'
@@ -10,7 +9,6 @@ import constants from '../commonMethods/constants'
 export default {
   title: 'Framework provision test 002',
   description: 'Check if device is provisioned',
-  teardown: restartFramework,
   steps: [
     {
       description: 'Deactivating Provisioning and check whether deactivated or not',

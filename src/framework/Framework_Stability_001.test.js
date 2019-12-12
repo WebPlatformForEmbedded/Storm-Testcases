@@ -1,14 +1,12 @@
 import {
   pluginActivate,
   pluginDeactivate,
-  restartFramework,
   getControllerPluginData,
 } from '../commonMethods/commonFunctions'
 
 export default {
   title: 'Framework Controller Robustness test',
   description: 'Tests start/stop functionality of the controller module and repeats 100 times',
-  teardown: restartFramework,
   steps: [
     {
       description: 'Get Controller data and validate whether it is Object or not',

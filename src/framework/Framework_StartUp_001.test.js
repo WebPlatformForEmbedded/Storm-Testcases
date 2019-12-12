@@ -2,7 +2,6 @@ import {
   pluginDeactivate,
   checkIfProcessIsRunning,
   getCpuLoad,
-  restartFramework,
   stopWPEFramework,
   startFramework,
   getPluginInfo,
@@ -14,7 +13,6 @@ export default {
   description:
     'Starts and stops Framework repeatedly and checks if everything is started correctly',
   repeat: 100,
-  teardown: restartFramework,
   context: {
     cpuLoad: 90,
   },
