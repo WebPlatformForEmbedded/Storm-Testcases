@@ -1,15 +1,9 @@
-import {
-  getPluginInfo,
-  pluginDeactivate,
-  pluginActivate,
-  restartFramework,
-} from '../commonMethods/commonFunctions'
+import { getPluginInfo, pluginDeactivate, pluginActivate } from '../commonMethods/commonFunctions'
 import constants from '../commonMethods/constants'
 
 export default {
   title: 'Framework Monitor test 001',
   description: 'Tests if the Framework Monitor module works',
-  teardown: restartFramework,
   steps: [
     {
       description: 'Deactivating Monitor Plugin and checking whether deactivated or not',
