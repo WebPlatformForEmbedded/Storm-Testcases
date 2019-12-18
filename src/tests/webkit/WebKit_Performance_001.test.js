@@ -1,6 +1,6 @@
-import { setWebKitUrl, calcAvgFPS, webKitBrowserOps } from './commonMethods/commonFunctions'
-import { fetchWebKitFPS } from './commonMethods/webKitPerformanceCommonFunctions'
-import constants from './commonMethods/constants'
+import { setWebKitUrl, calcAvgFPS, webKitBrowserOps } from '../../commonMethods/commonFunctions'
+import { fetchWebKitFPS } from '../../commonMethods/webKitPerformanceCommonFunctions'
+import constants from '../../commonMethods/constants'
 
 let listener
 

@@ -1,5 +1,5 @@
-import { setWebKitUrl, webKitBrowserOps } from './commonMethods/commonFunctions'
-import constants from './commonMethods/constants'
+import { setWebKitUrl, webKitBrowserOps } from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 const URL = 'http://peacekeeper.futuremark.com/run.action'
 let listener
