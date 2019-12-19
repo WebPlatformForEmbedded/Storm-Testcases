@@ -23,9 +23,7 @@ export default {
   deactivate: 'deactivate',
   resume: 'resumed',
   suspend: 'suspended',
-
   WPEFramework: 'WPEFramework',
-
   blankUrl: 'about:blank',
   host: config.thunder.host,
 }

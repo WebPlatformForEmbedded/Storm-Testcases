@@ -47,6 +47,7 @@ export const pluginDeactivate = function(plugin_name) {
 }
 
 /**
+<<<<<<< HEAD
  * This function is used to get Plugin information
  * @param plugin_name
  * @returns {!ManagedPromise<R>|PromiseLike<any>|Promise<any>}
@@ -280,7 +281,6 @@ export const restartFramework = function() {
     () => startFramework(),
   ])
 }
-
 /**
  * This function performs below operations on WebKitBrowser Plugin
  *  - Deactivate
