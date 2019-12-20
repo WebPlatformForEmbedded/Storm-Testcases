@@ -308,6 +308,32 @@ export const getPluginInfo = function(plugin) {
 }
 
 /**
+ * This function is used to get System Info of Device Ingo Plugin
+ * @param plugin
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getDeviceInfo = function() {
+  return this.$thunder.api.DeviceInfo.systeminfo()
+    .then(result => {
+      this.$data.write('systeminfo', result)
+    })
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Addresses Info of Device Info Plugin
+ * @param plugin
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getAddressesInfo = function() {
+  return this.$thunder.api.DeviceInfo.addresses()
+    .then(result => {
+      this.$data.write('addressinfo', result)
+    })
+    .catch(err => err)
+}
+
+/**
  * This function is used to get the controller UI
  * @returns {Promise<AxiosResponse<any>>}
  */

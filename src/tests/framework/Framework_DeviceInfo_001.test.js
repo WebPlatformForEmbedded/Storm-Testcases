@@ -1,7 +1,7 @@
 import {
-  getPluginInfo,
   pluginDeactivate,
   pluginActivate,
+  getDeviceInfo,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -22,43 +22,32 @@ export default {
       assert: 'activated',
     },
     {
-      description: 'Get DeviceInfo data',
-      test: getPluginInfo,
-      params: constants.deviceInfo,
-      validate(result) {
-        this.$data.write('pluginData', result)
+      description: 'Get Device Info and check whether the result is object or not',
+      sleep: 5,
+      test() {
+        return getDeviceInfo.call(this)
+      },
+      validate() {
+        let result = this.$data.read('systeminfo')
         return this.$expect(result).to.be.object() === true
       },
     },
   ],
   validate() {
-    let resp = this.$data.read('pluginData')
-    let response = resp.data
-    if (response.addresses !== undefined && response.addresses.length !== 0) {
-      for (var i = 0; i < response.addresses.length; i++) {
-        let addresses = response.addresses[i]
-        if (addresses.name === undefined || addresses.mac === undefined) {
-          this.$log('Error reading address name or mac on address idx: ' + i)
-          return false
-        }
-      }
-    } else {
-      this.$log('Error reading addresses object from DeviceInfo')
-      return false
-    }
+    let systeminfo = this.$data.read('systeminfo')
     if (
-      response.systeminfo === undefined ||
-      response.systeminfo.version === undefined ||
-      response.systeminfo.uptime === undefined ||
-      response.systeminfo.totalram === undefined ||
-      response.systeminfo.freeram === undefined ||
-      response.systeminfo.devicename === undefined ||
-      response.systeminfo.cpuload === undefined ||
-      response.systeminfo.totalgpuram === undefined ||
-      response.systeminfo.freegpuram === undefined ||
-      response.systeminfo.serialnumber === undefined ||
-      response.systeminfo.deviceid === undefined ||
-      response.systeminfo.time === undefined
+      systeminfo === undefined ||
+      systeminfo.version === undefined ||
+      systeminfo.uptime === undefined ||
+      systeminfo.totalram === undefined ||
+      systeminfo.freeram === undefined ||
+      systeminfo.devicename === undefined ||
+      systeminfo.cpuload === undefined ||
+      systeminfo.totalgpuram === undefined ||
+      systeminfo.freegpuram === undefined ||
+      systeminfo.serialnumber === undefined ||
+      systeminfo.deviceid === undefined ||
+      systeminfo.time === undefined
     ) {
       this.$log('Error reading systeminfo object from DeviceInfo')
       return false
