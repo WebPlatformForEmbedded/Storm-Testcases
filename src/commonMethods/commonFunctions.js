@@ -47,7 +47,6 @@ export const pluginDeactivate = function(plugin_name) {
 }
 
 /**
-<<<<<<< HEAD
  * This function is used to get Plugin information
  * @param plugin_name
  * @returns {!ManagedPromise<R>|PromiseLike<any>|Promise<any>}
