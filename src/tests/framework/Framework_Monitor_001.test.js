@@ -1,7 +1,7 @@
 import {
-  getPluginInfo,
   pluginDeactivate,
   pluginActivate,
+  getMonitorInfo,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -24,21 +24,22 @@ export default {
     {
       description: 'Get Monitor Plugin Info',
       sleep: 5, //This sleep is to make sure that Monitor plugin is activated
-      test: getPluginInfo,
-      params: constants.monitorPlugin,
-      validate(result) {
-        this.$data.write('pluginData', result)
-        return this.$expect(result).to.be.object() === true
+      test() {
+        return getMonitorInfo.call(this)
+      },
+      validate() {
+        let monitorInfo = this.$data.read('monitorinfo')
+        return this.$expect(monitorInfo).to.be.array() === true
       },
     },
   ],
   validate() {
-    let response = this.$data.read('pluginData')
-    for (let i = 0; i < response.data.length; i++) {
-      let plugin = response.data[i]
+    let response = this.$data.read('monitorinfo')
+    for (let i = 0; i < response.length; i++) {
+      let plugin = response[i]
       if (
-        plugin.name === constants.webKitBrowserPlugin ||
-        plugin.name === constants.youTubePlugin
+        plugin.observable === constants.webKitBrowserPlugin ||
+        plugin.observable === constants.youTubePlugin
       ) {
         return true
       } else {

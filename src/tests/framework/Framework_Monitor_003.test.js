@@ -1,4 +1,4 @@
-import { getPluginInfo, pluginActivate } from '../../commonMethods/commonFunctions'
+import { getMonitorInfo, pluginActivate } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 import baseTest from './Framework_Monitor_001.test'
 
@@ -15,23 +15,31 @@ export default {
         return {
           description: 'Get Monitor Plugin Info',
           sleep: 5, //This sleep is to make sure that Monitor plugin is activated
-          test: getPluginInfo,
-          params: constants.monitorPlugin,
-          validate(result) {
-            this.$data.write('pluginData', result)
-            return this.$expect(result).to.be.object() === true
+          test() {
+            return getMonitorInfo.call(this)
+          },
+          validate() {
+            let monitorInfo = this.$data.read('monitorinfo')
+            return this.$expect(monitorInfo).to.be.array() === true
           },
         }
       }
       return step
     }),
     validate() {
-      let response = this.$data.read('pluginData')
-      if (response.data[1].measurment === undefined) {
-        this.$log('Monitor measurement data is not present for Youtube')
-        return false
+      let response = this.$data.read('monitorinfo')
+      for (let i = 0; i < response.length; i++) {
+        let monitorData = response[i]
+        if (monitorData.observable === constants.youTubePlugin) {
+          if (monitorData.measurements === undefined) {
+            this.$log('Monitor data measurement for YouTube is undefined')
+            return false
+          }
+          return true
+        }
       }
-      return true
+      this.$log('Monitor data for Youtube plugin is unavailable')
+      return false
     },
   },
 }
