@@ -24,36 +24,15 @@ export default {
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)
         })),
-      () => (
-        (data = fs.readFileSync(
-          './testcases/Storm-Testcases/src/resources/xmlhttprequest_app.html'
-        )),
-        this.$data.write('app', data)
-      ),
     ])
+  },
+  context: {
+    url: 'http://cdn.metrological.com/static/testbot/v1/xmlhttprequest_app.html',
   },
   teardown() {
     listener.dispose()
   },
   steps: [
-    {
-      description: 'Start http server',
-      test: startHttpServer,
-      validate() {
-        let port = this.$data.read('port')
-        if (port === null || port === undefined) return false
-        return true
-      },
-    },
-    {
-      description: 'Determine IP to use',
-      test: matchIpRange,
-      validate(response) {
-        if (response === undefined) return false
-        this.$data.write('server', response)
-        return true
-      },
-    },
     {
       description: 'Check whether Web Kit Browser Plugin is in resumed state',
       test: getPluginState,
@@ -63,13 +42,11 @@ export default {
     {
       description: 'Load the app on WPEWebkit',
       test() {
-        return setWebKitUrl.call(
-          this,
-          `http://${this.$data.read('server')}:${this.$data.read('port')}`
-        )
+        this.$log(this.$context.read('url'))
+        return setWebKitUrl.call(this, this.$context.read('url'))
       },
-      validate(res) {
-        return res === `http://${this.$data.read('server')}:${this.$data.read('port')}/`
+      validate(url) {
+        return url === this.$context.read('url')
       },
     },
     {
@@ -78,10 +55,7 @@ export default {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
         return new Promise((resolve, reject) => {
           const interval = setInterval(() => {
-            if (
-              this.$data.read('currentUrl') ===
-              `http://${this.$data.read('server')}:${this.$data.read('port')}/`
-            ) {
+            if (this.$data.read('currentUrl') === this.$context.read('url')) {
               clearInterval(interval)
               resolve()
             }
