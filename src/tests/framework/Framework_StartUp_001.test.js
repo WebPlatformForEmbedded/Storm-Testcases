@@ -4,7 +4,7 @@ import {
   getCpuLoad,
   stopWPEFramework,
   startFramework,
-  getPluginInfo,
+  getControllerPluginData,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -55,13 +55,14 @@ export default {
     {
       description: 'Check if Framework responds',
       sleep: 5, //This sleep is to make sure that Provisioning plugin is activated
-      test: getPluginInfo,
-      params: constants.controllerPlugin,
-      validate(result) {
-        return this.$expect(result).to.be.object() === true
+      test() {
+        return getControllerPluginData.call(this)
+      },
+      validate(res) {
+        this.$data.write('pluginInfo', res)
+        return this.$expect(res).to.be.object() === true
       },
     },
-
     {
       description: 'Get CPU load',
       test: getCpuLoad,
