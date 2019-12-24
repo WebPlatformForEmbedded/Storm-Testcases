@@ -1,8 +1,8 @@
 import {
-  getPluginInfo,
   pluginDeactivate,
   pluginActivate,
-  putRequestForPlugin,
+  getProvisioningPluginData,
+  startProvisioning,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -25,10 +25,10 @@ export default {
     {
       description: 'Get Provisioning Plugin Info',
       sleep: 5, //This sleep is to make sure that Provisioning plugin is activated
-      test: getPluginInfo,
-      params: constants.provisioningPlugin,
-      validate(result) {
-        let response = result.data
+      test() {
+        return getProvisioningPluginData.call(this)
+      },
+      validate(response) {
         if (response.id === undefined && response.status === undefined) {
           this.$log('Provisioning id or status is not present in response')
           return false
@@ -43,27 +43,26 @@ export default {
     },
     {
       description: 'Request provisioning',
-      test: putRequestForPlugin,
-      validate(res) {
-        if (res.status !== 204) {
-          return false
-        }
-        return true
+      test() {
+        return startProvisioning.call(this)
       },
+      assert: null,
     },
     {
       description: 'Check Provisioning Status',
-      test: getPluginInfo,
-      params: constants.provisioningPlugin,
-      validate(result) {
-        let response = result.data
+      sleep: 5,
+      test() {
+        return getProvisioningPluginData.call(this)
+      },
+      validate(response) {
         if (response.id === undefined && response.status === undefined) {
           this.$log('Provisioning id or status is not present in response')
           return false
         }
-        if (parseInt(response.status) > 0 && response.tokens.length > 0) return true
+        if (parseInt(response.status) === 0) return true
+        else if (parseInt(response.status) > 0 && response.tokens.length > 0) return true
         else {
-          this.$log('Device is not provisioned')
+          this.$log('Provisioning tokens and status do not match')
           return false
         }
       },
