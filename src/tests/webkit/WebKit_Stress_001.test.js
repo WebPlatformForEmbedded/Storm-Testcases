@@ -5,7 +5,7 @@ import {
   webKitBrowserStartAndResume,
   getPluginState,
   getCpuLoad,
-  getPluginInfo,
+  getDeviceInfo,
 } from '../../commonMethods/commonFunctions'
 import fs from 'fs'
 import constants from '../../commonMethods/constants'
@@ -113,25 +113,25 @@ export default {
         },
         {
           description: 'Get Memory Usage and check the response',
-          test: getPluginInfo,
-          params: constants.deviceInfo,
-          validate(res) {
-            this.$data.write('memoryUsage', res)
-            return this.$expect(res).to.be.object() === true
+          test() {
+            return getDeviceInfo.call(this)
+          },
+          validate() {
+            let result = this.$data.read('systeminfo')
+            return this.$expect(result).to.be.object() === true
           },
         },
         {
           description: 'Validate the Memory Usage',
           test() {
-            let res = this.$data.read('memoryUsage')
-            let resp = res.data
+            let resp = this.$data.read('systeminfo')
             let free, total
-            if (resp.systeminfo === undefined) {
+            if (resp === undefined) {
               this.$log('Cannot find systemInfo on DeviceInfo plugin response')
               return false
             } else {
-              free = parseInt(resp.systeminfo.freeram)
-              total = parseInt(resp.systeminfo.totalram)
+              free = parseInt(resp.freeram)
+              total = parseInt(resp.totalram)
               let memUsage = Math.round((free / total) * 100)
               this.$data.write('memoryUsageValue', memUsage)
             }
