@@ -1,4 +1,4 @@
-import { getControllerUI, getPluginInfo } from '../../commonMethods/commonFunctions'
+import { getControllerPluginData, getControllerUI } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
 export default {
@@ -7,47 +7,32 @@ export default {
   steps: [
     {
       description: 'Check if response is a JSON response',
-      test: getPluginInfo,
-      params: constants.controllerPlugin,
-      validate(result) {
-        this.$data.write('pluginData', result.data)
-        return this.$expect(result).to.be.object() === true
-      },
-    },
-    {
-      description: 'Check for mandatory elements in response',
+      sleep: 5,
       test() {
-        let pluginInfo = this.$data.read('pluginData')
-        if (pluginInfo.plugins !== undefined && pluginInfo.plugins.length > 0) {
-          if (pluginInfo.server !== undefined && pluginInfo.channel !== undefined) {
-            return true
-          } else {
-            this.$log('Server of Channel object not found')
-            return false
-          }
-        } else {
-          this.$log('Plugins not found')
-          return false
-        }
+        return getControllerPluginData.call(this)
       },
-      assert: true,
+      validate(res) {
+        this.$data.write('pluginInfo', res)
+        return this.$expect(res).to.be.object() === true
+      },
     },
     {
       description: 'Check for mandatory elements  in plugins list',
       test() {
-        let pluginInfo = this.$data.read('pluginData')
-        if (pluginInfo.plugins === undefined) return false
-        for (let i = 0; i < pluginInfo.plugins.length; i++) {
-          let plugin = pluginInfo.plugins[i]
-          if (
-            plugin.callsign === undefined ||
-            plugin.locator === undefined ||
-            plugin.state === undefined
-          ) {
-            this.$log('Failed plugin is ==>', plugin)
-            return false
+        let pluginInfo = this.$data.read('pluginInfo')
+        for (let i = 0; i < pluginInfo.length; i++) {
+          let plugin = pluginInfo[i]
+          //TODO (Controller Plugin doesnt have locator? )
+          if (plugin.callsign != constants.controllerPlugin) {
+            if (
+              plugin.callsign === undefined ||
+              plugin.locator === undefined ||
+              plugin.state === undefined
+            ) {
+              return false
+            }
           }
-          if (i === pluginInfo.plugins.length - 1) return true
+          if (i === pluginInfo.length - 1) return true
         }
       },
       assert: true,

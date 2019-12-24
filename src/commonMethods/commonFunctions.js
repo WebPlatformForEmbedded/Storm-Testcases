@@ -373,7 +373,9 @@ export const getCpuLoad = function() {
  * @returns {Promise<any> | Thenable<any> | PromiseLike<any>}
  */
 export const getControllerPluginData = function() {
-  return this.$thunder.api.Controller.status().then(result => result)
+  return this.$thunder.api.Controller.status()
+    .then(result => result)
+    .catch(err => err)
 }
 
 /**
