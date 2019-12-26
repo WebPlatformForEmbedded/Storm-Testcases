@@ -1,12 +1,11 @@
 import {
   pluginDeactivate,
   checkIfProcessIsRunning,
-  restartFramework,
-  webKitBrowserOps,
+  webKitBrowserStartAndResume,
   stopWPEFramework,
   startFramework,
-} from '../commonMethods/commonFunctions'
-import constants from '../commonMethods/constants'
+} from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'WPEWebkit shutdown of Framework robustness test',
@@ -18,11 +17,10 @@ export default {
       () => pluginDeactivate.call(this, constants.netFlixPlugin),
     ])
   },
-  teardown: restartFramework,
   steps: [
     {
       description: 'Activate WebKit Plugin and check whether it is resumed correctly',
-      test: webKitBrowserOps,
+      test: webKitBrowserStartAndResume,
       assert: 'resumed',
     },
     {
