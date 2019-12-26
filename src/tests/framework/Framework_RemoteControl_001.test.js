@@ -1,14 +1,11 @@
 import {
   setWebKitUrl,
-  startHttpServer,
-  matchIpRange,
-  webKitBrowserOps,
-  restartFramework,
+  webKitBrowserStartAndResume,
   pluginDeactivate,
   pluginActivate,
-} from '../commonMethods/commonFunctions'
+} from '../../commonMethods/commonFunctions'
 import fs from 'fs'
-import constants from '../commonMethods/constants'
+import constants from '../../commonMethods/constants'
 
 var keysArray = ['ok', 'left', 'up', 'right', 'down']
 var counter = 0
@@ -20,52 +17,28 @@ export default {
   description: 'Sends and verifies key through the remote control plugin',
   setup() {
     return this.$sequence([
-      () => webKitBrowserOps.call(this),
+      () => webKitBrowserStartAndResume.call(this),
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)
         })),
-      () => (
-        (data = fs.readFileSync('./testcases/Storm-Testcases/src/resources/key_app.html')),
-        this.$data.write('app', data)
-      ),
     ])
   },
   teardown() {
     listener.dispose()
-    restartFramework.call(this)
+  },
+  context: {
+    url: 'http://cdn.metrological.com/static/testbot/v1/key_app.html',
   },
   steps: [
     {
-      description: 'Start http server',
-      test: startHttpServer,
-      validate() {
-        let port = this.$data.read('port')
-        if (port === null || port === undefined) return false
-        return true
-      },
-    },
-    {
-      description: 'Determine IP to use',
-      test: matchIpRange,
-      validate(response) {
-        if (response === undefined) return false
-        this.$data.write('server', response)
-
-        return true
-      },
-    },
-    {
       description: 'Load the app on WPEWebkit',
       test() {
-        this.$log('URL loaded is', `http://${this.$data.read('server')}:${this.$data.read('port')}`)
-        return setWebKitUrl.call(
-          this,
-          `http://${this.$data.read('server')}:${this.$data.read('port')}`
-        )
+        this.$log(this.$context.read('url'))
+        return setWebKitUrl.call(this, this.$context.read('url'))
       },
-      validate(res) {
-        return res === `http://${this.$data.read('server')}:${this.$data.read('port')}/`
+      validate(url) {
+        return url === this.$context.read('url')
       },
     },
     {
@@ -74,10 +47,7 @@ export default {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
         return new Promise((resolve, reject) => {
           const interval = setInterval(() => {
-            if (
-              this.$data.read('currentUrl') ===
-              `http://${this.$data.read('server')}:${this.$data.read('port')}/`
-            ) {
+            if (this.$data.read('currentUrl') === this.$context.read('url')) {
               clearInterval(interval)
               resolve()
             }
