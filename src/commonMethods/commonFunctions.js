@@ -1,10 +1,11 @@
+import constants from './constants'
+const Client = require('ssh2').Client
+
 /**
  * This function activates a given plugin
  * @param plugin_name
  * @returns current state of given plugin
  */
-import constants from './constants'
-
 export const pluginActivate = function(plugin_name) {
   return this.$thunder.api.Controller.activate({ callsign: plugin_name })
     .then(() =>
@@ -65,6 +66,73 @@ export const setWebKitUrl = function(URL) {
 }
 
 /**
+ * This function checks if the process is running by getting the process id and comparing it to the number.
+ *  - If the process id is a number, then false is returned
+ *  - If the process is not a number, then true is returned
+ * @param process
+ */
+export const checkIfProcessIsRunning = function(process) {
+  let opts = {
+    cmd: `ps w | grep ${process} | grep -v grep | awk ` + "'{printf(" + '"%i \\n\\r", $1)}' + "'",
+  }
+  exec(opts, res => {
+    //parse response as integer
+    var processId
+    try {
+      processId = parseInt(res)
+    } catch (e) {
+      return e
+    }
+    //only return true if valid number
+    return isNaN(processId) === false ? true : false
+  })
+}
+/**
+ * This function is used to connect RbPI
+ * @param opts
+ * @param cb
+ */
+export const exec = async function(opts) {
+  var conn = new Client()
+  let execCmd = new Promise((resolve, reject) => {
+    conn
+      .on('ready', function() {
+        return conn.exec(opts.cmd, function(err, stream) {
+          var res = ''
+          if (err) reject(err)
+          if (opts.cbWhenStarted === true) resolve(true)
+          stream
+            .on('close', function(code, signal) {
+              stream.end()
+              conn.end()
+              if (opts.cbWhenStarted !== true) resolve(res)
+            })
+            .on('data', function(data) {
+              res += data
+            })
+            .stderr.on('data', function(data) {})
+        })
+      })
+      .connect({
+        host: constants.host,
+        port: 22,
+        username: 'root',
+        password: 'root',
+      })
+    conn.on('timeout', function(e) {
+      throw new Error(`{opts.cmd}: Timeout while connecting to ${constants.host}`)
+    })
+
+    conn.on('error', function(err) {
+      throw new Error(`${opts.cmd}:  ${err}`)
+    })
+  })
+
+  let result = await execCmd
+  return result
+}
+
+/**
  * This function calculates the average of FPS samples collected in fetchFPS function
  * @returns {results}
  */
@@ -79,6 +147,24 @@ export const calcAvgFPS = function() {
   average = average.toFixed(2)
   this.$data.write('average', average)
 }
+
+/**
+ * This function is used to stop the process
+ * @param process
+ */
+export const stopProcess = function(process) {
+  return exec({ cmd: `killall ${process}` }, () => {
+    return true
+  })
+}
+
+/**
+ * This function starts WPEFramework
+ * @returns {Promise<any>}
+ */
+export const startFramework = function() {
+  return exec({ cmd: 'nohup WPEFramework WPEProcess -b &', cbWhenStarted: true })
+}
 /**
  * This function performs below operations on WebKitBrowser Plugin
  *  - Deactivate
@@ -91,4 +177,23 @@ export const webKitBrowserStartAndResume = function() {
     () => pluginActivate.call(this, constants.webKitBrowserPlugin),
     () => webKitBrowserActions.call(this, constants.resume),
   ])
+}
+
+/**
+ * This function is used to get Controller plugin data
+ * @returns {Promise<any> | Thenable<any> | PromiseLike<any>}
+ */
+export const getControllerPluginData = function() {
+  return this.$thunder.api.Controller.status()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function stops the WPE Framework Process
+ * @returns {boolean}
+ */
+export const stopWPEFramework = function() {
+  stopProcess('WPEFramework')
+  return true
 }

@@ -4,6 +4,7 @@ import {
   webKitBrowserStartAndResume,
   stopWPEFramework,
   startFramework,
+  getControllerPluginData,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -38,6 +39,17 @@ export default {
       description: 'Start Framework',
       test: startFramework,
       assert: true,
+    },
+    {
+      description: 'Check if response is a JSON response',
+      sleep: 5,
+      test() {
+        return getControllerPluginData.call(this)
+      },
+      validate(res) {
+        this.$data.write('pluginInfo', res)
+        return this.$expect(res).to.be.object() === true
+      },
     },
   ],
 }
