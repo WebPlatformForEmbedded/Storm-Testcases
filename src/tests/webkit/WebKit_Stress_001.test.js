@@ -5,13 +5,12 @@ import {
   webKitBrowserStartAndResume,
   getPluginState,
   getCpuLoad,
-  getPluginInfo,
-} from '../commonMethods/commonFunctions'
+  getDeviceInfo,
+} from '../../commonMethods/commonFunctions'
 import fs from 'fs'
-import constants from '../commonMethods/constants'
+import constants from '../../commonMethods/constants'
 
 let listener
-let data
 
 export default {
   title: 'WPEWebkit stability xmlhttprequest test',
@@ -24,36 +23,15 @@ export default {
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)
         })),
-      () => (
-        (data = fs.readFileSync(
-          './testcases/Storm-Testcases/src/resources/xmlhttprequest_app.html'
-        )),
-        this.$data.write('app', data)
-      ),
     ])
+  },
+  context: {
+    url: 'http://cdn.metrological.com/static/testbot/v1/xmlhttprequest_app.html',
   },
   teardown() {
     listener.dispose()
   },
   steps: [
-    {
-      description: 'Start http server',
-      test: startHttpServer,
-      validate() {
-        let port = this.$data.read('port')
-        if (port === null || port === undefined) return false
-        return true
-      },
-    },
-    {
-      description: 'Determine IP to use',
-      test: matchIpRange,
-      validate(response) {
-        if (response === undefined) return false
-        this.$data.write('server', response)
-        return true
-      },
-    },
     {
       description: 'Check whether Web Kit Browser Plugin is in resumed state',
       test: getPluginState,
@@ -63,13 +41,11 @@ export default {
     {
       description: 'Load the app on WPEWebkit',
       test() {
-        return setWebKitUrl.call(
-          this,
-          `http://${this.$data.read('server')}:${this.$data.read('port')}`
-        )
+        this.$log(this.$context.read('url'))
+        return setWebKitUrl.call(this, this.$context.read('url'))
       },
-      validate(res) {
-        return res === `http://${this.$data.read('server')}:${this.$data.read('port')}/`
+      validate(url) {
+        return url === this.$context.read('url')
       },
     },
     {
@@ -78,10 +54,7 @@ export default {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
         return new Promise((resolve, reject) => {
           const interval = setInterval(() => {
-            if (
-              this.$data.read('currentUrl') ===
-              `http://${this.$data.read('server')}:${this.$data.read('port')}/`
-            ) {
+            if (this.$data.read('currentUrl') === this.$context.read('url')) {
               clearInterval(interval)
               resolve()
             }
@@ -113,25 +86,25 @@ export default {
         },
         {
           description: 'Get Memory Usage and check the response',
-          test: getPluginInfo,
-          params: constants.deviceInfo,
-          validate(res) {
-            this.$data.write('memoryUsage', res)
-            return this.$expect(res).to.be.object() === true
+          test() {
+            return getDeviceInfo.call(this)
+          },
+          validate() {
+            let result = this.$data.read('systeminfo')
+            return this.$expect(result).to.be.object() === true
           },
         },
         {
           description: 'Validate the Memory Usage',
           test() {
-            let res = this.$data.read('memoryUsage')
-            let resp = res.data
+            let resp = this.$data.read('systeminfo')
             let free, total
-            if (resp.systeminfo === undefined) {
+            if (resp === undefined) {
               this.$log('Cannot find systemInfo on DeviceInfo plugin response')
               return false
             } else {
-              free = parseInt(resp.systeminfo.freeram)
-              total = parseInt(resp.systeminfo.totalram)
+              free = parseInt(resp.freeram)
+              total = parseInt(resp.totalram)
               let memUsage = Math.round((free / total) * 100)
               this.$data.write('memoryUsageValue', memUsage)
             }

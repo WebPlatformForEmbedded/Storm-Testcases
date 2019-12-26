@@ -1,5 +1,5 @@
 import baseTest from './WebKit_Stress_001.test'
-import { setWebKitUrl, webKitBrowserOps } from '../commonMethods/commonFunctions'
+import { setWebKitUrl, webKitBrowserOps } from '../../commonMethods/commonFunctions'
 import fs from 'fs'
 const url = require('url')
 

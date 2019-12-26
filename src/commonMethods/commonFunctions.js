@@ -280,7 +280,6 @@ export const restartFramework = function() {
     () => startFramework(),
   ])
 }
-
 /**
  * This function performs below operations on WebKitBrowser Plugin
  *  - Deactivate
@@ -304,6 +303,45 @@ export const getPluginInfo = function(plugin) {
   return this.$http
     .get(`http://${constants.host}:80/Service/${plugin}`)
     .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get System Info of Device Ingo Plugin
+ * @param plugin
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getDeviceInfo = function() {
+  return this.$thunder.api.DeviceInfo.systeminfo()
+    .then(result => {
+      this.$data.write('systeminfo', result)
+    })
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Addresses Info of Device Info Plugin
+ * @param plugin
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getAddressesInfo = function() {
+  return this.$thunder.api.DeviceInfo.addresses()
+    .then(result => {
+      this.$data.write('addressinfo', result)
+    })
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Monitor Info
+ * @param plugin
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getMonitorInfo = function() {
+  return this.$thunder.api.Monitor.status()
+    .then(result => {
+      this.$data.write('monitorinfo', result)
+    })
     .catch(err => err)
 }
 
@@ -335,7 +373,29 @@ export const getCpuLoad = function() {
  * @returns {Promise<any> | Thenable<any> | PromiseLike<any>}
  */
 export const getControllerPluginData = function() {
-  return this.$thunder.api.Controller.status().then(result => result)
+  return this.$thunder.api.Controller.status()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Provisioning plugin data
+ * @returns {Promise<any> | Thenable<any> | PromiseLike<any>}
+ */
+export const getProvisioningPluginData = function() {
+  return this.$thunder.api.Provisioning.state()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to start Provisioning plugin
+ * @returns {Promise<any> | Thenable<any> | PromiseLike<any>}
+ */
+export const startProvisioning = function() {
+  return this.$thunder.api.Provisioning.provision()
+    .then(result => result)
+    .catch(err => err)
 }
 
 /**
