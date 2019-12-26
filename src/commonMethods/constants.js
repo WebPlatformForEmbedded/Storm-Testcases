@@ -15,15 +15,15 @@ export default {
   webServerPlugin: 'WebServer',
   webServerImplementation: 'WebServerImplementation',
   provisioningPlugin: 'Provisioning',
+  WPEProcess: 'WPEProcess',
+  remoteControlPlugin: 'RemoteControl',
 
   //Plugin states
   activate: 'activate',
   deactivate: 'deactivate',
   resume: 'resumed',
-  suspend: 'suspend',
-
+  suspend: 'suspended',
   WPEFramework: 'WPEFramework',
-
   blankUrl: 'about:blank',
   host: config.thunder.host,
 }

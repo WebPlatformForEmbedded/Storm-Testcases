@@ -4,7 +4,7 @@ import {
   matchIpRange,
   webKitBrowserOps,
   restartFramework,
-} from '../commonMethods/commonFunctions'
+} from '../../commonMethods/commonFunctions'
 
 let listener
 
