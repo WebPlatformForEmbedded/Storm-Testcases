@@ -8,7 +8,6 @@ import {
 import constants from '../../commonMethods/constants'
 
 let listener
-let data
 
 export default {
   title: 'WPEWebkit stability xmlhttprequest test',
