@@ -1,13 +1,10 @@
 import {
   setWebKitUrl,
-  startHttpServer,
-  matchIpRange,
   webKitBrowserStartAndResume,
   getPluginState,
   getCpuLoad,
   getDeviceInfo,
 } from '../../commonMethods/commonFunctions'
-import fs from 'fs'
 import constants from '../../commonMethods/constants'
 
 let listener
@@ -68,7 +65,7 @@ export default {
       title: 'Repeat the steps for 1 hour',
       description: 'Nested test to repeat the test for 1 hour',
       repeat: {
-        seconds: 1 * 60, //One hour
+        seconds: 1 * 60 * 60, //One hour
       },
       steps: [
         {
