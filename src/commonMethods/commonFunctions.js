@@ -307,6 +307,19 @@ export const getPluginInfo = function(plugin) {
 }
 
 /**
+ * This function is used to Suspend or Resume a plugin
+ * @param plugin
+ * @param action
+ * @returns {Promise<unknown>}
+ */
+export const suspendOrResumePlugin = function(plugin, action) {
+  return this.$http
+    .post(`http://${constants.host}:80/Service/${plugin}/${action}`)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
  * This function is used to get System Info of Device Ingo Plugin
  * @param plugin
  * @returns {Promise<AxiosResponse<any>>}
