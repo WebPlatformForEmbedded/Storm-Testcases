@@ -1,14 +1,14 @@
 import { setWebKitUrl, webKitBrowserActions } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
-const URL = 'http://peacekeeper.futuremark.com/run.action'
+const URL = 'https://krakenbenchmark.mozilla.org/kraken-1.1/driver.html'
 let listener
 
 export default {
-  title: 'WPEWebkit Peacekeeper Benchmark test',
-  description: 'Loads the Peacekeeper Benchmark test and get the results',
+  title: 'WPEWebkit Kraken Benchmark test',
+  description: 'Loads the Kraken Benchmark test and get the results',
   context: {
-    resultURL: 'http://peacekeeper.futuremark.com/results',
+    resultURL: 'https://krakenbenchmark.mozilla.org/kraken-1.1/results.html',
   },
   setup() {
     return this.$sequence([
@@ -25,7 +25,7 @@ export default {
   },
   steps: [
     {
-      description: 'Navigating to Load http://peacekeeper.futuremark.com/run.action',
+      description: 'Navigating to Load Kranken Bench Mark URL',
       test: setWebKitUrl,
       params: URL,
       assert: URL,
@@ -55,7 +55,9 @@ export default {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
         return new Promise((resolve, reject) => {
           const interval = setInterval(() => {
-            if (this.$data.read('currentUrl') === this.$context.read('resultURL')) {
+            let url = this.$data.read('currentUrl')
+            let krakenBenchmarkUrl = url.split('?')
+            if (krakenBenchmarkUrl[0] === this.$context.read('resultURL')) {
               clearInterval(interval)
               resolve()
             }
@@ -63,17 +65,6 @@ export default {
           }, 480000)
         })
       },
-      test() {
-        this.$thunder.api.WebKitBrowser.url().then(url => {
-          let PeacekeeperUrl = url.split('?')
-          this.$data.write('result', PeacekeeperUrl[0])
-        })
-      },
     },
   ],
-  validate() {
-    let result = this.$data.read('result')
-    if (result === this.$context.read('resultURL')) return true
-    else return false
-  },
 }
