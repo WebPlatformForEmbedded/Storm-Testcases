@@ -1,10 +1,20 @@
+import constants from './constants'
+import moment from 'moment'
+const _http = require('http')
+const Client = require('ssh2').Client
+const URL = require('url')
+const http = require('http')
+const os = require('os')
+const path = require('path')
+const httpServer = require('http-server')
+const fs = require('fs')
+const httpclient = require('httpclient')
+
 /**
  * This function activates a given plugin
  * @param plugin_name
  * @returns current state of given plugin
  */
-import constants from './constants'
-
 export const pluginActivate = function(plugin_name) {
   return this.$thunder.api.Controller.activate({ callsign: plugin_name })
     .then(() =>
@@ -37,6 +47,22 @@ export const pluginDeactivate = function(plugin_name) {
 }
 
 /**
+ * This function is used to get Plugin information
+ * @param plugin_name
+ * @returns {!ManagedPromise<R>|PromiseLike<any>|Promise<any>}
+ */
+export const getPluginState = function(plugin_name) {
+  return this.$thunder.api.call(constants.controllerPlugin, 'status').then(result => {
+    let value = result.filter(p => {
+      if (p.callsign === plugin_name) {
+        return true
+      }
+    })
+    return value[0].state
+  })
+}
+
+/**
  * This function resumes or suspends WebKitBrowser plugin
  * @param action
  */
@@ -65,6 +91,71 @@ export const setWebKitUrl = function(URL) {
 }
 
 /**
+ * This function checks if the process is running by getting the process id and comparing it to the number.
+ *  - If the process id is a number, then false is returned
+ *  - If the process is not a number, then true is returned
+ * @param process
+ */
+export const checkIfProcessIsRunning = function(process) {
+  let opts = {
+    cmd: `ps w | grep ${process} | grep -v grep | awk ` + "'{printf(" + '"%i \\n\\r", $1)}' + "'",
+  }
+  exec(opts, res => {
+    //parse response as integer
+    var processId
+    try {
+      processId = parseInt(res)
+    } catch (e) {
+      return e
+    }
+    //only return true if valid number
+    return isNaN(processId) === false ? true : false
+  })
+}
+
+/**
+ * This function is used to connect RbPI
+ * @param opts
+ * @param cb
+ */
+export const exec = function(opts, cb) {
+  var conn = new Client()
+  conn
+    .on('ready', function() {
+      conn.exec(opts.cmd, function(err, stream) {
+        var res = ''
+        if (err) throw new Error(`Error starting ${opts.cmd}: ${err}`)
+        if (opts.cbWhenStarted === true) cb()
+
+        stream
+          .on('close', function(code, signal) {
+            stream.end()
+            conn.end()
+            if (opts.cbWhenStarted !== true) cb(res)
+          })
+          .on('data', function(data) {
+            res += data
+          })
+          .stderr.on('data', function(data) {})
+      })
+    })
+    .connect({
+      host: constants.host,
+      port: 22,
+      username: 'root',
+      password: 'root',
+    })
+
+  conn.on('timeout', function(e) {
+    throw new Error(`{opts.cmd}: Timeout while connecting to ${constants.host}`)
+  })
+
+  conn.on('error', function(err) {
+    throw new Error(`${opts.cmd}:  ${err}`)
+  })
+}
+
+/**
  * This function calculates the average of FPS samples collected in fetchFPS function
  * @returns {results}
  */
@@ -79,6 +170,72 @@ export const calcAvgFPS = function() {
   average = average.toFixed(2)
   this.$data.write('average', average)
 }
+
+/**
+ * This function is used to get screenshot
+ * @returns {Promise<void>}
+ */
+export const screenshot = async function() {
+  let url = `http://${constants.host}:80/Service/Snapshot/Capture?${moment().valueOf()}`
+  // create a new promise inside of the async function
+  let bufferData = new Promise((resolve, reject) => {
+    _http
+      .get(url, function(res) {
+        if (res.headers['content-length'] === undefined)
+          this.$log(
+            'Framework did not return a content-length! This will slow down the screenshot module.'
+          )
+        var buffers = []
+        var imageSize = res.headers['content-length']
+
+        res.on('data', function(chunk) {
+          buffers.push(Buffer.from(chunk))
+        })
+
+        res.on('end', function() {
+          return resolve(Buffer.concat(buffers, parseInt(imageSize)))
+        })
+      })
+      .on('error', function(e) {
+        return reject(e)
+      })
+  })
+
+  // wait for the promise to resolve
+  let result = await bufferData
+  this.$data.write('screenshotResult', result)
+}
+
+/**
+ * This function is used to kill the process
+ * @param process
+ */
+export const killProcess = function(process) {
+  exec({ cmd: `killall -9 ${process}` }, err => {
+    return true
+  })
+}
+
+/**
+ * This function is used to start the framework
+ */
+export const startFramework = function() {
+  exec({ cmd: 'nohup WPEFramework WPEProcess -b &', cbWhenStarted: true }, err => {
+    return true
+  })
+}
+
+/**
+ * This function is used to restart the framework
+ */
+export const restartFramework = function() {
+  return this.$sequence([
+    () => killProcess('WPEFramework'),
+    () => killProcess('WPEProcess'),
+    () => startFramework(),
+  ])
+}
+
 /**
  * This function performs below operations on WebKitBrowser Plugin
  *  - Deactivate
@@ -91,4 +248,48 @@ export const webKitBrowserOps = function() {
     () => pluginActivate.call(this, constants.webKitBrowserPlugin),
     () => webKitBrowserActions.call(this, constants.resume),
   ])
+}
+
+/**
+ * This function is used to get Plugin Info
+ * @param plugin
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getPluginInfo = function(plugin) {
+  return this.$http
+    .get(`http://${constants.host}:80/Service/${plugin}`)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get CpuLoad
+ * @returns {Promise<T>}
+ */
+export const getCpuLoad = function() {
+  this.$thunder.api.DeviceInfo.systeminfo()
+    .then(result => {
+      this.$data.write('cpuload', result.cpuload)
+    })
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Controller plugin data
+ * @returns {Promise<any> | Thenable<any> | PromiseLike<any>}
+ */
+export const getControllerPluginData = function() {
+  return this.$thunder.api.Controller.status().then(result => result)
+}
+
+/**
+ * This function is used to put request
+ * @param plugin
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const putRequestForPlugin = function(plugin) {
+  return this.$http
+    .put(`http://${constants.host}:80/Service/${plugin}`)
+    .then(result => result)
+    .catch(err => err)
 }

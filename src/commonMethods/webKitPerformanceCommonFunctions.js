@@ -7,9 +7,9 @@ export const fetchWebKitFPS = function() {
     .then(result => {
       if (isNaN(result) === false) {
         let samples = this.$data.read('samples')
-        this.$log('FPS ' + result)
         samples.push(result)
         this.$data.write('samples', samples)
+        return true
       }
     })
     .catch(err => err)
