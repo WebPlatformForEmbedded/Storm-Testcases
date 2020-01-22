@@ -17,12 +17,11 @@ export default {
   provisioningPlugin: 'Provisioning',
   WPEProcess: 'WPEProcess',
   remoteControlPlugin: 'RemoteControl',
-
   //Plugin states
   activate: 'activate',
   deactivate: 'deactivate',
   resume: 'resumed',
-  suspend: 'suspended',
+  suspend: 'suspend',
   WPEFramework: 'WPEFramework',
   blankUrl: 'about:blank',
   host: config.thunder.host,
