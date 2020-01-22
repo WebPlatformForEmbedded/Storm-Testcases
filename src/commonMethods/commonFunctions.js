@@ -332,19 +332,6 @@ export const getAddressesInfo = function() {
 }
 
 /**
- * This function is used to get Monitor Info
- * @param plugin
- * @returns {Promise<AxiosResponse<any>>}
- */
-export const getMonitorInfo = function() {
-  return this.$thunder.api.Monitor.status()
-    .then(result => {
-      this.$data.write('monitorinfo', result)
-    })
-    .catch(err => err)
-}
-
-/**
  * This function is used to get the controller UI
  * @returns {Promise<AxiosResponse<any>>}
  */
