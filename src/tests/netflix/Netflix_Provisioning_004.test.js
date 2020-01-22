@@ -3,7 +3,7 @@ import {
   pluginDeactivate,
   pluginActivate,
   startProvisioning,
-  getPluginInfo,
+  getNetflixPluginEsnInfo,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -68,11 +68,10 @@ export default {
       description: 'Check if Netflix has a valid ESN',
       sleep: 5,
       test() {
-        return getPluginInfo.call(this, constants.netFlixPlugin)
+        return getNetflixPluginEsnInfo.call(this)
       },
       validate(res) {
-        if (res.data.esn !== undefined && res.data.esn !== '' && res.data.esn.length > 0)
-          return true
+        if (res.result !== undefined && res.result !== '' && res.result.length > 0) return true
         else {
           this.$log('Netflix does not have a ESN')
           return false

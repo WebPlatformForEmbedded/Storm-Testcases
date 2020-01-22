@@ -2,7 +2,7 @@ import {
   pluginDeactivate,
   pluginActivate,
   startProvisioning,
-  getPluginInfo,
+  getNetflixPluginEsnInfo,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -31,13 +31,10 @@ export default {
       description: 'Check if Netflix is started without a valid ESN (screen stays blank)',
       sleep: 5,
       test() {
-        return getPluginInfo.call(this, constants.netFlixPlugin)
+        return getNetflixPluginEsnInfo.call(this)
       },
       validate(res) {
-        if (res.status > 400) {
-          this.$log('Netflix plugin is responding with an error')
-        }
-        if (res.data.esn !== undefined && res.data.esn === '' && res.data.esn.length === 0) {
+        if (res.result !== undefined && res.result === '' && res.result.length === 0) {
           return true
         } else {
           this.$log('Expected Netflix to not have an ESN, yet it does')

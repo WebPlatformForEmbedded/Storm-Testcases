@@ -3,7 +3,7 @@ import {
   getCpuLoad,
   pluginActivate,
   webKitBrowserActions,
-  suspendOrResumePlugin,
+  suspendOrResumeNetflixPlugin,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -82,10 +82,10 @@ export default {
             {
               description: 'Suspend Netflix Plugin',
               test() {
-                return suspendOrResumePlugin.call(this, constants.netFlixPlugin, 'Suspend')
+                return suspendOrResumeNetflixPlugin.call(this, 'suspended')
               },
               validate(res) {
-                if (res.status == 200) {
+                if (res.result == null) {
                   return true
                 } else {
                   this.$log('Plugin not suspended')
@@ -96,10 +96,10 @@ export default {
             {
               description: 'Resume Netflix Plugin',
               test() {
-                return suspendOrResumePlugin.call(this, constants.netFlixPlugin, 'Resume')
+                return suspendOrResumeNetflixPlugin.call(this, 'resumed')
               },
               validate(res) {
-                if (res.status == 200) {
+                if (res.result == null) {
                   return true
                 } else {
                   this.$log('Plugin not resumed')
