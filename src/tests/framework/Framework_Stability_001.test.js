@@ -2,7 +2,7 @@ import {
   pluginActivate,
   pluginDeactivate,
   getControllerPluginData,
-} from '../commonMethods/commonFunctions'
+} from '../../commonMethods/commonFunctions'
 
 export default {
   title: 'Framework Controller Robustness test',

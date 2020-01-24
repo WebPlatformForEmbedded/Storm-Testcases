@@ -112,6 +112,7 @@ export const checkIfProcessIsRunning = function(process) {
     return isNaN(processId) === false ? true : false
   })
 }
+
 /**
  * This function is used to connect RbPI
  * @param opts
@@ -306,6 +307,19 @@ export const getPluginInfo = function(plugin) {
 }
 
 /**
+ * This function is used to Suspend or Resume a plugin
+ * @param plugin
+ * @param action
+ * @returns {Promise<unknown>}
+ */
+export const suspendOrResumePlugin = function(plugin, action) {
+  return this.$http
+    .post(`http://${constants.host}:80/Service/${plugin}/${action}`)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
  * This function is used to get System Info of Device Ingo Plugin
  * @param plugin
  * @returns {Promise<AxiosResponse<any>>}
@@ -315,6 +329,27 @@ export const getDeviceInfo = function() {
     .then(result => {
       this.$data.write('systeminfo', result)
     })
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get esn Info of Netflix Plugin
+ * @returns {Promise<unknown>}
+ */
+export const getNetflixPluginEsnInfo = function() {
+  return this.$thunder.api.Netflix.esn()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to suspend or resume Info of Netflix Plugin
+ * @param state
+ * @returns {Promise<unknown>}
+ */
+export const suspendOrResumeNetflixPlugin = function(state) {
+  return this.$thunder.api.Netflix.state(state)
+    .then(result => result)
     .catch(err => err)
 }
 

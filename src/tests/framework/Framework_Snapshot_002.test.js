@@ -3,8 +3,8 @@ import {
   pluginDeactivate,
   screenshot,
   webKitBrowserStartAndResume,
-} from '../commonMethods/commonFunctions'
-import constants from '../commonMethods/constants'
+} from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework snapshot test with multiple start/stops',

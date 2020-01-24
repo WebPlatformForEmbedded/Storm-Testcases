@@ -1,5 +1,9 @@
-import { setWebKitUrl, webKitBrowserOps, getPluginInfo } from './commonMethods/commonFunctions'
-import constants from './commonMethods/constants'
+import {
+  setWebKitUrl,
+  webKitBrowserStartAndResume,
+  getMonitorInfo,
+} from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 let listener
 export default {
@@ -7,7 +11,7 @@ export default {
   description: 'Loads about blank and checks the memory usage',
   setup() {
     return this.$sequence([
-      () => webKitBrowserOps.call(this),
+      () => webKitBrowserStartAndResume.call(this),
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)
@@ -44,30 +48,32 @@ export default {
     },
     {
       description: 'Get Monitor Plugin Info',
-      test: getPluginInfo,
-      params: constants.monitorPlugin,
-      validate(result) {
-        this.$data.write('pluginData', result)
-        return this.$expect(result).to.be.object() === true
+      sleep: 5, //This sleep is to make sure that Monitor plugin is activated
+      test() {
+        return getMonitorInfo.call(this)
+      },
+      validate() {
+        let monitorInfo = this.$data.read('monitorinfo')
+        return this.$expect(monitorInfo).to.be.array() === true
       },
     },
   ],
   validate() {
-    let response = this.$data.read('pluginData')
-    for (let i = 0; i < response.data.length; i++) {
-      let plugin = response.data[i]
-      if (plugin.name === constants.webKitBrowserPlugin) {
+    let response = this.$data.read('monitorinfo')
+    for (let i = 0; i < response.length; i++) {
+      let plugin = response[i]
+      if (plugin.observable === constants.webKitBrowserPlugin) {
         if (
           plugin !== undefined &&
-          plugin.measurment !== undefined &&
-          plugin.measurment.resident !== undefined &&
-          plugin.measurment.resident.last !== undefined
+          plugin.measurements !== undefined &&
+          plugin.measurements.resident !== undefined &&
+          plugin.measurements.resident.last !== undefined
         ) {
-          if (plugin.measurment.resident.last < this.$context.read('MAX_MEMORY')) return true
+          if (plugin.measurements.resident.last < this.$context.read('MAX_MEMORY')) return true
           else {
             this.$log(
               `WebKitBrowser memory usage ${
-                plugin.measurment.resident.last
+                plugin.measurements.resident.last
               } is higher then ${this.$context.read('MAX_MEMORY')} while loading about:blank`
             )
             return false

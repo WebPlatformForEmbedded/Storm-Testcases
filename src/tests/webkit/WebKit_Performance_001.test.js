@@ -1,4 +1,4 @@
-import { setWebKitUrl, calcAvgFPS, webKitBrowserOps } from '../../commonMethods/commonFunctions'
+import { setWebKitUrl, calcAvgFPS, webKitBrowserActions } from '../../commonMethods/commonFunctions'
 import { fetchWebKitFPS } from '../../commonMethods/webKitPerformanceCommonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -12,7 +12,7 @@ export default {
   setup() {
     this.$data.write('samples', [])
     return this.$sequence([
-      () => webKitBrowserOps.call(this),
+      () => webKitBrowserActions.call(this),
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)

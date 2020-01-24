@@ -1,16 +1,14 @@
 import {
-  getPluginInfo,
   pluginDeactivate,
   pluginActivate,
-  restartFramework,
-  putRequestForPlugin,
-} from './commonMethods/commonFunctions'
-import constants from './commonMethods/constants'
+  getProvisioningPluginData,
+  startProvisioning,
+} from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Framework provision test 002',
-  description: 'Check if device is provisioned',
-  teardown: restartFramework,
+  title: 'Framework request provision stress test',
+  description: 'Perform multiple device provision requests and see if it is still running',
   steps: [
     {
       description: 'Deactivating Provisioning and check whether deactivated or not',
@@ -27,10 +25,10 @@ export default {
     {
       description: 'Get Provisioning Plugin Info',
       sleep: 5, //This sleep is to make sure that Provisioning plugin is activated
-      test: getPluginInfo,
-      params: constants.provisioningPlugin,
-      validate(result) {
-        let response = result.data
+      test() {
+        return getProvisioningPluginData.call(this)
+      },
+      validate(response) {
         if (response.id === undefined && response.status === undefined) {
           this.$log('Provisioning id or status is not present in response')
           return false
@@ -44,22 +42,31 @@ export default {
       },
     },
     {
-      description: 'Request Provisioning',
-      test: putRequestForPlugin,
-      params: constants.provisioningPlugin,
+      title: 'Repeat Provisioning multiple times',
+      description: 'Request provisioning',
+      repeat: 10,
+      steps: [
+        {
+          description: 'Request provisioning',
+          test() {
+            return startProvisioning.call(this)
+          },
+          assert: null,
+        },
+      ],
     },
     {
       description: 'Check Provisioning Status',
-      sleep: 5, //This sleep is to make sure that Provisioning plugin is activated
-      test: getPluginInfo,
-      params: constants.provisioningPlugin,
-      validate(result) {
-        let response = result.data
+      test() {
+        return getProvisioningPluginData.call(this)
+      },
+      validate(response) {
         if (response.id === undefined && response.status === undefined) {
           this.$log('Provisioning id or status is not present in response')
           return false
         }
-        if (parseInt(response.status) > 0 && response.tokens.length > 0) return true
+        if (parseInt(response.status) === 0) return true
+        else if (parseInt(response.status) > 0 && response.tokens.length > 0) return true
         else {
           this.$log('Device is not provisioned')
           return false

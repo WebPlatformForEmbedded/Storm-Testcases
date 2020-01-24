@@ -3,16 +3,14 @@ import {
   checkIfProcessIsRunning,
   pluginActivate,
   getCpuLoad,
-  restartFramework,
-} from './commonMethods/commonFunctions'
-import constants from './commonMethods/constants'
+} from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'OCDM startup robustness test',
   description:
     'Starts and stops the OCDM plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
-  teardown: restartFramework,
   context: {
     cpuLoad: 90,
   },

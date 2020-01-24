@@ -1,5 +1,5 @@
 import baseTest from './WebKit_Stress_001.test'
-import { setWebKitUrl, webKitBrowserOps } from '../../commonMethods/commonFunctions'
+import { setWebKitUrl, webKitBrowserStartAndResume } from '../../commonMethods/commonFunctions'
 import fs from 'fs'
 const url = require('url')
 
@@ -13,7 +13,7 @@ export default {
       'Stress loads the system with redirects and see if the WPEWebkit process continues to operate nominally',
     setup() {
       return this.$sequence([
-        () => webKitBrowserOps.call(this),
+        () => webKitBrowserStartAndResume.call(this),
         () =>
           (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
             this.$data.write('currentUrl', data.url)

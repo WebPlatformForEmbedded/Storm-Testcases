@@ -1,37 +1,36 @@
 import {
   pluginDeactivate,
   checkIfProcessIsRunning,
-  pluginActivate,
   getCpuLoad,
-} from '../commonMethods/commonFunctions'
-import constants from '../commonMethods/constants'
+  webKitBrowserStartAndResume,
+} from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'OCDM startup robustness test',
+  title: 'WPEWebkit startup robustness test',
   description:
-    'Starts and stops the OCDM plugin repeatedly and checks if everything is started correctly',
+    'Starts and stops the WPEWebkit plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
   context: {
     cpuLoad: 90,
   },
   steps: [
     {
-      description: 'Deactivate OCDM plugin and also check deactivated or not',
+      description: 'Check if WPEWebkit is stopped correctly',
       test: pluginDeactivate,
-      params: constants.ocdmPlugin,
+      params: constants.webKitBrowserPlugin,
       assert: 'deactivated',
     },
     {
-      description: 'Check if OCDM Implementation rpcprocess is gone',
+      description: 'Check if WebKitImplementation rpcprocess is gone',
       test: checkIfProcessIsRunning,
-      params: constants.ocdmImplementation,
+      params: constants.webKitImplementation,
       assert: false,
     },
     {
-      description: 'Activating ocdmPlugin',
-      test: pluginActivate,
-      params: constants.ocdmPlugin,
-      assert: 'activated',
+      description: 'Activating WebKit Browser Plugin',
+      test: webKitBrowserStartAndResume,
+      assert: 'resumed',
     },
     {
       description: 'Get CPU load',

@@ -2,15 +2,13 @@ import {
   getPluginState,
   pluginActivate,
   pluginDeactivate,
-  restartFramework,
   screenshot,
-} from './commonMethods/commonFunctions'
-import constants from './commonMethods/constants'
+} from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework snapshot Test 003',
   description: 'Tests if the Framework snapshot module works',
-  teardown: restartFramework,
   steps: [
     {
       description: 'Deactivating WebKitBrowser Plugin',

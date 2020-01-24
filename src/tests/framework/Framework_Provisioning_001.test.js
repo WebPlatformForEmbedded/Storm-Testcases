@@ -1,5 +1,9 @@
-import { getPluginInfo, pluginDeactivate, pluginActivate } from '../commonMethods/commonFunctions'
-import constants from '../commonMethods/constants'
+import {
+  pluginDeactivate,
+  pluginActivate,
+  getProvisioningPluginData,
+} from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework provision test 001',
@@ -18,19 +22,19 @@ export default {
       assert: 'activated',
     },
     {
-      description: 'Get Provisioning Plugin Info',
-      sleep: 5, //This sleep is to make sure that Provisioning plugin is activated
-      test: getPluginInfo,
-      params: constants.provisioningPlugin,
-      validate(result) {
-        this.$data.write('pluginData', result)
-        return this.$expect(result).to.be.object() === true
+      description: 'Get Provisioning status and Check if response is a JSON response',
+      sleep: 5,
+      test() {
+        return getProvisioningPluginData.call(this)
+      },
+      validate(res) {
+        this.$data.write('pluginInfo', res)
+        return this.$expect(res).to.be.object() === true
       },
     },
   ],
   validate() {
-    let resp = this.$data.read('pluginData')
-    let response = resp.data
+    let response = this.$data.read('pluginInfo')
     if (response.id === undefined) {
       this.$log('Provisioning id is not present')
       return false
@@ -39,7 +43,6 @@ export default {
       this.$log('Provisioning status is not provided')
       return false
     }
-
     return true
   },
 }

@@ -1,4 +1,4 @@
-import baseTest from '../../../../../src/youtube/WebKit_Stress_001.test.js'
+import baseTest from './WebKit_Stress_001.test.js'
 
 export default {
   ...baseTest,

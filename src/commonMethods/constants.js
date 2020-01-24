@@ -14,9 +14,11 @@ export default {
   snapshotPlugin: 'Snapshot',
   webServerPlugin: 'WebServer',
   webServerImplementation: 'WebServerImplementation',
+  netflixImplementation: 'NetflixImplementation',
   provisioningPlugin: 'Provisioning',
   WPEProcess: 'WPEProcess',
   remoteControlPlugin: 'RemoteControl',
+
   //Plugin states
   activate: 'activate',
   deactivate: 'deactivate',

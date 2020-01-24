@@ -5,8 +5,8 @@ import {
   webKitBrowserStartAndResume,
   getPluginInfo,
   setWebKitUrl,
-} from '../commonMethods/commonFunctions'
-import constants from '../commonMethods/constants'
+} from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 let listener
 
 export default {
