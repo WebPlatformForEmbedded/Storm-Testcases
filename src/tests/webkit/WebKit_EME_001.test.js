@@ -1,57 +1,65 @@
-import { pluginDeactivate, pluginActivate, screenshot } from '../../commonMethods/commonFunctions'
+import {
+  setWebKitUrl,
+  webKitBrowserStartAndResume,
+  screenshot,
+} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
-let keysArray = ['up', 'down', 'left', 'right', 'esc']
-let counter = 0
+let listener
 let curSameScreenshot = 0
+let counter = 0
 let maxSameScreenshot = 5
 
 export default {
-  title: 'YouTube Random Key test',
-  description: 'Sends random keys to YouTube and checks if YouTube is still working',
+  title: 'Stress test using eme.html test',
+  description: 'Loads eme.html test page and runs stress tests by playing a video for 3 hours',
+  setup() {
+    return this.$sequence([
+      () => webKitBrowserStartAndResume.call(this),
+      () =>
+        (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
+          this.$data.write('currentUrl', data.url)
+        })),
+    ])
+  },
+  context: {
+    url: 'http://cdn.metrological.com/static/eme-v3-clean.html',
+  },
+  teardown() {
+    listener.dispose()
+  },
   steps: [
     {
-      description: 'Check if WPEWebkit is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if Youtube is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.youTubePlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if Youtube is started correctly',
+      description: 'Navigating to EME URL',
       test() {
-        return pluginActivate.call(this, constants.youTubePlugin)
+        this.$log(this.$context.read('url'))
+        return setWebKitUrl.call(this, this.$context.read('url'))
       },
-      validate(result) {
-        if (result === 'suspended') {
-          return true
-        } else return false
+      validate(url) {
+        return url === this.$context.read('url')
       },
     },
     {
-      description: 'Repeat for 12 hours',
+      description: 'Sleep until URL is loaded',
+      sleep() {
+        // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
+        return new Promise((resolve, reject) => {
+          const interval = setInterval(() => {
+            if (this.$data.read('currentUrl') === constants.blankUrl) {
+              clearInterval(interval)
+              resolve()
+            }
+            reject('URL not loaded within time limit')
+          }, 1000)
+        })
+      },
+    },
+    {
+      description: 'Repeat for 3 hours',
       repeat: {
-        seconds: 12 * 60 * 60, //Twelve hours
+        seconds: 3 * 60 * 60, //Twelve hours
       },
       steps: [
-        {
-          description: 'Press keys from Remote Control',
-          repeat: 4,
-          test() {
-            let currCount = counter
-            counter++
-            return this.$thunder.remoteControl.key(keysArray[currCount])
-          },
-          validate(res) {
-            if (res === null) return true
-            else return false
-          },
-        },
         {
           description: 'Check if screen still updates',
           test: screenshot,
