@@ -81,7 +81,7 @@ export default {
       description: 'verify if the resolution change happened',
       test() {
         let screenshot = this.$data.read('screenshot')
-        resemble('./resources/res_320x240.png')
+        resemble('../../resources/res_320x240.png')
           .compareTo(screenshot)
           .ignoreColors()
           .onComplete(function(data) {
@@ -122,7 +122,7 @@ export default {
       description: 'verify if the resolution change happened',
       test() {
         let screenshot = this.$data.read('screenshot')
-        resemble('./resources/res_640x480.png')
+        resemble('../../resources/res_640x480.png')
           .compareTo(screenshot)
           .ignoreColors()
           .onComplete(function(data) {
@@ -163,7 +163,7 @@ export default {
       description: 'verify if the resolution change happened',
       test() {
         let screenshot = this.$data.read('screenshot')
-        resemble('./resources/res_1280x720.png')
+        resemble('../../resources/res_1280x720.png')
           .compareTo(screenshot)
           .ignoreColors()
           .onComplete(function(data) {
@@ -204,7 +204,7 @@ export default {
       description: 'verify if the resolution change happened',
       test() {
         let screenshot = this.$data.read('screenshot')
-        resemble('./resources/res_1920x1080.png')
+        resemble('../../resources/res_1920x1080.png')
           .compareTo(screenshot)
           .ignoreColors()
           .onComplete(function(data) {
