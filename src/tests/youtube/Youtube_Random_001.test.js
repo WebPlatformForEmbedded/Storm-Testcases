@@ -1,8 +1,8 @@
 import { pluginDeactivate, pluginActivate, screenshot } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
-var keysArray = ['up', 'down', 'left', 'right', 'esc']
-var counter = 0
+let keysArray = ['up', 'down', 'left', 'right', 'esc']
+let counter = 0
 let curSameScreenshot = 0
 let maxSameScreenshot = 5
 
