@@ -1,14 +1,8 @@
 import constants from './constants'
 import moment from 'moment'
-const _http = require('http')
-const Client = require('ssh2').Client
-const URL = require('url')
-const http = require('http')
-const os = require('os')
-const path = require('path')
-const httpServer = require('http-server')
-const fs = require('fs')
-const httpclient = require('httpclient')
+import _http from 'http'
+import { Client } from 'ssh2'
+import URL from 'url'
 
 /**
  * This function activates a given plugin
@@ -148,12 +142,10 @@ export const exec = async function(opts) {
     conn.on('timeout', function(e) {
       throw new Error(`{opts.cmd}: Timeout while connecting to ${constants.host}`)
     })
-
     conn.on('error', function(err) {
       throw new Error(`${opts.cmd}:  ${err}`)
     })
   })
-
   let result = await execCmd
   return result
 }
@@ -182,6 +174,7 @@ export const screenshot = async function() {
   let url = `http://${constants.host}:80/Service/Snapshot/Capture?${moment().valueOf()}`
   // create a new promise inside of the async function
   let bufferData = new Promise((resolve, reject) => {
+    //TODO : Replace _http by using this.$http helper
     _http
       .get(url, function(res) {
         if (res.headers['content-length'] === undefined)
@@ -190,11 +183,9 @@ export const screenshot = async function() {
           )
         var buffers = []
         var imageSize = res.headers['content-length']
-
         res.on('data', function(chunk) {
           buffers.push(Buffer.from(chunk))
         })
-
         res.on('end', function() {
           return resolve(Buffer.concat(buffers, parseInt(imageSize)))
         })
@@ -203,10 +194,10 @@ export const screenshot = async function() {
         return reject(e)
       })
   })
-
   // wait for the promise to resolve
   let result = await bufferData
   this.$data.write('screenshotResult', result)
+  return result
 }
 /**
  * This function is used to kill the process
@@ -229,45 +220,6 @@ export const stopProcess = function(process) {
 }
 export const startFramework = function() {
   return exec({ cmd: 'nohup WPEFramework WPEProcess -b &', cbWhenStarted: true })
-}
-
-export const startHttpServer = function(requestFunction) {
-  let data = this.$data.read('app')
-  let server = http.createServer(function(req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
-    res.write(data)
-    res.end()
-  })
-  server.listen(() => {
-    this.$data.write('port', server.address().port)
-  })
-}
-
-export const matchIpRange = function() {
-  let ip = constants.host
-  let localInterfaces = os.networkInterfaces()
-  let parsedIp = ip.split('.')
-  let interfaceList = Object.keys(localInterfaces)
-  for (var i = 0; i < interfaceList.length; i++) {
-    var interface1 = localInterfaces[interfaceList[i]]
-
-    for (var k = 0; k < interface1.length; k++) {
-      if (interface1[k].family === 'IPv6') continue //not supporting IPv6, this shouldn't be called in IPv6 mode as there is no need for private/lan ranges anymore
-      if (interface1[k].address !== undefined) {
-        var parsedLocalIp = interface1[k].address.split('.')
-
-        if (
-          parsedIp[0] === parsedLocalIp[0] &&
-          parsedIp[1] === parsedLocalIp[1] &&
-          parsedIp[2] === parsedLocalIp[2]
-        ) {
-          return interface1[k].address
-        }
-      }
-    }
-    if (i === interfaceList.length - 1)
-      throw new Error('Could not determine IP network of the server that belongs to: ' + ip)
-  }
 }
 
 /**
@@ -362,6 +314,7 @@ export const getAddressesInfo = function() {
   return this.$thunder.api.DeviceInfo.addresses()
     .then(result => {
       this.$data.write('addressinfo', result)
+      return result
     })
     .catch(err => err)
 }
@@ -375,6 +328,7 @@ export const getMonitorInfo = function() {
   return this.$thunder.api.Monitor.status()
     .then(result => {
       this.$data.write('monitorinfo', result)
+      return result
     })
     .catch(err => err)
 }
@@ -398,6 +352,7 @@ export const getCpuLoad = function() {
   this.$thunder.api.DeviceInfo.systeminfo()
     .then(result => {
       this.$data.write('cpuload', result.cpuload)
+      return result
     })
     .catch(err => err)
 }
