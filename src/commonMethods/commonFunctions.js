@@ -202,6 +202,7 @@ export const screenshot = async function() {
   // wait for the promise to resolve
   let result = await bufferData
   this.$data.write('screenshotResult', result)
+  return result
 }
 /**
  * This function is used to kill the process
