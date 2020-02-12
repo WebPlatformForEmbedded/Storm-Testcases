@@ -37,6 +37,7 @@ export default {
         return getProvisioningPluginData.call(this)
       },
       validate(response) {
+        this.$log('Response of Provisioning is=======================>', response)
         if (response.id === undefined && response.status === undefined) {
           this.$log('Provisioning id or status is not present in response')
           return false

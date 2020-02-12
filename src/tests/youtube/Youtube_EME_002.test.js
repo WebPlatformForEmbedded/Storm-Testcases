@@ -10,7 +10,7 @@ let url =
   'https://yt-dash-mse-test.commondatastorage.googleapis.com/unit-tests/2017.html?test_type=encryptedmedia-test&command=run'
 
 export default {
-  title: 'YouTube Encrupted Media conformance test',
+  title: 'YouTube Encrypted Media conformance test',
   description: 'Loads the YouTube EME 2017 conformance test and captures the output',
   setup() {
     this.$data.write('testCount', 9)

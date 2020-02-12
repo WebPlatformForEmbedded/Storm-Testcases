@@ -3,6 +3,7 @@ import {
   pluginActivate,
   screenshot,
   youtubeStartAndResume,
+  getYoutubeUrl,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -11,8 +12,8 @@ let maxSameScreenshot = 5
 let listener
 
 export default {
-  title: 'YouTube Playback test 001',
-  description: 'Start playback of a movie on YouTube and let it run for 12 hours',
+  title: 'YouTube Playback test',
+  description: 'Start playback of a movie on YouTube and let it run for 8 hours',
   setup() {
     return this.$sequence([
       () => youtubeStartAndResume.call(this),
@@ -26,7 +27,7 @@ export default {
     listener.dispose()
   },
   context: {
-    url: 'https://www.youtube.com/watch?v=kg3ElG-H7Wo', //12 hour length Youtube Video
+    url: 'https://www.youtube.com/watch?v=02NQkhbjALg', //8 hour length Youtube Video
   },
   steps: [
     {
@@ -47,45 +48,41 @@ export default {
         return pluginActivate.call(this, constants.youTubePlugin)
       },
       validate(result) {
-        if (result === 'resumed') {
+        if (result === 'suspended') {
           return true
         } else return false
       },
     },
     {
-      description: 'Press Down key from Remote Control',
+      description: 'Navigating to Youtube URL which plays for 12 hours',
       test() {
-        return this.$thunder.remoteControl.down()
+        this.$log(this.$context.read('url'))
+        return getYoutubeUrl.call(this, this.$context.read('url'))
       },
-      validate(res) {
-        if (res === null) return true
-        else return false
+      validate(url) {
+        return url === this.$context.read('url')
       },
     },
     {
-      description: 'Press Enter key from Remote Control',
-      test() {
-        return this.$thunder.remoteControl.ok()
-      },
-      validate(res) {
-        if (res === null) return true
-        else return false
-      },
-    },
-    {
-      description: 'Press Enter key from Remote Control',
-      test() {
-        return this.$thunder.remoteControl.ok()
-      },
-      validate(res) {
-        if (res === null) return true
-        else return false
+      description: 'Validate the test by verifying if the url is still loaded',
+      sleep() {
+        // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
+        return new Promise((resolve, reject) => {
+          const interval = setInterval(() => {
+            if (this.$data.read('currentUrl') === this.$context.read('url')) {
+              this.$log(this.$data.read('currentUrl'))
+              clearInterval(interval)
+              resolve()
+            }
+            reject('URL not loaded within time limit')
+          }, 1000)
+        })
       },
     },
     {
-      description: 'Repeat for 12 hours',
+      description: 'Repeat for 8 hours',
       repeat: {
-        seconds: 12 * 60 * 60, //Twelve hours
+        seconds: 8 * 60 * 60, //Eight hours
       },
       steps: [
         {

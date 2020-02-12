@@ -7,7 +7,7 @@ export default {
   webKitBrowserPlugin: 'WebKitBrowser',
   webKitImplementation: 'WebKitImplementation',
   deviceInfo: 'DeviceInfo',
-  youTubePlugin: 'YouTube',
+  youTubePlugin: 'Cobalt',
   netFlixPlugin: 'Netflix',
   ocdmPlugin: 'OCDM',
   ocdmImplementation: 'OCDMImplementation',
@@ -18,6 +18,7 @@ export default {
   provisioningPlugin: 'Provisioning',
   WPEProcess: 'WPEProcess',
   remoteControlPlugin: 'RemoteControl',
+  youtubeImplementation: 'CobaltImplementation',
 
   //Plugin states
   activate: 'activate',

@@ -1,13 +1,8 @@
-import {
-  pluginDeactivate,
-  getCpuLoad,
-  pluginActivate,
-  screenshot,
-} from '../../commonMethods/commonFunctions'
+import { pluginDeactivate, pluginActivate, screenshot } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
-var keysArray = ['ok', 'left', 'up', 'right', 'down']
-var counter = 0
+let keysArray = ['ok', 'left', 'up', 'right', 'down']
+let counter = 0
 let curSameScreenshot = 0
 let maxSameScreenshot = 5
 
