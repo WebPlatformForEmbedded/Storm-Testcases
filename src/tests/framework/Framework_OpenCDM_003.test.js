@@ -9,12 +9,12 @@ import constants from '../../commonMethods/constants'
 
 let listener
 let curSameScreenshot = 0
-let maxSameScreenshot = 3
+let maxSameScreenshot = 5
 export default {
   title: 'OCDM playback test',
   description: 'Start a playready video and validate if video plays',
   context: {
-    url: 'https://www.websocket.org/demos/racer/run/',
+    url: 'http://cdn.metrological.com/static/eme-v3-clean.html',
     blankUrl: 'about:blank',
   },
   setup() {

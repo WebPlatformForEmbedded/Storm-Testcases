@@ -5,7 +5,7 @@ export default {
   ...{
     context: {
       minFPS: 30,
-      url: 'http://helloracer.com/racer-s/',
+      url: 'http://cdn.metrological.com/static/eme-v3-clean.html',
     },
     title: 'WPEWebkit performance racer-s',
     description: 'Loads the Racer-S WebGL animation and measures its performance',

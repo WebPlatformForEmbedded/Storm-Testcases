@@ -47,6 +47,10 @@ export default {
             })
           },
         },
+        {
+          description: 'Sleep to check the Race car on monitor screen',
+          sleep: 5,
+        },
       ],
     },
   ],

@@ -7,7 +7,7 @@ export default {
   webKitBrowserPlugin: 'WebKitBrowser',
   webKitImplementation: 'WebKitImplementation',
   deviceInfo: 'DeviceInfo',
-  youTubePlugin: 'YouTube',
+  youTubePlugin: 'Cobalt',
   netFlixPlugin: 'Netflix',
   ocdmPlugin: 'OCDM',
   ocdmImplementation: 'OCDMImplementation',
@@ -28,3 +28,4 @@ export default {
   blankUrl: 'about:blank',
   host: config.thunder.host,
 }
+
