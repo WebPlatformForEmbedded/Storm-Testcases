@@ -43,10 +43,6 @@ export default {
       systeminfo.freeram === undefined ||
       systeminfo.devicename === undefined ||
       systeminfo.cpuload === undefined ||
-      systeminfo.totalgpuram === undefined ||
-      systeminfo.freegpuram === undefined ||
-      systeminfo.serialnumber === undefined ||
-      systeminfo.deviceid === undefined ||
       systeminfo.time === undefined
     ) {
       this.$log('Error reading systeminfo object from DeviceInfo')
