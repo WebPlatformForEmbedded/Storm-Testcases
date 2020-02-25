@@ -12,7 +12,7 @@ export default {
       description: 'Set Youtube URL to a playing video',
       test: pluginActivate,
       params: constants.youTubePlugin,
-      assert: 'activateds',
+      assert: 'resumed',
     },
     {
       description: 'Get Monitor Plugin Info',

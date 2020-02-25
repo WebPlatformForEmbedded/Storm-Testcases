@@ -1,11 +1,14 @@
 import { pluginDeactivate, pluginActivate, screenshot } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
-let keysArray = ['ok', 'left', 'up', 'right', 'down']
+let keysArray = ['up', 'down', 'left', 'right']
 let counter = 0
 let curSameScreenshot = 0
 let maxSameScreenshot = 5
 
+//https://www.youtube.com/watch?v=G0YwEc50dZg //30 minute length Youtube Video
+//url: 'https://www.youtube.com/watch?v=02NQkhbjALg', //8 hour length Youtube Video
+// url: 'https://www.youtube.com/watch?v=kg3ElG-H7Wo', //12 hour length Youtube Video
 export default {
   title: 'YouTube Random Key test',
   description:
@@ -29,22 +32,26 @@ export default {
         return pluginActivate.call(this, constants.youTubePlugin)
       },
       validate(result) {
-        if (result === 'suspended') {
+        if (result === 'resumed') {
           return true
         } else return false
       },
     },
     {
-      description: 'Repeat for3 hours',
+      description: 'Sleep for 10 seconds to make sure Youtube is loaded',
+      sleep: 10,
+    },
+    {
+      description: 'Repeat for 3 hours',
       repeat: {
-        seconds: 3 * 60 * 60, //Three hours
+        seconds: 3 * 60 * 60, // Three hours
       },
       steps: [
         {
           description: 'Press keys from Remote Control',
-          repeat: 4,
+          repeat: 3,
           test() {
-            let currCount = counter
+            let currCount = counter % 4
             counter++
             return this.$thunder.remoteControl.key(keysArray[currCount])
           },

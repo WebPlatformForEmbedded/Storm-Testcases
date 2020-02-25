@@ -36,12 +36,6 @@ export default {
       description: 'Activate Youtube Plugin and check if it is activated',
       test: pluginActivate,
       params: constants.youTubePlugin,
-      assert: 'suspended',
-    },
-    {
-      description: 'Resume Youtube Plugin and check if it is resumed',
-      test: youtubeActions,
-      params: constants.resume,
       assert: 'resumed',
     },
     {
