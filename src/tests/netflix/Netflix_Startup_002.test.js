@@ -33,7 +33,7 @@ export default {
       description: 'Start Netflix Plugin',
       test: pluginActivate,
       params: constants.netFlixPlugin,
-      assert: 'activated',
+      assert: 'resumed',
     },
     {
       description: 'Stop Framework',

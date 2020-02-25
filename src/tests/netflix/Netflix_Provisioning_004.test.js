@@ -28,7 +28,7 @@ export default {
       description: 'Activate Provisioning Plugin',
       test: pluginActivate,
       params: constants.provisioningPlugin,
-      assert: 'activated',
+      assert: 'resumed',
     },
     {
       description: 'Start provisioning',

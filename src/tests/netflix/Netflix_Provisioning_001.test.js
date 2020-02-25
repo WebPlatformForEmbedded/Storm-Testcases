@@ -56,6 +56,7 @@ export default {
       description: 'Start Netflix Plugin',
       test: pluginActivate,
       params: constants.netFlixPlugin,
+      assert: 'resumed',
     },
     {
       description: 'Check if Netflix has a valid ESN',

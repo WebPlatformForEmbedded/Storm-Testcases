@@ -26,6 +26,7 @@ export default {
       description: 'Start Netflix Plugin',
       test: pluginActivate,
       params: constants.netFlixPlugin,
+      assert: 'resumed',
     },
     {
       description: 'Check if Netflix is started without a valid ESN (screen stays blank)',
