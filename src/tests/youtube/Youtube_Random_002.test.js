@@ -6,9 +6,6 @@ let counter = 0
 let curSameScreenshot = 0
 let maxSameScreenshot = 5
 
-//https://www.youtube.com/watch?v=G0YwEc50dZg //30 minute length Youtube Video
-//url: 'https://www.youtube.com/watch?v=02NQkhbjALg', //8 hour length Youtube Video
-// url: 'https://www.youtube.com/watch?v=kg3ElG-H7Wo', //12 hour length Youtube Video
 export default {
   title: 'YouTube Random Key test',
   description:
