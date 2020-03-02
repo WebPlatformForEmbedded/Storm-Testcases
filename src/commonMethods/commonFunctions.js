@@ -210,6 +210,7 @@ export const screenshot = async function() {
   let url = `http://${constants.host}:80/Service/Snapshot/Capture?${moment().valueOf()}`
   // create a new promise inside of the async function
   let bufferData = new Promise((resolve, reject) => {
+    //TODO : Replace _http by using this.$http helper
     _http
       .get(url, function(res) {
         if (res.headers['content-length'] === undefined)

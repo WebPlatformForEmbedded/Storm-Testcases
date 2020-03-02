@@ -1,7 +1,5 @@
 import { setWebKitUrl, webKitBrowserStartAndResume } from '../../commonMethods/commonFunctions'
-
 let listener
-
 export default {
   title: 'Framework stability set URL test',
   description:
