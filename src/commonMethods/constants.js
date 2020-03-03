@@ -5,9 +5,10 @@ export default {
   monitorPlugin: 'Monitor',
   controllerPlugin: 'Controller',
   webKitBrowserPlugin: 'WebKitBrowser',
+  bluetoothControlPlugin: 'BluetoothControl',
   webKitImplementation: 'WebKitImplementation',
   deviceInfo: 'DeviceInfo',
-  youTubePlugin: 'YouTube',
+  youTubePlugin: 'Cobalt',
   netFlixPlugin: 'Netflix',
   ocdmPlugin: 'OCDM',
   ocdmImplementation: 'OCDMImplementation',
@@ -18,6 +19,8 @@ export default {
   provisioningPlugin: 'Provisioning',
   WPEProcess: 'WPEProcess',
   remoteControlPlugin: 'RemoteControl',
+  youtubeImplementation: 'CobaltImplementation',
+  invalidAddress: 'invalidstring',
 
   //Plugin states
   activate: 'activate',
