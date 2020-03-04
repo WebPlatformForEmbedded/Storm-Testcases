@@ -2,6 +2,7 @@ import constants from './constants'
 import moment from 'moment'
 import _http from 'http'
 import { Client } from 'ssh2'
+
 import URL from 'url'
 
 /**
@@ -85,6 +86,39 @@ export const setWebKitUrl = function(URL) {
 }
 
 /**
+ * This function resumes or suspends Youtube plugin
+ * @param action
+ */
+export const youtubeChangeState = function(action) {
+  return this.$thunder.api.Cobalt.state(action)
+    .then(() => {
+      return this.$thunder.api.call(constants.controllerPlugin, 'status').then(
+        result =>
+          result.filter(p => {
+            return p.callsign === 'Cobalt'
+          })[0].state
+      )
+    })
+    .catch(err => err)
+}
+
+/**
+ * This function gets the URL
+ * @param URL
+ * @returns URL
+ */
+export const getYoutubeUrl = function(URL) {
+  return this.$thunder.api.Cobalt.url(URL)
+    .then(() =>
+      this.$thunder.api.Cobalt.url().then(url => {
+        this.$log('URL is', url)
+        return url
+      })
+    )
+    .catch(err => err)
+}
+
+/**
  * This function checks if the process is running by getting the process id and comparing it to the number.
  *  - If the process id is a number, then false is returned
  *  - If the process is not a number, then true is returned
@@ -142,10 +176,12 @@ export const exec = async function(opts) {
     conn.on('timeout', function(e) {
       throw new Error(`{opts.cmd}: Timeout while connecting to ${constants.host}`)
     })
+
     conn.on('error', function(err) {
       throw new Error(`${opts.cmd}:  ${err}`)
     })
   })
+
   let result = await execCmd
   return result
 }
@@ -174,8 +210,7 @@ export const screenshot = async function() {
   let url = `http://${constants.host}:80/Service/Snapshot/Capture?${moment().valueOf()}`
   // create a new promise inside of the async function
   let bufferData = new Promise((resolve, reject) => {
-    //TODO : Replace _http by using this.$http helper
-    _http
+    _http //TODO : Replace _http by using this.$http helper
       .get(url, function(res) {
         if (res.headers['content-length'] === undefined)
           this.$log(
@@ -183,9 +218,11 @@ export const screenshot = async function() {
           )
         var buffers = []
         var imageSize = res.headers['content-length']
+
         res.on('data', function(chunk) {
           buffers.push(Buffer.from(chunk))
         })
+
         res.on('end', function() {
           return resolve(Buffer.concat(buffers, parseInt(imageSize)))
         })
@@ -194,6 +231,7 @@ export const screenshot = async function() {
         return reject(e)
       })
   })
+
   // wait for the promise to resolve
   let result = await bufferData
   this.$data.write('screenshotResult', result)
@@ -243,6 +281,20 @@ export const webKitBrowserStartAndResume = function() {
     () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
     () => pluginActivate.call(this, constants.webKitBrowserPlugin),
     () => webKitBrowserActions.call(this, constants.resume),
+  ])
+}
+
+/**
+ * This function performs below operations on Youtube Plugin
+ *  - Deactivate
+ *  - Activate
+ *  - Resume
+ */
+export const youtubeStartAndResume = function() {
+  return this.$sequence([
+    () => pluginDeactivate.call(this, constants.youTubePlugin),
+    () => pluginActivate.call(this, constants.youTubePlugin),
+    () => youtubeChangeState.call(this, constants.resume),
   ])
 }
 
