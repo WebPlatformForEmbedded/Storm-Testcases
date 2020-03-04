@@ -29,3 +29,4 @@ export default {
   blankUrl: 'about:blank',
   host: config.thunder.host,
 }
+

@@ -22,7 +22,6 @@ export default {
         let pluginInfo = this.$data.read('pluginInfo')
         for (let i = 0; i < pluginInfo.length; i++) {
           let plugin = pluginInfo[i]
-          //TODO (Controller Plugin doesnt have locator? )
           if (plugin.callsign != constants.controllerPlugin) {
             if (
               plugin.callsign === undefined ||
