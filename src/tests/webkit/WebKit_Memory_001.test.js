@@ -74,7 +74,7 @@ export default {
             this.$log(
               `WebKitBrowser memory usage ${
                 plugin.measurements.resident.last
-              } is higher then ${this.$context.read('MAX_MEMORY')} while loading about:blank`
+              } is higher than ${this.$context.read('MAX_MEMORY')} while loading about:blank`
             )
             return false
           }

@@ -16,10 +16,10 @@ export default {
   webServerPlugin: 'WebServer',
   webServerImplementation: 'WebServerImplementation',
   netflixImplementation: 'NetflixImplementation',
+  youtubeImplementation: 'CobaltImplementation',
   provisioningPlugin: 'Provisioning',
   WPEProcess: 'WPEProcess',
   remoteControlPlugin: 'RemoteControl',
-  youtubeImplementation: 'CobaltImplementation',
   invalidAddress: 'invalidstring',
 
   //Plugin states

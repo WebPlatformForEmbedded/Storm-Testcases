@@ -8,7 +8,7 @@ let maxSameScreenshot = 5
 
 export default {
   title: 'YouTube Playback test',
-  descripton: 'Start playback of a movie on YouTube and let it run for 30 minutes',
+  description: 'Start playback of a movie on YouTube and let it run for 30 minutes',
   context: {
     url: 'https://www.youtube.com/watch?v=G0YwEc50dZg', //30 minute length Youtube Video
   },
