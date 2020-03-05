@@ -2,7 +2,7 @@ import {
   pluginDeactivate,
   getCpuLoad,
   pluginActivate,
-  youtubeActions,
+  youtubeChangeState,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -45,13 +45,13 @@ export default {
       steps: [
         {
           description: 'Suspend Youtube Plugin and check if it is suspended',
-          test: youtubeActions,
+          test: youtubeChangeState,
           params: constants.suspend,
           assert: 'suspended',
         },
         {
           description: 'Resume Youtube Plugin and check if it is resumed',
-          test: youtubeActions,
+          test: youtubeChangeState,
           params: constants.resume,
           assert: 'resumed',
         },

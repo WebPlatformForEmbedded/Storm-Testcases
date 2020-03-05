@@ -14,7 +14,7 @@ export default {
   title: 'OCDM playback test when OCDM is disabled',
   description: 'Start a playready video while OCDM plugin is disabled',
   context: {
-    url: 'https://www.websocket.org/demos/racer/run/',
+    url: 'http://cdn.metrological.com/static/eme-v3-clean.html',
     blankUrl: 'about:blank',
   },
   setup() {
@@ -53,7 +53,7 @@ export default {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
         return new Promise((resolve, reject) => {
           const interval = setInterval(() => {
-            if (this.$data.read('currentUrl') === this.$context.read('metrologicalURL')) {
+            if (this.$data.read('currentUrl') === this.$context.read('url')) {
               clearInterval(interval)
               resolve()
             }
@@ -64,7 +64,7 @@ export default {
     },
     {
       description: 'Repeat Taking screenshot and compare with prev screenshot',
-      repeat: 20,
+      repeat: 10,
       test: screenshot,
       validate() {
         let resp = this.$data.read('screenshotResult')
@@ -72,30 +72,24 @@ export default {
           let prevScreenshot = this.$data.read('prevScreenshot')
           if (
             prevScreenshot === null ||
-            (prevScreenshot !== null && prevScreenshot.equals(resp) === false)
+            (prevScreenshot !== null && prevScreenshot.equals(resp) === true)
           ) {
-            this.$data.write('prevScreenshot', resp)
-            curSameScreenshot = 0
-            return true
-          } else {
-            if (curSameScreenshot >= maxSameScreenshot) {
-              this.$log(
-                'Screen is stuck, new screenshot is the same as previous screenshot for ' +
-                  curSameScreenshot +
-                  ' times.'
-              )
-              return false
-            }
+            prevScreenshot = resp
             curSameScreenshot++
             return true
+          } else {
+            this.$log('Screen updated')
+            return false
           }
         } else {
           if (curSameScreenshot >= maxSameScreenshot) {
-            this.$log('Error screenshot returned is empty for ' + curSameScreenshot + ' times.')
-            return false
+            this.$log(
+              'Screen did not update, new screenshot is the same as previous screenshot for ' +
+                curSameScreenshot +
+                ' times.'
+            )
+            return true
           }
-          curSameScreenshot++
-          return true
         }
       },
     },

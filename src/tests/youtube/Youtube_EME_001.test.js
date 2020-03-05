@@ -7,13 +7,13 @@ import constants from '../../commonMethods/constants'
 import { AttachToLogs } from '../../commonMethods/remoteWebInspector'
 
 let url =
-  'http://yt-dash-mse-test.commondatastorage.googleapis.com/unit-tests/2016.html?test_type=encryptedmedia-test&enablewebm=off&command=run&tests=1,6,17,18'
+  'https://yt-dash-mse-test.commondatastorage.googleapis.com/unit-tests/2018.html?test_type=encryptedmedia-test&enablewebm=off&command=run'
 
 export default {
   title: 'YouTube Encrypted Media conformance test',
-  description: 'Loads the YouTube EME 2016 conformance test and captures the output',
+  description: 'Loads the YouTube EME 2018 conformance test and captures the output',
   setup() {
-    this.$data.write('testCount', 4)
+    this.$data.write('testCount', 40)
   },
   teardown() {
     setWebKitUrl.call(this, constants.blankUrl)

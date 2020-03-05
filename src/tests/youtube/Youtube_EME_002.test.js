@@ -7,13 +7,13 @@ import constants from '../../commonMethods/constants'
 import { AttachToLogs } from '../../commonMethods/remoteWebInspector'
 
 let url =
-  'https://yt-dash-mse-test.commondatastorage.googleapis.com/unit-tests/2017.html?test_type=encryptedmedia-test&command=run'
+  'http://yt-dash-mse-test.commondatastorage.googleapis.com/unit-tests/2019.html?test_type=encryptedmedia-test&enablewebm=off&command=run'
 
 export default {
   title: 'YouTube Encrypted Media conformance test',
-  description: 'Loads the YouTube EME 2017 conformance test and captures the output',
+  description: 'Loads the YouTube EME 2019 conformance test and captures the output',
   setup() {
-    this.$data.write('testCount', 9)
+    this.$data.write('testCount', 42)
   },
   teardown() {
     setWebKitUrl.call(this, constants.blankUrl)
@@ -32,7 +32,7 @@ export default {
     },
     {
       description: 'Attach to the logs to capture the log output and run the test',
-      timeout: 10 * 60, // 10 minutes
+      repeat: 10 * 60, // 10 minutes
       test() {
         let ready = false
         let testOK
@@ -108,12 +108,14 @@ export default {
       results.failed.amount === 0 &&
       results.timedout.amount === 0 &&
       results.testsRun === this.$data.read('testCount')
-    )
+    ) {
       return true
-
-    let error = `Tests run: ${results.testsRun} of ${this.$data.read('testCount')}. `
-    error += 'Tests failed: ' + results.failed.tests + '. '
-    error += 'Tests timedout: ' + results.timedout.tests + '. '
-    throw new Error(error)
+    } else {
+      let error = `Tests run: ${results.testsRun} of ${this.$data.read('testCount')}. `
+      error += 'Tests failed: ' + results.failed.tests + '. '
+      error += 'Tests timedout: ' + results.timedout.tests + '. '
+      this.$log('Error is ', error)
+      return false
+    }
   },
 }

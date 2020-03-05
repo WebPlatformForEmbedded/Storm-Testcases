@@ -36,7 +36,6 @@ export default {
   validate() {
     let response = this.$data.read('addressinfo')
     if (response !== undefined && response.length !== 0) {
-      this.$log('In IF condition')
       for (let i = 0; i < response.length; i++) {
         let addresseinfo = response[i]
         if (addresseinfo.name === undefined || addresseinfo.mac === undefined) {

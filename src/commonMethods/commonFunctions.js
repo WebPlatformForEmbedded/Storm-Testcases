@@ -89,7 +89,7 @@ export const setWebKitUrl = function(URL) {
  * This function resumes or suspends Youtube plugin
  * @param action
  */
-export const youtubeActions = function(action) {
+export const youtubeChangeState = function(action) {
   return this.$thunder.api.Cobalt.state(action)
     .then(() => {
       return this.$thunder.api.call(constants.controllerPlugin, 'status').then(
@@ -210,7 +210,7 @@ export const screenshot = async function() {
   let url = `http://${constants.host}:80/Service/Snapshot/Capture?${moment().valueOf()}`
   // create a new promise inside of the async function
   let bufferData = new Promise((resolve, reject) => {
-    _http
+    _http //TODO : Replace _http by using this.$http helper
       .get(url, function(res) {
         if (res.headers['content-length'] === undefined)
           this.$log(
@@ -237,6 +237,7 @@ export const screenshot = async function() {
   this.$data.write('screenshotResult', result)
   return result
 }
+
 /**
  * This function is used to kill the process
  * @param process
@@ -294,7 +295,7 @@ export const youtubeStartAndResume = function() {
   return this.$sequence([
     () => pluginDeactivate.call(this, constants.youTubePlugin),
     () => pluginActivate.call(this, constants.youTubePlugin),
-    () => youtubeActions().call(this, constants.resume),
+    () => youtubeChangeState.call(this, constants.resume),
   ])
 }
 
@@ -404,7 +405,6 @@ export const getCpuLoad = function() {
   this.$thunder.api.DeviceInfo.systeminfo()
     .then(result => {
       this.$data.write('cpuload', result.cpuload)
-      return result
     })
     .catch(err => err)
 }
