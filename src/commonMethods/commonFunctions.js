@@ -599,6 +599,7 @@ export const getDRMSList = function() {
     .then(result => result)
     .catch(err => err)
 }
+
 /**
  * This function is used to get DRMS item info
  * @returns {Promise<AxiosResponse<any>>}
@@ -606,6 +607,66 @@ export const getDRMSList = function() {
  */
 export const getDRMKeySystemInfo = function(keysystem) {
   return this.$thunder.api.OCDM.keysystems(keysystem)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to synchronize time
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const syncTime = function() {
+  return this.$thunder.api.TimeSync.synchronize()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get latest synchronized time
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getLatestSyncTime = function() {
+  return this.$thunder.api.TimeSync.synctime()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get current time
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getCurrentTime = function() {
+  return this.$thunder.api.TimeSync.time()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get current time
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const setTime = function(time) {
+  return this.$thunder.api.TimeSync.time(time)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to sync Location
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const syncLocation = function() {
+  return this.$thunder.api.LocationSync.sync()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Location
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getLocation = function() {
+  return this.$thunder.api.LocationSync.location()
     .then(result => result)
     .catch(err => err)
 }

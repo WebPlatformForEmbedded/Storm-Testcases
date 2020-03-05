@@ -11,6 +11,8 @@ export default {
   youTubePlugin: 'Cobalt',
   netFlixPlugin: 'Netflix',
   ocdmPlugin: 'OCDM',
+  timeSyncPlugin: 'TimeSync',
+  locationSyncPlugin: 'LocationSync',
   ocdmImplementation: 'OCDMImplementation',
   snapshotPlugin: 'Snapshot',
   webServerPlugin: 'WebServer',
