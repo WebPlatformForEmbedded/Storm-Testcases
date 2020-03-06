@@ -10,6 +10,7 @@ export default {
   youTubePlugin: 'Cobalt',
   netFlixPlugin: 'Netflix',
   ocdmPlugin: 'OCDM',
+  timeSyncPlugin: 'TimeSync',
   ocdmImplementation: 'OCDMImplementation',
   snapshotPlugin: 'Snapshot',
   webServerPlugin: 'WebServer',
@@ -29,4 +30,3 @@ export default {
   blankUrl: 'about:blank',
   host: config.thunder.host,
 }
-
