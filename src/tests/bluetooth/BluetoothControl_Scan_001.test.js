@@ -6,15 +6,18 @@ import {
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
-let listener
+let scanCompleteListener
 
 export default {
-  title: 'Bluetooth Control Scan 001',
+  title: 'Bluetooth Control - Scan 001',
   description: 'Check the Scan Functionality of Bluetooth Control Module',
   setup() {
-    listener = this.$thunder.api.BluetoothControl.on('scancomplete', () => {
-      this.$data.write('scancompleted', 'scancompleted') //TODO  Need to update this line
+    scanCompleteListener = this.$thunder.api.BluetoothControl.on('scancomplete', () => {
+      this.$data.write('scancompleted', 'scancompleted')
     })
+  },
+  teardown() {
+    scanCompleteListener.dispose()
   },
   steps: [
     {
@@ -55,7 +58,7 @@ export default {
             if (this.$data.read('scancompleted') === 'scancompleted') {
               clearInterval(interval)
               resolve()
-            } else if (attempts > 1000) {
+            } else if (attempts > 10) {
               clearInterval(interval)
               reject('Scanning not completed')
             }
@@ -70,6 +73,8 @@ export default {
         return getBluetoothDevices.call(this)
       },
       validate(result) {
+        //TODO - Prompt the user with result and ask him to confirm the devices available are in the list.
+        // If user says yes pass the test case. Store this device list in a variable
         if (result === undefined || result.length === 0) {
           this.$log('Result does not have device list')
           return false

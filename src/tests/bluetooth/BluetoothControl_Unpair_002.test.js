@@ -1,8 +1,6 @@
 import {
   pluginDeactivate,
   pluginActivate,
-  scanDevices,
-  getBluetoothDevices,
   unpairBTDevice,
 } from '../../commonMethods/commonFunctions'
 

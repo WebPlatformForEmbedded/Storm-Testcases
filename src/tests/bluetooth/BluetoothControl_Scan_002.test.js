@@ -2,7 +2,7 @@ import { pluginDeactivate, pluginActivate, scanDevices } from '../../commonMetho
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Bluetooth Control Scan 002',
+  title: 'Bluetooth Control - Scan 002',
   description: 'Check error message when scanning is performed while previous scan is in progress',
   steps: [
     {

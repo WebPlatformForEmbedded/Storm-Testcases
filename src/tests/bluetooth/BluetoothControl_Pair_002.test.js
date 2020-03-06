@@ -1,25 +1,9 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  scanDevices,
-  getBluetoothDevices,
-  pairBTDevice,
-} from '../../commonMethods/commonFunctions'
-
+import { pluginDeactivate, pluginActivate, pairBTDevice } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
-let btdevicelist
-let listener
-
 export default {
-  title: 'Bluetooth Control Pair  002',
+  title: 'Bluetooth Control - Pair  002',
   description: 'Check the Pair Functionality of Bluetooth Control Module with Invalid MAC',
-  setup() {
-    listener = this.$thunder.api.BluetoothControl.on('devicestatechange', data => {
-      this.$data.write('address', data.address)
-      this.$data.write('state', data.state)
-    })
-  },
   steps: [
     {
       description: 'Check if Bluetooth Control Plugin is stopped correctly',
