@@ -7,7 +7,7 @@ import {
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Bluetooth Control disconnect  002',
+  title: 'Bluetooth Control - Disconnect  002',
   description: 'Check the disconnect Functionality with invalid MAC of Bluetooth Control Module',
   steps: [
     {

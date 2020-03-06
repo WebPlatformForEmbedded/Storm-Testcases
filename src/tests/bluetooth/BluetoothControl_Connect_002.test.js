@@ -7,9 +7,8 @@ import {
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Bluetooth Control Connect  002',
-  description:
-    'Check the Connect Functionality with invalid Bluetooth device of Bluetooth Control Module',
+  title: 'Bluetooth Control - Connect  002',
+  description: 'Check the Connect Functionality with invalid Bluetooth device',
   steps: [
     {
       description: 'Check if Bluetooth Control Plugin is stopped correctly',

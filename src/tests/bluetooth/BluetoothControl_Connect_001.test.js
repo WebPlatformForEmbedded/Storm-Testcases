@@ -1,135 +1,34 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  scanDevices,
-  getBluetoothDevices,
-  pairBTDevice,
-  connectBTDevice,
-} from '../../commonMethods/commonFunctions'
-
-import constants from '../../commonMethods/constants'
+import { connectBTDevice } from '../../commonMethods/commonFunctions'
+import baseTest from './BluetoothControl_Pair_001.test'
 
 let btdevicelist
-let statechangelistener
-let scancompletelistener
+let deviceStateChangeListener
+let scanCompleteListener
 
 export default {
-  title: 'Bluetooth Control Disconnect  001',
-  description: 'Check the disconnect Functionality of Bluetooth Control Module',
+  title: 'Bluetooth Control - Connect  001',
+  description: 'Check the Connect Functionality of Bluetooth Control Module',
   setup() {
-    scancompletelistener = this.$thunder.api.BluetoothControl.on('scancomplet', () => {
+    scanCompleteListener = this.$thunder.api.BluetoothControl.on('scancomplete', () => {
       this.$data.write('scancompleted')
     })
-    statechangelistener = this.$thunder.api.BluetoothControl.on('devicestatechange', data => {
+    deviceStateChangeListener = this.$thunder.api.BluetoothControl.on('devicestatechange', data => {
       this.$data.write('address', data.address)
       this.$data.write('state', data.state)
     })
   },
+  teardown() {
+    scanCompleteListener.dispose()
+    deviceStateChangeListener.dispose()
+  },
   steps: [
-    {
-      description: 'Check if Bluetooth Control Plugin is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.bluetoothControlPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if Bluetooth Control Plugin is started correctly',
-      test: pluginActivate,
-      params: constants.bluetoothControlPlugin,
-      assert: 'activated',
-    },
-    {
-      description: 'Invoke Scan',
-      sleep: 5,
-      test() {
-        return scanDevices.call(this, 'LowEnergy', 10)
-      },
-      validate(res) {
-        if (res == null) {
-          return true
-        } else {
-          this.$log('Scan does not start')
-          return false
-        }
-      },
-    },
-    {
-      description: 'Check whether scanning is success',
-      sleep: 5,
-      test() {
-        return new Promise((resolve, reject) => {
-          let attempts = 0
-          const interval = setInterval(() => {
-            attempts++
-            if (this.$data.read('scancompleted') === 'scancompleted') {
-              clearInterval(interval)
-              resolve()
-            } else if (attempts > 1000) {
-              clearInterval(interval)
-              reject('Scanning not completed')
-            }
-          }, 1000)
-        })
-      },
-    },
-    {
-      description: 'Get scan results',
-      sleep: 10,
-      test() {
-        return getBluetoothDevices.call(this)
-      },
-      validate(result) {
-        this.$data.write('btdevicelist', result)
-        btdevicelist = this.$data.read('btdevicelist')
-        if (result === undefined || result === null) {
-          this.$log('Result does not have device list')
-          return false
-        } else {
-          return true
-        }
-      },
-    },
-    {
-      description: 'Pair with the device',
-      sleep: 5,
-      test() {
-        return pairBTDevice.call(this, btdevicelist[0])
-      },
-      validate(res) {
-        if (res == null) {
-          return true
-        } else {
-          this.$log('Pairing doesnt happen')
-          return false
-        }
-      },
-    },
-    {
-      description: 'Check whether pairing is success',
-      sleep: 5,
-      test() {
-        return new Promise((resolve, reject) => {
-          let attempts = 0
-          const interval = setInterval(() => {
-            attempts++
-            if (
-              this.$data.read('address') === btdevicelist[0] &&
-              this.$data.read('state') === 'Paired'
-            ) {
-              clearInterval(interval)
-              resolve()
-            } else if (attempts > 10) {
-              clearInterval(interval)
-              reject('Pairing does not happen')
-            }
-          }, 1000)
-        })
-      },
-    },
+    baseTest,
     {
       description: 'Connect with the device',
       sleep: 5,
       test() {
+        //TODO - Prompt the user to select the device that need to be connected
+        // and input(instead of btdevicelist[0]) that to the 'connectBTDevice'
         return connectBTDevice.call(this, btdevicelist[0])
       },
       validate(res) {
@@ -150,7 +49,7 @@ export default {
           const interval = setInterval(() => {
             attempts++
             if (
-              this.$data.read('address') === btdevicelist[0] &&
+              this.$data.read('address') === btdevicelist[0] && //TODO - btdevicelist[0] need to be replaced with the user input given in previous step
               this.$data.read('state') === 'Connected'
             ) {
               clearInterval(interval)
