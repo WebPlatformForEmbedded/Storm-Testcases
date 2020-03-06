@@ -1,13 +1,8 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  syncTime,
-  syncLocation,
-} from '../../commonMethods/commonFunctions'
+import { pluginDeactivate, pluginActivate, syncLocation } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Time Synchronize 002',
+  title: 'LocationSync - Sync 002',
   description:
     'Check the Synchronize Functionality of TimeSync Module when Sync is already in progress',
   steps: [

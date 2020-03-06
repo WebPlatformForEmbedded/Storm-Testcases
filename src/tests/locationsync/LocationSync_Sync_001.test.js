@@ -7,7 +7,7 @@ import {
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Location Sync 001',
+  title: 'Location - Sync 001',
   description:
     'Check the Sync Functionality of LocationSync Module and validate the location information',
   steps: [
@@ -27,7 +27,7 @@ export default {
       description: 'Invoke Sync',
       sleep: 5,
       test() {
-        return syncLocation.call(this)
+        return syncLocation.call(this) //TODO - Add code to make sure the Sync is completed
       },
     },
     {
