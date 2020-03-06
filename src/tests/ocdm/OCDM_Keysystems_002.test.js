@@ -7,7 +7,7 @@ import {
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'OCDM Keysystems  002',
+  title: 'OCDM  - Keysystems 002',
   description: 'Check OCDM Keysystems info with invalid KeySystem',
   steps: [
     {
