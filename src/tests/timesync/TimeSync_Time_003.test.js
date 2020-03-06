@@ -1,13 +1,8 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  setTime,
-  getCurrentTime,
-} from '../../commonMethods/commonFunctions'
+import { pluginDeactivate, pluginActivate, setTime } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Time Sync Get Time 003',
+  title: 'TimeSync - GetTime 003',
   description: 'Check the error message when we set wrong time format',
   steps: [
     {
@@ -29,7 +24,6 @@ export default {
         return setTime.call(this, 'datetime')
       },
       validate(res) {
-        this.$log('Eror message ===>', res)
         if (res.code == 30 && res.message == 'ERROR_BAD_REQUEST') {
           return true
         } else {

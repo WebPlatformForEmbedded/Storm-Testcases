@@ -6,7 +6,7 @@ import {
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Time Sync Get Time 001',
+  title: 'TimeSync - GetTime 001',
   description: 'Check the latest Time returned from TimeSync Module',
   steps: [
     {

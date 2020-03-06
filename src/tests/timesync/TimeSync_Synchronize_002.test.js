@@ -2,7 +2,7 @@ import { pluginDeactivate, pluginActivate, syncTime } from '../../commonMethods/
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Time Synchronize 002',
+  title: 'TimeSync - Synchronize 002',
   description:
     'Check the Synchronize Functionality of TimeSync Module when Sync is already in progress',
   steps: [

@@ -4,7 +4,7 @@ import baseTest from './TimeSync_Synchronize_001.test'
 export default {
   ...baseTest,
   ...{
-    title: 'Sync Time 001',
+    title: 'TimeSync - SyncTime 001',
     description: 'Check the latest Synchronized time',
     steps: [
       baseTest,
