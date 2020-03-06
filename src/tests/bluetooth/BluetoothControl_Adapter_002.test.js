@@ -7,7 +7,7 @@ import {
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Bluetooth Control Adapter  002',
+  title: 'Bluetooth Control - Adapter  002',
   description: 'Check Bluetooth Control Adapter Info with invalid adapter and validate the error',
   steps: [
     {

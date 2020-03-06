@@ -10,7 +10,7 @@ import constants from '../../commonMethods/constants'
 let adapterList
 
 export default {
-  title: 'Bluetooth Control Adapter  001',
+  title: 'Bluetooth Control - Adapter  001',
   description: 'Check Bluetooth Control Adapter Info',
   steps: [
     {
@@ -33,8 +33,9 @@ export default {
       },
       validate(result) {
         this.$data.write('adapterList', result)
+        //TODO - Prompt the user with result and ask him to confirm the adapters are available in the list.
+        // If user says yes pass the test case. s
         adapterList = this.$data.read('adapterList')
-        this.$log('adapter list is ===========>', adapterList)
         if (result === undefined || result === null) {
           this.$log('Result does not have adapter list')
           return false
@@ -47,9 +48,13 @@ export default {
       description: 'Get Bluetooth Adapter info',
       sleep: 10,
       test() {
+        //TODO - Prompt the user for which adapter he need info
+        // and replace adapterList[0] with input
         return getBluetoothAdapterInfo.call(this, adapterList[0])
       },
       validate(result) {
+        //TODO - Prompt the user for the information of the adapter is correct
+        // If he selects Yes pass the test
         if (result === undefined || result === null) {
           this.$log('Adapter Info is not available')
           return false

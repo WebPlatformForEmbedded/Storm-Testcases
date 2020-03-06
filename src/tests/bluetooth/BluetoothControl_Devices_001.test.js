@@ -29,6 +29,8 @@ export default {
         return getBluetoothDevices.call(this)
       },
       validate(result) {
+        //TODO - Prompt the user with result and ask him to confirm the devices are available in the list.
+        // If user says yes pass the test case.
         if (result === undefined || result === null) {
           this.$log('Result does not have adapter list')
           return false
