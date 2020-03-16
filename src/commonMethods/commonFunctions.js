@@ -5,6 +5,8 @@ import { Client } from 'ssh2'
 
 import URL from 'url'
 
+let hostIP
+
 /**
  * This function activates a given plugin
  * @param plugin_name
@@ -147,6 +149,7 @@ export const checkIfProcessIsRunning = function(process) {
  * @param cb
  */
 export const exec = async function(opts) {
+  deviceIP.call(this)
   var conn = new Client()
   let execCmd = new Promise((resolve, reject) => {
     conn
@@ -168,13 +171,13 @@ export const exec = async function(opts) {
         })
       })
       .connect({
-        host: constants.host,
+        host: hostIP,
         port: 22,
         username: 'root',
         password: 'root',
       })
     conn.on('timeout', function(e) {
-      throw new Error(`{opts.cmd}: Timeout while connecting to ${constants.host}`)
+      throw new Error(`{opts.cmd}: Timeout while connecting to ${hostIP}`)
     })
 
     conn.on('error', function(err) {
@@ -207,7 +210,8 @@ export const calcAvgFPS = function() {
  * @returns {Promise<void>}
  */
 export const screenshot = async function() {
-  let url = `http://${constants.host}:80/Service/Snapshot/Capture?${moment().valueOf()}`
+  deviceIP.call(this)
+  let url = `http://${hostIP}:80/Service/Snapshot/Capture?${moment().valueOf()}`
   // create a new promise inside of the async function
   let bufferData = new Promise((resolve, reject) => {
     _http //TODO : Replace _http by using this.$http helper
@@ -256,6 +260,7 @@ export const stopProcess = function(process) {
     return true
   })
 }
+
 export const startFramework = function() {
   return exec({ cmd: 'nohup WPEFramework WPEProcess -b &', cbWhenStarted: true })
 }
@@ -304,8 +309,9 @@ export const youtubeStartAndResume = function() {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getPluginInfo = function(plugin) {
+  deviceIP.call(this)
   return this.$http
-    .get(`http://${constants.host}:80/Service/${plugin}`)
+    .get(`http://${hostIP}:80/Service/${plugin}`)
     .then(result => result)
     .catch(err => err)
 }
@@ -317,8 +323,9 @@ export const getPluginInfo = function(plugin) {
  * @returns {Promise<unknown>}
  */
 export const suspendOrResumePlugin = function(plugin, action) {
+  deviceIP.call(this)
   return this.$http
-    .post(`http://${constants.host}:80/Service/${plugin}/${action}`)
+    .post(`http://${hostIP}:80/Service/${plugin}/${action}`)
     .then(result => result)
     .catch(err => err)
 }
@@ -390,10 +397,20 @@ export const getMonitorInfo = function() {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getControllerUI = function() {
+  deviceIP.call(this)
   return this.$http
-    .get(`http://${constants.host}:80/Service/Controller/UI`)
+    .get(`http://${hostIP}:80/Service/Controller/UI`)
     .then(result => result)
     .catch(err => err)
+}
+
+/**
+ * This function is used to get the HostIP address
+ * @returns {*}
+ */
+export const deviceIP = function() {
+  hostIP = this.$thunder.api.options.host
+  return hostIP
 }
 
 /**
@@ -440,49 +457,12 @@ export const startProvisioning = function() {
 }
 
 /**
- * This function is used to put request
- * @param plugin
- * @returns {Promise<AxiosResponse<any>>}
- */
-export const putRequestForPlugin = function() {
-  return this.$http
-    .put(`http://${constants.host}:80/Service/Provisioning`)
-    .then(result => result)
-    .catch(err => err)
-}
-
-/**
  * This function is used to perform GET request operation on the URL
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getReqURL = function(URL) {
   return this.$http
     .get(URL)
-    .then(result => result)
-    .catch(err => err)
-}
-
-/**
- * This function is used to get response from URL based on the Method type
- * @param methodType
- * @param url
- * @returns {Promise<AxiosResponse<any>>}
- */
-export const getResponseForURLRequest = function(methodType, url) {
-  if (methodType === 'GET') {
-    return getReqURL.call(this, url)
-  } else if (methodType === 'PUT') {
-    return putReqURL.call(this, url)
-  }
-}
-
-/**
- * This function is used to perform {PUT} request operation on the URL
- * @returns {Promise<AxiosResponse<any>>}
- */
-export const putReqURL = function(URL) {
-  return this.$http
-    .put(URL)
     .then(result => result)
     .catch(err => err)
 }
