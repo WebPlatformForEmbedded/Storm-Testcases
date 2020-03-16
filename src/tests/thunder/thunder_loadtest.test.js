@@ -9,6 +9,9 @@ let listener
 export default {
   title: 'Thunder Load test',
   description: 'Stress tests the Thunder',
+  repeat: {
+    seconds: 1 * 60 * 60, //One hour
+  },
   setup() {
     return this.$sequence([
       () => webKitBrowserStartAndResume.call(this),
@@ -54,21 +57,12 @@ export default {
       },
     },
     {
-      title: 'Repeat the steps for 1 hour',
-      description: 'Nested test to repeat the test for 1 hour',
-      repeat: {
-        seconds: 1 * 60 * 60, //One hour
+      description: 'Check if Framework controller still responds',
+      sleep: 15,
+      test: getControllerPluginData,
+      validate(result) {
+        return this.$expect(result).to.be.object() === true
       },
-      steps: [
-        {
-          description: 'Check if Framework controller still responds',
-          sleep: 15,
-          test: getControllerPluginData,
-          validate(result) {
-            return this.$expect(result).to.be.object() === true
-          },
-        },
-      ],
     },
   ],
 }
