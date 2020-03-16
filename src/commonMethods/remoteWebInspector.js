@@ -4,9 +4,9 @@
 /*jslint esnext: true*/
 /*jslint node: true */
 'use strict'
-import constants from './constants'
 
 const WebSocket = require('ws')
+let host = '' //TODO - Update to get IP dynamically
 
 /**
  * Attaches to the remote WebInspector to retrieve the console logs
@@ -19,9 +19,9 @@ export class AttachToLogs {
   }
 
   connect() {
-    this.ws = new WebSocket(`ws://${constants.host}:9998/devtools/page/1`, {
+    this.ws = new WebSocket(`ws://${host}:9998/Main.html?page=1`, {
       protocolVersion: 13,
-      origin: `${constants.host}:9998`,
+      origin: `${host}:9998`,
       perMessageDeflate: true,
     })
 
