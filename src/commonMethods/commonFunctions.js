@@ -5,8 +5,6 @@ import { Client } from 'ssh2'
 
 import URL from 'url'
 
-let hostIP
-
 /**
  * This function activates a given plugin
  * @param plugin_name
@@ -149,7 +147,7 @@ export const checkIfProcessIsRunning = function(process) {
  * @param cb
  */
 export const exec = async function(opts) {
-  deviceIP.call(this)
+  const hostIP = deviceIP.call(this)
   var conn = new Client()
   let execCmd = new Promise((resolve, reject) => {
     conn
@@ -210,7 +208,7 @@ export const calcAvgFPS = function() {
  * @returns {Promise<void>}
  */
 export const screenshot = async function() {
-  deviceIP.call(this)
+  const hostIP = deviceIP.call(this)
   let url = `http://${hostIP}:80/Service/Snapshot/Capture?${moment().valueOf()}`
   // create a new promise inside of the async function
   let bufferData = new Promise((resolve, reject) => {
@@ -309,7 +307,7 @@ export const youtubeStartAndResume = function() {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getPluginInfo = function(plugin) {
-  deviceIP.call(this)
+  const hostIP = deviceIP.call(this)
   return this.$http
     .get(`http://${hostIP}:80/Service/${plugin}`)
     .then(result => result)
@@ -323,7 +321,7 @@ export const getPluginInfo = function(plugin) {
  * @returns {Promise<unknown>}
  */
 export const suspendOrResumePlugin = function(plugin, action) {
-  deviceIP.call(this)
+  const hostIP = deviceIP.call(this)
   return this.$http
     .post(`http://${hostIP}:80/Service/${plugin}/${action}`)
     .then(result => result)
@@ -397,7 +395,7 @@ export const getMonitorInfo = function() {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getControllerUI = function() {
-  deviceIP.call(this)
+  const hostIP = deviceIP.call(this)
   return this.$http
     .get(`http://${hostIP}:80/Service/Controller/UI`)
     .then(result => result)
@@ -409,8 +407,7 @@ export const getControllerUI = function() {
  * @returns {*}
  */
 export const deviceIP = function() {
-  hostIP = this.$thunder.api.options.host
-  return hostIP
+  return this.$thunder.api.options.host
 }
 
 /**
