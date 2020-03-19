@@ -1,5 +1,3 @@
-import config from '../../../../config'
-
 export default {
   //Plugin Names
   monitorPlugin: 'Monitor',
@@ -29,5 +27,4 @@ export default {
   suspend: 'suspended',
   WPEFramework: 'WPEFramework',
   blankUrl: 'about:blank',
-  host: config.thunder.host,
 }
