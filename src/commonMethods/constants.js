@@ -8,6 +8,7 @@ export default {
   youTubePlugin: 'Cobalt',
   netFlixPlugin: 'Netflix',
   ocdmPlugin: 'OCDM',
+  bluetoothControlPlugin: 'BluetoothControl',
   ocdmImplementation: 'OCDMImplementation',
   snapshotPlugin: 'Snapshot',
   webServerPlugin: 'WebServer',

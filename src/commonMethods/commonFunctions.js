@@ -475,3 +475,258 @@ export const stopWPEFramework = function() {
   stopProcess('WPEFramework')
   return true
 }
+
+/**
+ * This function is used to connect with the available Bluetooth devices
+ * @param address
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const connectBTDevice = function(address) {
+  return this.$thunder.api.BluetoothControl.connect(address)
+    .then(result => result)
+    .catch(err => err)
+}
+/**
+ * This function is used to disconnect with the available Bluetooth devices
+ * @param address
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const disconnectBTDevice = function(address) {
+  return this.$thunder.api.BluetoothControl.disconnect(address)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get available Bluetooth devices
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getBluetoothDevices = function() {
+  return this.$thunder.api.BluetoothControl.devices()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get available Bluetooth adapters
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getBluetoothAdapters = function() {
+  return this.$thunder.api.BluetoothControl.adapters()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get info of particular Bluetooth adapters
+ * @param adaptername
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getBluetoothAdapterInfo = function(adaptername) {
+  return this.$thunder.api.BluetoothControl.adapter(adaptername)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get info of particular Bluetooth device
+ * @param devicemac
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getBluetoothDeviceInfo = function(devicemac) {
+  return this.$thunder.api.BluetoothControl.adapter(devicemac)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to scan Info of Bluetooth Control Plugin
+ * @param type , timeout
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const scanDevices = function(type, timeout) {
+  return this.$thunder.api.BluetoothControl.scan(type, timeout)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to pair with the available Bluetooth devices
+ * @param address
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const pairBTDevice = function(address) {
+  return this.$thunder.api.BluetoothControl.pair(address)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to disconnect with the available Bluetooth devices
+ * @param address
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const unpairBTDevice = function(address) {
+  return this.$thunder.api.BluetoothControl.unpair(address)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to sync Location
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const syncLocation = function() {
+  return this.$thunder.api.LocationSync.sync()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Location
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getLocation = function() {
+  return this.$thunder.api.LocationSync.location()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to synchronize time
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const syncTime = function() {
+  return this.$thunder.api.TimeSync.synchronize()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get latest synchronized time
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getLatestSyncTime = function() {
+  return this.$thunder.api.TimeSync.synctime()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get current time
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getCurrentTime = function() {
+  return this.$thunder.api.TimeSync.time()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get current time
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const setTime = function(time) {
+  return this.$thunder.api.TimeSync.time(time)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get DRMS list
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getDRMSList = function() {
+  return this.$thunder.api.OCDM.drms()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get DRMS item info
+ * @returns {Promise<AxiosResponse<any>>}
+ * @param keysystem
+ */
+export const getDRMKeySystemInfo = function(keysystem) {
+  return this.$thunder.api.OCDM.keysystems(keysystem)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to reload network adapters
+ * @param networkinterface
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const reloadNetworkAdapter = function(networkinterface) {
+  return this.$thunder.api.NetworkControl.reload(networkinterface)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to reload Non-static network adapters
+ * @param networkinterface
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const requestNetworkAdapter = function(networkinterface) {
+  return this.$thunder.api.NetworkControl.request(networkinterface)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to reload static network adapters
+ * @param networkinterface
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const assignNetworkAdapter = function(networkinterface) {
+  return this.$thunder.api.NetworkControl.assign(networkinterface)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to flush network adapters
+ * @param networkinterface
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const flushNetworkAdapter = function(networkinterface) {
+  return this.$thunder.api.NetworkControl.flush(networkinterface)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Network Information
+ * @param networkinterface
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getNetworkInformation = function(networkinterface) {
+  return this.$thunder.api.NetworkControl.network(networkinterface)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to check the Network up status
+ * @param networkinterface
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getNetworkStatus = function(networkinterface) {
+  return this.$thunder.api.NetworkControl.network(networkinterface)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to check the Network up status
+ * @param networkinterface
+ * @param state
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const setNetworkStatus = function(networkinterface, state) {
+  return this.$thunder.api.NetworkControl.network(networkinterface, state)
+    .then(result => result)
+    .catch(err => err)
+}
