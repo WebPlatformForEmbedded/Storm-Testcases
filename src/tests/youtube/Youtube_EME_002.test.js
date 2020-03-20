@@ -42,6 +42,7 @@ export default {
         let failedTests = []
         let timedoutTests = []
         let currentTest
+        let hostIP = this.$thunder.api.options.host
 
         function readyToParse() {
           ready = true
@@ -98,7 +99,7 @@ export default {
             resolve(results)
           })
         }
-        let logger = new AttachToLogs(parseGoogleLogs)
+        let logger = new AttachToLogs(parseGoogleLogs, hostIP)
         logger.connect(readyToParse.call(this), setWebKitUrl.call(this, url))
       },
     },
