@@ -1,87 +1,16 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  scanDevices,
-  getBluetoothDevices,
-} from '../../commonMethods/commonFunctions'
-import constants from '../../commonMethods/constants'
-
-let scanCompleteListener
+import baseTest from './BluetoothControl_Scan_001.test'
 
 export default {
-  title: 'Bluetooth Control - Scan 004',
-  description: 'Check the Scan Functionality of Bluetooth Control Module with modified timeout',
-  setup() {
-    scanCompleteListener = this.$thunder.api.BluetoothControl.on('scancomplete', () => {
-      this.$data.write('scancompleted', 'scancompleted')
-    })
+  ...baseTest,
+  ...{
+    context: {
+      deviceType: 'Low Energy',
+      timeOut: 20,
+    },
+    title: 'Bluetooth Control - Scan 004',
+    description: 'Check the Scan Functionality of Bluetooth Control Module with modified timeout',
+    steps: baseTest.steps.map((step, index) => {
+      return step
+    }),
   },
-  teardown() {
-    scanCompleteListener.dispose()
-  },
-  steps: [
-    {
-      description: 'Check if Bluetooth Control Plugin is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.bluetoothControlPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if Bluetooth Control Plugin is started correctly',
-      test: pluginActivate,
-      params: constants.bluetoothControlPlugin,
-      assert: 'activated',
-    },
-    {
-      description: 'Invoke Scan',
-      sleep: 5,
-      test() {
-        return scanDevices.call(this, 'LowEnergy', 20)
-      },
-      validate(res) {
-        if (res == null) {
-          return true
-        } else {
-          this.$log('Scan does not start')
-          return false
-        }
-      },
-    },
-    {
-      description: 'Check whether scanning is success',
-      sleep: 5,
-      test() {
-        return new Promise((resolve, reject) => {
-          let attempts = 0
-          const interval = setInterval(() => {
-            attempts++
-            if (this.$data.read('scancompleted') === 'scancompleted') {
-              clearInterval(interval)
-              resolve()
-            } else if (attempts > 10) {
-              clearInterval(interval)
-              reject('Scanning not completed')
-            }
-          }, 1000)
-        })
-      },
-    },
-    {
-      description: 'Get scan results',
-      sleep: 10,
-      test() {
-        return getBluetoothDevices.call(this)
-      },
-      validate(result) {
-        //TODO - Prompt the user with result and ask him to confirm the Low Energy devices available in the list.
-        // If user says yes pass the test case.
-        if (result === undefined || result.length === 0) {
-          this.$log('Result does not have device list')
-          return false
-        } else {
-          return true
-        }
-      },
-    },
-  ],
 }

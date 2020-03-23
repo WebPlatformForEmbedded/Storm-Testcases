@@ -11,6 +11,10 @@ let scanCompleteListener
 export default {
   title: 'Bluetooth Control - Scan 001',
   description: 'Check the Scan Functionality of Bluetooth Control Module for Low Energy devices',
+  context: {
+    deviceType: 'Low Energy',
+    timeOut: 10,
+  },
   setup() {
     scanCompleteListener = this.$thunder.api.BluetoothControl.on('scancomplete', () => {
       this.$data.write('scancompleted', 'scancompleted')
@@ -36,7 +40,12 @@ export default {
       description: 'Invoke Scan',
       sleep: 5,
       test() {
-        return scanDevices.call(this, 'LowEnergy', 10)
+        this.$log('devicetype is ', this.$context.read('deviceType'), this.$context.read('timeOut'))
+        return scanDevices.call(
+          this,
+          this.$context.read('deviceType'),
+          this.$context.read('timeOut')
+        )
       },
       validate(res) {
         if (res == null) {
