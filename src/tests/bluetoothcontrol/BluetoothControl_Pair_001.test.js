@@ -43,7 +43,7 @@ export default {
     },
     {
       description: 'Check whether pairing is success',
-      sleep: 5,
+      sleep: 60,
       test() {
         //TODO - Prompt the user to press on the button in the Bluetooth Device to pair with 1 minute timeout
         return new Promise((resolve, reject) => {

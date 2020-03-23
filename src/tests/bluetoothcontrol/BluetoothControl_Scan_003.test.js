@@ -9,8 +9,8 @@ import constants from '../../commonMethods/constants'
 let scanCompleteListener
 
 export default {
-  title: 'Bluetooth Control - Scan 001',
-  description: 'Check the Scan Functionality of Bluetooth Control Module for Low Energy devices',
+  title: 'Bluetooth Control - Scan 003',
+  description: 'Check the Scan Functionality of Bluetooth Control Module for Classic devices',
   setup() {
     scanCompleteListener = this.$thunder.api.BluetoothControl.on('scancomplete', () => {
       this.$data.write('scancompleted', 'scancompleted')
@@ -36,7 +36,7 @@ export default {
       description: 'Invoke Scan',
       sleep: 5,
       test() {
-        return scanDevices.call(this, 'LowEnergy', 10)
+        return scanDevices.call(this, 'Classic', 10)
       },
       validate(res) {
         if (res == null) {
@@ -73,7 +73,7 @@ export default {
         return getBluetoothDevices.call(this)
       },
       validate(result) {
-        //TODO - Prompt the user with result and ask him to confirm the Low Energy devices available in the list.
+        //TODO - Prompt the user with result and ask him to confirm the Classic devices available are in the list.
         // If user says yes pass the test case.
         if (result === undefined || result.length === 0) {
           this.$log('Result does not have device list')
