@@ -555,3 +555,45 @@ export const getDRMKeySystemInfo = function(keysystem) {
     .then(result => result)
     .catch(err => err)
 }
+
+/**
+ * This function is used to scan Info of Bluetooth Control Plugin
+ * @param type , timeout
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const scanDevices = function(type, timeout) {
+  return this.$thunder.api.BluetoothControl.scan(type, timeout)
+    .then(result => result)
+    .catch(err => err)
+}
+/**
+ * This function is used to get available Bluetooth devices
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getBluetoothDevices = function() {
+  return this.$thunder.api.BluetoothControl.devices()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to pair with the available Bluetooth devices
+ * @param address
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const pairBTDevice = function(address) {
+  return this.$thunder.api.BluetoothControl.pair(address)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to disconnect with the available Bluetooth devices
+ * @param address
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const unpairBTDevice = function(address) {
+  return this.$thunder.api.BluetoothControl.unpair(address)
+    .then(result => result)
+    .catch(err => err)
+}
