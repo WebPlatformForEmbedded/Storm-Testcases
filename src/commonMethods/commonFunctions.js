@@ -555,3 +555,24 @@ export const getDRMKeySystemInfo = function(keysystem) {
     .then(result => result)
     .catch(err => err)
 }
+
+/**
+ * This function is used to connect with the available Bluetooth devices
+ * @param address
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const connectBTDevice = function(address) {
+  return this.$thunder.api.BluetoothControl.connect(address)
+    .then(result => result)
+    .catch(err => err)
+}
+/**
+ * This function is used to disconnect with the available Bluetooth devices
+ * @param address
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const disconnectBTDevice = function(address) {
+  return this.$thunder.api.BluetoothControl.disconnect(address)
+    .then(result => result)
+    .catch(err => err)
+}
