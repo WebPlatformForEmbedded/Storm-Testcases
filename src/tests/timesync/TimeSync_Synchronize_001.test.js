@@ -13,7 +13,6 @@ export default {
       () => {
         this.$data.write('timechanged', false)
         listener = this.$thunder.api.TimeSync.on('timechange', () => {
-          this.$log('In time Sync')
           this.$data.write('timechanged', true)
         })
       },
@@ -45,7 +44,6 @@ export default {
         return new Promise((resolve, reject) => {
           let attempts = 0
           const interval = setInterval(() => {
-            this.$log('In TIme Sync interval', this.$data.read('timechanged'))
             attempts++
             if (this.$data.read('timechanged') === true) {
               clearInterval(interval)
