@@ -1,5 +1,6 @@
 import { getLatestSyncTime } from '../../commonMethods/commonFunctions'
 import baseTest from './TimeSync_Synchronize_001.test'
+import Moment from 'moment'
 
 export default {
   ...baseTest,
@@ -15,11 +16,13 @@ export default {
           return getLatestSyncTime.call(this)
         },
         validate(res) {
-          //TODO - Need to update the validation with most recent Synced time
-          if (res !== null && res.time !== null) {
+          let result = Moment(res)
+          let currTime = Moment()
+          let timeDiff = currTime.diff(result)
+          if (timeDiff < 3000) {
             return true
           } else {
-            this.$log('Latest Sync time is not available')
+            this.$log('Current Time is not provided')
             return false
           }
         },
