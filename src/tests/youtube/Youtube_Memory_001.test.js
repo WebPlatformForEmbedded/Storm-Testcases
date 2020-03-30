@@ -50,6 +50,9 @@ export default {
           this.$log('Resident memory measurement not found in monitor response')
           return false
         }
+      } else {
+        this.$log('Youtube Plugin not found')
+        return false
       }
     }
   },

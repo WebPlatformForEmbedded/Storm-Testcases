@@ -1,6 +1,8 @@
-import {getMonitorInfo, pluginActivate} from '../../commonMethods/commonFunctions'
+import { getMonitorInfo, pluginActivate } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
+//TODO - Do we need to still have this test case as it is covered in Youtube? (OR)
+//TODO - Do we need to check the Webkit memory usage by using url 'https://www.youtube.com/tv'?
 export default {
   title: 'WPEWebkit Memory test 002',
   description: 'Loads youtube and checks the memory usage',
@@ -12,7 +14,7 @@ export default {
       description: 'Set WebKit URL to Youtube URL',
       test: pluginActivate,
       params: constants.youTubePlugin,
-      assert: 'activated',
+      assert: 'resumed',
     },
     {
       description: 'Get Monitor Plugin Info',
@@ -50,6 +52,9 @@ export default {
           this.$log('Resident memory measurement not found in monitor response')
           return false
         }
+      } else {
+        this.$log('Youtube plugin not found')
+        return false
       }
     }
   },

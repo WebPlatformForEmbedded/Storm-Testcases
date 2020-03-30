@@ -82,6 +82,9 @@ export default {
           this.$log('Resident memory measurement not found in monitor response')
           return false
         }
+      } else {
+        this.$log('Webkit Browser plugin not found')
+        return false
       }
     }
   },
