@@ -9,12 +9,12 @@ export default {
   title: 'NetworkControl - Assign 001',
   description: 'Check the Assign Functionality of Network Control Module',
   steps: [
-    // {
-    //   description: 'Check if NetworkControl Plugin is stopped correctly',
-    //   test: pluginDeactivate,
-    //   params: constants.networkControlPlugin,
-    //   assert: 'deactivated',
-    // },
+    {
+      description: 'Check if NetworkControl Plugin is stopped correctly',
+      test: pluginDeactivate,
+      params: constants.networkControlPlugin,
+      assert: 'deactivated',
+    },
     {
       description: 'Check if NetworkControl Plugin is started correctly',
       test: pluginActivate,
