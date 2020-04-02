@@ -1,7 +1,8 @@
 {
   "name": "storm-testcases",
-  "version": "0.0.1",
-  "author": "Michiel van der Geest <hello@michielvandergeest.com>",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "Michiel van der Geest <m.van.der.geest@metrological.com>",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,12 +17,14 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "post-merge": "node scripts/post-merge.js",
+      "post-rebase": "node scripts/post-merge.js"
     }
   },
   "dependencies": {
     "http": "0.0.0",
-    "http-server": "^0.11.1",
+    "http-server": "^0.12.1",
     "httpclient": "^0.1.0",
     "node-resemble-js": "^0.2.0",
     "pngjs": "^3.4.0",
