@@ -22,7 +22,7 @@ export default {
     listener.dispose()
   },
   context: {
-    MAX_MEMORY: 85 * 1000 * 1000,
+    MAX_MEMORY: 85 * 1000 * 1000, //TODO - Need to update max memory
   },
   steps: [
     {

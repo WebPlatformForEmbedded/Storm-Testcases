@@ -19,6 +19,7 @@ export default {
             this.$data.write('currentUrl', data.url)
           })),
         () => (
+          //TODO - Need to update the logic once after redir_app.html is hosted and working
           (data = fs.readFileSync('./testcases/Storm-Testcases/src/resources/redir_app.html')),
           this.$data.write('app', data)
         ),
