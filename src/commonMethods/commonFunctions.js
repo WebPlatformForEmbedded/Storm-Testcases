@@ -147,6 +147,7 @@ export const checkIfProcessIsRunning = function(process) {
  * @param cb
  */
 export const exec = async function(opts) {
+  const hostIP = deviceIP.call(this)
   var conn = new Client()
   let execCmd = new Promise((resolve, reject) => {
     conn
@@ -168,13 +169,13 @@ export const exec = async function(opts) {
         })
       })
       .connect({
-        host: constants.host,
+        host: hostIP,
         port: 22,
         username: 'root',
         password: 'root',
       })
     conn.on('timeout', function(e) {
-      throw new Error(`{opts.cmd}: Timeout while connecting to ${constants.host}`)
+      throw new Error(`{opts.cmd}: Timeout while connecting to ${hostIP}`)
     })
 
     conn.on('error', function(err) {
@@ -207,7 +208,8 @@ export const calcAvgFPS = function() {
  * @returns {Promise<void>}
  */
 export const screenshot = async function() {
-  let url = `http://${constants.host}:80/Service/Snapshot/Capture?${moment().valueOf()}`
+  const hostIP = deviceIP.call(this)
+  let url = `http://${hostIP}:80/Service/Snapshot/Capture?${moment().valueOf()}`
   // create a new promise inside of the async function
   let bufferData = new Promise((resolve, reject) => {
     _http //TODO : Replace _http by using this.$http helper
@@ -256,6 +258,7 @@ export const stopProcess = function(process) {
     return true
   })
 }
+
 export const startFramework = function() {
   return exec({ cmd: 'nohup WPEFramework WPEProcess -b &', cbWhenStarted: true })
 }
@@ -304,8 +307,9 @@ export const youtubeStartAndResume = function() {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getPluginInfo = function(plugin) {
+  const hostIP = deviceIP.call(this)
   return this.$http
-    .get(`http://${constants.host}:80/Service/${plugin}`)
+    .get(`http://${hostIP}:80/Service/${plugin}`)
     .then(result => result)
     .catch(err => err)
 }
@@ -317,8 +321,9 @@ export const getPluginInfo = function(plugin) {
  * @returns {Promise<unknown>}
  */
 export const suspendOrResumePlugin = function(plugin, action) {
+  const hostIP = deviceIP.call(this)
   return this.$http
-    .post(`http://${constants.host}:80/Service/${plugin}/${action}`)
+    .post(`http://${hostIP}:80/Service/${plugin}/${action}`)
     .then(result => result)
     .catch(err => err)
 }
@@ -390,10 +395,19 @@ export const getMonitorInfo = function() {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getControllerUI = function() {
+  const hostIP = deviceIP.call(this)
   return this.$http
-    .get(`http://${constants.host}:80/Service/Controller/UI`)
+    .get(`http://${hostIP}:80/Service/Controller/UI`)
     .then(result => result)
     .catch(err => err)
+}
+
+/**
+ * This function is used to get the HostIP address
+ * @returns {*}
+ */
+export const deviceIP = function() {
+  return this.$thunder.api.options.host
 }
 
 /**
@@ -440,18 +454,6 @@ export const startProvisioning = function() {
 }
 
 /**
- * This function is used to put request
- * @param plugin
- * @returns {Promise<AxiosResponse<any>>}
- */
-export const putRequestForPlugin = function() {
-  return this.$http
-    .put(`http://${constants.host}:80/Service/Provisioning`)
-    .then(result => result)
-    .catch(err => err)
-}
-
-/**
  * This function is used to perform GET request operation on the URL
  * @returns {Promise<AxiosResponse<any>>}
  */
@@ -463,37 +465,95 @@ export const getReqURL = function(URL) {
 }
 
 /**
- * This function is used to get response from URL based on the Method type
- * @param methodType
- * @param url
- * @returns {Promise<AxiosResponse<any>>}
- */
-export const getResponseForURLRequest = function(methodType, url) {
-  if (methodType === 'GET') {
-    return getReqURL.call(this, url)
-  } else if (methodType === 'PUT') {
-    return putReqURL.call(this, url)
-  }
-}
-
-/**
- * This function is used to perform {PUT} request operation on the URL
- * @returns {Promise<AxiosResponse<any>>}
- */
-export const putReqURL = function(URL) {
-  return this.$http
-    .put(URL)
-    .then(result => result)
-    .catch(err => err)
-}
-
-/**
  * This function stops the WPE Framework Process
  * @returns {boolean}
  */
 export const stopWPEFramework = function() {
   stopProcess('WPEFramework')
   return true
+}
+
+/**
+ * This function is used to get available Bluetooth devices
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getBluetoothDevices = function() {
+  return this.$thunder.api.BluetoothControl.devices()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get available Bluetooth adapters
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getBluetoothAdapters = function() {
+  return this.$thunder.api.BluetoothControl.adapters()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get info of particular Bluetooth adapters
+ * @param adaptername
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getBluetoothAdapterInfo = function(adaptername) {
+  return this.$thunder.api.BluetoothControl.adapter(adaptername)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get info of particular Bluetooth device
+ * @param devicemac
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getBluetoothDeviceInfo = function(devicemac) {
+  return this.$thunder.api.BluetoothControl.adapter(devicemac)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to sync Location
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const syncLocation = function() {
+  return this.$thunder.api.LocationSync.sync()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Location
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getLocation = function() {
+  return this.$thunder.api.LocationSync.location()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get DRMS list
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getDRMSList = function() {
+  return this.$thunder.api.OCDM.drms()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get DRMS item info
+ * @returns {Promise<AxiosResponse<any>>}
+ * @param keysystem
+ */
+export const getDRMKeySystemInfo = function(keysystem) {
+  return this.$thunder.api.OCDM.keysystems(keysystem)
+    .then(result => result)
+    .catch(err => err)
 }
 
 /**

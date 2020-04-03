@@ -4,7 +4,6 @@
 /*jslint esnext: true*/
 /*jslint node: true */
 'use strict'
-import constants from './constants'
 
 const WebSocket = require('ws')
 
@@ -13,15 +12,16 @@ const WebSocket = require('ws')
  * NOTE: Only 1 webinspector connection can be made per host/agent, limited by the wpe webinspector itself
  */
 export class AttachToLogs {
-  constructor(cb) {
+  constructor(cb, hostIP) {
     this.cb = cb
+    this.hostIP = hostIP
     this.ws = undefined
   }
 
   connect() {
-    this.ws = new WebSocket(`ws://${constants.host}:9998/devtools/page/1`, {
+    this.ws = new WebSocket(`ws://${this.hostIP}:9998/Main.html?page=1`, {
       protocolVersion: 13,
-      origin: `${constants.host}:9998`,
+      origin: `${this.hostIP}:9998`,
       perMessageDeflate: true,
     })
 
