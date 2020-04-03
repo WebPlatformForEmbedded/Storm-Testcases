@@ -22,7 +22,7 @@ export default {
     listener.dispose()
   },
   context: {
-    MAX_MEMORY: 85 * 1000 * 1000,
+    MAX_MEMORY: 85 * 1000 * 1000, //TODO - Need to update max memory
   },
   steps: [
     {
@@ -62,7 +62,8 @@ export default {
     let response = this.$data.read('monitorinfo')
     for (let i = 0; i < response.length; i++) {
       let plugin = response[i]
-      if (plugin.observable === constants.webKitBrowserPlugin) {
+      this.$log('Plugin is', plugin)
+      if (plugin.observable === constants.youTubePlugin) {
         if (
           plugin !== undefined &&
           plugin.measurements !== undefined &&
@@ -82,10 +83,9 @@ export default {
           this.$log('Resident memory measurement not found in monitor response')
           return false
         }
-      } else {
-        this.$log('Webkit Browser plugin not found')
-        return false
       }
     }
+    this.$log('Plugin not found')
+    return false
   },
 }

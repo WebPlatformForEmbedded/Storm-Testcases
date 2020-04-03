@@ -3,20 +3,20 @@ import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Youtube Memory test 001',
-  description: 'Loads Youtube and checks the memory usage',
+  description: 'Loads youtube and checks the memory usage',
   context: {
-    MAX_MEMORY: 85 * 1000 * 1000,
+    MAX_MEMORY: 85 * 1000 * 1000, //TODO- Update memory info related to Youtube
   },
   steps: [
     {
-      description: 'Set Youtube URL to a playing video',
+      description: 'Activate Youtube Plugin',
       test: pluginActivate,
       params: constants.youTubePlugin,
       assert: 'resumed',
     },
     {
       description: 'Get Monitor Plugin Info',
-      sleep: 5, //This sleep is to make sure that Monitor plugin is activated
+      sleep: 10, //This sleep is to make sure that Monitor plugin is activated
       test() {
         return getMonitorInfo.call(this)
       },
@@ -40,9 +40,9 @@ export default {
           if (plugin.measurements.resident.last < this.$context.read('MAX_MEMORY')) return true
           else {
             this.$log(
-              `Youtube memory usage ${
+              `Youtube Plugin memory usage ${
                 plugin.measurements.resident.last
-              } is higher then ${this.$context.read('MAX_MEMORY')} while loading about:blank`
+              } is higher than ${this.$context.read('MAX_MEMORY')} while loading Youtube`
             )
             return false
           }
@@ -50,10 +50,9 @@ export default {
           this.$log('Resident memory measurement not found in monitor response')
           return false
         }
-      } else {
-        this.$log('Youtube Plugin not found')
-        return false
       }
     }
+    this.$log('Youtube Plugin not found')
+    return false
   },
 }
