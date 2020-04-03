@@ -62,7 +62,7 @@ export default {
     let response = this.$data.read('monitorinfo')
     for (let i = 0; i < response.length; i++) {
       let plugin = response[i]
-      if (plugin.observable === constants.youTubePlugin) {
+      if (plugin.observable === constants.webKitBrowserPlugin) {
         if (
           plugin !== undefined &&
           plugin.measurements !== undefined &&

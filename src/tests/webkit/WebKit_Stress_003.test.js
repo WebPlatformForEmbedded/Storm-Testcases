@@ -54,15 +54,19 @@ export default {
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
         return new Promise((resolve, reject) => {
+          let attempts = 0
           const interval = setInterval(() => {
+            attempts++
             if (
               this.$data.read('currentUrl') === this.$context.read('expUrl1') ||
               this.$context.read('expUrl2')
             ) {
               clearInterval(interval)
               resolve()
+            } else if (attempts > 10) {
+              clearInterval(interval)
+              reject('URL not loaded within time limit')
             }
-            reject('URL not loaded within time limit')
           }, 1000)
         })
       },
