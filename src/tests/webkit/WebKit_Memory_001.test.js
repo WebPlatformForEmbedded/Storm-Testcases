@@ -7,7 +7,7 @@ import constants from '../../commonMethods/constants'
 
 let listener
 export default {
-  title: 'WPEWebkit Memory test 001',
+  title: 'Webkit Memory test 001',
   description: 'Loads about blank and checks the memory usage',
   setup() {
     return this.$sequence([
@@ -62,7 +62,6 @@ export default {
     let response = this.$data.read('monitorinfo')
     for (let i = 0; i < response.length; i++) {
       let plugin = response[i]
-      this.$log('Plugin is', plugin)
       if (plugin.observable === constants.youTubePlugin) {
         if (
           plugin !== undefined &&
@@ -85,7 +84,7 @@ export default {
         }
       }
     }
-    this.$log('Plugin not found')
+    this.$log('Web kit browser Plugin not found')
     return false
   },
 }
