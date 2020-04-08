@@ -70,12 +70,12 @@ export const getControllerEnvironment = function(envName) {
 }
 
 /**
- * This function is used to get Controller Environment info
- * @param envName
+ * This function is used to get plugin status
+ * @param pluginName
  * @returns {Promise<T>}
  */
-export const getPluginStatus = function(envName) {
-  let methodName = 'status@' + envName
+export const getPluginStatus = function(pluginName) {
+  let methodName = 'status@' + pluginName
   return this.$thunder.api.Controller[methodName]()
     .then(res => res)
     .catch(err => err)
