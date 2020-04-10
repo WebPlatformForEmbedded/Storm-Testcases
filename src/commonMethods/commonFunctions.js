@@ -103,6 +103,17 @@ export const getPluginStatus = function(pluginName) {
 }
 
 /**
+ * This function is used to get plugins status
+ * @param pluginName
+ * @returns {Promise<T>}
+ */
+export const getPluginsStatus = function() {
+  return this.$thunder.api.Controller.status()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
  * This function is used to get Plugin Configuration
  * @param pluginName
  * @returns {Promise<T>}

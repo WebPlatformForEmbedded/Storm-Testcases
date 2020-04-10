@@ -1,35 +1,37 @@
-import { getPluginStatus } from '../../commonMethods/commonFunctions'
-import constants from '../../commonMethods/constants'
+import { getPluginsStatus } from '../../commonMethods/commonFunctions'
 
 export default {
   title: 'Framework Controller Status - 003',
   description: 'Get status of multiple plugins plugin',
   steps: [
     {
-      description: 'Get status of webkitbrowser plugin and validate the result',
+      description: 'Get status of multiple plugins   and validate the result',
       test() {
-        return getPluginStatus.call(this, constants.webKitBrowserPlugin)
+        return getPluginsStatus.call(this)
       },
       validate(res) {
-        if (res !== undefined && res !== null) {
-          return true
-        } else {
-          this.$log('Proper error message is not shown')
-          return false
-        }
-      },
-    },
-    {
-      description: 'Get status of deviceInfo plugin and validate the result',
-      test() {
-        return getPluginStatus.call(this, constants.deviceInfo)
-      },
-      validate(res) {
-        if (res !== undefined && res !== null) {
-          return true
-        } else {
-          this.$log('Proper error message is not shown')
-          return false
+        this.$log('res is', res.length)
+        for (let i = 0; i < res.length; i++) {
+          let plugin = res[i]
+          if (
+            plugin.callsign !== null &&
+            plugin.locator !== null &&
+            plugin.classname !== null &&
+            plugin.autostart !== null &&
+            plugin.state !== null &&
+            plugin.processedrequests !== null &&
+            plugin.processedobjects !== null &&
+            plugin.observers !== null &&
+            plugin.module !== null &&
+            plugin.hash !== null
+          ) {
+            if (i === res.length - 1) {
+              return true
+            }
+          } else {
+            this.$log('Mandatory elements in Plugins state not found')
+            return false
+          }
         }
       },
     },

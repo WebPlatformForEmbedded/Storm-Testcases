@@ -10,7 +10,6 @@ export default {
         return getControllerEnvironment.call(this, 'SHELL')
       },
       validate(res) {
-        this.$log('Res is', res)
         if (res !== undefined && res !== null) {
           return true
         } else {
