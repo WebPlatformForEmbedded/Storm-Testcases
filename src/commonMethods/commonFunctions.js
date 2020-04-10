@@ -104,7 +104,6 @@ export const getPluginStatus = function(pluginName) {
 
 /**
  * This function is used to get plugins status
- * @param pluginName
  * @returns {Promise<T>}
  */
 export const getPluginsStatus = function() {
