@@ -58,6 +58,61 @@ export const getPluginState = function(plugin_name) {
 }
 
 /**
+ * This function is used to get Plugin Configuration
+ * @param pluginName
+ * @returns {Promise<T>}
+ */
+export const getPluginConfiguration = function(pluginName) {
+  const methodName = 'configuration@' + pluginName
+  return this.$thunder.api.Controller[methodName]()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function starts the discovery process
+ * @param ttl
+ * @returns {Promise<T>}
+ */
+export const startDiscovery = function(ttl) {
+  return this.$thunder.api.Controller.startdiscovery(ttl)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get plugin status
+ * @param pluginName
+ * @returns {Promise<T>}
+ */
+export const getPluginStatus = function(pluginName) {
+  let methodName = 'status@' + pluginName
+  return this.$thunder.api.Controller[methodName]()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get plugins status
+ * @returns {Promise<T>}
+ */
+export const getPluginsStatus = function() {
+  return this.$thunder.api.Controller.status()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function stores the configuration to persistent memory.
+ * @returns {Promise<T>}
+ */
+export const storeconfig = function() {
+  return this.$thunder.api.Controller.storeconfig()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
  * This function resumes or suspends WebKitBrowser plugin
  * @param action
  */
