@@ -21,6 +21,7 @@ export default {
   WPEProcess: 'WPEProcess',
   remoteControlPlugin: 'RemoteControl',
   invalidAddress: 'invalidstring',
+  invalidPlugin: 'invalidplugin',
 
   //Plugin states
   activate: 'activate',

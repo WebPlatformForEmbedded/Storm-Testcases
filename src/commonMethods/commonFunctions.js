@@ -58,6 +58,30 @@ export const getPluginState = function(plugin_name) {
 }
 
 /**
+ * This function is used to get Controller Environment info
+ * @param envName
+ * @returns {Promise<T>}
+ */
+export const getControllerEnvironment = function(envName) {
+  let methodName = 'environment@' + envName
+  return this.$thunder.api.Controller[methodName]()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get plugin status
+ * @param pluginName
+ * @returns {Promise<T>}
+ */
+export const getPluginStatus = function(pluginName) {
+  let methodName = 'status@' + pluginName
+  return this.$thunder.api.Controller[methodName]()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
  * This function is used to get Plugin Configuration
  * @param pluginName
  * @returns {Promise<T>}
@@ -77,18 +101,6 @@ export const getPluginConfiguration = function(pluginName) {
 export const startDiscovery = function(ttl) {
   return this.$thunder.api.Controller.startdiscovery(ttl)
     .then(result => result)
-    .catch(err => err)
-}
-
-/**
- * This function is used to get plugin status
- * @param pluginName
- * @returns {Promise<T>}
- */
-export const getPluginStatus = function(pluginName) {
-  let methodName = 'status@' + pluginName
-  return this.$thunder.api.Controller[methodName]()
-    .then(res => res)
     .catch(err => err)
 }
 
