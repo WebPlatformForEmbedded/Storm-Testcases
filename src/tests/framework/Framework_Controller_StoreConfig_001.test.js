@@ -1,11 +1,11 @@
 import { storeconfig } from '../../commonMethods/commonFunctions'
 
 export default {
-  title: 'Framework Start Discovery test - 001',
-  description: 'Starts Discovery',
+  title: 'Framework Store Config test - 001',
+  description: 'Check Framework Store Config Functionality ',
   steps: [
     {
-      description: 'Start Discovery and validate the result',
+      description: 'Stores Config and validate the result',
       test() {
         return storeconfig.call(this)
       },
