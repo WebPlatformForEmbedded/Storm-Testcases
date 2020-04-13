@@ -8,12 +8,17 @@ import constants from '../../commonMethods/constants'
 
 let listener
 export default {
-  title: 'Webkit Resume functionality test ',
-  description: 'Resumes WPEWebkit plugin and check whether resumed or not',
+  title: 'Webkit Suspend functionality test  ',
+  description: 'Suspends WPEWebkit plugin and check whether suspended or not',
   setup() {
-    listener = this.$thunder.api.WebKitBrowser.on('statechange', data => {
-      this.$data.write('state', data.suspended)
-    })
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
+      () => pluginActivate.call(this, constants.webKitBrowserPlugin),
+      () =>
+        (listener = this.$thunder.api.WebKitBrowser.on('statechange', data => {
+          this.$data.write('state', data.suspended)
+        })),
+    ])
   },
   steps: [
     {
@@ -43,25 +48,6 @@ export default {
       },
     },
     {
-      description: 'Wait until state change event is changed',
-      sleep() {
-        // Purpose of this sleep is to wait until current step gets 'state change' response from the listener
-        return new Promise((resolve, reject) => {
-          let attempts = 0
-          const interval = setInterval(() => {
-            attempts++
-            if (this.$data.read('state') === false) {
-              clearInterval(interval)
-              resolve()
-            } else if (attempts > 10) {
-              clearInterval(interval)
-              reject('Visibility not changed')
-            }
-          }, 1000)
-        })
-      },
-    },
-    {
       description: 'Suspend Webkit Plugin and validate the result',
       test() {
         return setWebKitState.call(this, constants.suspend)
@@ -85,6 +71,25 @@ export default {
         } else {
           return false
         }
+      },
+    },
+    {
+      description: 'Wait until state change event is detected',
+      sleep() {
+        // Purpose of this sleep is to wait until current step gets 'state change' response from the listener
+        return new Promise((resolve, reject) => {
+          let attempts = 0
+          const interval = setInterval(() => {
+            attempts++
+            if (this.$data.read('state') === true) {
+              clearInterval(interval)
+              resolve()
+            } else if (attempts > 10) {
+              clearInterval(interval)
+              reject('State not changed')
+            }
+          }, 1000)
+        })
       },
     },
   ],
