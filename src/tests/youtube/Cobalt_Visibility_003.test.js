@@ -3,8 +3,8 @@ import {
   getCobaltVisibility,
   pluginDeactivate,
   pluginActivate,
-} from '../../../../../../../StormCLIForTest/Storm-CLI/testcases/Storm-Testcases/src/commonMethods/commonFunctions'
-import constants from '../../../../../../../StormCLIForTest/Storm-CLI/testcases/Storm-Testcases/src/commonMethods/constants'
+} from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 let listener
 export default {

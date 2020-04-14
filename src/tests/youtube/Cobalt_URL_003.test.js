@@ -1,9 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  setCobaltUrl,
-} from '../../../../../../../StormCLIForTest/Storm-CLI/testcases/Storm-Testcases/src/commonMethods/commonFunctions'
-import constants from '../../../../../../../StormCLIForTest/Storm-CLI/testcases/Storm-Testcases/src/commonMethods/constants'
+import { pluginDeactivate, pluginActivate, setCobaltUrl } from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Cobalt URL - 003',
