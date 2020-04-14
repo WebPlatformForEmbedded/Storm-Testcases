@@ -633,6 +633,17 @@ export const setTime = function(time) {
 }
 
 /**
+ * This function sets the state of Cobalt
+ * @param state
+ * @returns state
+ */
+export const setCobaltState = function(state) {
+  return this.$thunder.api.Cobalt.state(state)
+    .then(state => state)
+    .catch(err => err)
+}
+
+/**
  * This function gets the state of Cobalt
  * @returns state
  */
