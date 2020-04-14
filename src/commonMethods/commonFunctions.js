@@ -957,16 +957,6 @@ export const setNetflixState = function(state) {
 }
 
 /**
- * This function gets the state of Netflix
- * @returns state
- */
-export const getNetflixState = function() {
-  return this.$thunder.api.Netflix.state()
-    .then(state => state)
-    .catch(err => err)
-}
-
-/**
  * This function sets the visibility of Netflix
  * @param status
  * @returns {Promise<T>}

@@ -1,7 +1,6 @@
 import {
   pluginDeactivate,
   pluginActivate,
-  getNetflixVisibility,
   setNetflixVisibility,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
@@ -35,20 +34,6 @@ export default {
           return true
         } else {
           this.$log('Result is not as expected')
-          return false
-        }
-      },
-    },
-    {
-      description: 'Get Netflix visibility and validate the result',
-      test() {
-        return getNetflixVisibility.call(this)
-      },
-      validate(res) {
-        if (res === this.$context.read('visibilityState')) {
-          return true
-        } else {
-          this.$log('Visibility is not as expected and is ', res)
           return false
         }
       },

@@ -1,7 +1,6 @@
 import {
   pluginDeactivate,
   pluginActivate,
-  getNetflixState,
   setNetflixState,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
@@ -29,19 +28,6 @@ export default {
       },
       validate(res) {
         if (res == null) {
-          return true
-        } else {
-          return false
-        }
-      },
-    },
-    {
-      description: 'Get Netflix Plugin state and check if it is suspended',
-      test() {
-        return getNetflixState.call(this)
-      },
-      validate(res) {
-        if (res == constants.suspend) {
           return true
         } else {
           return false

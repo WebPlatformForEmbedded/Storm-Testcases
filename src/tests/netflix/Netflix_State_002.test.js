@@ -1,7 +1,6 @@
 import {
   pluginDeactivate,
   pluginActivate,
-  getNetflixState,
   setNetflixState,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
@@ -16,7 +15,6 @@ export default {
       () => pluginActivate.call(this, constants.netFlixPlugin),
       () =>
         (listener = this.$thunder.api.Netflix.on('statechange', data => {
-          this.$log('data is', data.suspended)
           this.$data.write('state', data.suspended)
         })),
     ])
@@ -38,6 +36,7 @@ export default {
     },
     {
       description: 'Resume Netflix Plugin and check if it is resumed',
+      sleep: 5,
       test() {
         return setNetflixState.call(this, constants.resume)
       },
@@ -45,20 +44,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          return false
-        }
-      },
-    },
-    {
-      description: 'Get Netflix Plugin state and check if it is resumed',
-      test() {
-        return getNetflixState.call(this)
-      },
-      validate(res) {
-        this.$log('res is', res)
-        if (res == constants.resume) {
-          return true
-        } else {
+          this.$log('Netflix is not resumed')
           return false
         }
       },
