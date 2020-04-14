@@ -944,3 +944,45 @@ export const getCobaltVisibility = function() {
     .then(res => res)
     .catch(err => err)
 }
+
+/**
+ * This function sets the state of Netflix
+ * @param state
+ * @returns state
+ */
+export const setNetflixState = function(state) {
+  return this.$thunder.api.Netflix.state(state)
+    .then(state => state)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the state of Netflix
+ * @returns state
+ */
+export const getNetflixState = function() {
+  return this.$thunder.api.Netflix.state()
+    .then(state => state)
+    .catch(err => err)
+}
+
+/**
+ * This function sets the visibility of Netflix
+ * @param status
+ * @returns {Promise<T>}
+ */
+export const setNetflixVisibility = function(status) {
+  return this.$thunder.api.Netflix.visibility(status)
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the visibility of Netflix
+ * @returns {Promise<T>}
+ */
+export const getNetflixVisibility = function() {
+  return this.$thunder.api.Netflix.visibility()
+    .then(res => res)
+    .catch(err => err)
+}
