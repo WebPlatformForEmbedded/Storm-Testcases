@@ -22,7 +22,6 @@ export default {
       params: constants.timeSyncPlugin,
       assert: 'activated',
     },
-
     {
       description: 'Invoke Time to get current time',
       sleep: 5,

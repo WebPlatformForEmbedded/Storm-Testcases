@@ -1,11 +1,19 @@
-import { pluginDeactivate, pluginActivate, syncTime } from '../../commonMethods/commonFunctions'
+import {
+  pluginDeactivate,
+  pluginActivate,
+  syncTime,
+  setTime,
+  getCurrentTime,
+} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import Moment from 'moment'
 
 let listener
 
 export default {
-  title: 'TimeSync - Synchronize 001',
-  description: 'Check the Synchronize Functionality of TimeSync Module',
+  title: 'TimeSync - Synchronize 003',
+  description:
+    'Check whether date is correctly synchronized when Sync time is triggered with past date',
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.timeSyncPlugin),
@@ -19,9 +27,25 @@ export default {
     ])
   },
   teardown() {
-    listener.dispose
+    listener.dispose()
   },
   steps: [
+    {
+      description: 'Set Time to Past time time',
+      sleep: 5,
+      test() {
+        let datetime = Moment().subtract(2, 'days')
+        return setTime.call(this, datetime)
+      },
+      validate(res) {
+        if (res == null) {
+          return true
+        } else {
+          this.$log('Current Time is not provided')
+          return false
+        }
+      },
+    },
     {
       description: 'Invoke Time Synchronize',
       sleep: 5,
@@ -29,6 +53,7 @@ export default {
         return syncTime.call(this)
       },
       validate(res) {
+        this.$log('Result is', res)
         if (res == null) {
           return true
         } else {
@@ -39,6 +64,7 @@ export default {
     },
     {
       description: 'Check whether time sync is success',
+      sleep: 5,
       test() {
         return new Promise((resolve, reject) => {
           let attempts = 0
@@ -53,6 +79,24 @@ export default {
             }
           }, 1000)
         })
+      },
+    },
+    {
+      description: 'Invoke Time to get current time',
+      sleep: 5,
+      test() {
+        return getCurrentTime.call(this)
+      },
+      validate(res) {
+        let result = Moment(res)
+        let currTime = Moment()
+        let timeDiff = currTime.diff(result)
+        if (timeDiff < 3000) {
+          return true
+        } else {
+          this.$log('Current Time is not provided')
+          return false
+        }
       },
     },
   ],

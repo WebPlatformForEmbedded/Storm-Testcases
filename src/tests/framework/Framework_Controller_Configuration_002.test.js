@@ -1,35 +1,24 @@
-import { getPluginConfiguration, setPluginConfiguration } from '../../commonMethods/commonFunctions'
+import {
+  getPluginConfiguration,
+  pluginActivate,
+  pluginDeactivate,
+} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Framework Controller Configuration - 001',
-  description: 'Validate Plugin Configuration',
+  title: 'Framework Controller Configuration - 002',
+  description: 'Get plugin Configuration for invalid Plugin and check framework behavior',
   steps: [
     {
-      description: 'Get Plugin Configuration and validate the result',
+      description: 'Get invalid Plugin Configuration and validate the result',
       test() {
-        return setPluginConfiguration.call(this, constants.deviceInfo, 'randomString')
+        return getPluginConfiguration.call(this, constants.invalidPlugin)
       },
       validate(res) {
-        if (res === null) {
+        if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
-          this.$log('Configuration not set')
-          return false
-        }
-      },
-    },
-    {
-      description: 'Get Plugin Configuration and validate the result',
-      test() {
-        return getPluginConfiguration.call(this, constants.deviceInfo)
-      },
-      validate(res) {
-        if (res == 'randomString') {
-          //TODO - Currently not getting any response. Need to check how we can get response
-          return true
-        } else {
-          this.$log('Configuration not available')
+          this.$log('Proper error message is not shown')
           return false
         }
       },
