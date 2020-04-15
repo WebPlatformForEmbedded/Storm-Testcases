@@ -4,6 +4,7 @@ import {
   getCurrentTime,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import Moment from 'moment'
 
 export default {
   title: 'TimeSync - GetTime 001',
@@ -21,6 +22,7 @@ export default {
       params: constants.timeSyncPlugin,
       assert: 'activated',
     },
+
     {
       description: 'Invoke Time to get current time',
       sleep: 5,
@@ -28,8 +30,10 @@ export default {
         return getCurrentTime.call(this)
       },
       validate(res) {
-        //TODO - Implement Proper validation to check whether the current time is returned
-        if (res == null) {
+        let result = Moment(res)
+        let currTime = Moment()
+        let timeDiff = currTime.diff(result)
+        if (timeDiff < 3000) {
           return true
         } else {
           this.$log('Current Time is not provided')

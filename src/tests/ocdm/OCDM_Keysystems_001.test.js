@@ -40,7 +40,6 @@ export default {
       description: 'Get DRM KeySystem info',
       test() {
         let drmlist = this.$data.read('drmlist')
-        this.$log('DRM list info', drmlist[0].name)
         return getDRMKeySystemInfo.call(this, drmlist[0].name)
       },
       validate(result) {

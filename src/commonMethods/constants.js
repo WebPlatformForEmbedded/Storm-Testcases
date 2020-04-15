@@ -19,6 +19,7 @@ export default {
   netflixImplementation: 'NetflixImplementation',
   youtubeImplementation: 'CobaltImplementation',
   provisioningPlugin: 'Provisioning',
+  wifiControlPlugin: 'WifiControl',
   WPEProcess: 'WPEProcess',
   remoteControlPlugin: 'RemoteControl',
   invalidAddress: 'invalidstring',
