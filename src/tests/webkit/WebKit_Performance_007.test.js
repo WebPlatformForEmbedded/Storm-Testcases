@@ -4,7 +4,7 @@ export default {
   ...baseTest,
   ...{
     context: {
-      minFPS: 20,
+      minFPS: 10,
       url: 'http://oos.moxiecode.com/js_webgl/particles_morph/',
     },
     title: 'WPEWebkit performance anisotropic',
