@@ -13,6 +13,7 @@ export default {
   locationSyncPlugin: 'LocationSync',
   ocdmImplementation: 'OCDMImplementation',
   snapshotPlugin: 'Snapshot',
+  ioconnector: 'IOConnector',
   webServerPlugin: 'WebServer',
   webServerImplementation: 'WebServerImplementation',
   netflixImplementation: 'NetflixImplementation',
