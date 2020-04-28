@@ -10,22 +10,22 @@ export default {
   description: 'Sets the client visibility and validates the result',
   steps: [
     {
-      description: 'Deactivate Netflix Plugin and check deactivated or not',
+      description: 'Deactivate WebKitBrowser Plugin and check deactivated or not',
       test: pluginDeactivate,
-      params: constants.netFlixPlugin,
+      params: constants.webKitBrowserPlugin,
       assert: 'deactivated',
     },
     {
-      description: 'Activate Netflix Plugin and check resumed or not',
+      description: 'Activate WebKitBrowser Plugin and check resumed or not',
       test: pluginActivate,
-      params: constants.netFlixPlugin,
+      params: constants.webKitBrowserPlugin,
       assert: 'resumed',
     },
     {
       description: 'Set Client Visibility to hidden and validate the result',
       sleep: 10,
       test() {
-        return setClientVisibility.call(this, constants.netFlixPlugin, 'hidden')
+        return setClientVisibility.call(this, constants.webKitBrowserPlugin, 'hidden')
       },
       validate(res) {
         if (res == null) {
@@ -39,7 +39,7 @@ export default {
     {
       description: 'Set Client Visibility to Visibile and validate the result',
       test() {
-        return setClientVisibility.call(this, constants.netFlixPlugin, 'visible')
+        return setClientVisibility.call(this, constants.webKitBrowserPlugin, 'visible')
       },
       validate(res) {
         if (res == null) {

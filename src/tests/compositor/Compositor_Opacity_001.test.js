@@ -13,15 +13,15 @@ export default {
   },
   steps: [
     {
-      description: 'Deactivate Netflix Plugin and check deactivated or not',
+      description: 'Deactivate WebKitBrowser Plugin and check deactivated or not',
       test: pluginDeactivate,
-      params: constants.netFlixPlugin,
+      params: constants.webKitBrowserPlugin,
       assert: 'deactivated',
     },
     {
-      description: 'Activate Netflix Plugin and check resumed or not',
+      description: 'Activate WebKitBrowser Plugin and check resumed or not',
       test: pluginActivate,
-      params: constants.netFlixPlugin,
+      params: constants.webKitBrowserPlugin,
       assert: 'resumed',
     },
     {
@@ -30,7 +30,7 @@ export default {
       test() {
         return setClientOpacity.call(
           this,
-          constants.netFlixPlugin,
+          constants.webKitBrowserPlugin,
           this.$context.read('opacityValue')
         )
       },
