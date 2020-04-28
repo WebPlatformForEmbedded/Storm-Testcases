@@ -23,9 +23,9 @@ export default {
       assert: 'deactivated',
     },
     {
-      description: 'Deactivate Netflix Plugin and check deactivated or not',
+      description: 'Deactivate Youtube Plugin and check deactivated or not',
       test: pluginDeactivate,
-      params: constants.netFlixPlugin,
+      params: constants.youTubePlugin,
       assert: 'deactivated',
     },
     {
@@ -41,9 +41,9 @@ export default {
       },
     },
     {
-      description: 'Activate Netflix Plugin and check resumed or not',
+      description: 'Activate Youtube Plugin and check resumed or not',
       test: pluginActivate,
-      params: constants.netFlixPlugin,
+      params: constants.youTubePlugin,
       assert: 'resumed',
     },
     {
@@ -52,7 +52,7 @@ export default {
         return getCompositorClients.call(this)
       },
       validate(res) {
-        if (res.indexOf('Netflix') !== -1 && res.indexOf('UX') !== -1) {
+        if (res.indexOf('Cobalt-graphics') !== -1 && res.indexOf('UX') !== -1) {
           return true
         } else {
           this.$log('Clients list is incorrect')

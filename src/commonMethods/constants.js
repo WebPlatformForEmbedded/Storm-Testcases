@@ -11,6 +11,7 @@ export default {
   ocdmPlugin: 'OCDM',
   timeSyncPlugin: 'TimeSync',
   locationSyncPlugin: 'LocationSync',
+  uxplugin: 'UX',
   ocdmImplementation: 'OCDMImplementation',
   snapshotPlugin: 'Snapshot',
   webServerPlugin: 'WebServer',
