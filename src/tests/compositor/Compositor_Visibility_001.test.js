@@ -2,25 +2,25 @@ import {
   pluginDeactivate,
   pluginActivate,
   setClientVisibility,
+  setWebKitUrl,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Compositor Client Visibility - 001',
   description: 'Sets the client visibility and validates the result',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => setWebKitUrl.call(this, 'about:blank'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
+    ])
+  },
   steps: [
-    {
-      description: 'Deactivate WebKitBrowser Plugin and check deactivated or not',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activate WebKitBrowser Plugin and check resumed or not',
-      test: pluginActivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'resumed',
-    },
     {
       description: 'Set Client Visibility to hidden and validate the result',
       sleep: 10,

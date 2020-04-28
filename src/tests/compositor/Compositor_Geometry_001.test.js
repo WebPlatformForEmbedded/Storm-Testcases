@@ -3,28 +3,28 @@ import {
   pluginActivate,
   getClientGeometry,
   setClientGeometry,
+  setWebKitUrl,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Compositor Geometry - 001',
   description: 'Sets and gets the Geometry of client',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => setWebKitUrl.call(this, 'about:blank'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
+    ])
+  },
   steps: [
     {
-      description: 'Deactivate WebKitBrowser Plugin and check deactivated or not',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activate WebKitBrowser Plugin and check resumed or not',
-      test: pluginActivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'resumed',
-    },
-    {
       description: 'Set Compositor Geometry and validate the result',
-      sleep: 20,
+      sleep: 5,
       test() {
         return setClientGeometry.call(this, constants.webKitBrowserPlugin, '1', '1', '480', '360')
       },
