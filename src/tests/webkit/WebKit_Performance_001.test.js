@@ -1,9 +1,7 @@
 import {
   setWebKitUrl,
   calcAvgFPS,
-  webKitBrowserActions,
   pluginActivate,
-  suspendOrResumePlugin,
   pluginDeactivate,
 } from '../../commonMethods/commonFunctions'
 import { fetchWebKitFPS } from '../../commonMethods/webKitPerformanceCommonFunctions'
@@ -19,7 +17,7 @@ export default {
   setup() {
     this.$data.write('samples', [])
     return this.$sequence([
-      () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
       () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
       () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
       () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
@@ -45,7 +43,7 @@ export default {
   },
   teardown() {
     setWebKitUrl.call(this, constants.blankUrl)
-    console.log('teardown disposing event')
+    listener.dispose()
   },
   title: 'WPEWebkit performance poster circle',
   description: 'Loads the Poster Circle CSS3 animation and measures its performance',
