@@ -48,7 +48,7 @@ export default {
       },
     },
     {
-      description: 'Check for Netflix plugin in plugins list',
+      description: 'Check for WebKitBrowser plugin in plugins list',
       test() {
         let pluginInfo = this.$data.read('pluginInfo')
         //TODO Best way to check WebKitBrowser is still live need to be implemented
