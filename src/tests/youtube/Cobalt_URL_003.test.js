@@ -17,7 +17,7 @@ export default {
     {
       description: 'Activate Cobalt Plugin',
       test: pluginActivate,
-      params: constants.webKitBrowserPlugin,
+      params: constants.youTubePlugin,
       assert: 'resumed',
     },
     {
