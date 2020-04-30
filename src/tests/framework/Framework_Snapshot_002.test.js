@@ -1,16 +1,22 @@
-import {
-  pluginActivate,
-  pluginDeactivate,
-  screenshot,
-  webKitBrowserStartAndResume,
-} from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate, screenshot } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework snapshot test with multiple start/stops',
   description: 'Tests if the Framework snapshot module works',
   repeat: 30,
-  setup: webKitBrowserStartAndResume,
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
+    ])
+  },
   steps: [
     {
       description: 'Deactivating Snapshot Plugin',

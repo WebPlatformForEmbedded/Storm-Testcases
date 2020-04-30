@@ -9,6 +9,13 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Framework snapshot test',
   description: 'Tests if the Framework snapshot module works',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+    ])
+  },
   steps: [
     {
       description: 'Deactivating Snapshot Plugin',

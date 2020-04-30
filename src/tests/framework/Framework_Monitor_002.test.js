@@ -1,4 +1,4 @@
-import { getMonitorInfo } from '../../commonMethods/commonFunctions'
+import { getMonitorInfo, pluginDeactivate } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 import baseTest from './Framework_Monitor_001.test'
 import { pluginActivate } from '../../commonMethods/commonFunctions'
@@ -10,7 +10,16 @@ export default {
     description:
       'Tests if the Framework Monitor module return measurement values for WebKitBrowser',
     setup() {
-      pluginActivate.call(this, constants.webKitBrowserPlugin)
+      return this.$sequence([
+        () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+        () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+        () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+        () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+        () => pluginActivate.call(this, 'WebKitBrowser'),
+        () => {
+          return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+        },
+      ])
     },
     steps: baseTest.steps.map((step, index) => {
       if (index === 2) {

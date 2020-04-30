@@ -1,9 +1,10 @@
 import {
   setWebKitUrl,
-  webKitBrowserStartAndResume,
   getPluginState,
   getCpuLoad,
   getDeviceInfo,
+  pluginDeactivate,
+  pluginActivate,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -15,11 +16,28 @@ export default {
     'Stress loads the system with xmlhttprequests and see if the WPEWebkit process continues to operate nominally',
   setup() {
     return this.$sequence([
-      () => webKitBrowserStartAndResume.call(this),
-      () =>
-        (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
-          this.$data.write('currentUrl', data.url)
-        })),
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => setWebKitUrl.call(this, 'about:blank'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
+      () => {
+        listener = this.$thunder.api.WebKitBrowser.on(
+          'urlchange',
+          data => {
+            this.$log('Got urlchange event: ', data.url)
+            this.$data.write('currentUrl', data.url)
+          },
+          e => {
+            this.$log('Error subscribing to urlchange: ', e)
+          }
+        )
+        return true
+      },
     ])
   },
   context: {

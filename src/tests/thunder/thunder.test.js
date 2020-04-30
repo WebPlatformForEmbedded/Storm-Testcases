@@ -1,6 +1,20 @@
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/commonFunctions'
+
 export default {
   title: 'Thunder',
   description: 'Testing that we can use the ThunderJS to make calls to a Thunder enabled device',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
+    ])
+  },
   steps: [
     {
       description: 'Getting Device Info',
@@ -26,15 +40,6 @@ export default {
           'time'
         )
       },
-    },
-    {
-      description: 'Activating the Webkit plugin',
-      test() {
-        return this.$thunder.api.Controller.activate({ callsign: 'WebKitBrowser' })
-          .then(() => true)
-          .catch(err => err)
-      },
-      assert: true,
     },
     {
       description: 'Setting the URL to metrological.com',
