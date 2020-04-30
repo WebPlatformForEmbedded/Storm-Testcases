@@ -70,27 +70,6 @@ export const getPluginState = function(plugin_name) {
 }
 
 /**
- * This function starts the discovery process
- * @param ttl
- * @returns {Promise<T>}
- */
-export const startDiscovery = function(ttl) {
-  return this.$thunder.api.Controller.startdiscovery(ttl)
-    .then(result => result)
-    .catch(err => err)
-}
-
-/**
- * This function stores the configuration to persistent memory.
- * @returns {Promise<T>}
- */
-export const storeconfig = function() {
-  return this.$thunder.api.Controller.storeconfig()
-    .then(result => result)
-    .catch(err => err)
-}
-
-/**
  * This function is used to get plugin status
  * @param pluginName
  * @returns {Promise<T>}
@@ -98,16 +77,6 @@ export const storeconfig = function() {
 export const getPluginStatus = function(pluginName) {
   let methodName = 'status@' + pluginName
   return this.$thunder.api.Controller[methodName]()
-    .then(res => res)
-    .catch(err => err)
-}
-
-/**
- * This function is used to get plugins status
- * @returns {Promise<T>}
- */
-export const getPluginsStatus = function() {
-  return this.$thunder.api.Controller.status()
     .then(res => res)
     .catch(err => err)
 }
@@ -125,14 +94,33 @@ export const getPluginConfiguration = function(pluginName) {
 }
 
 /**
- * This function is used to set Plugin Configuration
- * @param pluginName
+ * This function starts the discovery process
+ * @param ttl
  * @returns {Promise<T>}
  */
-export const setPluginConfiguration = function(pluginName, params) {
-  const methodName = 'configuration@' + pluginName
-  return this.$thunder.api.Controller[methodName](params)
+export const startDiscovery = function(ttl) {
+  return this.$thunder.api.Controller.startdiscovery(ttl)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get plugins status
+ * @returns {Promise<T>}
+ */
+export const getPluginsStatus = function() {
+  return this.$thunder.api.Controller.status()
     .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function stores the configuration to persistent memory.
+ * @returns {Promise<T>}
+ */
+export const storeconfig = function() {
+  return this.$thunder.api.Controller.storeconfig()
+    .then(result => result)
     .catch(err => err)
 }
 
@@ -166,7 +154,6 @@ export const setWebKitState = function(state) {
 
 /**
  * This function gets the state of Webkit Browser
- *
  * @returns state
  */
 export const getWebKitState = function() {
@@ -193,16 +180,6 @@ export const setWebKitUrl = function(URL) {
  */
 export const setWebKitBrowserUrl = function(URL) {
   return this.$thunder.api.WebKitBrowser.url(URL)
-    .then(url => url)
-    .catch(err => err)
-}
-
-/**
- * This function gets the visibility of WebkitBrowser
- * @returns {Promise<T>}
- */
-export const getWebKitBrowserVisibility = function() {
-  return this.$thunder.api.WebKitBrowser.visibility()
     .then(url => url)
     .catch(err => err)
 }
@@ -235,6 +212,16 @@ export const getWebKitBrowserUrl = function() {
  */
 export const getWebKitUrl = function() {
   return this.$thunder.api.WebKitBrowser.url()
+    .then(url => url)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the visibility of WebkitBrowser
+ * @returns {Promise<T>}
+ */
+export const getWebKitBrowserVisibility = function() {
+  return this.$thunder.api.WebKitBrowser.visibility()
     .then(url => url)
     .catch(err => err)
 }
@@ -525,20 +512,6 @@ export const getAddressesInfo = function() {
   return this.$thunder.api.DeviceInfo.addresses()
     .then(result => {
       this.$data.write('addressinfo', result)
-      return result
-    })
-    .catch(err => err)
-}
-
-/**
- * This function is used to get Socket Info of Device Info Plugin
- * @param plugin
- * @returns {Promise<AxiosResponse<any>>}
- */
-export const getSocketInfo = function() {
-  return this.$thunder.api.DeviceInfo.socketinfo()
-    .then(result => {
-      this.$data.write('socketinfo', result)
       return result
     })
     .catch(err => err)
@@ -1233,5 +1206,19 @@ export const setIoConnectorPinValue = function(pin, value) {
 export const getIoConnectorPinValue = function() {
   return this.$thunder.api.IOConnector.pin()
     .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Socket Info of Device Info Plugin
+ * @param plugin
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getSocketInfo = function() {
+  return this.$thunder.api.DeviceInfo.socketinfo()
+    .then(result => {
+      this.$data.write('socketinfo', result)
+      return result
+    })
     .catch(err => err)
 }
