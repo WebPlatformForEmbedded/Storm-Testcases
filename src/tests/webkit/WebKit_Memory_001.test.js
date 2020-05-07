@@ -7,7 +7,7 @@ import constants from '../../commonMethods/constants'
 
 let listener
 export default {
-  title: 'WPEWebkit Memory test 001',
+  title: 'Webkit Memory test 001',
   description: 'Loads about blank and checks the memory usage',
   setup() {
     return this.$sequence([
@@ -22,7 +22,7 @@ export default {
     listener.dispose()
   },
   context: {
-    MAX_MEMORY: 85 * 1000 * 1000,
+    MAX_MEMORY: 85 * 1000 * 1000, //TODO - Need to update max memory
   },
   steps: [
     {
@@ -84,5 +84,7 @@ export default {
         }
       }
     }
+    this.$log('Web kit browser Plugin not found')
+    return false
   },
 }

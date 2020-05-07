@@ -79,6 +79,7 @@ export default {
     },
     {
       description: 'Fetch FPS',
+      sleepOnce: 20,
       repeat: 11,
       test: fetchWebKitFPS,
     },
