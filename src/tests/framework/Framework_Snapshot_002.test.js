@@ -8,9 +8,6 @@ export default {
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
-      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
-      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
-      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
       () => pluginActivate.call(this, 'WebKitBrowser'),
       () => {
         return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
