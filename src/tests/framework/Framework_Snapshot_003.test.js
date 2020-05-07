@@ -9,25 +9,15 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Framework snapshot Test 003',
   description: 'Tests if the Framework snapshot module works',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+    ])
+  },
   steps: [
-    {
-      description: 'Deactivating WebKitBrowser Plugin',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Deactivating Youtube Plugin',
-      test: pluginDeactivate,
-      params: constants.youTubePlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Deactivating Netflix Plugin',
-      test: pluginDeactivate,
-      params: constants.netFlixPlugin,
-      assert: 'deactivated',
-    },
     {
       description: 'Deactivating Snapshot Plugin',
       test: pluginDeactivate,
