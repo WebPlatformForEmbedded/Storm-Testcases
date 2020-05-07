@@ -14,10 +14,19 @@ export default {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
       () => pluginActivate.call(this, constants.webKitBrowserPlugin),
-      () =>
-        (listener = this.$thunder.api.WebKitBrowser.on('statechange', data => {
-          this.$data.write('state', data.suspended)
-        })),
+      () => {
+        listener = this.$thunder.api.WebKitBrowser.on(
+          'statechange',
+          data => {
+            this.$log('Got statechange event: ', data.suspended)
+            this.$data.write('state', data.suspended)
+          },
+          e => {
+            this.$log('Error subscribing to urlchange: ', e)
+          }
+        )
+        return true
+      },
     ])
   },
   steps: [
@@ -49,21 +58,10 @@ export default {
     },
     {
       description: 'Wait until state change event for resume is detected',
-      sleep() {
-        // Purpose of this sleep is to wait until current step gets 'state change' response from the listener
-        return new Promise((resolve, reject) => {
-          let attempts = 0
-          const interval = setInterval(() => {
-            attempts++
-            if (this.$data.read('state') === false) {
-              clearInterval(interval)
-              resolve()
-            } else if (attempts > 10) {
-              clearInterval(interval)
-              reject('State not changed')
-            }
-          }, 1000)
-        })
+      sleep: 10,
+      test: () => {},
+      validate() {
+        return this.$data.read('state') === false
       },
     },
   ],

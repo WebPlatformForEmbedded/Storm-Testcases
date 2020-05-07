@@ -20,6 +20,16 @@ export default {
         })),
     ])
   },
+  teardown() {
+    return this.$sequence([
+      () => setWebKitState.call(this, constants.resume),
+      () => {
+        return new Promise((resolve, reject) => {
+          setTimeout(resolve, 5000)
+        })
+      },
+    ])
+  },
   steps: [
     {
       description: 'Resume Webkit Plugin and check if it is resumed',

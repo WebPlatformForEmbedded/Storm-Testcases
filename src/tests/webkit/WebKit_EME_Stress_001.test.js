@@ -1,7 +1,8 @@
 import {
   setWebKitUrl,
-  webKitBrowserStartAndResume,
+  pluginDeactivate,
   screenshot,
+  webKitBrowserStartAndResume,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -15,7 +16,12 @@ export default {
   description: 'Loads Race car test page and runs stress tests by playing a video for 3 hours',
   setup() {
     return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
       () => webKitBrowserStartAndResume.call(this),
+      () => setWebKitUrl.call(this, 'about:blank'),
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)
@@ -45,13 +51,15 @@ export default {
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
         return new Promise((resolve, reject) => {
-          const interval = setInterval(() => {
+          const checkFn = () => {
             if (this.$data.read('currentUrl') === this.$context.read('url')) {
               clearInterval(interval)
               resolve()
             }
             reject('URL not loaded within time limit')
-          }, 1000)
+          }
+
+          const interval = setInterval(checkFn.bind(this), 1000)
         })
       },
     },

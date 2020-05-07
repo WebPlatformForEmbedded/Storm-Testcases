@@ -143,6 +143,15 @@ export const setWebKitUrl = function(URL) {
 }
 
 /**
+ * This function sets the URL
+ * @param URL
+ * @returns URL
+ */
+export const setUrl = function(callsign, URL) {
+  return this.$thunder.api.call(callsign, 'url', URL).catch(err => err)
+}
+
+/**
  * This function sets the URL on WebkitBrowser
  * @param URL
  * @returns URL
@@ -420,11 +429,7 @@ export const getPluginInfo = function(plugin) {
  * @returns {Promise<unknown>}
  */
 export const suspendOrResumePlugin = function(plugin, action) {
-  const hostIP = deviceIP.call(this)
-  return this.$http
-    .post(`http://${hostIP}:80/Service/${plugin}/${action}`)
-    .then(result => result)
-    .catch(err => err)
+  return this.$thunder.api.call(plugin, 'state', action)
 }
 
 /**
@@ -487,6 +492,13 @@ export const getMonitorInfo = function() {
       return result
     })
     .catch(err => err)
+}
+
+/**
+ * Converts bytes into Mb's
+ */
+export const bytesToMb = bytes => {
+  return (bytes / 1024 / 1024).toFixed(1)
 }
 
 /**
