@@ -1,17 +1,25 @@
 import {
   setWebKitUrl,
-  webKitBrowserStartAndResume,
   getMonitorInfo,
+  pluginDeactivate,
+  pluginActivate,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
 let listener
 export default {
-  title: 'WPEWebkit Memory test 001',
+  title: 'Webkit Memory test 001',
   description: 'Loads about blank and checks the memory usage',
   setup() {
     return this.$sequence([
-      () => webKitBrowserStartAndResume.call(this),
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
           this.$data.write('currentUrl', data.url)
@@ -84,5 +92,7 @@ export default {
         }
       }
     }
+    this.$log('Web kit browser Plugin not found')
+    return false
   },
 }

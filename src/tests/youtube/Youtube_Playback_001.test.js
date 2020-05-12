@@ -12,19 +12,15 @@ export default {
   context: {
     url: 'https://www.youtube.com/watch?v=kg3ElG-H7Wo', //12 hour length Youtube Video
   },
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+    ])
+  },
   steps: [
-    {
-      description: 'Check if WPEWebkit is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if Youtube is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.youTubePlugin,
-      assert: 'deactivated',
-    },
     {
       description: 'Check if Youtube is started correctly',
       test() {
