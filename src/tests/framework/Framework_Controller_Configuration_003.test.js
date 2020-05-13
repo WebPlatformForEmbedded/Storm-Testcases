@@ -1,5 +1,5 @@
-import { getPluginConfiguration } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { getPluginConfiguration } from '../../commonMethods/controller'
 
 export default {
   title: 'Framework Controller Configuration - 003',

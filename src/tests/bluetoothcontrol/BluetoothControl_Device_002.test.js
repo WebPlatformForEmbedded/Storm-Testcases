@@ -1,9 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getBluetoothDeviceInfo,
-} from '../../commonMethods/commonFunctions'
-
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getBluetoothDeviceInfo } from '../../commonMethods/bluetoothControl'
 import constants from '../../commonMethods/constants'
 
 export default {

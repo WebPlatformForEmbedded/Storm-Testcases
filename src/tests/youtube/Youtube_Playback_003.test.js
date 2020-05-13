@@ -1,5 +1,6 @@
-import { pluginDeactivate, pluginActivate, screenshot } from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
+import { screenshot } from '../../commonMethods/commonFunctions'
 
 let keysArray = ['left', 'up', 'ok']
 let counter = 0

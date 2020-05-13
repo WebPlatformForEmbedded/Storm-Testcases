@@ -1,9 +1,5 @@
-import {
-  setWebKitBrowserUrl,
-  getWebKitBrowserUrl,
-  pluginDeactivate,
-  pluginActivate,
-} from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getWebKitBrowserUrl, setWebKitBrowserUrl } from '../../commonMethods/webKitBrowser'
 
 export default {
   title: 'Webkit URL - 001',

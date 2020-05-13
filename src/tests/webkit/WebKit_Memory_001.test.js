@@ -1,10 +1,7 @@
-import {
-  setWebKitUrl,
-  getMonitorInfo,
-  pluginDeactivate,
-  pluginActivate,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
+import { getMonitorInfo } from '../../commonMethods/monitor'
 
 let listener
 export default {

@@ -1,10 +1,8 @@
-import {
-  pluginDeactivate,
-  checkIfProcessIsRunning,
-  getCpuLoad,
-  youtubeStartAndResume,
-} from '../../commonMethods/commonFunctions'
+import { pluginDeactivate } from '../../commonMethods/controller'
+import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
+import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
+import { youtubeStartAndResume } from '../../commonMethods/cobalt'
 
 export default {
   title: 'Youtube startup robustness test',

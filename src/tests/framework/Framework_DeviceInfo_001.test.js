@@ -1,9 +1,6 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getDeviceInfo,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getDeviceInfo } from '../../commonMethods/deviceInfo'
 
 export default {
   title: 'Framework Device Info test',

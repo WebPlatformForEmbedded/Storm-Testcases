@@ -1,10 +1,6 @@
-import {
-  getPluginState,
-  pluginActivate,
-  pluginDeactivate,
-  screenshot,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { getPluginState, pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { screenshot } from '../../commonMethods/commonFunctions'
 
 export default {
   title: 'Framework snapshot Test 003',

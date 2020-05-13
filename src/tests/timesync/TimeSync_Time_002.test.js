@@ -1,9 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  setTime,
-  getCurrentTime,
-} from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getCurrentTime, setTime } from '../../commonMethods/timeSync'
 import constants from '../../commonMethods/constants'
 import Moment from 'moment'
 

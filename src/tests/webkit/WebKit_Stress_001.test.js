@@ -1,12 +1,7 @@
-import {
-  setWebKitUrl,
-  getPluginState,
-  getCpuLoad,
-  getDeviceInfo,
-  pluginDeactivate,
-  pluginActivate,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { getPluginState, pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
+import { getCpuLoad, getDeviceInfo } from '../../commonMethods/deviceInfo'
 
 let listener
 

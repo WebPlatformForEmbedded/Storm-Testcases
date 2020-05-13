@@ -1,5 +1,6 @@
-import { setWebKitUrl, pluginDeactivate, pluginActivate } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 
 var keysArray = ['ok', 'left', 'up', 'right', 'down']
 var counter = 0

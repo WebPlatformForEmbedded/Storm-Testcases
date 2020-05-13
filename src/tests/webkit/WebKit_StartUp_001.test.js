@@ -1,10 +1,8 @@
-import {
-  pluginDeactivate,
-  checkIfProcessIsRunning,
-  getCpuLoad,
-  webKitBrowserStartAndResume,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginDeactivate } from '../../commonMethods/controller'
+import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
+import { webKitBrowserStartAndResume } from '../../commonMethods/webKitBrowser'
+import { getCpuLoad } from '../../commonMethods/deviceInfo'
 
 export default {
   title: 'WPEWebkit startup robustness test',

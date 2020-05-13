@@ -1,11 +1,11 @@
-import {
-  pluginDeactivate,
-  checkIfProcessIsRunning,
-  webKitBrowserStartAndResume,
-  stopWPEFramework,
-  startFramework,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginDeactivate } from '../../commonMethods/controller'
+import { webKitBrowserStartAndResume } from '../../commonMethods/webKitBrowser'
+import {
+  checkIfProcessIsRunning,
+  startFramework,
+  stopWPEFramework,
+} from '../../commonMethods/commonFunctions'
 
 export default {
   title: 'WPEWebkit shutdown of Framework robustness test',

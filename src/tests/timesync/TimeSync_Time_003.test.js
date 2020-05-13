@@ -1,4 +1,5 @@
-import { pluginDeactivate, pluginActivate, setTime } from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setTime } from '../../commonMethods/timeSync'
 import constants from '../../commonMethods/constants'
 
 export default {

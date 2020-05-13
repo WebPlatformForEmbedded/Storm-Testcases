@@ -1,9 +1,6 @@
-import {
-  pluginDeactivate,
-  getCpuLoad,
-  pluginActivate,
-  youtubeChangeState,
-} from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { youtubeChangeState } from '../../commonMethods/cobalt'
+import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
 
 export default {

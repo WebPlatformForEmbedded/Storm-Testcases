@@ -1,10 +1,6 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getProvisioningPluginData,
-  startProvisioning,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getProvisioningPluginData, startProvisioning } from '../../commonMethods/provisioning'
 
 export default {
   title: 'Framework provision test 002',

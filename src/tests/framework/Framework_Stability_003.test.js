@@ -1,4 +1,6 @@
-import { pluginActivate, pluginDeactivate, setWebKitUrl } from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
+
 let listener
 export default {
   title: 'Framework stability set URL test',

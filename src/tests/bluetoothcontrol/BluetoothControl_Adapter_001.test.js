@@ -1,10 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getBluetoothAdapters,
-  getBluetoothAdapterInfo,
-} from '../../commonMethods/commonFunctions'
-
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getBluetoothAdapterInfo, getBluetoothAdapters } from '../../commonMethods/bluetoothControl'
 import constants from '../../commonMethods/constants'
 
 let adapterList

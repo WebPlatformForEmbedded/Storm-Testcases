@@ -1,9 +1,6 @@
-import {
-  pluginDeactivate,
-  checkIfProcessIsRunning,
-  pluginActivate,
-  getCpuLoad,
-} from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
+import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
 
 export default {

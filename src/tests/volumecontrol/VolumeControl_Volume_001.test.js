@@ -1,9 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getVolume,
-  setVolume,
-} from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getVolume, setVolume } from '../../commonMethods/volumeControl'
 import constants from '../../commonMethods/constants'
 
 let listener
