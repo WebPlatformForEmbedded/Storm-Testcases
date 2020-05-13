@@ -1,10 +1,6 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  suspendOrResumeUxPlugin,
-  putOnTop,
-  getZOrder,
-} from '../../commonMethods/commonFunctions'
+import { putOnTop, getZOrder } from '../../commonMethods/compositor'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
+import { suspendOrResumeUxPlugin } from '../../commonMethods/ux'
 import constants from '../../commonMethods/constants'
 
 export default {

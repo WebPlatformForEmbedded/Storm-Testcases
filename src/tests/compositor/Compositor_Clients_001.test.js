@@ -1,9 +1,6 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  suspendOrResumeUxPlugin,
-  getCompositorClients,
-} from '../../commonMethods/commonFunctions'
+import { getCompositorClients } from '../../commonMethods/compositor'
+import { suspendOrResumeUxPlugin } from '../../commonMethods/ux'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

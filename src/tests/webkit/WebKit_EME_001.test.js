@@ -1,8 +1,5 @@
-import {
-  setWebKitUrl,
-  webKitBrowserStartAndResume,
-  screenshot,
-} from '../../commonMethods/commonFunctions'
+import { setWebKitUrl, webKitBrowserStartAndResume } from '../../commonMethods/webKitBrowser'
+import { screenshot } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
 let listener

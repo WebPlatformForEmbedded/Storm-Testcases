@@ -1,8 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  setNetflixState,
-} from '../../commonMethods/commonFunctions'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
+import { setNetflixState } from '../../commonMethods/netflix'
 import constants from '../../commonMethods/constants'
 
 let listener

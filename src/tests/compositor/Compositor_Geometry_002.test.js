@@ -1,9 +1,4 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getClientGeometry,
-  setClientGeometry,
-} from '../../commonMethods/commonFunctions'
+import { getClientGeometry } from '../../commonMethods/compositor'
 import constants from '../../commonMethods/constants'
 
 export default {

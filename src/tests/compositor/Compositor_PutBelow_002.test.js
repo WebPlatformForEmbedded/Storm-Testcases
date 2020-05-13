@@ -1,4 +1,4 @@
-import { putBelow } from '../../commonMethods/commonFunctions'
+import { putBelow } from '../../commonMethods/compositor'
 import constants from '../../commonMethods/constants'
 
 export default {

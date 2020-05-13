@@ -1,11 +1,7 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  suspendOrResumeUxPlugin,
-  putBelow,
-  getZOrder,
-} from '../../commonMethods/commonFunctions'
+import { putBelow, getZOrder } from '../../commonMethods/compositor'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
+import { suspendOrResumeUxPlugin } from '../../commonMethods/ux'
 
 export default {
   title: 'Compositor Putbelow Functionality - 001',

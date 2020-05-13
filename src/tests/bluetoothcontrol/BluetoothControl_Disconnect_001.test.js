@@ -1,4 +1,4 @@
-import { disconnectBTDevice } from '../../commonMethods/commonFunctions'
+import { disconnectBTDevice } from '../../commonMethods/bluetoothControl'
 import baseTest from './BluetoothControl_Connect_001.test'
 
 let btdevicelist

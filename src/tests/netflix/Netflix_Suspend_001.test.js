@@ -1,9 +1,6 @@
-import {
-  pluginDeactivate,
-  getCpuLoad,
-  pluginActivate,
-  suspendOrResumeNetflixPlugin,
-} from '../../commonMethods/commonFunctions'
+import { getCpuLoad } from '../../commonMethods/deviceInfo'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
+import { suspendOrResumeNetflixPlugin } from '../../commonMethods/netflix'
 import constants from '../../commonMethods/constants'
 
 export default {

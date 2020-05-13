@@ -1,8 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  setClientVisibility,
-} from '../../commonMethods/commonFunctions'
+import { setClientVisibility } from '../../commonMethods/compositor'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

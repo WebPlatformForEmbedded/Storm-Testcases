@@ -1,9 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getLocation,
-  syncLocation,
-} from '../../commonMethods/commonFunctions'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
+import { getLocation, syncLocation } from '../../commonMethods/locationSync'
 import constants from '../../commonMethods/constants'
 
 export default {

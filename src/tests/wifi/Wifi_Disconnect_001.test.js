@@ -1,9 +1,6 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  disconnectWifi,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { disconnectWifi } from '../../commonMethods/wifiControl'
 
 export default {
   title: 'Wifi Control - Disconnect 001',

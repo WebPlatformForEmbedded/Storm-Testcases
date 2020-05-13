@@ -1,9 +1,9 @@
+import { pluginDeactivate } from '../../commonMethods/controller'
+import { webKitBrowserStartAndResume } from '../../commonMethods/webKitBrowser'
 import {
-  pluginDeactivate,
   checkIfProcessIsRunning,
-  webKitBrowserStartAndResume,
-  stopWPEFramework,
   startFramework,
+  stopWPEFramework,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 

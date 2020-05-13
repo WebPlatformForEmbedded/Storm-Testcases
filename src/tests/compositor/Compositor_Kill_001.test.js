@@ -1,9 +1,9 @@
+import { killClient } from '../../commonMethods/compositor'
 import {
   pluginDeactivate,
   pluginActivate,
-  killClient,
   getControllerPluginData,
-} from '../../commonMethods/commonFunctions'
+} from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

@@ -2,7 +2,7 @@ import {
   getControllerPluginData,
   pluginActivate,
   pluginDeactivate,
-} from '../../commonMethods/commonFunctions'
+} from '../../commonMethods/controller'
 
 export default {
   title: 'Framework Controller test 02',

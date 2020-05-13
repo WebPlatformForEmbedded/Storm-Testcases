@@ -1,8 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getProvisioningPluginData,
-} from '../../commonMethods/commonFunctions'
+import { getProvisioningPluginData } from '../../commonMethods/provisioning'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

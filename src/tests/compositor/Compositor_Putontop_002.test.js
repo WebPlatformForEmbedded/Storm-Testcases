@@ -1,4 +1,4 @@
-import { putOnTop } from '../../commonMethods/commonFunctions'
+import { putOnTop } from '../../commonMethods/compositor'
 import constants from '../../commonMethods/constants'
 
 export default {

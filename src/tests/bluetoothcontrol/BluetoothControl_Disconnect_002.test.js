@@ -1,8 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  disconnectBTDevice,
-} from '../../commonMethods/commonFunctions'
+import { disconnectBTDevice } from '../../commonMethods/bluetoothControl'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
 
 import constants from '../../commonMethods/constants'
 

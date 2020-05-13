@@ -1,4 +1,4 @@
-import { getControllerEnvironment } from '../../commonMethods/commonFunctions'
+import { getControllerEnvironment } from '../../commonMethods/controller'
 
 export default {
   title: 'Framework Controller Environment - 001',

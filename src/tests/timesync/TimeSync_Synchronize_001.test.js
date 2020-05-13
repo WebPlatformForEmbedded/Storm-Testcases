@@ -1,5 +1,6 @@
-import { pluginDeactivate, pluginActivate, syncTime } from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
+import { syncTime } from '../../commonMethods/timeSync'
 
 let listener
 

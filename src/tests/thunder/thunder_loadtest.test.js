@@ -2,8 +2,8 @@ import {
   getControllerPluginData,
   pluginActivate,
   pluginDeactivate,
-  setWebKitUrl,
-} from '../../commonMethods/commonFunctions'
+} from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 
 let listener
 

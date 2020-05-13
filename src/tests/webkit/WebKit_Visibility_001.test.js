@@ -1,9 +1,8 @@
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import {
-  pluginDeactivate,
-  pluginActivate,
-  setWebKitBrowserVisibility,
   getWebKitBrowserVisibility,
-} from '../../commonMethods/commonFunctions'
+  setWebKitBrowserVisibility,
+} from '../../commonMethods/webKitBrowser'
 
 export default {
   title: 'Webkit Visibility - 001',

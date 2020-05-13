@@ -1,9 +1,6 @@
-import {
-  pluginDeactivate,
-  getCpuLoad,
-  pluginActivate,
-  webKitBrowserActions,
-} from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { webKitBrowserActions } from '../../commonMethods/webKitBrowser'
+import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
 
 export default {

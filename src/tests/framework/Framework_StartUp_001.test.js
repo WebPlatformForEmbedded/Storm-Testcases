@@ -1,11 +1,10 @@
 import {
-  pluginDeactivate,
   checkIfProcessIsRunning,
-  getCpuLoad,
   stopWPEFramework,
   startFramework,
-  getControllerPluginData,
 } from '../../commonMethods/commonFunctions'
+import { getCpuLoad } from '../../commonMethods/deviceInfo'
+import { pluginDeactivate, getControllerPluginData } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

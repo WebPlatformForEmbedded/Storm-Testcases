@@ -1,8 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  flushNetworkAdapter,
-} from '../../commonMethods/commonFunctions'
+import { flushNetworkAdapter } from '../../commonMethods/networkControl'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

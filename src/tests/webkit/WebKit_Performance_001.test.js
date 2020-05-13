@@ -1,10 +1,7 @@
-import {
-  setWebKitUrl,
-  calcAvgFPS,
-  pluginActivate,
-  pluginDeactivate,
-} from '../../commonMethods/commonFunctions'
 import { fetchWebKitFPS } from '../../commonMethods/webKitPerformanceCommonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
+import { calcAvgFPS } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
 let listener

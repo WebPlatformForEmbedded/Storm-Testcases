@@ -1,8 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  reloadNetworkAdapter,
-} from '../../commonMethods/commonFunctions'
+import { reloadNetworkAdapter } from '../../commonMethods/networkControl'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

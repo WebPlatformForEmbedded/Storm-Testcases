@@ -1,9 +1,6 @@
-import {
-  pluginActivate,
-  pluginDeactivate,
-  screenshot,
-  webKitBrowserStartAndResume,
-} from '../../commonMethods/commonFunctions'
+import { screenshot } from '../../commonMethods/commonFunctions'
+import { webKitBrowserStartAndResume } from '../../commonMethods/webKitBrowser'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

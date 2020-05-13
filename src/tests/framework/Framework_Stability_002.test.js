@@ -1,5 +1,5 @@
-import { pluginActivate, pluginDeactivate, setWebKitUrl } from '../../commonMethods/commonFunctions'
-
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 var keysArray = ['ok', 'left', 'up', 'right', 'down']
 var counter = 0
 let listener

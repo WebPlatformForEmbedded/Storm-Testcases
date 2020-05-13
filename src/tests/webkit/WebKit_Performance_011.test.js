@@ -1,5 +1,6 @@
-import { setWebKitUrl, pluginActivate, pluginDeactivate } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 
 const URL = 'https://krakenbenchmark.mozilla.org/kraken-1.1/driver.html'
 let listener

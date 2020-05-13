@@ -1,4 +1,5 @@
-import { pluginDeactivate, pluginActivate, scanWifi } from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { scanWifi } from '../../commonMethods/wifiControl'
 import constants from '../../commonMethods/constants'
 
 export default {

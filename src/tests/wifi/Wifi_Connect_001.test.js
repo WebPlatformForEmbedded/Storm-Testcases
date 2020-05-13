@@ -1,4 +1,5 @@
-import { pluginDeactivate, pluginActivate, connectWifi } from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { connectWifi } from '../../commonMethods/wifiControl'
 import constants from '../../commonMethods/constants'
 
 export default {

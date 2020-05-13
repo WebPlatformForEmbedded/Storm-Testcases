@@ -1,4 +1,4 @@
-import { pairBTDevice } from '../../commonMethods/commonFunctions'
+import { pairBTDevice } from '../../commonMethods/bluetoothControl'
 
 import baseTest from './BluetoothControl_Pair_001.test'
 

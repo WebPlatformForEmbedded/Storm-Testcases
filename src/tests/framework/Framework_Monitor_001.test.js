@@ -1,8 +1,6 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getMonitorInfo,
-} from '../../commonMethods/commonFunctions'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
+import { getMonitorInfo } from '../../commonMethods/monitor'
+
 import constants from '../../commonMethods/constants'
 
 export default {

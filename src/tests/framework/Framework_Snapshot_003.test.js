@@ -1,9 +1,5 @@
-import {
-  getPluginState,
-  pluginActivate,
-  pluginDeactivate,
-  screenshot,
-} from '../../commonMethods/commonFunctions'
+import { screenshot } from '../../commonMethods/commonFunctions'
+import { getPluginState, pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

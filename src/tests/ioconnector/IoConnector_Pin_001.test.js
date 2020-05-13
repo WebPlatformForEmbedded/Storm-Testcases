@@ -1,9 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  setIoConnectorPinValue,
-  getIoConnectorPinValue,
-} from '../../commonMethods/commonFunctions'
+import { setIoConnectorPinValue, getIoConnectorPinValue } from '../../commonMethods/ioConnector'
+import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 let listener

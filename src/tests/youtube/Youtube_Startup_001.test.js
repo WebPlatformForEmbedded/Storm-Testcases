@@ -1,9 +1,7 @@
-import {
-  pluginDeactivate,
-  checkIfProcessIsRunning,
-  getCpuLoad,
-  youtubeStartAndResume,
-} from '../../commonMethods/commonFunctions'
+import { pluginDeactivate } from '../../commonMethods/controller'
+import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
+import { youtubeStartAndResume } from '../../commonMethods/cobalt'
+import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
 
 export default {

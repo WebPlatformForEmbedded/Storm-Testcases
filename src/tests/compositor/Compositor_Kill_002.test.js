@@ -1,4 +1,4 @@
-import { killClient } from '../../commonMethods/commonFunctions'
+import { killClient } from '../../commonMethods/compositor'
 import constants from '../../commonMethods/constants'
 
 export default {

@@ -1,4 +1,4 @@
-import { setClientVisibility } from '../../commonMethods/commonFunctions'
+import { setClientVisibility } from '../../commonMethods/compositor'
 import constants from '../../commonMethods/constants'
 
 export default {

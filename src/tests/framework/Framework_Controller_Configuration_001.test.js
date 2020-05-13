@@ -1,8 +1,4 @@
-import {
-  getPluginConfiguration,
-  pluginActivate,
-  pluginDeactivate,
-} from '../../commonMethods/commonFunctions'
+import { getPluginConfiguration } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

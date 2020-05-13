@@ -1,8 +1,5 @@
-import {
-  getSocketInfo,
-  pluginActivate,
-  pluginDeactivate,
-} from '../../commonMethods/commonFunctions'
+import { getSocketInfo } from '../../commonMethods/deviceInfo'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

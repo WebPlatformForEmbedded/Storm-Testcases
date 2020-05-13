@@ -1,9 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getCobaltState,
-  setCobaltState,
-} from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getCobaltState, setCobaltState } from '../../commonMethods/cobalt'
 import constants from '../../commonMethods/constants'
 
 let listener

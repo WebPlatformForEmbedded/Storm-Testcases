@@ -1,4 +1,4 @@
-import { unpairBTDevice } from '../../commonMethods/commonFunctions'
+import { unpairBTDevice } from '../../commonMethods/bluetoothControl'
 import baseTest from './BluetoothControl_Pair_001.test'
 
 let btdevicelist

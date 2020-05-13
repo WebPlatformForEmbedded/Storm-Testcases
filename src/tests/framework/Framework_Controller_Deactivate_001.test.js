@@ -1,4 +1,4 @@
-import { pluginDeactivate } from '../../commonMethods/commonFunctions'
+import { pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

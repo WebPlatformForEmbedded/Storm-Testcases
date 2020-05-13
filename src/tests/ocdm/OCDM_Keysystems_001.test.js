@@ -1,10 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getDRMSList,
-  getDRMKeySystemInfo,
-} from '../../commonMethods/commonFunctions'
-
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getDRMKeySystemInfo, getDRMSList } from '../../commonMethods/ocdm'
 import constants from '../../commonMethods/constants'
 
 export default {

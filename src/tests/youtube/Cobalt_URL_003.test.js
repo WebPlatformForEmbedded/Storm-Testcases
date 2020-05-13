@@ -1,4 +1,5 @@
-import { pluginDeactivate, pluginActivate, setCobaltUrl } from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setCobaltUrl } from '../../commonMethods/cobalt'
 import constants from '../../commonMethods/constants'
 
 export default {

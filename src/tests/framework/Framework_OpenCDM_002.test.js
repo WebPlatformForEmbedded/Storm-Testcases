@@ -1,9 +1,9 @@
 import {
   checkIfProcessIsRunning,
-  pluginActivate,
   startFramework,
   stopWPEFramework,
 } from '../../commonMethods/commonFunctions'
+import { pluginActivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

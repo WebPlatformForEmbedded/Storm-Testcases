@@ -1,9 +1,5 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  setCobaltVisibility,
-  getCobaltVisibility,
-} from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getCobaltVisibility, setCobaltVisibility } from '../../commonMethods/cobalt'
 import constants from '../../commonMethods/constants'
 
 export default {

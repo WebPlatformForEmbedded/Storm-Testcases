@@ -1,4 +1,4 @@
-import { getPluginStatus } from '../../commonMethods/commonFunctions'
+import { getPluginStatus } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {
