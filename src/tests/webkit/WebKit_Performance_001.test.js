@@ -1,4 +1,9 @@
-import { setWebKitUrl, calcAvgFPS, webKitBrowserActions } from '../../commonMethods/commonFunctions'
+import {
+  setWebKitUrl,
+  calcAvgFPS,
+  pluginActivate,
+  pluginDeactivate,
+} from '../../commonMethods/commonFunctions'
 import { fetchWebKitFPS } from '../../commonMethods/webKitPerformanceCommonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -6,17 +11,34 @@ let listener
 
 export default {
   context: {
-    minFPS: 40,
-    url: 'http://webkit.org/blog-files/3d-transforms/poster-circle.html',
+    minFPS: 30,
+    url: 'https://webkit.org/blog-files/3d-transforms/poster-circle.html',
   },
   setup() {
     this.$data.write('samples', [])
     return this.$sequence([
-      () => webKitBrowserActions.call(this),
-      () =>
-        (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
-          this.$data.write('currentUrl', data.url)
-        })),
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => setWebKitUrl.call(this, 'about:blank'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
+      () => {
+        listener = this.$thunder.api.WebKitBrowser.on(
+          'urlchange',
+          data => {
+            this.$log('Got urlchange event: ', data.url)
+            this.$data.write('currentUrl', data.url)
+          },
+          e => {
+            this.$log('Error subscribing to urlchange: ', e)
+          }
+        )
+        return true
+      },
     ])
   },
   teardown() {
@@ -29,7 +51,7 @@ export default {
     {
       description: 'Navigating to Poster Circle URL',
       test() {
-        this.$log(this.$context.read('url'))
+        this.$log('Setting url: ', this.$context.read('url'))
         return setWebKitUrl.call(this, this.$context.read('url'))
       },
       validate(url) {
@@ -46,7 +68,7 @@ export default {
             attempts++
             if (this.$data.read('currentUrl') === this.$context.read('url')) {
               clearInterval(interval)
-              resolve()
+              setTimeout(resolve, 5000) //give it some time to load
             } else if (attempts > 10) {
               clearInterval(interval)
               reject('URL not loaded within time limit')
@@ -57,6 +79,7 @@ export default {
     },
     {
       description: 'Fetch FPS',
+      sleepOnce: 20,
       repeat: 11,
       test: fetchWebKitFPS,
     },

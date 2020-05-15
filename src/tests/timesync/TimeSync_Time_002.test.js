@@ -28,7 +28,7 @@ export default {
       sleep: 5,
       test() {
         let datetime = Moment()
-        return setTime.call(this, datetime)
+        return setTime.call(this, datetime.format('YYYY-MM-DDTHH:mm:ss') + 'Z')
       },
       validate(res) {
         if (res == null) {

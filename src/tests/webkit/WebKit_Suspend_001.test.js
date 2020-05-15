@@ -13,37 +13,19 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
+    ])
+  },
   steps: [
-    {
-      description: 'Deactivate Webkit Browser Plugin and Check if is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Deactivate Youtube and Check if is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.youTubePlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Deactivate Netflix and Check if is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.netFlixPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activate Webkit Plugin and check if it is activated',
-      test: pluginActivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'suspended',
-    },
-    {
-      description: 'Resume Webkit Plugin and check if it is resumed',
-      test: webKitBrowserActions,
-      params: constants.resume,
-      assert: 'resumed',
-    },
     {
       title: 'Repeat Steps for 30 times',
       description: 'Nested test to repeat the test for 30 times',
