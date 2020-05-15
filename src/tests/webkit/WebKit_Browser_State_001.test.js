@@ -12,8 +12,14 @@ export default {
   description: 'Resume WPEWebkit plugin and check whether Resumed or not',
   setup() {
     return this.$sequence([
-      () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
-      () => pluginActivate.call(this, constants.webKitBrowserPlugin),
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
       () =>
         (listener = this.$thunder.api.WebKitBrowser.on('statechange', data => {
           this.$data.write('state', data.suspended)

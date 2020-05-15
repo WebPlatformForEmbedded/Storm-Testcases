@@ -4,7 +4,7 @@ export default {
   ...baseTest,
   ...{
     context: {
-      minFPS: baseTest.context.minFPS,
+      minFPS: 10,
       url: 'https://www.websocket.org/demos/racer/run/',
     },
     title: 'WPEWebkit performance helloracer',

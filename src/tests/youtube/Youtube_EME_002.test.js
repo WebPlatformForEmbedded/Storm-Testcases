@@ -1,8 +1,4 @@
-import {
-  pluginDeactivate,
-  webKitBrowserStartAndResume,
-  setWebKitUrl,
-} from '../../commonMethods/commonFunctions'
+import { pluginDeactivate, setWebKitUrl, pluginActivate } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 import { AttachToLogs } from '../../commonMethods/remoteWebInspector'
 
@@ -13,23 +9,22 @@ export default {
   title: 'YouTube Encrypted Media conformance test',
   description: 'Loads the YouTube EME 2019 conformance test and captures the output',
   setup() {
-    this.$data.write('testCount', 42)
+    return this.$sequence([
+      () => this.$data.write('testCount', 42),
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
+    ])
   },
   teardown() {
     setWebKitUrl.call(this, constants.blankUrl)
   },
   steps: [
-    {
-      description: 'Check if WPEWebkit is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activating WebKit Browser Plugin',
-      test: webKitBrowserStartAndResume,
-      assert: 'resumed',
-    },
     {
       description: 'Attach to the logs to capture the log output and run the test',
       repeat: 10 * 60, // 10 minutes

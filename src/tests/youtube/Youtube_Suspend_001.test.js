@@ -13,25 +13,15 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+    ])
+  },
   steps: [
-    {
-      description: 'Deactivate Youtube Plugin and Check if is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.youTubePlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Deactivate WebKit Browser and Check if is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Deactivate Netflix and Check if is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.netFlixPlugin,
-      assert: 'deactivated',
-    },
     {
       description: 'Activate Youtube Plugin and check if it is activated',
       test: pluginActivate,
