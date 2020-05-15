@@ -4,27 +4,26 @@ import {
   pluginDeactivate,
   pluginActivate,
 } from '../../commonMethods/commonFunctions'
-import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Webkit URL - 001',
   description: 'Loads valid URL and check the webkit behavior',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
+    ])
+  },
   context: {
     url: 'http://cdn.metrological.com/static/testbot/v1/images_app.html',
   },
   steps: [
-    {
-      description: 'Deactivate WebKit browser',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activate WebKit browser',
-      test: pluginActivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'suspended',
-    },
     {
       description: 'Load URL and check the response',
       test() {
