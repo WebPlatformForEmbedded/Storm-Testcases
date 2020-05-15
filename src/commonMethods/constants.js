@@ -11,6 +11,8 @@ export default {
   ocdmPlugin: 'OCDM',
   timeSyncPlugin: 'TimeSync',
   locationSyncPlugin: 'LocationSync',
+  uxplugin: 'UX',
+  volumeControl: 'VolumeControl',
   ocdmImplementation: 'OCDMImplementation',
   snapshotPlugin: 'Snapshot',
   ioconnector: 'IOConnector',

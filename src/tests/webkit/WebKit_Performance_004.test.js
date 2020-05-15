@@ -4,7 +4,7 @@ export default {
   ...baseTest,
   ...{
     context: {
-      minFPS: baseTest.context.minFPS,
+      minFPS: 15,
       url: 'http://www.smashcat.org/av/canvas_test/',
     },
     title: 'WPEWebkit performance smashcat',
