@@ -94,6 +94,37 @@ export const getPluginConfiguration = function(pluginName) {
 }
 
 /**
+ * This function starts the discovery process
+ * @param ttl
+ * @returns {Promise<T>}
+ */
+export const startDiscovery = function(ttl) {
+  return this.$thunder.api.Controller.startdiscovery(ttl)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get plugins status
+ * @returns {Promise<T>}
+ */
+export const getPluginsStatus = function() {
+  return this.$thunder.api.Controller.status()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function stores the configuration to persistent memory.
+ * @returns {Promise<T>}
+ */
+export const storeconfig = function() {
+  return this.$thunder.api.Controller.storeconfig()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
  * This function resumes or suspends WebKitBrowser plugin
  * @param action
  */
@@ -759,6 +790,69 @@ export const getCompositorClients = function() {
  */
 export const killClient = function(plugin) {
   return this.$thunder.api.Compositor.kill({ client: plugin })
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set Compositor resolution
+ * @param resolution
+ * @returns {Promise<unknown>}
+ */
+export const setCompositorResolution = function(resolution) {
+  return this.$thunder.api.Compositor.resolution(resolution)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Compositor resolution
+ * @returns {Promise<unknown>}
+ */
+export const getCompositorResolution = function() {
+  return this.$thunder.api.Compositor.resolution()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Mute status
+ * @returns {Promise<unknown>}
+ */
+export const getVolumeMuteStatus = function() {
+  return this.$thunder.api.VolumeControl.muted()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set Mute status
+ * @param state
+ * @returns {Promise<unknown>}
+ */
+export const setVolumeMuteStatus = function(state) {
+  return this.$thunder.api.VolumeControl.muted(state)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set Volume
+ * @param v
+ * @returns {Promise<unknown>}
+ */
+export const setVolume = function(v) {
+  return this.$thunder.api.VolumeControl.volume(v)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Volume
+ * @returns {Promise<unknown>}
+ */
+export const getVolume = function() {
+  return this.$thunder.api.VolumeControl.volume()
     .then(result => result)
     .catch(err => err)
 }

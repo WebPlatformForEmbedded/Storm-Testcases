@@ -12,6 +12,7 @@ export default {
   timeSyncPlugin: 'TimeSync',
   locationSyncPlugin: 'LocationSync',
   uxplugin: 'UX',
+  volumeControl: 'VolumeControl',
   ocdmImplementation: 'OCDMImplementation',
   snapshotPlugin: 'Snapshot',
   webServerPlugin: 'WebServer',

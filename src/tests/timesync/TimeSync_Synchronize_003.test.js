@@ -35,7 +35,8 @@ export default {
       sleep: 5,
       test() {
         let datetime = Moment().subtract(2, 'days')
-        return setTime.call(this, datetime)
+        let pastDate = datetime.format('YYYY-MM-DDTHH:mm:ss') + 'Z'
+        return setTime.call(this, pastDate)
       },
       validate(res) {
         if (res == null) {

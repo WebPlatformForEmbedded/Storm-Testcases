@@ -3,7 +3,6 @@ import {
   pluginDeactivate,
   screenshot,
   setWebKitUrl,
-  webKitBrowserStartAndResume,
 } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
 
@@ -20,11 +19,27 @@ export default {
   setup() {
     return this.$sequence([
       () => this.$data.write('prevScreenshot', null),
-      () => webKitBrowserStartAndResume.call(this),
-      () =>
-        (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
-          this.$data.write('currentUrl', data.url)
-        })),
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
+      () => {
+        listener = this.$thunder.api.WebKitBrowser.on(
+          'urlchange',
+          data => {
+            this.$log('Got urlchange event: ', data.url)
+            this.$data.write('currentUrl', data.url)
+          },
+          e => {
+            this.$log('Error subscribing to urlchange: ', e)
+          }
+        )
+        return true
+      },
     ])
   },
   teardown() {
