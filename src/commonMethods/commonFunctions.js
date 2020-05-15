@@ -727,6 +727,54 @@ export const setTime = function(time) {
 }
 
 /**
+ * This function is used to get Compositor Client Geometry
+ * @returns {Promise<unknown>}
+ */
+export const getClientGeometry = function(pluginName) {
+  let methodName = 'geometry@' + pluginName
+  return this.$thunder.api.Compositor[methodName]()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to sets Compositor Client Geometry
+ * @returns {Promise<unknown>}
+ */
+export const setClientGeometry = function(pluginName, x, y, width, height) {
+  let methodName = 'geometry@' + pluginName
+  return this.$thunder.api.Compositor[methodName]({ x: x, y: y, width: width, height: height })
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set Client Visibility
+ * @param client
+ * @param state
+ * @returns {Promise<unknown>}
+ */
+export const setClientVisibility = function(client, state) {
+  let methodName = 'visiblity@' + client
+  return this.$thunder.api.Compositor[methodName](state)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set Client Opacity
+ * @param client
+ * @param value
+ * @returns {Promise<unknown>}
+ */
+export const setClientOpacity = function(client, value) {
+  let methodName = 'opacity@' + client
+  return this.$thunder.api.Compositor[methodName](value)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
  * This function is used to suspend or resume UX Plugin
  * @param state
  * @returns {Promise<unknown>}
