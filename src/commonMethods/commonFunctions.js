@@ -727,6 +727,69 @@ export const setTime = function(time) {
 }
 
 /**
+ * This function sets the state of Cobalt
+ * @param state
+ * @returns state
+ */
+export const setCobaltState = function(state) {
+  return this.$thunder.api.Cobalt.state(state)
+    .then(state => state)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the state of Cobalt
+ * @returns state
+ */
+export const getCobaltState = function() {
+  return this.$thunder.api.Cobalt.state()
+    .then(state => state)
+    .catch(err => err)
+}
+
+/**
+ * This function sets the URL on Cobalt
+ * @param URL
+ * @returns URL
+ */
+export const setCobaltUrl = function(URL) {
+  return this.$thunder.api.Cobalt.url(URL)
+    .then(url => url)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the URL on Cobalt
+ * @returns {Promise<T>}
+ */
+export const getCobaltUrl = function() {
+  return this.$thunder.api.Cobalt.url()
+    .then(url => url)
+    .catch(err => err)
+}
+
+/**
+ * This function sets the visibility of Cobalt
+ * @param status
+ * @returns {Promise<T>}
+ */
+export const setCobaltVisibility = function(status) {
+  return this.$thunder.api.Cobalt.visibility(status)
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the visibility of Cobalt
+ * @returns {Promise<T>}
+ */
+export const getCobaltVisibility = function() {
+  return this.$thunder.api.Cobalt.visibility()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
  * This function sets the state of Netflix
  * @param state
  * @returns state
