@@ -15,6 +15,7 @@ export default {
   volumeControl: 'VolumeControl',
   ocdmImplementation: 'OCDMImplementation',
   snapshotPlugin: 'Snapshot',
+  ioconnector: 'IOConnector',
   webServerPlugin: 'WebServer',
   webServerImplementation: 'WebServerImplementation',
   netflixImplementation: 'NetflixImplementation',
