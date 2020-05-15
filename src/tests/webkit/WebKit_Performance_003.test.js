@@ -4,7 +4,7 @@ export default {
   ...baseTest,
   ...{
     context: {
-      minFPS: baseTest.context.minFPS,
+      minFPS: 25,
       url: 'https://webkit.org/blog-files/leaves/',
     },
     title: 'WPEWebkit performance falling leaves',

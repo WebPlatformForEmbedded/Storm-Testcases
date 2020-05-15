@@ -94,6 +94,37 @@ export const getPluginConfiguration = function(pluginName) {
 }
 
 /**
+ * This function starts the discovery process
+ * @param ttl
+ * @returns {Promise<T>}
+ */
+export const startDiscovery = function(ttl) {
+  return this.$thunder.api.Controller.startdiscovery(ttl)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get plugins status
+ * @returns {Promise<T>}
+ */
+export const getPluginsStatus = function() {
+  return this.$thunder.api.Controller.status()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function stores the configuration to persistent memory.
+ * @returns {Promise<T>}
+ */
+export const storeconfig = function() {
+  return this.$thunder.api.Controller.storeconfig()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
  * This function resumes or suspends WebKitBrowser plugin
  * @param action
  */
@@ -111,6 +142,27 @@ export const webKitBrowserActions = function(action) {
 }
 
 /**
+ * This function sets the state of Webkit Browser
+ * @param state
+ * @returns state
+ */
+export const setWebKitState = function(state) {
+  return this.$thunder.api.WebKitBrowser.state(state)
+    .then(state => state)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the state of Webkit Browser
+ * @returns state
+ */
+export const getWebKitState = function() {
+  return this.$thunder.api.WebKitBrowser.state()
+    .then(state => state)
+    .catch(err => err)
+}
+
+/**
  * This function sets the URL
  * @param URL
  * @returns URL
@@ -118,6 +170,48 @@ export const webKitBrowserActions = function(action) {
 export const setWebKitUrl = function(URL) {
   return this.$thunder.api.WebKitBrowser.url(URL)
     .then(() => this.$thunder.api.WebKitBrowser.url().then(url => url))
+    .catch(err => err)
+}
+
+/**
+ * This function sets the URL on WebkitBrowser
+ * @param URL
+ * @returns URL
+ */
+export const setWebKitBrowserUrl = function(URL) {
+  return this.$thunder.api.WebKitBrowser.url(URL)
+    .then(url => url)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the URL on WebKit Browser
+ * @returns {Promise<T>}
+ */
+export const getWebKitBrowserUrl = function() {
+  return this.$thunder.api.WebKitBrowser.url()
+    .then(url => url)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the visibility of WebkitBrowser
+ * @returns {Promise<T>}
+ */
+export const getWebKitBrowserVisibility = function() {
+  return this.$thunder.api.WebKitBrowser.visibility()
+    .then(url => url)
+    .catch(err => err)
+}
+
+/**
+ * This function sets the visibility of WebkitBrowser
+ * @param status
+ * @returns {Promise<T>}
+ */
+export const setWebKitBrowserVisibility = function(status) {
+  return this.$thunder.api.WebKitBrowser.visibility(status)
+    .then(url => url)
     .catch(err => err)
 }
 
@@ -692,5 +786,228 @@ export const setCobaltVisibility = function(status) {
 export const getCobaltVisibility = function() {
   return this.$thunder.api.Cobalt.visibility()
     .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function sets the state of Netflix
+ * @param state
+ * @returns state
+ */
+export const setNetflixState = function(state) {
+  return this.$thunder.api.Netflix.state(state)
+    .then(state => state)
+    .catch(err => err)
+}
+
+/**
+ * This function sets the visibility of Netflix
+ * @param status
+ * @returns {Promise<T>}
+ */
+export const setNetflixVisibility = function(status) {
+  return this.$thunder.api.Netflix.visibility(status)
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set the IO Connector pin value
+ * @params - pin
+ * @returns {Promise<unknown>}
+ */
+export const setIoConnectorPinValue = function(pin, value) {
+  let methodName = 'pin@' + pin
+  return this.$thunder.api.IOConnector[methodName](value)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get the IO Connector pin value
+ * @returns {Promise<unknown>}
+ */
+export const getIoConnectorPinValue = function() {
+  return this.$thunder.api.IOConnector.pin()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Compositor Client Geometry
+ * @returns {Promise<unknown>}
+ */
+export const getClientGeometry = function(pluginName) {
+  let methodName = 'geometry@' + pluginName
+  return this.$thunder.api.Compositor[methodName]()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to sets Compositor Client Geometry
+ * @returns {Promise<unknown>}
+ */
+export const setClientGeometry = function(pluginName, x, y, width, height) {
+  let methodName = 'geometry@' + pluginName
+  return this.$thunder.api.Compositor[methodName]({ x: x, y: y, width: width, height: height })
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set Client Visibility
+ * @param client
+ * @param state
+ * @returns {Promise<unknown>}
+ */
+export const setClientVisibility = function(client, state) {
+  let methodName = 'visiblity@' + client
+  return this.$thunder.api.Compositor[methodName](state)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set Client Opacity
+ * @param client
+ * @param value
+ * @returns {Promise<unknown>}
+ */
+export const setClientOpacity = function(client, value) {
+  let methodName = 'opacity@' + client
+  return this.$thunder.api.Compositor[methodName](value)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to suspend or resume UX Plugin
+ * @param state
+ * @returns {Promise<unknown>}
+ */
+export const suspendOrResumeUxPlugin = function(state) {
+  return this.$thunder.api.UX.state(state)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to put the plugin on the top
+ * @param plugin
+ * @returns {Promise<unknown>}
+ */
+export const putOnTop = function(plugin) {
+  return this.$thunder.api.Compositor.putontop({ client: plugin })
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to put the plugin below
+ * @param plugin
+ * @param pluginNameToPutBelow
+ * @returns {Promise<unknown>}
+ */
+export const putBelow = function(plugin, pluginNameToPutBelow) {
+  return this.$thunder.api.Compositor.putbelow({ client: plugin, relative: pluginNameToPutBelow })
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get the zorder of the plugins
+ * @returns {Promise<unknown>}
+ */
+export const getZOrder = function() {
+  return this.$thunder.api.Compositor.zorder()
+    .then(result => {
+      this.$data.write('zorder', result)
+      return result
+    })
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Compositor Clients
+ * @returns {Promise<unknown>}
+ */
+export const getCompositorClients = function() {
+  return this.$thunder.api.Compositor.clients()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to kill a client
+ * @param plugin
+ * @returns {Promise<unknown>}
+ */
+export const killClient = function(plugin) {
+  return this.$thunder.api.Compositor.kill({ client: plugin })
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set Compositor resolution
+ * @param resolution
+ * @returns {Promise<unknown>}
+ */
+export const setCompositorResolution = function(resolution) {
+  return this.$thunder.api.Compositor.resolution(resolution)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Compositor resolution
+ * @returns {Promise<unknown>}
+ */
+export const getCompositorResolution = function() {
+  return this.$thunder.api.Compositor.resolution()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Mute status
+ * @returns {Promise<unknown>}
+ */
+export const getVolumeMuteStatus = function() {
+  return this.$thunder.api.VolumeControl.muted()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set Mute status
+ * @param state
+ * @returns {Promise<unknown>}
+ */
+export const setVolumeMuteStatus = function(state) {
+  return this.$thunder.api.VolumeControl.muted(state)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set Volume
+ * @param v
+ * @returns {Promise<unknown>}
+ */
+export const setVolume = function(v) {
+  return this.$thunder.api.VolumeControl.volume(v)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Volume
+ * @returns {Promise<unknown>}
+ */
+export const getVolume = function() {
+  return this.$thunder.api.VolumeControl.volume()
+    .then(result => result)
     .catch(err => err)
 }
