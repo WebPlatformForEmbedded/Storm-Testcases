@@ -727,6 +727,27 @@ export const setTime = function(time) {
 }
 
 /**
+ * This function is used to set Compositor resolution
+ * @param resolution
+ * @returns {Promise<unknown>}
+ */
+export const setCompositorResolution = function(resolution) {
+  return this.$thunder.api.Compositor.resolution(resolution)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Compositor resolution
+ * @returns {Promise<unknown>}
+ */
+export const getCompositorResolution = function() {
+  return this.$thunder.api.Compositor.resolution()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
  * This function is used to get Mute status
  * @returns {Promise<unknown>}
  */
