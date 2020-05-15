@@ -1,11 +1,11 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  killClient,
-  getControllerPluginData,
-  setWebKitUrl,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import {
+  getControllerPluginData,
+  pluginActivate,
+  pluginDeactivate,
+} from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
+import { killClient } from '../../commonMethods/compositor'
 
 export default {
   title: 'Compositor Kill - 001',

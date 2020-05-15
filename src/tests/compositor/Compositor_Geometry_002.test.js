@@ -1,5 +1,5 @@
-import { getClientGeometry } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { getClientGeometry } from '../../commonMethods/compositor'
 
 export default {
   title: 'Compositor Geometry - 002',

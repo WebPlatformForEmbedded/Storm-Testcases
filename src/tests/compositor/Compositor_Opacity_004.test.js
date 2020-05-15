@@ -1,4 +1,4 @@
-import { setClientOpacity } from '../../commonMethods/commonFunctions'
+import { setClientOpacity } from '../../commonMethods/compositor'
 import constants from '../../commonMethods/constants'
 
 export default {

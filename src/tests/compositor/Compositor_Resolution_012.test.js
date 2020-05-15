@@ -1,10 +1,4 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  setCompositorResolution,
-  getCompositorResolution,
-} from '../../commonMethods/commonFunctions'
-import constants from '../../commonMethods/constants'
+import { setCompositorResolution } from '../../commonMethods/compositor'
 
 export default {
   title: 'Compositor Resolution - 012',

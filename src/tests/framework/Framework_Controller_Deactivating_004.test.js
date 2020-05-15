@@ -1,5 +1,5 @@
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 
 let listener
 let listenerArray = []

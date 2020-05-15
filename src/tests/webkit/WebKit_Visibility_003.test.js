@@ -1,9 +1,8 @@
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import {
-  setWebKitBrowserVisibility,
   getWebKitBrowserVisibility,
-  pluginDeactivate,
-  pluginActivate,
-} from '../../commonMethods/commonFunctions'
+  setWebKitBrowserVisibility,
+} from '../../commonMethods/webKitBrowser'
 
 let listener
 export default {

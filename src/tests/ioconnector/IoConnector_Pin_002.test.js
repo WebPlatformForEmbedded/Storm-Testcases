@@ -1,9 +1,6 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  setIoConnectorPinValue,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setIoConnectorPinValue } from '../../commonMethods/ioConnector'
 
 export default {
   title: 'IO Connector Pin - 002',

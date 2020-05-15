@@ -1,11 +1,6 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getDRMSList,
-  getDRMKeySystemInfo,
-} from '../../commonMethods/commonFunctions'
-
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getDRMKeySystemInfo, getDRMSList } from '../../commonMethods/ocdm'
 
 export default {
   title: 'OCDM - Keysystems  001',

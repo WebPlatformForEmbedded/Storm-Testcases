@@ -1,9 +1,6 @@
-import {
-  setNetflixVisibility,
-  pluginDeactivate,
-  pluginActivate,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setNetflixVisibility } from '../../commonMethods/netflix'
 
 let listener
 export default {

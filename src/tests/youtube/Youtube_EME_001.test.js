@@ -1,4 +1,5 @@
-import { pluginDeactivate, setWebKitUrl, pluginActivate } from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 import constants from '../../commonMethods/constants'
 import { AttachToLogs } from '../../commonMethods/remoteWebInspector'
 

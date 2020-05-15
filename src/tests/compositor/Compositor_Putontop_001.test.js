@@ -1,11 +1,8 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  suspendOrResumeUxPlugin,
-  putOnTop,
-  getZOrder,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { suspendOrResumeUxPlugin } from '../../commonMethods/ux'
+import { getZOrder, putOnTop } from '../../commonMethods/compositor'
+import { suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 
 export default {
   title: 'Compositor Putontop Functionality - 001',
@@ -42,10 +39,16 @@ export default {
       },
     },
     {
-      description: 'Activate Cobalt Plugin and check resumed or not',
+      description: 'Activate Youtube Plugin and check suspended or not',
       test: pluginActivate,
       params: constants.youTubePlugin,
-      assert: 'resumed',
+      assert: 'suspended',
+    },
+    {
+      description: 'Resume Cobalt Plugin and check resumed or not',
+      test() {
+        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
     },
     {
       description: 'Put UX plugin on top',

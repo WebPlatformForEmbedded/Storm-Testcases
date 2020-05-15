@@ -1,4 +1,4 @@
-import { startDiscovery } from '../../commonMethods/commonFunctions'
+import { startDiscovery } from '../../commonMethods/controller'
 
 export default {
   title: 'Framework Start Discovery test - 001',

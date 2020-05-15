@@ -1,4 +1,4 @@
-import { getPluginsStatus } from '../../commonMethods/commonFunctions'
+import { getPluginsStatus } from '../../commonMethods/controller'
 
 export default {
   title: 'Framework Controller Status - 003',

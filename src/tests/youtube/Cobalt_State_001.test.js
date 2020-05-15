@@ -1,10 +1,6 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getCobaltState,
-  setCobaltState,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { getCobaltState, setCobaltState } from '../../commonMethods/cobalt'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 
 let listener
 export default {

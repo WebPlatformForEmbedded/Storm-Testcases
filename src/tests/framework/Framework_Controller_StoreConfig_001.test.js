@@ -1,4 +1,4 @@
-import { storeconfig } from '../../commonMethods/commonFunctions'
+import { storeconfig } from '../../commonMethods/controller'
 
 export default {
   title: 'Framework Store Config test - 001',

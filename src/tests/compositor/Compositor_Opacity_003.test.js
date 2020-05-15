@@ -1,10 +1,7 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  setClientOpacity,
-  setWebKitUrl,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
+import { setClientOpacity } from '../../commonMethods/compositor'
 
 export default {
   title: 'Compositor Client Opacity - 003',

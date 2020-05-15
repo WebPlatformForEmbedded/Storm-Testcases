@@ -1,11 +1,8 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  suspendOrResumeUxPlugin,
-  putBelow,
-  getZOrder,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { suspendOrResumeUxPlugin } from '../../commonMethods/ux'
+import { getZOrder, putBelow } from '../../commonMethods/compositor'
+import { suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 
 export default {
   title: 'Compositor Putbelow Functionality - 001',
@@ -45,7 +42,13 @@ export default {
       description: 'Activate Cobalt Plugin and check resumed or not',
       test: pluginActivate,
       params: constants.youTubePlugin,
-      assert: 'resumed',
+      assert: 'suspended',
+    },
+    {
+      description: 'Resume Cobalt Plugin and check resumed or not',
+      test() {
+        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
     },
     {
       description: 'Put Cobalt plugin below UX plugin',

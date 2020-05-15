@@ -1,11 +1,7 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  getClientGeometry,
-  setClientGeometry,
-  setWebKitUrl,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
+import { getClientGeometry, setClientGeometry } from '../../commonMethods/compositor'
 
 export default {
   title: 'Compositor Geometry - 001',

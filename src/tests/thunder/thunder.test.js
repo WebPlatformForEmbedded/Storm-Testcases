@@ -1,4 +1,4 @@
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 
 export default {
   title: 'Thunder',

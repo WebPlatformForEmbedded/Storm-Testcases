@@ -1,4 +1,4 @@
-import { getControllerPluginData, getControllerUI } from '../../commonMethods/commonFunctions'
+import { getControllerPluginData, getControllerUI } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {

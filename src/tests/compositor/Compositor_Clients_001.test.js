@@ -1,10 +1,8 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  suspendOrResumeUxPlugin,
-  getCompositorClients,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getCompositorClients } from '../../commonMethods/compositor'
+import { suspendOrResumeUxPlugin } from '../../commonMethods/ux'
+import { suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 
 export default {
   title: 'Compositor Clients - 001',
@@ -41,10 +39,16 @@ export default {
       },
     },
     {
-      description: 'Activate Youtube Plugin and check resumed or not',
+      description: 'Activate Youtube Plugin and check suspended or not',
       test: pluginActivate,
       params: constants.youTubePlugin,
-      assert: 'resumed',
+      assert: 'suspended',
+    },
+    {
+      description: 'Resume Cobalt Plugin and check resumed or not',
+      test() {
+        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
     },
     {
       description: 'Get Compositor Clients and validate the result',

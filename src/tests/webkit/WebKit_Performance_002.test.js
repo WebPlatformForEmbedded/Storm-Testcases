@@ -1,5 +1,4 @@
 import baseTest from './WebKit_Performance_001.test.js'
-// import { setWebKitUrl } from './commonMethods/commonFunctions'
 
 export default {
   ...baseTest,

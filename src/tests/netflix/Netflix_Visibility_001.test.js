@@ -1,9 +1,6 @@
-import {
-  pluginDeactivate,
-  pluginActivate,
-  setNetflixVisibility,
-} from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setNetflixVisibility } from '../../commonMethods/netflix'
 
 export default {
   title: 'Netflix Visibility - 001',

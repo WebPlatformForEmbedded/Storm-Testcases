@@ -1,10 +1,6 @@
-import {
-  getProvisioningPluginData,
-  pluginDeactivate,
-  pluginActivate,
-  startProvisioning,
-  getNetflixPluginEsnInfo,
-} from '../../commonMethods/commonFunctions'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getProvisioningPluginData, startProvisioning } from '../../commonMethods/provisioning'
+import { getNetflixPluginEsnInfo } from '../../commonMethods/netflix'
 import constants from '../../commonMethods/constants'
 
 export default {

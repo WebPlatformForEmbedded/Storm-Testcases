@@ -1,5 +1,5 @@
-import { setClientVisibility } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
+import { setClientVisibility } from '../../commonMethods/compositor'
 
 export default {
   title: 'Compositor Client Visibility - 002',
