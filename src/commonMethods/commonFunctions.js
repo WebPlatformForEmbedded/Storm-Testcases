@@ -727,6 +727,74 @@ export const setTime = function(time) {
 }
 
 /**
+ * This function is used to suspend or resume UX Plugin
+ * @param state
+ * @returns {Promise<unknown>}
+ */
+export const suspendOrResumeUxPlugin = function(state) {
+  return this.$thunder.api.UX.state(state)
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to put the plugin on the top
+ * @param plugin
+ * @returns {Promise<unknown>}
+ */
+export const putOnTop = function(plugin) {
+  return this.$thunder.api.Compositor.putontop({ client: plugin })
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to put the plugin below
+ * @param plugin
+ * @param pluginNameToPutBelow
+ * @returns {Promise<unknown>}
+ */
+export const putBelow = function(plugin, pluginNameToPutBelow) {
+  return this.$thunder.api.Compositor.putbelow({ client: plugin, relative: pluginNameToPutBelow })
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get the zorder of the plugins
+ * @returns {Promise<unknown>}
+ */
+export const getZOrder = function() {
+  return this.$thunder.api.Compositor.zorder()
+    .then(result => {
+      this.$data.write('zorder', result)
+      return result
+    })
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Compositor Clients
+ * @returns {Promise<unknown>}
+ */
+export const getCompositorClients = function() {
+  return this.$thunder.api.Compositor.clients()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to kill a client
+ * @param plugin
+ * @returns {Promise<unknown>}
+ */
+export const killClient = function(plugin) {
+  return this.$thunder.api.Compositor.kill({ client: plugin })
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
  * This function is used to set Compositor resolution
  * @param resolution
  * @returns {Promise<unknown>}
