@@ -727,6 +727,28 @@ export const setTime = function(time) {
 }
 
 /**
+ * This function sets the state of Netflix
+ * @param state
+ * @returns state
+ */
+export const setNetflixState = function(state) {
+  return this.$thunder.api.Netflix.state(state)
+    .then(state => state)
+    .catch(err => err)
+}
+
+/**
+ * This function sets the visibility of Netflix
+ * @param status
+ * @returns {Promise<T>}
+ */
+export const setNetflixVisibility = function(status) {
+  return this.$thunder.api.Netflix.visibility(status)
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
  * This function is used to set the IO Connector pin value
  * @params - pin
  * @returns {Promise<unknown>}
