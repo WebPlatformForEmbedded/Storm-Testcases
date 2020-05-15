@@ -1,6 +1,7 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 import { screenshot } from '../../commonMethods/commonFunctions'
+import { suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 
 let keysArray = ['left', 'up', 'ok']
 let counter = 0
@@ -23,14 +24,15 @@ export default {
   },
   steps: [
     {
-      description: 'Check if Youtube is started correctly',
+      description: 'Activate Youtube Plugin and check suspended or not',
+      test: pluginActivate,
+      params: constants.youTubePlugin,
+      assert: 'suspended',
+    },
+    {
+      description: 'Resume Cobalt Plugin and check resumed or not',
       test() {
-        return pluginActivate.call(this, constants.youTubePlugin)
-      },
-      validate(result) {
-        if (result === 'resumed') {
-          return true
-        } else return false
+        suspendOrResumeCobaltPlugin.call(this, constants.resume)
       },
     },
     {

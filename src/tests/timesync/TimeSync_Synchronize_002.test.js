@@ -20,15 +20,10 @@ export default {
       assert: 'activated',
     },
     {
-      description: 'Invoke Time Synchronize',
+      description: 'Invoke Time Synchronize again and validate error message',
       sleep: 5,
       test() {
-        return syncTime.call(this)
-      },
-    },
-    {
-      description: 'Invoke Time Synchronize again and validate error message',
-      test() {
+        syncTime.call(this)
         return syncTime.call(this)
       },
       validate(res) {

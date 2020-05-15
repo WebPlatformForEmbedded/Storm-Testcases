@@ -1,5 +1,5 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { youtubeChangeState } from '../../commonMethods/cobalt'
+import { suspendOrResumeCobaltPlugin, youtubeChangeState } from '../../commonMethods/cobalt'
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
 
@@ -20,10 +20,16 @@ export default {
   },
   steps: [
     {
-      description: 'Activate Youtube Plugin and check if it is activated',
+      description: 'Activate Youtube Plugin and check suspended or not',
       test: pluginActivate,
       params: constants.youTubePlugin,
-      assert: 'resumed',
+      assert: 'suspended',
+    },
+    {
+      description: 'Resume Cobalt Plugin and check resumed or not',
+      test() {
+        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
     },
     {
       title: 'Repeat Steps for 30 times',
