@@ -56,7 +56,7 @@ export default {
         return getCompositorClients.call(this)
       },
       validate(res) {
-        if (res.indexOf('Cobalt-graphics') !== -1 && res.indexOf('UX') !== -1) {
+        if (res.indexOf(constants.youTubePlugin) !== -1 && res.indexOf(constants.uxplugin) !== -1) {
           return true
         } else {
           this.$log('Clients list is incorrect')

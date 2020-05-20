@@ -21,6 +21,9 @@ export default {
         })),
     ])
   },
+  teardown() {
+    listener.dispose()
+  },
   steps: [
     {
       description: 'Set initial volume',

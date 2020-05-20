@@ -22,6 +22,9 @@ export default {
         })),
     ])
   },
+  teardown() {
+    listener.dispose()
+  },
   steps: [
     {
       description: 'Resume Webkit Plugin and check if it is resumed',

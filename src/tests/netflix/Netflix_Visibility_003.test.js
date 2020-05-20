@@ -19,6 +19,9 @@ export default {
         })),
     ])
   },
+  teardown() {
+    listener.dispose()
+  },
   steps: [
     {
       description: 'Set Netflix Browser visibility',
