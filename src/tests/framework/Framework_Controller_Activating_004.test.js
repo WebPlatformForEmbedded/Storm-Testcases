@@ -12,6 +12,9 @@ export default {
       listenerArray.push(data.state)
     })
   },
+  teardown() {
+    listener.dispose()
+  },
   steps: [
     {
       description: 'Deactivating plugin',

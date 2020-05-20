@@ -16,6 +16,9 @@ export default {
         })),
     ])
   },
+  teardown() {
+    listener.dispose()
+  },
   steps: [
     {
       description: 'Set volume to Mute',

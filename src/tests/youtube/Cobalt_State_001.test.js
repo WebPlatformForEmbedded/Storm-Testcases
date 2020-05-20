@@ -16,6 +16,9 @@ export default {
         })),
     ])
   },
+  teardown() {
+    listener.dispose()
+  },
   steps: [
     {
       description: 'Suspend Cobalt Plugin and check if it is suspended',

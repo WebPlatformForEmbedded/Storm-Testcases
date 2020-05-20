@@ -16,6 +16,9 @@ export default {
         })),
     ])
   },
+  teardown() {
+    listener.dispose()
+  },
   steps: [
     {
       description: 'Suspend Netflix Plugin and check if it is suspended',

@@ -36,6 +36,9 @@ export default {
       },
     ])
   },
+  teardown() {
+    listener.dispose()
+  },
   steps: [
     {
       description: 'Set Webkit Browser visibility',
