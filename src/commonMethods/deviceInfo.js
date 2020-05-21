@@ -37,3 +37,17 @@ export const getCpuLoad = function() {
     })
     .catch(err => err)
 }
+
+/**
+ * This function is used to get Socket Info of Device Info Plugin
+ * @param plugin
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getSocketInfo = function() {
+  return this.$thunder.api.DeviceInfo.socketinfo()
+    .then(result => {
+      this.$data.write('socketinfo', result)
+      return result
+    })
+    .catch(err => err)
+}
