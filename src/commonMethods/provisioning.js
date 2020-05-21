@@ -17,3 +17,13 @@ export const startProvisioning = function() {
     .then(result => result)
     .catch(err => err)
 }
+
+/**
+ * This function is used to get Provisioning id
+ * @returns {Promise<unknown>}
+ */
+export const getProvisioningId = function() {
+  return this.$thunder.api.Provisioning.id()
+    .then(result => result)
+    .catch(err => err)
+}

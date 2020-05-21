@@ -7,7 +7,7 @@ export default {
   title: 'IO Connector Pin - 001',
   description: 'Sets the Pin value and check whether pin value is set or not',
   context: {
-    pin: 19,
+    pin: 169,
     value: '12',
   },
   setup() {
