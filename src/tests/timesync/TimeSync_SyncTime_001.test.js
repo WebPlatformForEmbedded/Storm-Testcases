@@ -1,6 +1,6 @@
-import { getLatestSyncTime } from '../../commonMethods/timeSync'
 import baseTest from './TimeSync_Synchronize_001.test'
 import Moment from 'moment'
+import { getLatestSyncTime } from '../../commonMethods/timeSync'
 
 export default {
   ...baseTest,

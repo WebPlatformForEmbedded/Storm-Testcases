@@ -1,7 +1,7 @@
-import constants from '../../commonMethods/constants'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'WebServer startup robustness test',

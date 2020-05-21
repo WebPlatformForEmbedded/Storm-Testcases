@@ -1,5 +1,5 @@
-import { pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
+import { pluginDeactivate } from '../../commonMethods/controller'
 
 export default {
   title: 'Framework Controller Deactivate - 003',

@@ -1,6 +1,6 @@
-import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
-import { setNetflixVisibility } from '../../commonMethods/netflix'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setNetflixVisibility } from '../../commonMethods/netflix'
 
 let listener
 export default {
@@ -18,6 +18,9 @@ export default {
           this.$data.write('visibility', data.hidden)
         })),
     ])
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {

@@ -1,6 +1,6 @@
+import constants from '../../commonMethods/constants'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { getAddressesInfo } from '../../commonMethods/deviceInfo'
-import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework Device Info test to check valid IP',

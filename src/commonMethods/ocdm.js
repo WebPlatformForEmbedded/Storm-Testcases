@@ -14,8 +14,7 @@ export const getDRMSList = function() {
  * @param keysystem
  */
 export const getDRMKeySystemInfo = function(keysystem) {
-  const methodName = 'keysystems@' + keysystem
-  return this.$thunder.api.OCDM[methodName]()
-    .then(res => res)
+  return this.$thunder.api.OCDM.keysystems(keysystem)
+    .then(result => result)
     .catch(err => err)
 }

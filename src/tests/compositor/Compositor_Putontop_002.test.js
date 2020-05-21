@@ -1,5 +1,5 @@
-import { putOnTop } from '../../commonMethods/compositor'
 import constants from '../../commonMethods/constants'
+import { putOnTop } from '../../commonMethods/compositor'
 
 export default {
   title: 'Compositor Putontop Functionality - 002',

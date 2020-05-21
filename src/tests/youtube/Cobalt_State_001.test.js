@@ -1,6 +1,7 @@
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { getCobaltState, setCobaltState } from '../../commonMethods/cobalt'
 import constants from '../../commonMethods/constants'
+import { getCobaltState, setCobaltState } from '../../commonMethods/cobalt'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+
 let listener
 export default {
   title: 'Cobalt Suspend functionality test',
@@ -14,6 +15,9 @@ export default {
           this.$data.write('state', data.suspended)
         })),
     ])
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {

@@ -23,8 +23,8 @@ export default {
       description: 'Set Time to current time',
       sleep: 5,
       test() {
-        let datetime = Moment()
-        return setTime.call(this, datetime)
+        let datetime = Moment.utc()
+        return setTime.call(this, datetime.format('YYYY-MM-DDTHH:mm:ss') + 'Z')
       },
       validate(res) {
         if (res == null) {
@@ -42,8 +42,8 @@ export default {
         return getCurrentTime.call(this)
       },
       validate(res) {
-        let result = Moment(res)
-        let currTime = Moment()
+        let result = Moment.utc(res)
+        let currTime = Moment.utc()
         let timeDiff = currTime.diff(result)
         if (timeDiff < 3000) {
           return true

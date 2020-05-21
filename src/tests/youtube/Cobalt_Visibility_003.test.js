@@ -1,6 +1,10 @@
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { getCobaltVisibility, setCobaltVisibility } from '../../commonMethods/cobalt'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import {
+  getCobaltVisibility,
+  setCobaltVisibility,
+  suspendOrResumeCobaltPlugin,
+} from '../../commonMethods/cobalt'
 
 let listener
 export default {
@@ -13,11 +17,15 @@ export default {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.youTubePlugin),
       () => pluginActivate.call(this, constants.youTubePlugin),
+      () => suspendOrResumeCobaltPlugin.call(this, constants.resume),
       () =>
         (listener = this.$thunder.api.Cobalt.on('visibilitychange', data => {
           this.$data.write('visibility', data.hidden)
         })),
     ])
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {

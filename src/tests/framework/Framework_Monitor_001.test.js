@@ -1,7 +1,6 @@
-import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
-import { getMonitorInfo } from '../../commonMethods/monitor'
-
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getMonitorInfo } from '../../commonMethods/monitor'
 
 export default {
   title: 'Framework Monitor test 001',

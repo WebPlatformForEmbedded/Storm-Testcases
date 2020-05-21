@@ -38,14 +38,33 @@ export const pluginDeactivate = function(plugin_name) {
 }
 
 /**
- * This function is used to get Controller Environment info
- * @param envName
+ * This function stores the configuration to persistent memory.
  * @returns {Promise<T>}
  */
-export const getControllerEnvironment = function(envName) {
-  let methodName = 'environment@' + envName
-  return this.$thunder.api.Controller[methodName]()
+export const storeconfig = function() {
+  return this.$thunder.api.Controller.storeconfig()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get plugins status
+ * @returns {Promise<T>}
+ */
+export const getPluginsStatus = function() {
+  return this.$thunder.api.Controller.status()
     .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function starts the discovery process
+ * @param ttl
+ * @returns {Promise<T>}
+ */
+export const startDiscovery = function(ttl) {
+  return this.$thunder.api.Controller.startdiscovery(ttl)
+    .then(result => result)
     .catch(err => err)
 }
 
@@ -63,6 +82,18 @@ export const getPluginState = function(plugin_name) {
     })
     return value[0].state
   })
+}
+
+/**
+ * This function is used to get Controller Environment info
+ * @param envName
+ * @returns {Promise<T>}
+ */
+export const getControllerEnvironment = function(envName) {
+  let methodName = 'environment@' + envName
+  return this.$thunder.api.Controller[methodName]()
+    .then(res => res)
+    .catch(err => err)
 }
 
 /**
@@ -90,37 +121,6 @@ export const getPluginConfiguration = function(pluginName) {
 }
 
 /**
- * This function starts the discovery process
- * @param ttl
- * @returns {Promise<T>}
- */
-export const startDiscovery = function(ttl) {
-  return this.$thunder.api.Controller.startdiscovery(ttl)
-    .then(result => result)
-    .catch(err => err)
-}
-
-/**
- * This function is used to get plugins status
- * @returns {Promise<T>}
- */
-export const getPluginsStatus = function() {
-  return this.$thunder.api.Controller.status()
-    .then(res => res)
-    .catch(err => err)
-}
-
-/**
- * This function stores the configuration to persistent memory.
- * @returns {Promise<T>}
- */
-export const storeconfig = function() {
-  return this.$thunder.api.Controller.storeconfig()
-    .then(result => result)
-    .catch(err => err)
-}
-
-/**
  * This function is used to get the controller UI
  * @returns {Promise<AxiosResponse<any>>}
  */
@@ -131,6 +131,7 @@ export const getControllerUI = function() {
     .then(result => result)
     .catch(err => err)
 }
+
 /**
  * This function is used to get Controller plugin data
  * @returns {Promise<any> | Thenable<any> | PromiseLike<any>}

@@ -1,6 +1,6 @@
-import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
-import { getProvisioningPluginData, startProvisioning } from '../../commonMethods/provisioning'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getProvisioningPluginData, startProvisioning } from '../../commonMethods/provisioning'
 
 export default {
   title: 'Framework request provision stress test',

@@ -1,6 +1,10 @@
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { getCobaltVisibility, setCobaltVisibility } from '../../commonMethods/cobalt'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import {
+  getCobaltVisibility,
+  setCobaltVisibility,
+  suspendOrResumeCobaltPlugin,
+} from '../../commonMethods/cobalt'
 
 export default {
   title: 'Cobalt Visibility - 001',
@@ -16,10 +20,16 @@ export default {
       assert: 'deactivated',
     },
     {
-      description: 'Activate Cobalt Plugin',
+      description: 'Activate Youtube Plugin and check suspended or not',
       test: pluginActivate,
       params: constants.youTubePlugin,
-      assert: 'resumed',
+      assert: 'suspended',
+    },
+    {
+      description: 'Resume Cobalt Plugin and check resumed or not',
+      test() {
+        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
     },
     {
       description: 'Set Cobalt Plugin visibility',

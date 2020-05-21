@@ -1,5 +1,5 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { youtubeChangeState } from '../../commonMethods/cobalt'
+import { setCobaltState, suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
 
@@ -20,10 +20,17 @@ export default {
   },
   steps: [
     {
-      description: 'Activate Youtube Plugin and check if it is activated',
+      description: 'Activate Youtube Plugin and check suspended or not',
       test: pluginActivate,
       params: constants.youTubePlugin,
-      assert: 'resumed',
+      assert: 'suspended',
+    },
+    {
+      description: 'Resume Cobalt Plugin and check resumed or not',
+      sleep: 10,
+      test() {
+        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
     },
     {
       title: 'Repeat Steps for 30 times',
@@ -31,16 +38,30 @@ export default {
       repeat: 30,
       steps: [
         {
-          description: 'Suspend Youtube Plugin and check if it is suspended',
-          test: youtubeChangeState,
-          params: constants.suspend,
-          assert: 'suspended',
+          description: 'Suspend Cobalt Plugin and check if it is suspended',
+          test() {
+            return setCobaltState.call(this, constants.suspend)
+          },
+          validate(res) {
+            if (res == null) {
+              return true
+            } else {
+              return false
+            }
+          },
         },
         {
-          description: 'Resume Youtube Plugin and check if it is resumed',
-          test: youtubeChangeState,
-          params: constants.resume,
-          assert: 'resumed',
+          description: 'Resume Cobalt Plugin and check if it is resumed',
+          test() {
+            return setCobaltState.call(this, constants.resume)
+          },
+          validate(res) {
+            if (res == null) {
+              return true
+            } else {
+              return false
+            }
+          },
         },
         {
           description: 'Get CPU load',

@@ -1,5 +1,5 @@
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 
 let listener
 let listenerArray = []
@@ -10,6 +10,9 @@ export default {
     listener = this.$thunder.api.Controller.on('statechange', data => {
       listenerArray.push(data.state)
     })
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {

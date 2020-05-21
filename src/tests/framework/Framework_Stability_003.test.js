@@ -35,6 +35,9 @@ export default {
     //TODO - Update URL once the real URL is hosted on CDN
     url: 'http://cdn.metrological.com/static/eme-v3-clean.html',
   },
+  teardown() {
+    listener.dispose()
+  },
   steps: [
     {
       title: 'Repeat Steps for 100 times',

@@ -1,7 +1,7 @@
+import constants from '../../commonMethods/constants'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { webKitBrowserActions } from '../../commonMethods/webKitBrowser'
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
-import constants from '../../commonMethods/constants'
 
 export default {
   title: 'WPEWebkit Suspend/Resume robustness test',

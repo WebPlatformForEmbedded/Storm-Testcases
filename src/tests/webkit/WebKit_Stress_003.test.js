@@ -1,7 +1,7 @@
+import constants from '../../commonMethods/constants'
 import { setWebKitUrl, webKitBrowserStartAndResume } from '../../commonMethods/webKitBrowser'
 import { getPluginState } from '../../commonMethods/controller'
 import { getCpuLoad, getDeviceInfo } from '../../commonMethods/deviceInfo'
-import constants from '../../commonMethods/constants'
 
 let listener
 

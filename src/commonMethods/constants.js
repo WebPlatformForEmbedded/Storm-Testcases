@@ -23,6 +23,7 @@ export default {
   netflixImplementation: 'NetflixImplementation',
   youtubeImplementation: 'CobaltImplementation',
   provisioningPlugin: 'Provisioning',
+  dhcpserver: 'DHCPServer',
   wifiControlPlugin: 'WifiControl',
   WPEProcess: 'WPEProcess',
   remoteControlPlugin: 'RemoteControl',

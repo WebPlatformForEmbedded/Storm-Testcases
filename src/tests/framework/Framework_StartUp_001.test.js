@@ -1,11 +1,11 @@
+import constants from '../../commonMethods/constants'
+import { getControllerPluginData, pluginDeactivate } from '../../commonMethods/controller'
 import {
   checkIfProcessIsRunning,
-  stopWPEFramework,
   startFramework,
+  stopWPEFramework,
 } from '../../commonMethods/commonFunctions'
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
-import { pluginDeactivate, getControllerPluginData } from '../../commonMethods/controller'
-import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework startup robustness test',

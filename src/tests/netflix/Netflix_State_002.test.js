@@ -1,6 +1,6 @@
-import { setNetflixState } from '../../commonMethods/netflix'
-import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setNetflixState } from '../../commonMethods/netflix'
 
 let listener
 export default {
@@ -15,6 +15,9 @@ export default {
           this.$data.write('state', data.suspended)
         })),
     ])
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {

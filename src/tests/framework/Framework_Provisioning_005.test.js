@@ -1,46 +1,29 @@
-import { startProvisioning } from '../../commonMethods/provisioning'
-import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
+import { getProvisioningId } from '../../commonMethods/provisioning'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
 export default {
-  title: 'Framework provisioning - 005',
-  description:
-    'Check error message when Provisioning is performed while previous provisioning request is in progress',
+  title: 'Framework Controller Provisioning - 005',
+  description: 'Get Provisioning ID and validate the result',
+  setup() {
+    return this.$sequence([
+      () => {
+        pluginDeactivate.call(this, constants.provisioningPlugin)
+      },
+      () => {
+        pluginActivate.call(this, constants.provisioningPlugin)
+      },
+    ])
+  },
   steps: [
     {
-      description: 'Check if Provisioning Plugin is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.provisioningPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if Provisioning Plugin is started correctly',
-      test: pluginActivate,
-      params: constants.provisioningPlugin,
-      assert: 'activated',
-    },
-    {
-      description: 'Invoke Start Provisioning',
+      description: 'Get provisioning ID and validate the result',
       sleep: 5,
       test() {
-        return startProvisioning.call(this)
+        return getProvisioningId.call(this)
       },
       validate(res) {
-        if (res == null) {
-          return true
-        } else {
-          this.$log('Scan does not start')
-          return false
-        }
-      },
-    },
-    {
-      description: 'Invoke Start Provisioning',
-      test() {
-        return startProvisioning.call(this)
-      },
-      validate(res) {
-        if (res.code == 12 && res.message == 'ERROR_INPROGRESS') {
+        if (res !== null && res !== undefined) {
           return true
         } else {
           this.$log('Proper error message is not shown')

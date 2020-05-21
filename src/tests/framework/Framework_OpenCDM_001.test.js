@@ -1,7 +1,7 @@
-import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
-import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
-import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
+import { getCpuLoad } from '../../commonMethods/deviceInfo'
 
 export default {
   title: 'OCDM startup robustness test',

@@ -1,6 +1,6 @@
-import { setCompositorResolution, getCompositorResolution } from '../../commonMethods/compositor'
-import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
-import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
+import { getCompositorResolution, setCompositorResolution } from '../../commonMethods/compositor'
 
 export default {
   title: 'Compositor Resolution - 001',
@@ -8,19 +8,18 @@ export default {
   context: {
     resolution: '480i',
   },
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => setWebKitUrl.call(this, 'about:blank'),
+      () => {
+        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+      },
+    ])
+  },
   steps: [
-    {
-      description: 'Deactivate Netflix Plugin and check deactivated or not',
-      test: pluginDeactivate,
-      params: constants.netFlixPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activate Netflix Plugin and check resumed or not',
-      test: pluginActivate,
-      params: constants.netFlixPlugin,
-      assert: 'resumed',
-    },
     {
       description: 'Set Compositor resolution and validate the result',
       sleep: 10,

@@ -1,7 +1,8 @@
+import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { getCompositorClients } from '../../commonMethods/compositor'
 import { suspendOrResumeUxPlugin } from '../../commonMethods/ux'
-import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
-import constants from '../../commonMethods/constants'
+import { suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 
 export default {
   title: 'Compositor Clients - 001',
@@ -20,9 +21,9 @@ export default {
       assert: 'deactivated',
     },
     {
-      description: 'Deactivate Netflix Plugin and check deactivated or not',
+      description: 'Deactivate Youtube Plugin and check deactivated or not',
       test: pluginDeactivate,
-      params: constants.netFlixPlugin,
+      params: constants.youTubePlugin,
       assert: 'deactivated',
     },
     {
@@ -38,10 +39,16 @@ export default {
       },
     },
     {
-      description: 'Activate Netflix Plugin and check resumed or not',
+      description: 'Activate Youtube Plugin and check suspended or not',
       test: pluginActivate,
-      params: constants.netFlixPlugin,
-      assert: 'resumed',
+      params: constants.youTubePlugin,
+      assert: 'suspended',
+    },
+    {
+      description: 'Resume Cobalt Plugin and check resumed or not',
+      test() {
+        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
     },
     {
       description: 'Get Compositor Clients and validate the result',
@@ -49,7 +56,7 @@ export default {
         return getCompositorClients.call(this)
       },
       validate(res) {
-        if (res.indexOf('Netflix') !== -1 && res.indexOf('UX') !== -1) {
+        if (res.indexOf(constants.youTubePlugin) !== -1 && res.indexOf(constants.uxplugin) !== -1) {
           return true
         } else {
           this.$log('Clients list is incorrect')

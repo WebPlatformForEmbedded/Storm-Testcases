@@ -1,7 +1,7 @@
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { screenshot } from '../../commonMethods/commonFunctions'
-import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
+import { screenshot } from '../../commonMethods/commonFunctions'
 
 let listener
 let curSameScreenshot = 0

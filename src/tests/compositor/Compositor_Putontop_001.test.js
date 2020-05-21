@@ -1,7 +1,8 @@
-import { putOnTop, getZOrder } from '../../commonMethods/compositor'
-import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
-import { suspendOrResumeUxPlugin } from '../../commonMethods/ux'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { suspendOrResumeUxPlugin } from '../../commonMethods/ux'
+import { getZOrder, putOnTop } from '../../commonMethods/compositor'
+import { suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 
 export default {
   title: 'Compositor Putontop Functionality - 001',
@@ -20,9 +21,9 @@ export default {
       assert: 'deactivated',
     },
     {
-      description: 'Deactivate Netflix Plugin and check deactivated or not',
+      description: 'Deactivate Cobalt Plugin and check deactivated or not',
       test: pluginDeactivate,
-      params: constants.netFlixPlugin,
+      params: constants.youTubePlugin,
       assert: 'deactivated',
     },
     {
@@ -38,10 +39,16 @@ export default {
       },
     },
     {
-      description: 'Activate Netflix Plugin and check resumed or not',
+      description: 'Activate Youtube Plugin and check suspended or not',
       test: pluginActivate,
-      params: constants.netFlixPlugin,
-      assert: 'resumed',
+      params: constants.youTubePlugin,
+      assert: 'suspended',
+    },
+    {
+      description: 'Resume Cobalt Plugin and check resumed or not',
+      test() {
+        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
     },
     {
       description: 'Put UX plugin on top',
@@ -66,20 +73,20 @@ export default {
       },
     },
     {
-      description: 'Put Netflix plugin on top',
+      description: 'Put Cobalt plugin on top',
       test: putOnTop,
-      params: constants.netFlixPlugin,
+      params: constants.youTubePlugin,
       assert: null,
     },
     {
-      description: 'Get Zorder and validate whether Netflix plugin is on top',
+      description: 'Get Zorder and validate whether Cobalt plugin is on top',
       sleep: 5,
       test() {
         return getZOrder.call(this)
       },
       validate() {
         let zorder = this.$data.read('zorder')
-        if (zorder[0] == constants.netFlixPlugin) {
+        if (zorder[0] == constants.youTubePlugin) {
           return true
         } else {
           this.$log('Plugin not moved to top')

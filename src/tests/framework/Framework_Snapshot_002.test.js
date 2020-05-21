@@ -1,6 +1,6 @@
-import { screenshot } from '../../commonMethods/commonFunctions'
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { screenshot } from '../../commonMethods/commonFunctions'
 
 export default {
   title: 'Framework snapshot test with multiple start/stops',

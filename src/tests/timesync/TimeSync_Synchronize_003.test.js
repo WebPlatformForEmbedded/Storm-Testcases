@@ -29,8 +29,9 @@ export default {
       description: 'Set Time to Past time time',
       sleep: 5,
       test() {
-        let datetime = Moment().subtract(2, 'days')
-        return setTime.call(this, datetime)
+        let datetime = Moment.utc().subtract(2, 'days')
+        let pastDate = datetime.format('YYYY-MM-DDTHH:mm:ss') + 'Z'
+        return setTime.call(this, pastDate)
       },
       validate(res) {
         if (res == null) {
@@ -48,7 +49,6 @@ export default {
         return syncTime.call(this)
       },
       validate(res) {
-        this.$log('Result is', res)
         if (res == null) {
           return true
         } else {
@@ -83,8 +83,8 @@ export default {
         return getCurrentTime.call(this)
       },
       validate(res) {
-        let result = Moment(res)
-        let currTime = Moment()
+        let result = Moment.utc(res)
+        let currTime = Moment.utc()
         let timeDiff = currTime.diff(result)
         if (timeDiff < 3000) {
           return true

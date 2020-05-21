@@ -1,10 +1,10 @@
+import constants from '../../commonMethods/constants'
+import { pluginActivate } from '../../commonMethods/controller'
 import {
   checkIfProcessIsRunning,
   startFramework,
   stopWPEFramework,
 } from '../../commonMethods/commonFunctions'
-import { pluginActivate } from '../../commonMethods/controller'
-import constants from '../../commonMethods/constants'
 
 export default {
   title: 'OCDM shutdown of Framework robustness test',

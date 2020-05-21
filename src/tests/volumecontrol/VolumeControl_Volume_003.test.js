@@ -1,6 +1,6 @@
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { getVolume, setVolume } from '../../commonMethods/volumeControle'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getVolume, setVolume } from '../../commonMethods/volumeControl'
 
 let listener
 
@@ -20,6 +20,9 @@ export default {
           this.$data.write('volume', data.volume)
         })),
     ])
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {

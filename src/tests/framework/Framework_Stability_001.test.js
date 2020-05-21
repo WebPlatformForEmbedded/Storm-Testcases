@@ -1,7 +1,7 @@
 import {
+  getControllerPluginData,
   pluginActivate,
   pluginDeactivate,
-  getControllerPluginData,
 } from '../../commonMethods/controller'
 
 export default {

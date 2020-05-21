@@ -1,5 +1,5 @@
-import { killClient } from '../../commonMethods/compositor'
 import constants from '../../commonMethods/constants'
+import { killClient } from '../../commonMethods/compositor'
 
 export default {
   title: 'Compositor Kill - 002',

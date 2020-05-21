@@ -62,32 +62,10 @@ export const setWebKitBrowserUrl = function(URL) {
 }
 
 /**
- * This function sets the visibility of WebkitBrowser
- * @param status
- * @returns {Promise<T>}
- */
-export const setWebKitBrowserVisibility = function(status) {
-  return this.$thunder.api.WebKitBrowser.visibility(status)
-    .then(url => url)
-    .catch(err => err)
-}
-
-/**
  * This function gets the URL on WebKit Browser
  * @returns {Promise<T>}
  */
 export const getWebKitBrowserUrl = function() {
-  return this.$thunder.api.WebKitBrowser.url()
-    .then(url => url)
-    .catch(err => err)
-}
-
-/**
- * This function sets the URL
- * @param URL
- * @returns URL
- */
-export const getWebKitUrl = function() {
   return this.$thunder.api.WebKitBrowser.url()
     .then(url => url)
     .catch(err => err)
@@ -99,6 +77,17 @@ export const getWebKitUrl = function() {
  */
 export const getWebKitBrowserVisibility = function() {
   return this.$thunder.api.WebKitBrowser.visibility()
+    .then(url => url)
+    .catch(err => err)
+}
+
+/**
+ * This function sets the visibility of WebkitBrowser
+ * @param status
+ * @returns {Promise<T>}
+ */
+export const setWebKitBrowserVisibility = function(status) {
+  return this.$thunder.api.WebKitBrowser.visibility(status)
     .then(url => url)
     .catch(err => err)
 }

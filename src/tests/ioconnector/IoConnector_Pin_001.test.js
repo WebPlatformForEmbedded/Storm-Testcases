@@ -1,13 +1,13 @@
-import { setIoConnectorPinValue, getIoConnectorPinValue } from '../../commonMethods/ioConnector'
-import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getIoConnectorPinValue, setIoConnectorPinValue } from '../../commonMethods/ioConnector'
 
 let listener
 export default {
   title: 'IO Connector Pin - 001',
   description: 'Sets the Pin value and check whether pin value is set or not',
   context: {
-    pin: 109,
+    pin: 169,
     value: '12',
   },
   setup() {
@@ -19,6 +19,9 @@ export default {
           this.$data.write('activity', data.value)
         })),
     ])
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {

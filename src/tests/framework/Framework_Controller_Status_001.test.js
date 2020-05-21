@@ -1,5 +1,5 @@
-import { getPluginStatus } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
+import { getPluginStatus } from '../../commonMethods/controller'
 
 export default {
   title: 'Framework Controller Status - 001',
@@ -11,6 +11,7 @@ export default {
         return getPluginStatus.call(this, constants.invalidPlugin)
       },
       validate(res) {
+        this.$log('redevice', res)
         if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {

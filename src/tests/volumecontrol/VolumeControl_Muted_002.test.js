@@ -1,5 +1,5 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { getVolumeMuteStatus, setVolumeMuteStatus } from '../../commonMethods/volumeControle'
+import { getVolumeMuteStatus, setVolumeMuteStatus } from '../../commonMethods/volumeControl'
 import constants from '../../commonMethods/constants'
 
 let listener
@@ -15,6 +15,9 @@ export default {
           this.$data.write('muteState', data.muted)
         })),
     ])
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {

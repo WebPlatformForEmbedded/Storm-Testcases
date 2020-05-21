@@ -1,5 +1,5 @@
-import { putBelow } from '../../commonMethods/compositor'
 import constants from '../../commonMethods/constants'
+import { putBelow } from '../../commonMethods/compositor'
 
 export default {
   title: 'Compositor Putbelow Functionality - 002',

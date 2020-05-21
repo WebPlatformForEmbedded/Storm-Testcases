@@ -1,6 +1,6 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import constants from '../../commonMethods/constants'
 import { syncTime } from '../../commonMethods/timeSync'
+import constants from '../../commonMethods/constants'
 
 let listener
 
@@ -40,6 +40,7 @@ export default {
     },
     {
       description: 'Check whether time sync is success',
+      sleep: 5,
       test() {
         return new Promise((resolve, reject) => {
           let attempts = 0

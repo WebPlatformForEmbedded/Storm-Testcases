@@ -1,6 +1,6 @@
+import constants from '../../commonMethods/constants'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { getWebKitState, setWebKitState } from '../../commonMethods/webKitBrowser'
-import constants from '../../commonMethods/constants'
 
 let listener
 export default {
@@ -21,6 +21,9 @@ export default {
           this.$data.write('state', data.suspended)
         })),
     ])
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {

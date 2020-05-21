@@ -1,7 +1,7 @@
-import { screenshot } from '../../commonMethods/commonFunctions'
-import { webKitBrowserStartAndResume } from '../../commonMethods/webKitBrowser'
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { webKitBrowserStartAndResume } from '../../commonMethods/webKitBrowser'
+import { screenshot } from '../../commonMethods/commonFunctions'
 
 export default {
   title: 'Framework snapshot test',

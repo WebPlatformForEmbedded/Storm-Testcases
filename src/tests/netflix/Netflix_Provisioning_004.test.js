@@ -1,4 +1,4 @@
-import { pluginDeactivate, pluginActivate } from '../../commonMethods/controller'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { getProvisioningPluginData, startProvisioning } from '../../commonMethods/provisioning'
 import { getNetflixPluginEsnInfo } from '../../commonMethods/netflix'
 import constants from '../../commonMethods/constants'

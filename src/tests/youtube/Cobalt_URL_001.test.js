@@ -1,6 +1,6 @@
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { getCobaltUrl } from '../../commonMethods/cobalt'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import { getCobaltUrl, suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 
 export default {
   title: 'Cobalt URL - 001',
@@ -16,10 +16,16 @@ export default {
       assert: 'deactivated',
     },
     {
-      description: 'Activate Cobalt browser',
+      description: 'Activate Youtube Plugin and check suspended or not',
       test: pluginActivate,
       params: constants.youTubePlugin,
-      assert: 'resumed',
+      assert: 'suspended',
+    },
+    {
+      description: 'Resume Cobalt Plugin and check resumed or not',
+      test() {
+        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
     },
     {
       description: 'Get the default URL Loaded on Cobalt',

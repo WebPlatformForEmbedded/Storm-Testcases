@@ -1,7 +1,7 @@
-import resemble from 'node-resemble-js'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 import { screenshot } from '../../commonMethods/commonFunctions'
+import resemble from 'node-resemble-js'
 import constants from '../../commonMethods/constants'
 
 let listener

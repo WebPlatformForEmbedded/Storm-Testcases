@@ -1,6 +1,6 @@
+import constants from '../../commonMethods/constants'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { getCobaltState, setCobaltState } from '../../commonMethods/cobalt'
-import constants from '../../commonMethods/constants'
 
 let listener
 export default {
@@ -16,6 +16,9 @@ export default {
           this.$data.write('state', data.suspended)
         })),
     ])
+  },
+  teardown() {
+    listener.dispose()
   },
   steps: [
     {
