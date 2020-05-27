@@ -17,6 +17,7 @@ export default {
   snapshotPlugin: 'Snapshot',
   ioconnector: 'IOConnector',
   webServerPlugin: 'WebServer',
+  compositorPlugin: 'Compositor',
   webServerImplementation: 'WebServerImplementation',
   netflixImplementation: 'NetflixImplementation',
   youtubeImplementation: 'CobaltImplementation',
