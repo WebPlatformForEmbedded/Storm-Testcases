@@ -35,8 +35,7 @@ export default {
     if (response.runs !== undefined && response.length !== 0) {
       return true
     } else {
-      this.$log('Error reading socket info DeviceInfo')
-      return false
+      throw new Error('Error reading socket info DeviceInfo')
     }
   },
 }

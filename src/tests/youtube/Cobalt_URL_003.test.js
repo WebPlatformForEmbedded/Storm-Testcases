@@ -36,8 +36,7 @@ export default {
         if (res.code == 15 && res.message == 'ERROR_INCORRECT_URL') {
           return true
         } else {
-          this.$log('Proper error message is not shown')
-          return false
+          throw new Error('Proper error message is not shown')
         }
       },
     },

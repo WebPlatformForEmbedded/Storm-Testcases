@@ -60,8 +60,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Result is not as expected')
-          return false
+          throw new Error('Result is not as expected after executing putbelow')
         }
       },
     },
@@ -76,13 +75,12 @@ export default {
         if (zorder[0] == constants.uxplugin) {
           return true
         } else {
-          this.$log('Plugin not moved to below')
-          return false
+          throw new Error('Plugin not moved to below')
         }
       },
     },
     {
-      description: 'Put UX plugin below Netflix plugin',
+      description: 'Put UX plugin below Youtube plugin',
       test() {
         return putBelow.call(this, constants.uxplugin, constants.youTubePlugin)
       },
@@ -90,8 +88,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Result is not as expected')
-          return false
+          throw new Error('Result is not as expected after executing putbelow ')
         }
       },
     },
@@ -106,8 +103,7 @@ export default {
         if (zorder[0] == constants.youTubePlugin) {
           return true
         } else {
-          this.$log('Plugin not moved to below')
-          return false
+          throw new Error('Plugin not moved to below')
         }
       },
     },

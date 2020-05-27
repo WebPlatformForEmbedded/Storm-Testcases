@@ -37,7 +37,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          return false
+          throw new Error('Result is not as expected when we try to set IO connector PIN value')
         }
       },
     },
@@ -69,8 +69,7 @@ export default {
         if (res == this.$context.read('value')) {
           return true
         } else {
-          this.$log('Pin value not set')
-          return false
+          throw new Error('Pin value not set')
         }
       },
     },

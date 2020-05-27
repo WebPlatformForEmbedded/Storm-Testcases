@@ -28,8 +28,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Visbility not set to hidden')
-          return false
+          throw new Error('Visbility not set to hidden')
         }
       },
     },
@@ -42,8 +41,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Visbility not set to visible')
-          return false
+          throw new Error('Visbility not set to visible')
         }
       },
     },

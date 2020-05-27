@@ -28,8 +28,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Client geometry not set')
-          return false
+          throw new Error('Client geometry not set')
         }
       },
     },
@@ -42,8 +41,7 @@ export default {
         if (res.x == '1' && res.y == '1' && res.width == '480' && res.height == '360') {
           return true
         } else {
-          this.$log('Client Geometry not set correctly')
-          return false
+          throw new Error('Client Geometry not set correctly')
         }
       },
     },

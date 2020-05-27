@@ -37,8 +37,7 @@ export default {
         if (res === null) {
           return true
         } else {
-          this.$log('Response is not as expected')
-          return false
+          throw new Error('Response is not as expected')
         }
       },
     },
@@ -51,8 +50,7 @@ export default {
         if (res === this.$context.read('url')) {
           return true
         } else {
-          this.$log('Response is ' + res + ' which is not as expected')
-          return false
+          throw new Error('Response is ' + res + ' which is not as expected')
         }
       },
     },
