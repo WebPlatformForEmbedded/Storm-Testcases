@@ -29,8 +29,7 @@ export default {
         if (res === null) {
           return true
         } else {
-          this.$log('Proper error message is not shown')
-          return false
+          throw new Error('Proper error message is not shown')
         }
       },
     },
@@ -43,8 +42,7 @@ export default {
         if (res === this.$context.read('url')) {
           return true
         } else {
-          this.$log('Proper error message is not shown')
-          return false
+          throw new Error('Proper error message is not shown')
         }
       },
     },

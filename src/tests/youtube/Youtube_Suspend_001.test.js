@@ -46,7 +46,7 @@ export default {
             if (res == null) {
               return true
             } else {
-              return false
+              throw new Error(`Result is not as expected and is ${res}`)
             }
           },
         },
@@ -59,7 +59,7 @@ export default {
             if (res == null) {
               return true
             } else {
-              return false
+              throw new Error(`Result is not as expected and is ${res}`)
             }
           },
         },
@@ -71,8 +71,7 @@ export default {
             let cpuload = this.$data.read('cpuload')
             this.$log('Cpu Load is', cpuload)
             if (cpuload > 90) {
-              this.$log('CPU load is greater than 90')
-              return false
+              throw new Error('CPU load is greater than 90')
             } else {
               return true
             }

@@ -30,7 +30,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          return false
+          throw new Error(`Result is not as expected and is ${res}`)
         }
       },
     },
@@ -44,8 +44,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Netflix is not resumed')
-          return false
+          throw new Error('Netflix is not resumed')
         }
       },
     },

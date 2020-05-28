@@ -28,7 +28,7 @@ export default {
               plugin.locator === undefined ||
               plugin.state === undefined
             ) {
-              return false
+              throw new Error('Callsign, locator and state related to plugin are undefined')
             }
           }
           if (i === pluginInfo.length - 1) return true
@@ -42,7 +42,7 @@ export default {
       validate(result) {
         let status = result.status
         if (status === 200) return true
-        else return false
+        else throw new Error('Status is not as expected')
       },
     },
   ],

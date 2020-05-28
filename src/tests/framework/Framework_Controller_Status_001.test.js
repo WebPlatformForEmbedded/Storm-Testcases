@@ -11,12 +11,12 @@ export default {
         return getPluginStatus.call(this, constants.invalidPlugin)
       },
       validate(res) {
-        this.$log('redevice', res)
         if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
-          this.$log('Proper error message is not shown')
-          return false
+          throw new Error(
+            'Proper error message is not shown while getting plugin status for invalid plugin'
+          )
         }
       },
     },

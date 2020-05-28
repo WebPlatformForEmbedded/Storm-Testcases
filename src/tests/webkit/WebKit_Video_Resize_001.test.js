@@ -78,7 +78,9 @@ export default {
       },
       validate(res) {
         if (res === null) return true
-        else return false
+        else {
+          throw new Error(`Result is not as expected and is ${res}`)
+        }
       },
     },
     {
@@ -88,8 +90,7 @@ export default {
         let resp = this.$data.read('screenshotResult')
         this.$data.write('screenshot', resp)
         if (resp === undefined || resp.length === 0) {
-          this.$log('Error while reading snapshot from Framework')
-          return false
+          throw new Error('Error while reading snapshot from Framework')
         } else {
           return true
         }
@@ -106,8 +107,7 @@ export default {
             if (Number(data.misMatchPercentage) <= 0.01) {
               return true
             } else {
-              this.$log('Screenshot differs ' + data.misMatchPercentage + '%')
-              return false
+              throw new Error('Screenshot differs ' + data.misMatchPercentage + '%')
             }
           })
       },
@@ -119,7 +119,9 @@ export default {
       },
       validate(res) {
         if (res === null) return true
-        else return false
+        else {
+          throw new Error(`Result is not as expected and is ${res}`)
+        }
       },
     },
     {
@@ -129,8 +131,7 @@ export default {
         let resp = this.$data.read('screenshotResult')
         this.$data.write('screenshot', resp)
         if (resp === undefined || resp.length === 0) {
-          this.$log('Error while reading snapshot from Framework')
-          return false
+          throw new Error('Error while reading snapshot from Framework')
         } else {
           return true
         }
@@ -147,8 +148,7 @@ export default {
             if (Number(data.misMatchPercentage) <= 0.01) {
               return true
             } else {
-              this.$log('Screenshot differs ' + data.misMatchPercentage + '%')
-              return false
+              throw new Error('Screenshot differs ' + data.misMatchPercentage + '%')
             }
           })
       },
@@ -160,7 +160,9 @@ export default {
       },
       validate(res) {
         if (res === null) return true
-        else return false
+        else {
+          throw new Error(`Result is not as expected and is ${res}`)
+        }
       },
     },
     {
@@ -170,8 +172,7 @@ export default {
         let resp = this.$data.read('screenshotResult')
         this.$data.write('screenshot', resp)
         if (resp === undefined || resp.length === 0) {
-          this.$log('Error while reading snapshot from Framework')
-          return false
+          throw new Error('Error while reading snapshot from Framework')
         } else {
           return true
         }
@@ -188,8 +189,7 @@ export default {
             if (Number(data.misMatchPercentage) <= 0.01) {
               return true
             } else {
-              this.$log('Screenshot differs ' + data.misMatchPercentage + '%')
-              return false
+              throw new Error('Screenshot differs ' + data.misMatchPercentage + '%')
             }
           })
       },
@@ -201,7 +201,9 @@ export default {
       },
       validate(res) {
         if (res === null) return true
-        else return false
+        else {
+          throw new Error(`Result is not as expected and is ${res}`)
+        }
       },
     },
     {
@@ -211,8 +213,7 @@ export default {
         let resp = this.$data.read('screenshotResult')
         this.$data.write('screenshot', resp)
         if (resp === undefined || resp.length === 0) {
-          this.$log('Error while reading snapshot from Framework')
-          return false
+          throw new Error('Error while reading snapshot from Framework')
         } else {
           return true
         }
@@ -229,8 +230,7 @@ export default {
             if (Number(data.misMatchPercentage) <= 0.01) {
               return true
             } else {
-              this.$log('Screenshot differs ' + data.misMatchPercentage + '%')
-              return false
+              throw new Error('Screenshot differs ' + data.misMatchPercentage + '%')
             }
           })
       },

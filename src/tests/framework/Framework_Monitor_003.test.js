@@ -33,14 +33,12 @@ export default {
         let monitorData = response[i]
         if (monitorData.observable === constants.youTubePlugin) {
           if (monitorData.measurements === undefined) {
-            this.$log('Monitor data measurement for YouTube is undefined')
-            return false
+            throw new Error('Monitor data measurement for YouTube is undefined')
           }
           return true
         }
       }
-      this.$log('Monitor data for Youtube plugin is unavailable')
-      return false
+      throw new Error('Monitor data for Youtube plugin is unavailable')
     },
   },
 }

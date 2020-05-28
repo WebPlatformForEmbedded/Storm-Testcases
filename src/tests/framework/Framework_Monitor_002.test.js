@@ -39,14 +39,12 @@ export default {
         let monitorData = response[i]
         if (monitorData.observable === constants.webKitBrowserPlugin) {
           if (monitorData.measurements === undefined) {
-            this.$log('Monitor data measurement for WebKitBrowser is undefined')
-            return false
+            throw new Error('Monitor data measurement for WebKitBrowser is undefined')
           }
           return true
         }
       }
-      this.$log('Monitor data for WebKitBrowser plugin is unavailable')
-      return false
+      throw new Error('Monitor data for WebKitBrowser plugin is unavailable')
     },
   },
 }

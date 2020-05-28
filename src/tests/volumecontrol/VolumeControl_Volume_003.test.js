@@ -34,8 +34,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Error while setting Volume')
-          return false
+          throw new Error('Error while setting Volume')
         }
       },
     },
@@ -48,8 +47,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Error while setting Volume')
-          return false
+          throw new Error('Error while setting Volume')
         }
       },
     },
@@ -81,8 +79,7 @@ export default {
         if (res === this.$context.read('volume')) {
           return true
         } else {
-          this.$log('Volume not set to ' + this.$context.read('volume'))
-          return false
+          throw new Error('Volume not set to ' + this.$context.read('volume'))
         }
       },
     },

@@ -30,8 +30,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Current Time is not provided')
-          return false
+          throw new Error('Current Time is not provided')
         }
       },
     },
@@ -48,8 +47,7 @@ export default {
         if (timeDiff < 3000) {
           return true
         } else {
-          this.$log('Current Time is not provided')
-          return false
+          throw new Error('Current Time is not provided')
         }
       },
     },

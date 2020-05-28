@@ -35,7 +35,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          return false
+          throw new Error(`Result is not as expected and is ${res}`)
         }
       },
     },
@@ -48,7 +48,7 @@ export default {
         if (res == constants.resume) {
           return true
         } else {
-          return false
+          throw new Error(`Result is not as expected and is ${res}`)
         }
       },
     },

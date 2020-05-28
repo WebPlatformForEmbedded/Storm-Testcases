@@ -37,8 +37,9 @@ export default {
         if (res.code === 5 && res.message === 'ERROR_ILLEGAL_STATE') {
           return true
         } else {
-          this.$log('Proper error message is not shown')
-          return false
+          throw new Error(
+            'Proper error message is not shown when we activate already activated DHCP interface'
+          )
         }
       },
     },

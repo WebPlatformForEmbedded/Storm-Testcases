@@ -57,8 +57,7 @@ export default {
         ) {
           return true
         } else {
-          this.$log('Error in getting dhcp server status')
-          return false
+          throw new Error('Error in getting dhcp server status')
         }
       },
     },

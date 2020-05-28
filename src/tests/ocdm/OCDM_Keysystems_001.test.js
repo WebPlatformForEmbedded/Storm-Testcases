@@ -24,8 +24,7 @@ export default {
       validate(result) {
         this.$data.write('drmlist', result)
         if (result === undefined || result.length === 0) {
-          this.$log('DRM list not available')
-          return false
+          throw new Error('DRM list not available')
         } else {
           return true
         }
@@ -40,8 +39,7 @@ export default {
       },
       validate(result) {
         if (result === undefined || result.length === 0) {
-          this.$log('DRM info not available')
-          return false
+          throw new Error('DRM info not available')
         } else {
           return true
         }

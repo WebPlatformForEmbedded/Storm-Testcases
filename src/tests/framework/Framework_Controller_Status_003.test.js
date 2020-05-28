@@ -29,8 +29,7 @@ export default {
               return true
             }
           } else {
-            this.$log('Mandatory elements in Plugins state not found')
-            return false
+            throw new Error('Mandatory elements in Plugins state not found')
           }
         }
       },

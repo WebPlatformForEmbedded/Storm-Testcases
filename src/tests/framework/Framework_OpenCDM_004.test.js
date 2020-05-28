@@ -90,17 +90,15 @@ export default {
             curSameScreenshot++
             return true
           } else {
-            this.$log('Screen updated')
-            return false
+            throw new Error('Screen updated')
           }
         } else {
           if (curSameScreenshot >= maxSameScreenshot) {
-            this.$log(
+            throw new Error(
               'Screen did not update, new screenshot is the same as previous screenshot for ' +
                 curSameScreenshot +
                 ' times.'
             )
-            return true
           }
         }
       },

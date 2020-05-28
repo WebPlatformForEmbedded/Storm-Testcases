@@ -14,8 +14,7 @@ export default {
         if (res.code === 24 && res.message === 'ERROR_PRIVILIGED_REQUEST') {
           return true
         } else {
-          this.$log('Proper error message is not shown')
-          return false
+          throw new Error('Proper error message is not shown while deactivating controller plugin')
         }
       },
     },

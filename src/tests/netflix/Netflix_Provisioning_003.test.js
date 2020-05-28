@@ -36,8 +36,7 @@ export default {
         if (res.result !== undefined && res.result === '' && res.result.length === 0) {
           return true
         } else {
-          this.$log('Expected Netflix to not have an ESN, yet it does')
-          return false
+          throw new Error('Expected Netflix to not have an ESN, yet it does')
         }
       },
     },

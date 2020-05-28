@@ -92,8 +92,7 @@ export default {
         let resp = this.$data.read('screenshotResult')
         this.$data.write('screenshot', resp)
         if (resp === undefined || resp.length === 0) {
-          this.$log('Error while reading snapshot from Framework')
-          return false
+          throw new Error('Error while reading snapshot from Framework')
         } else {
           return true
         }
@@ -164,8 +163,7 @@ export default {
         let resp = this.$data.read('screenshotResult')
         this.$data.write('screenshot', resp)
         if (resp === undefined || resp.length === 0) {
-          this.$log('Error while reading snapshot from Framework')
-          return false
+          throw new Error('Error while reading snapshot from Framework')
         } else {
           return true
         }
@@ -188,8 +186,7 @@ export default {
     ) {
       return true
     } else {
-      this.$log('Screenshot changed or empty response')
-      return false
+      throw new Error('Screenshot changed or empty response')
     }
   },
 }
