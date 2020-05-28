@@ -22,6 +22,7 @@ export default {
   youtubeImplementation: 'CobaltImplementation',
   provisioningPlugin: 'Provisioning',
   dhcpserver: 'DHCPServer',
+  traceControlPlugin: 'TraceControl',
   WPEProcess: 'WPEProcess',
   remoteControlPlugin: 'RemoteControl',
   invalidAddress: 'invalidstring',
