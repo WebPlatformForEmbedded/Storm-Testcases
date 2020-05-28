@@ -22,6 +22,7 @@ export default {
   webServerImplementation: 'WebServerImplementation',
   netflixImplementation: 'NetflixImplementation',
   youtubeImplementation: 'CobaltImplementation',
+  powerPlugin: 'Power',
   provisioningPlugin: 'Provisioning',
   dhcpserver: 'DHCPServer',
   wifiControlPlugin: 'WifiControl',
