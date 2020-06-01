@@ -33,12 +33,10 @@ export default {
   validate() {
     let response = this.$data.read('pluginInfo')
     if (response.id === undefined) {
-      this.$log('Provisioning id is not present')
-      return false
+      throw new Error('Provisioning id is not present')
     }
     if (response.status === undefined || isNaN(parseInt(response.status)) === true) {
-      this.$log('Provisioning status is not provided')
-      return false
+      throw new Error('Provisioning status is not provided')
     }
     return true
   },

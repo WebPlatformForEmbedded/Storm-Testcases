@@ -31,8 +31,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Plugin not killed')
-          return false
+          throw new Error('Plugin not killed')
         }
       },
     },
@@ -53,8 +52,7 @@ export default {
         let pluginInfo = this.$data.read('pluginInfo')
         //TODO Best way to check WebKitBrowser is still live need to be implemented
         if (pluginInfo.indexOf('WebKitBrowser') !== -1) {
-          this.$log('WebKitBrowser found in the list')
-          return false
+          throw new Error('WebKitBrowser found in the list')
         } else {
           return true
         }

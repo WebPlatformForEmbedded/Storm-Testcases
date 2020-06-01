@@ -82,20 +82,20 @@ export default {
                 return true
               } else {
                 if (curSameScreenshot >= maxSameScreenshot) {
-                  this.$log(
+                  throw new Error(
                     'Screen is stuck, new screenshot is the same as previous screenshot for ' +
                       curSameScreenshot +
                       ' times.'
                   )
-                  return false
                 }
                 curSameScreenshot++
                 return true
               }
             } else {
               if (curSameScreenshot >= maxSameScreenshot) {
-                this.$log('Error screenshot returned is empty for ' + curSameScreenshot + ' times.')
-                return false
+                throw new Error(
+                  'Error screenshot returned is empty for ' + curSameScreenshot + ' times.'
+                )
               }
               curSameScreenshot++
               return true

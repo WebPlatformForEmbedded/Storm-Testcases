@@ -37,8 +37,7 @@ export default {
         if (res === this.$context.read('url')) {
           return true
         } else {
-          this.$log('Proper error message is not shown')
-          return false
+          throw new Error(`Cobalt URL not set and the current URL is ${this.$context.read('url')}`)
         }
       },
     },

@@ -15,7 +15,7 @@ export default {
       validate(result) {
         const foundPlugins = []
         if (this.$expect(result).to.be.array() === false) {
-          return false
+          throw new Error('Result is not an array')
         }
 
         return (

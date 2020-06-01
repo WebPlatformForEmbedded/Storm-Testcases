@@ -30,8 +30,7 @@ export default {
         if (res === null) {
           return true
         } else {
-          this.$log('Error while setting Volume mute status')
-          return false
+          throw new Error('Error while setting Volume mute status')
         }
       },
     },
@@ -45,8 +44,7 @@ export default {
         if (res === null) {
           return true
         } else {
-          this.$log('Error while setting Volume mute status')
-          return false
+          throw new Error('Error while setting Volume mute status')
         }
       },
     },
@@ -79,8 +77,7 @@ export default {
         if (res === false) {
           return true
         } else {
-          this.$log('Volume state not set')
-          return false
+          throw new Error('Volume state not set')
         }
       },
     },

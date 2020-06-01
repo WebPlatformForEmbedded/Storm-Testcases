@@ -37,8 +37,7 @@ export default {
         if (res === null) {
           return true
         } else {
-          this.$log('Proper error message is not shown')
-          return false
+          throw new Error('Proper error message is not shown')
         }
       },
     },
@@ -70,8 +69,7 @@ export default {
         if (res === this.$context.read('visibilityState')) {
           return true
         } else {
-          this.$log('Visibility is not as expected and is ', res)
-          return false
+          throw new Error('Visibility is not as expected and is ', res)
         }
       },
     },

@@ -43,8 +43,7 @@ export default {
       systeminfo.serialnumber === undefined ||
       systeminfo.time === undefined
     ) {
-      this.$log('Error reading systeminfo object from DeviceInfo')
-      return false
+      throw new Error('Error reading systeminfo object from DeviceInfo')
     } else {
       return true
     }

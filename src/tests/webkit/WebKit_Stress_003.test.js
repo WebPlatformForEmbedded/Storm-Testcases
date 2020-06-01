@@ -81,8 +81,7 @@ export default {
           validate() {
             let cpuload = this.$data.read('cpuload')
             if (cpuload > 90) {
-              this.$log('CPU load is greater than 90')
-              return false
+              throw new Error('CPU load is greater than 90')
             } else {
               return true
             }
@@ -104,8 +103,7 @@ export default {
             let resp = this.$data.read('systeminfo')
             let free, total
             if (resp === undefined) {
-              this.$log('Cannot find systemInfo on DeviceInfo plugin response')
-              return false
+              throw new Error('Cannot find systemInfo on DeviceInfo plugin response')
             } else {
               free = parseInt(resp.freeram)
               total = parseInt(resp.totalram)
@@ -117,8 +115,7 @@ export default {
             let memUsage = this.$data.read('memoryUsageValue')
             if (memUsage < 98) return true
             else {
-              this.$log('Memory usage is above 98%, failing test')
-              return false
+              throw new Error('Memory usage is above 98%, failing test')
             }
           },
         },

@@ -13,8 +13,7 @@ export default {
         if (res !== undefined && res !== null) {
           return true
         } else {
-          this.$log('Environment not available')
-          return false
+          throw new Error('Environment not available')
         }
       },
     },

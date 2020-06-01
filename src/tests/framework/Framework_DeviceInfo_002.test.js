@@ -36,20 +36,17 @@ export default {
       for (let i = 0; i < response.length; i++) {
         let addresseinfo = response[i]
         if (addresseinfo.name === undefined || addresseinfo.mac === undefined) {
-          this.$log('Error reading interface name or mac on interface idx: ' + i)
-          return false
+          throw new Error('Error reading interface name or mac on interface idx: ' + i)
         }
         if (addresseinfo.ip !== undefined && !addresseinfo.ip.includes('127.0.0.1')) {
           return true
         }
         if (i == response.length - 1) {
-          this.$log('No valid IP address found in Framework response')
-          return false
+          throw new Error('No valid IP address found in Framework response')
         }
       }
     } else {
-      this.$log('Error reading addresses object from DeviceInfo')
-      return false
+      throw new Error('Error reading addresses object from DeviceInfo')
     }
   },
 }

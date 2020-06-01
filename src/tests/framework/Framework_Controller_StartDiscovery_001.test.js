@@ -13,8 +13,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Result is not as expected')
-          return false
+          throw new Error(`Result is not as expected in startDiscovery and is ${res}`)
         }
       },
     },

@@ -67,8 +67,7 @@ export default {
         if (zorder[0] == constants.uxplugin) {
           return true
         } else {
-          this.$log('Plugin not moved to top')
-          return false
+          throw new Error('Plugin not moved to top')
         }
       },
     },
@@ -89,8 +88,7 @@ export default {
         if (zorder[0] == constants.youTubePlugin) {
           return true
         } else {
-          this.$log('Plugin not moved to top')
-          return false
+          throw new Error('Plugin not moved to top')
         }
       },
     },

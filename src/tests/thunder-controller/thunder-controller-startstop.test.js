@@ -105,7 +105,9 @@ export default {
           return (
             result.filter(p => {
               if (p.callsign === callsign && p.state === 'activated') return true
-              else return false
+              else {
+                throw new Error('Plugin not activated')
+              }
             }).length === 1
           )
         })

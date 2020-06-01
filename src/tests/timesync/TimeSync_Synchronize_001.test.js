@@ -33,8 +33,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Sync does not start')
-          return false
+          throw new Error('Sync does not start')
         }
       },
     },

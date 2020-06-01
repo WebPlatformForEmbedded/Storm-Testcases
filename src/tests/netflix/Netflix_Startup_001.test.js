@@ -48,8 +48,7 @@ export default {
   validate() {
     let cpuload = this.$data.read('cpuload')
     if (cpuload > 90) {
-      this.$log('CPU load is greater than 90')
-      return false
+      throw new Error('CPU load is greater than 90')
     } else {
       return true
     }

@@ -76,20 +76,17 @@ export default {
         ) {
           if (plugin.measurements.resident.last < this.$context.read('MAX_MEMORY')) return true
           else {
-            this.$log(
+            throw new Error(
               `WebKitBrowser memory usage ${
                 plugin.measurements.resident.last
               } is higher than ${this.$context.read('MAX_MEMORY')} while loading about:blank`
             )
-            return false
           }
         } else {
-          this.$log('Resident memory measurement not found in monitor response')
-          return false
+          throw new Error('Resident memory measurement not found in monitor response')
         }
       }
     }
-    this.$log('Web kit browser Plugin not found')
-    return false
+    throw new Error('Web kit browser Plugin not found')
   },
 }

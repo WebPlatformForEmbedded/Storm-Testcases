@@ -59,8 +59,7 @@ export default {
         if (res.indexOf(constants.youTubePlugin) !== -1 && res.indexOf(constants.uxplugin) !== -1) {
           return true
         } else {
-          this.$log('Clients list is incorrect')
-          return false
+          throw new Error('Clients list is incorrect and does not have expected plugins')
         }
       },
     },

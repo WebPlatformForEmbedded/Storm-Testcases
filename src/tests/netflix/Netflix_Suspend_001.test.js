@@ -49,8 +49,7 @@ export default {
             if (res.result == null) {
               return true
             } else {
-              this.$log('Plugin not suspended')
-              return false
+              throw new Error('Plugin not suspended')
             }
           },
         },
@@ -63,8 +62,7 @@ export default {
             if (res.result == null) {
               return true
             } else {
-              this.$log('Plugin not resumed')
-              return false
+              throw new Error('Plugin not resumed')
             }
           },
         },
@@ -76,8 +74,7 @@ export default {
             let cpuload = this.$data.read('cpuload')
             this.$log('Cpu Load is', cpuload)
             if (cpuload > 90) {
-              this.$log('CPU load is greater than 90')
-              return false
+              throw new Error('CPU load is greater than 90')
             } else {
               return true
             }

@@ -40,8 +40,7 @@ export default {
         if (res === null) {
           return true
         } else {
-          this.$log('Result is not as expected')
-          return false
+          throw new Error('Result is not as expected')
         }
       },
     },
@@ -54,8 +53,7 @@ export default {
         if (res === this.$context.read('visibilityState')) {
           return true
         } else {
-          this.$log('Visibility is not as expected and is ', res)
-          return false
+          throw new Error('Visibility is not as expected and is ', res)
         }
       },
     },
