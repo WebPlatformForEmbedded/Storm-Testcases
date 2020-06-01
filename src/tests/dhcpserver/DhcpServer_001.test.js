@@ -38,7 +38,7 @@ export default {
         return getDhcpStatus.call(this, this.$context.read('interface'))
       },
       validate(res) {
-        if (res.interface != null && res.active != 'false') {
+        if (res.interface != null && res.active == 'false') {
           return true
         } else {
           throw new Error('Error in getting dhcp server status')
@@ -60,7 +60,7 @@ export default {
       validate(res) {
         if (
           res.interface != null &&
-          res.active != 'true' &&
+          res.active == 'true' &&
           res.begin != null &&
           res.end != null &&
           res.router != null &&
