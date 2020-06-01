@@ -3,28 +3,27 @@ import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
 
 export default {
-  title: 'Compositor Plugin robustness test',
-  description:
-    'Activates and Deactivates Compositor plugin repeatedly and checks the functionality',
+  title: 'Power Plugin plugin robustness test',
+  description: 'Activates and Deactivates Power plugin repeatedly and checks the functionality',
   context: {
     cpuLoad: 90,
   },
   steps: [
     {
-      title: 'Activate and deactivate Compositor plugin for 30 times',
+      title: 'Activate and deactivate Power plugin for 30 times',
       description: 'Nested test to repeat the test for 30 times',
       repeat: 30,
       steps: [
         {
-          description: 'Deactivate compositor plugin and check if it is deactivated',
+          description: 'Deactivate Power plugin and check if it is deactivated',
           test: pluginDeactivate,
-          params: constants.compositorPlugin,
+          params: constants.powerPlugin,
           assert: 'deactivated',
         },
         {
-          description: 'Activate Compositor Plugin and check if it is activated',
+          description: 'Activate Power Plugin and check if it is activated',
           test: pluginActivate,
-          params: constants.compositorPlugin,
+          params: constants.powerPlugin,
           assert: 'activated',
         },
         {

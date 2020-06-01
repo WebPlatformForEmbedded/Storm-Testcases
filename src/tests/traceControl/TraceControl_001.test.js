@@ -38,8 +38,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Error in seting trace for a module')
-          return false
+          throw new Error('Error in seting trace for a module')
         }
       },
     },
@@ -57,8 +56,7 @@ export default {
         if (setting.state === this.$context.read('state')) {
           return true
         } else {
-          this.$log('State not set for the Plugin ')
-          return false
+          throw new Error('State not set for the Plugin ')
         }
       },
     },
