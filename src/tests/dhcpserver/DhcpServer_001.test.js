@@ -33,6 +33,28 @@ export default {
       assert: null,
     },
     {
+      description: 'Get Interface Status and validate the result',
+      test() {
+        return getDhcpStatus.call(this, this.$context.read('interface'))
+      },
+      validate(res) {
+        if (
+          res.interface != null &&
+          res.active != 'false' &&
+          res.begin != null &&
+          res.end != null &&
+          res.router != null &&
+          res.lease.name != null &&
+          res.lease.ip != null &&
+          res.lease.expires != null
+        ) {
+          return true
+        } else {
+          throw new Error('Error in getting dhcp server status')
+        }
+      },
+    },
+    {
       description: 'Activate the dhcp interface and validate the result',
       test() {
         return dhcpInterfaceActivate.call(this, this.$context.read('interface'))
@@ -47,7 +69,7 @@ export default {
       validate(res) {
         if (
           res.interface != null &&
-          res.active != null &&
+          res.active != 'true' &&
           res.begin != null &&
           res.end != null &&
           res.router != null &&
