@@ -27,6 +27,7 @@ export default {
   dhcpserver: 'DHCPServer',
   wifiControlPlugin: 'WifiControl',
   traceControlPlugin: 'TraceControl',
+  firmwareUpgradePlugin: 'FirmwareControl',
   WPEProcess: 'WPEProcess',
   remoteControlPlugin: 'RemoteControl',
   invalidAddress: 'invalidstring',
