@@ -30,8 +30,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Result is not as expected')
-          return false
+          throw new Error('Result is not as expected while setting compositor resolution')
         }
       },
     },
@@ -45,8 +44,7 @@ export default {
         if (res == this.$context.read('resolution')) {
           return true
         } else {
-          this.$log('Resolution not set to ' + this.$context.read('resolution'))
-          return false
+          throw new Error('Resolution not set to ' + this.$context.read('resolution'))
         }
       },
     },

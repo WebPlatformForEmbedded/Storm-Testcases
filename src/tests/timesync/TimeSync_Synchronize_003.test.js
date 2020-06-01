@@ -37,8 +37,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Current Time is not provided')
-          return false
+          throw new Error('Current Time is not provided')
         }
       },
     },
@@ -52,8 +51,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Sync does not start')
-          return false
+          throw new Error('Sync does not start')
         }
       },
     },
@@ -89,8 +87,7 @@ export default {
         if (timeDiff < 3000) {
           return true
         } else {
-          this.$log('Current Time is not provided')
-          return false
+          throw new Error('Current Time is not provided')
         }
       },
     },

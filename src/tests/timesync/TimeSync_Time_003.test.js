@@ -28,8 +28,7 @@ export default {
         if (res.code == 30 && res.message == 'ERROR_BAD_REQUEST') {
           return true
         } else {
-          this.$log('Error message is improper')
-          return false
+          throw new Error('Error message is improper')
         }
       },
     },

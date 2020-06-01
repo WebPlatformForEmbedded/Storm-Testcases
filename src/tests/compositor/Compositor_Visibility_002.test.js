@@ -14,8 +14,7 @@ export default {
         if (res.code == 34 && res.message == 'ERROR_FIRST_RESOURCE_NOT_FOUND') {
           return true
         } else {
-          this.$log('Error message improper')
-          return false
+          throw new Error('Error message improper and is', res.message())
         }
       },
     },

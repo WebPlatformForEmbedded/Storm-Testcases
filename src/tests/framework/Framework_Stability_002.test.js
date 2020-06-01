@@ -77,7 +77,9 @@ export default {
       },
       validate(res) {
         if (res === null) return true
-        else return false
+        else {
+          throw new Error(`Result is not as expected and is ${res}`)
+        }
       },
     },
   ],

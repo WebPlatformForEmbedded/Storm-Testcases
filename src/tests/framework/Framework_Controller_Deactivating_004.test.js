@@ -30,8 +30,7 @@ export default {
         if (res == 'deactivated') {
           return true
         } else {
-          this.$log('Plugin not Activated', res)
-          return false
+          throw new Error(`Plugin not Activated and the state is ${res}`)
         }
       },
     },

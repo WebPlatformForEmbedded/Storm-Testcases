@@ -24,7 +24,7 @@ export default {
       validate(result) {
         console.log(result)
         if (this.$expect(result).to.be.object() !== true) {
-          return false
+          throw new Error('Result is not an object')
         }
         return this.$expect(Object.keys(result)).to.include(
           'version',

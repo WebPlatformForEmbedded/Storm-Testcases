@@ -111,8 +111,7 @@ export default {
       let error = `Tests run: ${results.testsRun} of ${this.$data.read('testCount')}. `
       error += 'Tests failed: ' + results.failed.tests + '. '
       error += 'Tests timedout: ' + results.timedout.tests + '. '
-      this.$log('Error is ', error)
-      return false
+      throw new Error('Error is ', error)
     }
   },
 }

@@ -41,8 +41,7 @@ export default {
       },
       validate(response) {
         if (response.id === undefined && response.status === undefined) {
-          this.$log('Provisioning id or status is not present in response')
-          return false
+          throw new Error('Provisioning id or status is not present in response')
         }
         if (parseInt(response.status) === 0) return true
         else if (parseInt(response.status) > 0 && response.tokens && response.tokens.length > 0) {
@@ -50,8 +49,7 @@ export default {
             return true
           }
         } else {
-          this.$log('Device is not provisioned')
-          return false
+          throw new Error('Device is not provisioned')
         }
       },
     },
@@ -69,8 +67,7 @@ export default {
       validate(res) {
         if (res.result !== undefined && res.result !== '' && res.result.length > 0) return true
         else {
-          this.$log('Netflix does not have a ESN')
-          return false
+          throw new Error('Netflix does not have a ESN')
         }
       },
     },

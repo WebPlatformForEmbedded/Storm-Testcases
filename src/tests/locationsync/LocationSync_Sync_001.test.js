@@ -42,8 +42,7 @@ export default {
         ) {
           return true
         } else {
-          this.$log('Error in getting location info')
-          return false
+          throw new Error('Error in getting location info')
         }
       },
     },

@@ -40,8 +40,7 @@ export default {
       ) {
         return true
       } else {
-        this.$log('Monitor data is not present for WebKitBrowser and YouTube')
-        return false
+        throw new Error('Monitor data is not present for WebKitBrowser and YouTube')
       }
     }
   },

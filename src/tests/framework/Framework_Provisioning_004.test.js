@@ -26,14 +26,12 @@ export default {
       },
       validate(response) {
         if (response.id === undefined && response.status === undefined) {
-          this.$log('Provisioning id or status is not present in response')
-          return false
+          throw new Error('Provisioning id or status is not present in response')
         }
         if (parseInt(response.status) === 0) return true
         else if (parseInt(response.status) > 0 && response.tokens.length > 0) return true
         else {
-          this.$log('Provisioning tokens and status do not match')
-          return false
+          throw new Error('Provisioning tokens and status do not match')
         }
       },
     },
@@ -58,14 +56,12 @@ export default {
       },
       validate(response) {
         if (response.id === undefined && response.status === undefined) {
-          this.$log('Provisioning id or status is not present in response')
-          return false
+          throw new Error('Provisioning id or status is not present in response')
         }
         if (parseInt(response.status) === 0) return true
         else if (parseInt(response.status) > 0 && response.tokens.length > 0) return true
         else {
-          this.$log('Device is not provisioned')
-          return false
+          throw new Error('Device is not provisioned')
         }
       },
     },

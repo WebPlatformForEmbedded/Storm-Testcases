@@ -14,8 +14,7 @@ export default {
         if (res !== undefined && res !== null) {
           return true
         } else {
-          this.$log('Configuration not available')
-          return false
+          throw new Error('Configuration not available')
         }
       },
     },

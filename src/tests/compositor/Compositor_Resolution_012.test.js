@@ -16,8 +16,7 @@ export default {
         if (res.code == 22 && res.message == 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
-          this.$log('Error is is not as expected and is ' + res.message)
-          return false
+          throw new Error('Error is is not as expected and is ' + res.message)
         }
       },
     },

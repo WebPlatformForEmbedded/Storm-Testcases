@@ -39,8 +39,7 @@ export default {
   validate() {
     let resp = this.$data.read('screenshotResult')
     if (resp === undefined || resp.length === 0) {
-      this.$log('Error while reading snapshot from Framework')
-      return false
+      throw new Error('Error while reading snapshot from Framework')
     } else {
       return true
     }
