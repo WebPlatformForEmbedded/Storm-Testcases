@@ -6,28 +6,29 @@ export default {
   title: 'Location - Sync 001',
   description:
     'Check the Sync Functionality of LocationSync Module and validate the location information',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.locationSyncPlugin),
+      () => pluginActivate.call(this, constants.locationSyncPlugin),
+    ])
+  },
   steps: [
-    {
-      description: 'Check if LocationSync Plugin is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.locationSyncPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if Location Sync Plugin is started correctly',
-      test: pluginActivate,
-      params: constants.locationSyncPlugin,
-      assert: 'activated',
-    },
     {
       description: 'Invoke Sync',
       sleep: 5,
       test() {
         return syncLocation.call(this) //TODO - Add code to make sure the Sync is completed
       },
+      validate(res) {
+        if (res == null) {
+          return true
+        } else {
+          throw new Error('Error occurred while syncing location')
+        }
+      },
     },
     {
-      description: 'Invoke Location Sync',
+      description: 'Invoke Get location and validate the result',
       sleep: 10,
       test() {
         return getLocation.call(this)
