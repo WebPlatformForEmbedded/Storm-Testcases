@@ -5,22 +5,19 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'DHCP Server Interface Status - 001',
   description: 'Get Status for invalid Interface and validate the result',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.dhcpserver),
+      () => pluginActivate.call(this, constants.dhcpserver),
+    ])
+  },
+  teardown() {
+    pluginDeactivate.call(this, constants.dhcpserver)
+  },
   context: {
     interface: 'invalidInterface',
   },
   steps: [
-    {
-      description: 'Deactivate DHCP Plugin and check deactivated or not',
-      test: pluginDeactivate,
-      params: constants.dhcpserver,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activate DHCP Plugin and check activated or not',
-      test: pluginActivate,
-      params: constants.dhcpserver,
-      assert: 'activated',
-    },
     {
       description: 'Gets Invalid Interface Status and validate the result',
       test() {

@@ -12,25 +12,28 @@ export default {
   context: {
     interface: 'eth0',
   },
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.dhcpserver),
+      () => pluginActivate.call(this, constants.dhcpserver),
+    ])
+  },
+  teardown() {
+    pluginDeactivate.call(this, constants.dhcpserver)
+  },
   steps: [
-    {
-      description: 'Deactivate DHCP Plugin and check deactivated or not',
-      test: pluginDeactivate,
-      params: constants.dhcpserver,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activate DHCP Plugin and check deactivated or not',
-      test: pluginActivate,
-      params: constants.dhcpserver,
-      assert: 'activated',
-    },
     {
       description: 'Deactivate the dhcp interface and validate the result',
       test() {
         return dhcpInterfaceDeactivate.call(this, this.$context.read('interface'))
       },
-      assert: null,
+      validate(res) {
+        if (res == null) {
+          return true
+        } else {
+          throw new Error('Error in deactivating DHCP interface')
+        }
+      },
     },
     {
       description: 'Get Interface Status and validate the result',
@@ -50,7 +53,13 @@ export default {
       test() {
         return dhcpInterfaceActivate.call(this, this.$context.read('interface'))
       },
-      assert: null,
+      validate(res) {
+        if (res == null) {
+          return true
+        } else {
+          throw new Error('Error in activating DHCP interface')
+        }
+      },
     },
     {
       description: 'Get Interface Status and validate the result',
