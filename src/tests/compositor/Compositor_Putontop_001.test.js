@@ -2,43 +2,28 @@ import constants from '../../commonMethods/constants'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { getZOrder, putOnTop } from '../../commonMethods/compositor'
 import { suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
-import { setWebKitState } from '../../commonMethods/webKitBrowser'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 
 export default {
   title: 'Compositor Putontop Functionality - 001',
   description: 'Checks the putontop functionality of compositor plugin',
   setup() {
     return this.$sequence([
-      () => pluginDeactivate.call(this, constants.compositorPlugin),
-      () => pluginActivate.call(this, constants.compositorPlugin),
       () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
       () => pluginDeactivate.call(this, constants.uxplugin),
+      () => pluginDeactivate.call(this, constants.netFlixPlugin),
       () => pluginDeactivate.call(this, constants.youTubePlugin),
+      () => pluginActivate.call(this, constants.webKitBrowserPlugin),
+      () => setWebKitUrl.call(this, constants.blankUrl),
+      () => {
+        return this.$thunder.api.call(constants.webKitBrowserPlugin, 'state', constants.resume)
+      },
     ])
   },
   teardown() {
-    pluginDeactivate.call(this, constants.youTubePlugin) //make sure Youtbe is turned off
+    pluginDeactivate.call(this, constants.youTubePlugin)
   },
   steps: [
-    {
-      description: 'Activate WebKitBrowser Plugin and check suspended or not',
-      test: pluginActivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'suspended',
-    },
-    {
-      description: 'Resume WebKitBrowser Plugin and check resumed or not',
-      test() {
-        return setWebKitState.call(this, constants.resume)
-      },
-      validate(res) {
-        if (res === null) {
-          return true
-        } else {
-          throw new Error('WebKit Browser Plugin not resumed')
-        }
-      },
-    },
     {
       description: 'Activate Cobalt Plugin and check suspended or not',
       test: pluginActivate,
