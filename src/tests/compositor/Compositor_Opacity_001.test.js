@@ -37,7 +37,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          throw new Error('Opacity not set to ', this.$context.read('opacityValue'))
+          throw new Error(`Opacity not set to ${this.$context.read('opacityValue')}`)
         }
       },
     },
