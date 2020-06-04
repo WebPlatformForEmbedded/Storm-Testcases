@@ -11,9 +11,6 @@ export default {
       () => pluginActivate.call(this, constants.dhcpserver),
     ])
   },
-  teardown() {
-    pluginDeactivate.call(this, constants.dhcpserver)
-  },
   context: {
     interface: 'invalidInterface',
   },

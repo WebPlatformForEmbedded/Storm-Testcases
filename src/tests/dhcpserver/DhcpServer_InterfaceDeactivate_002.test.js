@@ -1,4 +1,4 @@
-import { dhcpInterfaceDeactivate } from '../../commonMethods/dhcpServer'
+import { dhcpInterfaceActivate, dhcpInterfaceDeactivate } from '../../commonMethods/dhcpServer'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
@@ -12,13 +12,23 @@ export default {
       () => pluginActivate.call(this, constants.dhcpserver),
     ])
   },
-  teardown() {
-    pluginDeactivate.call(this, constants.dhcpserver)
-  },
   context: {
     interface: 'eth0',
   },
   steps: [
+    {
+      description: 'Activate the dhcp interface and validate the result',
+      test() {
+        return dhcpInterfaceActivate.call(this, this.$context.read('interface'))
+      },
+      validate(res) {
+        if (res == null) {
+          return true
+        } else {
+          throw new Error('Error in Activating DHCP interface')
+        }
+      },
+    },
     {
       description: 'Deactivate the dhcp interface and validate the result',
       test() {

@@ -18,36 +18,7 @@ export default {
       () => pluginActivate.call(this, constants.dhcpserver),
     ])
   },
-  teardown() {
-    pluginDeactivate.call(this, constants.dhcpserver)
-  },
   steps: [
-    {
-      description: 'Deactivate the dhcp interface and validate the result',
-      test() {
-        return dhcpInterfaceDeactivate.call(this, this.$context.read('interface'))
-      },
-      validate(res) {
-        if (res == null) {
-          return true
-        } else {
-          throw new Error('Error in deactivating DHCP interface')
-        }
-      },
-    },
-    {
-      description: 'Get Interface Status and validate the result',
-      test() {
-        return getDhcpStatus.call(this, this.$context.read('interface'))
-      },
-      validate(res) {
-        if (res.interface != null && res.active == 'false') {
-          return true
-        } else {
-          throw new Error('Error in getting dhcp server status')
-        }
-      },
-    },
     {
       description: 'Activate the dhcp interface and validate the result',
       test() {
@@ -66,20 +37,41 @@ export default {
       test() {
         return getDhcpStatus.call(this, this.$context.read('interface'))
       },
-      validate(res) {
-        if (
-          res.interface != null &&
-          res.active == 'true' &&
-          res.begin != null &&
-          res.end != null &&
-          res.router != null &&
-          res.leases[0].name != null &&
-          res.leases[0].ip != null &&
-          res.leases[0].expires != null
-        ) {
+      validate(result) {
+        let res = result[0]
+        if (res.interface == this.$context.read('interface') && res.active == true) {
           return true
         } else {
-          throw new Error('Error in getting dhcp server status')
+          throw new Error(
+            'Error in getting dhcp server status after activating DHCP Server interface'
+          )
+        }
+      },
+    },
+    {
+      description: 'Deactivate the dhcp interface and validate the result',
+      test() {
+        return dhcpInterfaceDeactivate.call(this, this.$context.read('interface'))
+      },
+      validate(res) {
+        if (res == null) {
+          return true
+        } else {
+          throw new Error('Error in deactivating DHCP interface')
+        }
+      },
+    },
+    {
+      description: 'Get Interface Status and validate the result',
+      test() {
+        return getDhcpStatus.call(this, this.$context.read('interface'))
+      },
+      validate(result) {
+        let res = result[0]
+        if (res.interface === this.$context.read('interface') && res.active == false) {
+          return true
+        } else {
+          throw new Error('Error in getting dhcp server status after deactivating DHCP Interface')
         }
       },
     },
