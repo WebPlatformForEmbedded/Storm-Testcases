@@ -37,8 +37,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Error in seting trace for a module')
-          return false
+          throw new Error('Error in seting trace for a module')
         }
       },
     },
@@ -63,8 +62,7 @@ export default {
         ) {
           return true
         } else {
-          this.$log('Error in getting traceControl Status')
-          return false
+          throw new Error('Error in getting traceControl Status')
         }
       },
     },

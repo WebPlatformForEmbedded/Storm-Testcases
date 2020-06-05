@@ -30,8 +30,7 @@ export default {
           if (plugin.module !== null && plugin.category !== null && plugin.state !== null) {
             return true
           } else {
-            this.$log('Mandatory info not in the plugin trace information')
-            return false
+            throw new Error('Mandatory info not in the plugin trace information')
           }
         }
       },
