@@ -16,10 +16,10 @@ export default {
           return getLatestSyncTime.call(this)
         },
         validate(res) {
-          let result = Moment(res)
-          let currTime = Moment()
+          let result = Moment.utc(res.time)
+          let currTime = Moment.utc()
           let timeDiff = currTime.diff(result)
-          if (timeDiff < 3000) {
+          if (timeDiff < 15000) {
             return true
           } else {
             throw new Error('Current Time is not provided')
