@@ -14,7 +14,6 @@ export default {
   uxplugin: 'UX',
   volumeControl: 'VolumeControl',
   networkControlPlugin: 'NetworkControl',
-  compositorPlugin: 'Compositor',
   ocdmImplementation: 'OCDMImplementation',
   snapshotPlugin: 'Snapshot',
   ioconnector: 'IOConnector',
