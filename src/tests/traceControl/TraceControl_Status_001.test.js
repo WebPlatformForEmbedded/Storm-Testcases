@@ -5,24 +5,18 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Trace Control Status - 001',
   description: 'Checks the functionality of setting the Trace for a module and getting the status',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.traceControlPlugin),
+      () => pluginActivate.call(this, constants.traceControlPlugin),
+    ])
+  },
   context: {
     module: 'Plugin_Monitor',
     category: 'Information',
     state: 'disabled',
   },
   steps: [
-    {
-      description: 'Check if Trace Control Plugin is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.traceControlPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if Trace Control Plugin is started correctly',
-      test: pluginActivate,
-      params: constants.traceControlPlugin,
-      assert: 'activated',
-    },
     {
       description: 'Set Trace for a module and validate the result',
       test() {
@@ -37,8 +31,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          this.$log('Error in seting trace for a module')
-          return false
+          throw new Error('Error in setting trace for a module')
         }
       },
     },
@@ -63,8 +56,7 @@ export default {
         ) {
           return true
         } else {
-          this.$log('Error in getting traceControl Status')
-          return false
+          throw new Error('Error in getting traceControl Status')
         }
       },
     },
