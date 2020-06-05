@@ -8,6 +8,12 @@ export default {
   description:
     'Starts and stops the webserver plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.webServerPlugin),
+      () => pluginActivate.call(this, constants.webServerPlugin),
+    ])
+  },
   context: {
     cpuLoad: 90,
   },

@@ -64,6 +64,7 @@ export default {
             attempts++
             if (this.$data.read('currentUrl') === this.$data.read('url')) {
               clearInterval(interval)
+              this.$data.write('res', true)
               resolve()
             } else if (attempts > 10) {
               clearInterval(interval)
@@ -72,6 +73,12 @@ export default {
           }, 1000)
         })
       },
+      test() {
+        if (this.$data.read('res') == true) {
+          return true
+        }
+      },
+      assert: true,
     },
     {
       description: 'Check if Framework controller still responds',

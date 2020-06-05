@@ -1,4 +1,4 @@
-import { pluginActivate } from '../../commonMethods/controller'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import {
   checkIfProcessIsRunning,
   startFramework,
@@ -10,6 +10,12 @@ export default {
   title: 'WebServer shutdown of Framework robustness test',
   description: 'Starts WebServer and stops Framework. Checks if everything is shutdown correctly',
   repeat: 30,
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.webServerPlugin),
+      () => pluginActivate.call(this, constants.webServerPlugin),
+    ])
+  },
   steps: [
     {
       description: 'Activating Web Server Plugin',
