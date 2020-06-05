@@ -23,6 +23,7 @@ export default {
   netflixImplementation: 'NetflixImplementation',
   youtubeImplementation: 'CobaltImplementation',
   powerPlugin: 'Power',
+  compositorPlugin: 'Compositor',
   provisioningPlugin: 'Provisioning',
   dhcpserver: 'DHCPServer',
   wifiControlPlugin: 'WifiControl',
@@ -32,6 +33,9 @@ export default {
   remoteControlPlugin: 'RemoteControl',
   invalidAddress: 'invalidstring',
   invalidPlugin: 'invalidplugin',
+
+  hidden: 'hidden',
+  visibile: 'visible',
 
   //Plugin states
   activate: 'activate',

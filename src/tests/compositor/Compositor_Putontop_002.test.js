@@ -1,9 +1,16 @@
 import constants from '../../commonMethods/constants'
 import { putOnTop } from '../../commonMethods/compositor'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 
 export default {
   title: 'Compositor Putontop Functionality - 002',
   description: 'Checks the puton top functionality for invalid plugin',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.compositorPlugin),
+      () => pluginActivate.call(this, constants.compositorPlugin),
+    ])
+  },
   steps: [
     {
       description: 'Put Invalid plugin on top',

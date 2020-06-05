@@ -1,10 +1,18 @@
 import { setCompositorResolution } from '../../commonMethods/compositor'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Compositor Resolution - 012',
   description: 'Sets the resolution to invalid and validate the result',
   context: {
     resolution: 'invalidres',
+  },
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.compositorPlugin),
+      () => pluginActivate.call(this, constants.compositorPlugin),
+    ])
   },
   steps: [
     {
