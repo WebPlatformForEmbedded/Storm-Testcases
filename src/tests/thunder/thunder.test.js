@@ -1,17 +1,20 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Thunder',
   description: 'Testing that we can use the ThunderJS to make calls to a Thunder enabled device',
   setup() {
     return this.$sequence([
-      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
-      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
-      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
-      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
-      () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => pluginDeactivate.call(this, constants.webKitBrowserPlugin), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, constants.uxplugin), //make sure UX is turned off
+      () => pluginDeactivate.call(this, constants.netFlixPlugin), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, constants.youTubePlugin), //make sure Cobalt is turned off
+      () => pluginDeactivate.call(this, constants.deviceInfo),
+      () => pluginActivate.call(this, constants.deviceInfo),
+      () => pluginActivate.call(this, constants.webKitBrowserPlugin),
       () => {
-        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+        return this.$thunder.api.call(constants.webKitBrowserPlugin, 'state', constants.resume)
       },
     ])
   },

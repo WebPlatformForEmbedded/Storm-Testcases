@@ -5,19 +5,13 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'OCDM  - Keysystems 002',
   description: 'Check OCDM Keysystems info with invalid KeySystem',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.ocdmPlugin),
+      () => pluginActivate.call(this, constants.ocdmPlugin),
+    ])
+  },
   steps: [
-    {
-      description: 'Check if OCDM Plugin is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.ocdmPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if OCDM Plugin is started correctly',
-      test: pluginActivate,
-      params: constants.ocdmPlugin,
-      assert: 'activated',
-    },
     {
       description: 'Get DRM KeySystem info',
       test() {

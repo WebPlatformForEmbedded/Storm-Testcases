@@ -5,19 +5,13 @@ import { getDRMKeySystemInfo, getDRMSList } from '../../commonMethods/ocdm'
 export default {
   title: 'OCDM - Keysystems  001',
   description: 'Check OCDM Keysystems info',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.ocdmPlugin),
+      () => pluginActivate.call(this, constants.ocdmPlugin),
+    ])
+  },
   steps: [
-    {
-      description: 'Check if OCDM Plugin is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.ocdmPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if OCDM Plugin is started correctly',
-      test: pluginActivate,
-      params: constants.ocdmPlugin,
-      assert: 'activated',
-    },
     {
       description: 'Get DRMS list',
       test: getDRMSList,

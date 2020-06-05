@@ -6,19 +6,13 @@ import Moment from 'moment'
 export default {
   title: 'TimeSync - GetTime 002',
   description: 'Check the latest Time returned from TimeSync Module',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.timeSyncPlugin),
+      () => pluginActivate.call(this, constants.timeSyncPlugin),
+    ])
+  },
   steps: [
-    {
-      description: 'Check if TimeSync Plugin is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.timeSyncPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if Time Sync Plugin is started correctly',
-      test: pluginActivate,
-      params: constants.timeSyncPlugin,
-      assert: 'activated',
-    },
     {
       description: 'Set Time to current time',
       sleep: 5,
