@@ -57,8 +57,7 @@ export default {
     },
     {
       description: 'Check whether time sync is success',
-      sleep: 5,
-      test() {
+      sleep() {
         return new Promise((resolve, reject) => {
           let attempts = 0
           const interval = setInterval(() => {
@@ -73,10 +72,6 @@ export default {
           }, 1000)
         })
       },
-    },
-    {
-      description: 'Invoke Time to get current time',
-      sleep: 5,
       test() {
         return getCurrentTime.call(this)
       },
