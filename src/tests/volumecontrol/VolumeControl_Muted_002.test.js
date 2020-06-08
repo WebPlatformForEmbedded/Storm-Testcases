@@ -2,7 +2,6 @@ import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller
 import { getVolumeMuteStatus, setVolumeMuteStatus } from '../../commonMethods/volumeControl'
 import constants from '../../commonMethods/constants'
 
-let listener
 export default {
   title: 'VolumeControl Muted - 002',
   description: 'Set the Volume to Un-Mute and check whether volume is unmuted',
@@ -10,14 +9,7 @@ export default {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.volumeControl),
       () => pluginActivate.call(this, constants.volumeControl),
-      () =>
-        (listener = this.$thunder.api.VolumeControl.on('muted', data => {
-          this.$data.write('muteState', data.muted)
-        })),
     ])
-  },
-  teardown() {
-    listener.dispose()
   },
   steps: [
     {
@@ -49,27 +41,8 @@ export default {
       },
     },
     {
-      description: 'Sleep until Volume is unmuted',
-      sleep() {
-        // Purpose of this sleep is to wait until current step gets 'mute change' event from the listener
-        return new Promise((resolve, reject) => {
-          let attempts = 0
-          const interval = setInterval(() => {
-            attempts++
-            if (this.$data.read('muteState') === false) {
-              clearInterval(interval)
-              resolve()
-            } else if (attempts > 10) {
-              clearInterval(interval)
-              reject('Volume not unmuted')
-            }
-          }, 1000)
-        })
-      },
-    },
-    {
       description: 'Get mute status and validate whether it is correct or not',
-      sleep: 5,
+      sleep: 10,
       test() {
         return getVolumeMuteStatus.call(this)
       },
