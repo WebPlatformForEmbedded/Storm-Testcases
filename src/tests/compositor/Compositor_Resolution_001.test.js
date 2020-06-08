@@ -1,6 +1,6 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 import { getCompositorResolution, setCompositorResolution } from '../../commonMethods/compositor'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Compositor Resolution - 001',
@@ -8,15 +8,11 @@ export default {
   context: {
     resolution: '480i',
   },
+
   setup() {
     return this.$sequence([
-      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
-      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
-      () => pluginActivate.call(this, 'WebKitBrowser'),
-      () => setWebKitUrl.call(this, 'about:blank'),
-      () => {
-        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
-      },
+      () => pluginDeactivate.call(this, constants.compositorPlugin),
+      () => pluginActivate.call(this, constants.compositorPlugin),
     ])
   },
   steps: [
@@ -35,7 +31,7 @@ export default {
       },
     },
     {
-      description: 'Get Compositor Clients and validate the result',
+      description: 'Get Compositor resolution and validate the result',
       sleep: 10,
       test() {
         return getCompositorResolution.call(this)

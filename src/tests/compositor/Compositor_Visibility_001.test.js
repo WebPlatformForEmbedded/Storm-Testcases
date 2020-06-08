@@ -8,21 +8,26 @@ export default {
   description: 'Sets the client visibility and validates the result',
   setup() {
     return this.$sequence([
-      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
-      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
-      () => pluginActivate.call(this, 'WebKitBrowser'),
-      () => setWebKitUrl.call(this, 'about:blank'),
+      () => pluginDeactivate.call(this, constants.compositorPlugin),
+      () => pluginActivate.call(this, constants.compositorPlugin),
+      () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
+      () => pluginDeactivate.call(this, constants.uxplugin),
+      () => pluginActivate.call(this, constants.webKitBrowserPlugin),
+      () => setWebKitUrl.call(this, constants.blankUrl),
       () => {
-        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+        return this.$thunder.api.call(constants.webKitBrowserPlugin, 'state', constants.resume)
       },
     ])
+  },
+  teardown() {
+    pluginDeactivate.call(this, constants.youTubePlugin)
   },
   steps: [
     {
       description: 'Set Client Visibility to hidden and validate the result',
       sleep: 10,
       test() {
-        return setClientVisibility.call(this, constants.webKitBrowserPlugin, 'hidden')
+        return setClientVisibility.call(this, constants.webKitBrowserPlugin, constants.hidden)
       },
       validate(res) {
         if (res == null) {
@@ -35,7 +40,7 @@ export default {
     {
       description: 'Set Client Visibility to Visibile and validate the result',
       test() {
-        return setClientVisibility.call(this, constants.webKitBrowserPlugin, 'visible')
+        return setClientVisibility.call(this, constants.webKitBrowserPlugin, constants.visible)
       },
       validate(res) {
         if (res == null) {

@@ -8,14 +8,19 @@ export default {
   description: 'Sets and gets the Geometry of client',
   setup() {
     return this.$sequence([
-      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
-      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
-      () => pluginActivate.call(this, 'WebKitBrowser'),
-      () => setWebKitUrl.call(this, 'about:blank'),
+      () => pluginDeactivate.call(this, constants.compositorPlugin),
+      () => pluginActivate.call(this, constants.compositorPlugin),
+      () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
+      () => pluginDeactivate.call(this, constants.uxplugin),
+      () => pluginActivate.call(this, constants.webKitBrowserPlugin),
+      () => setWebKitUrl.call(this, constants.blankUrl),
       () => {
-        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+        return this.$thunder.api.call(constants.webKitBrowserPlugin, 'state', constants.resume)
       },
     ])
+  },
+  teardown() {
+    pluginDeactivate.call(this, constants.youTubePlugin)
   },
   steps: [
     {

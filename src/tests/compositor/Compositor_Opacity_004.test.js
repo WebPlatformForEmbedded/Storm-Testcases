@@ -1,9 +1,16 @@
 import { setClientOpacity } from '../../commonMethods/compositor'
 import constants from '../../commonMethods/constants'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 
 export default {
   title: 'Compositor Client Opacity - 004',
   description: 'Sets the client Opacity for invalid Client',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.compositorPlugin),
+      () => pluginActivate.call(this, constants.compositorPlugin),
+    ])
+  },
   context: {
     opacityValue: '255',
   },

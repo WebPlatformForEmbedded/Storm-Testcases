@@ -12,14 +12,19 @@ export default {
   },
   setup() {
     return this.$sequence([
-      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
-      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
-      () => pluginActivate.call(this, 'WebKitBrowser'),
-      () => setWebKitUrl.call(this, 'about:blank'),
+      () => pluginDeactivate.call(this, constants.compositorPlugin),
+      () => pluginActivate.call(this, constants.compositorPlugin),
+      () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
+      () => pluginDeactivate.call(this, constants.uxplugin),
+      () => pluginActivate.call(this, constants.webKitBrowserPlugin),
+      () => setWebKitUrl.call(this, constants.blankUrl),
       () => {
-        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
+        return this.$thunder.api.call(constants.webKitBrowserPlugin, 'state', constants.resume)
       },
     ])
+  },
+  teardown() {
+    pluginDeactivate.call(this, constants.youTubePlugin)
   },
   steps: [
     {
@@ -36,7 +41,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          throw new Error('Opacity not set to ', this.$context.read('opacityInitialValue'))
+          throw new Error(`Opacity not set to ${this.$context.read('opacityInitialValue')}`)
         }
       },
     },
@@ -53,7 +58,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          throw new Error('Opacity not set to ', this.$context.read('opacityValue'))
+          throw new Error(`Opacity not set to ${this.$context.read('opacityValue')}`)
         }
       },
     },

@@ -7,27 +7,21 @@ import { suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 export default {
   title: 'Compositor Clients - 001',
   description: 'Gets the list of Clients',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.compositorPlugin),
+      () => pluginActivate.call(this, constants.compositorPlugin),
+      () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
+      () => pluginDeactivate.call(this, constants.uxplugin),
+      () => pluginDeactivate.call(this, constants.youTubePlugin),
+    ])
+  },
+  teardown() {
+    pluginDeactivate.call(this, constants.youTubePlugin)
+  },
   steps: [
     {
-      description: 'Deactivate UX Plugin and check deactivated or not',
-      test: pluginDeactivate,
-      params: constants.uxplugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Deactivate Webkitbrowser Plugin and check deactivated or not',
-      test: pluginDeactivate,
-      params: constants.webKitBrowserPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Deactivate Youtube Plugin and check deactivated or not',
-      test: pluginDeactivate,
-      params: constants.youTubePlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activate UX Plugin and check activated or not',
+      description: 'Activate UX Plugin and check suspended or not',
       test: pluginActivate,
       params: constants.uxplugin,
       assert: 'suspended',
@@ -35,7 +29,14 @@ export default {
     {
       description: 'Resume UX Plugin and check resumed or not',
       test() {
-        suspendOrResumeUxPlugin.call(this, constants.resume)
+        return suspendOrResumeUxPlugin.call(this, constants.resume)
+      },
+      validate(res) {
+        if (res === null) {
+          return true
+        } else {
+          throw new Error('Ux Plugin not resumed')
+        }
       },
     },
     {
@@ -45,9 +46,16 @@ export default {
       assert: 'suspended',
     },
     {
-      description: 'Resume Cobalt Plugin and check resumed or not',
+      description: 'Resume Youtube Plugin and check resumed or not',
       test() {
-        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+        return suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
+      validate(res) {
+        if (res === null) {
+          return true
+        } else {
+          throw new Error('Cobalt Plugin not resumed')
+        }
       },
     },
     {
