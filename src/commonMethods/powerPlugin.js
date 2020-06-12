@@ -5,7 +5,7 @@
  * @returns {Promise<T>}
  */
 export const setPowerState = function(powerState, timeOut) {
-  return this.$thunder.api.Power.set({ powerState: powerState, timeOut: timeOut })
+  return this.$thunder.api.Power.set({ powerstate: powerState, timeout: timeOut })
     .then(result => result)
     .catch(err => err)
 }
