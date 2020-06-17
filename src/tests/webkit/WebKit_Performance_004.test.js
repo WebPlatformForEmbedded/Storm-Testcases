@@ -5,7 +5,7 @@ export default {
   ...{
     context: {
       minFPS: 15,
-      url: 'http://www.smashcat.org/av/canvas_test/',
+      url: 'https://www.smashcat.org/av/canvas_test/',
     },
     title: 'WPEWebkit performance smashcat',
     description: 'Loads the smashcat Canvas animation and measures its performance',

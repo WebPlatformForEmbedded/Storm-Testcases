@@ -31,7 +31,7 @@ export default {
   invalidPlugin: 'invalidplugin',
 
   hidden: 'hidden',
-  visibile: 'visible',
+  visible: 'visible',
 
   //Plugin states
   activate: 'activate',

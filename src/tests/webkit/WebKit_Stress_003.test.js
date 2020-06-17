@@ -19,7 +19,7 @@ export default {
     ])
   },
   context: {
-    url: 'http://cdn.metrological.com/static/storm/app_redirect1.html',
+    url: 'https://cdn.metrological.com/static/storm/app_redirect1.html',
     expUrl1:
       'http://cdn.metrological.com/static/storm/app_redirect2.html?run=1&runs=-1&wait=200&requests=20&side=A',
     expUrl2:

@@ -5,7 +5,7 @@ export default {
   ...{
     context: {
       minFPS: 5,
-      url: 'http://alteredqualia.com/three/examples/webgl_pasta.html',
+      url: 'https://alteredqualia.com/three/examples/webgl_pasta.html',
     },
     title: 'WPEWebkit performance pasta',
     description: 'Loads the pasta WebGL animation and measures its performance',

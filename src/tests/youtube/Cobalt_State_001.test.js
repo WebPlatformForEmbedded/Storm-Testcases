@@ -21,13 +21,12 @@ export default {
   },
   steps: [
     {
-      description: 'Suspend Cobalt Plugin and check if it is suspended',
-      sleep: 10,
+      description: 'Set Cobalt Plugin state to resumed',
       test() {
-        return setCobaltState.call(this, constants.suspend)
+        return setCobaltState.call(this, constants.resume)
       },
       validate(res) {
-        if (res == null) {
+        if (res === null) {
           return true
         } else {
           throw new Error(`Result is not as expected and is ${res}`)
@@ -35,12 +34,13 @@ export default {
       },
     },
     {
-      description: 'Get Cobalt Plugin state and check if it is suspended',
+      description: 'Suspend Cobalt Plugin and check if it is suspended',
+      sleep: 10,
       test() {
-        return getCobaltState.call(this)
+        return setCobaltState.call(this, constants.suspend)
       },
       validate(res) {
-        if (res == constants.suspend) {
+        if (res == null) {
           return true
         } else {
           throw new Error(`Result is not as expected and is ${res}`)
@@ -64,6 +64,19 @@ export default {
             }
           }, 1000)
         })
+      },
+    },
+    {
+      description: 'Get Cobalt Plugin state and check if it is suspended',
+      test() {
+        return getCobaltState.call(this)
+      },
+      validate(res) {
+        if (res == constants.suspend) {
+          return true
+        } else {
+          throw new Error(`Result is not as expected and is ${res}`)
+        }
       },
     },
   ],
