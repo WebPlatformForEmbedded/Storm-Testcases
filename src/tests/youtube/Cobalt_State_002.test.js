@@ -12,7 +12,6 @@ export default {
       () => pluginActivate.call(this, constants.youTubePlugin),
       () =>
         (listener = this.$thunder.api.Cobalt.on('statechange', data => {
-          this.$log('data is', data.suspended)
           this.$data.write('state', data.suspended)
         })),
     ])
@@ -49,20 +48,6 @@ export default {
       },
     },
     {
-      description: 'Get Cobalt Plugin state and check if it is resumed',
-      test() {
-        return getCobaltState.call(this)
-      },
-      validate(res) {
-        this.$log('res is', res)
-        if (res == constants.resume) {
-          return true
-        } else {
-          throw new Error(`Result is not as expected and is ${res}`)
-        }
-      },
-    },
-    {
       description: 'Wait until state change event for suspend is detected',
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'state change' response from the listener
@@ -79,6 +64,19 @@ export default {
             }
           }, 1000)
         })
+      },
+    },
+    {
+      description: 'Get Cobalt Plugin state and check if it is resumed',
+      test() {
+        return getCobaltState.call(this)
+      },
+      validate(res) {
+        if (res == constants.resume) {
+          return true
+        } else {
+          throw new Error(`Result is not as expected and is ${res}`)
+        }
       },
     },
   ],

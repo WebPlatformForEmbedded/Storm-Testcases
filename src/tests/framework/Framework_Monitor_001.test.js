@@ -5,6 +5,16 @@ import { getMonitorInfo } from '../../commonMethods/monitor'
 export default {
   title: 'Framework Monitor test 001',
   description: 'Tests if the Framework Monitor module works',
+  setup() {
+    this.$data.write('samples', [])
+    return this.$sequence([
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
+      () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
+      () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
+      () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
+      () => pluginActivate.call(this, 'WebKitBrowser'),
+    ])
+  },
   steps: [
     {
       description: 'Deactivating Monitor Plugin and checking whether deactivated or not',

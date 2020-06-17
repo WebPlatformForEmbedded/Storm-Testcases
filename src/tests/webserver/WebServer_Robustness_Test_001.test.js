@@ -24,7 +24,7 @@ export default {
           description: 'Activate WebServer Plugin and check if it is activated',
           test: pluginActivate,
           params: constants.webServerPlugin,
-          assert: 'activated',
+          assert: 'resumed',
         },
         {
           description: 'Get CPU load',

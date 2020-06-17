@@ -36,7 +36,7 @@ export default {
     ])
   },
   context: {
-    url: 'http://cdn.metrological.com/static/testbot/v1/xmlhttprequest_app.html',
+    url: 'https://cdn.metrological.com/static/testbot/v1/xmlhttprequest_app.html',
   },
   teardown() {
     listener.dispose()

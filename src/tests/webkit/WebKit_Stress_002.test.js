@@ -4,7 +4,7 @@ export default {
   ...baseTest,
   ...{
     context: {
-      url: 'http://cdn.metrological.com/static/testbot/v1/images_app.html',
+      url: 'https://cdn.metrological.com/static/testbot/v1/images_app.html',
     },
     title: 'WPEWebkit stability images test',
     description:

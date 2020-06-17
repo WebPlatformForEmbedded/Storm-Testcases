@@ -40,38 +40,12 @@ export default {
       },
     },
     {
-      description: 'Get Webkit Plugin state and check if it is resumed',
-      test() {
-        return getWebKitState.call(this)
-      },
-      validate(res) {
-        if (res == constants.resume) {
-          return true
-        } else {
-          throw new Error(`Result is not as expected and is ${res}`)
-        }
-      },
-    },
-    {
       description: 'Suspend Webkit Plugin and validate the result',
       test() {
         return setWebKitState.call(this, constants.suspend)
       },
       validate(res) {
         if (res == null) {
-          return true
-        } else {
-          throw new Error(`Result is not as expected and is ${res}`)
-        }
-      },
-    },
-    {
-      description: 'Get Webkit Plugin state and check if it is suspended',
-      test() {
-        return getWebKitState.call(this)
-      },
-      validate(res) {
-        if (res == constants.suspend) {
           return true
         } else {
           throw new Error(`Result is not as expected and is ${res}`)
@@ -95,6 +69,19 @@ export default {
             }
           }, 1000)
         })
+      },
+    },
+    {
+      description: 'Get Webkit Plugin state and check if it is suspended',
+      test() {
+        return getWebKitState.call(this)
+      },
+      validate(res) {
+        if (res == constants.suspend) {
+          return true
+        } else {
+          throw new Error(`Result is not as expected and is ${res}`)
+        }
       },
     },
   ],
