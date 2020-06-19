@@ -29,6 +29,7 @@ export default {
   remoteControlPlugin: 'RemoteControl',
   invalidAddress: 'invalidstring',
   invalidPlugin: 'invalidplugin',
+  displayInfo: 'DisplayInfo',
 
   hidden: 'hidden',
   visible: 'visible',
