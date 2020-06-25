@@ -67,3 +67,45 @@ export const releaseKey = function(device, code) {
     .then(result => result)
     .catch(err => err)
 }
+
+/**
+ * This function is used to delete remote control key from table
+ * @param device
+ * @param code
+ * @returns {Promise<T>}
+ */
+export const deleteRemoteControlKey = function(device, code) {
+  return this.$thunder.api.RemoteControl.delete({ device: device, code: code })
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to add remote control key from table
+ * @param device
+ * @param code
+ * @returns {Promise<T>}
+ */
+export const addRemoteControlKey = function(device, code, keyvalue) {
+  return this.$thunder.api.RemoteControl.add({ device: device, code: code, key: keyvalue })
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to modify existing remote control key from table
+ * @param device
+ * @param code
+ * @param keyvalue
+ * @returns {Promise<T>}
+ */
+export const modifyRemoteControlKey = function(device, code, keyvalue, modifiers) {
+  return this.$thunder.api.RemoteControl.modify({
+    device: device,
+    code: code,
+    key: keyvalue,
+    modifiers: modifiers,
+  })
+    .then(result => result)
+    .catch(err => err)
+}
