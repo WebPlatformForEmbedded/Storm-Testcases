@@ -9,7 +9,7 @@ let curSameScreenshot = 0
 let maxSameScreenshot = 5
 
 export default {
-  title: 'YouTube Random Key test',
+  title: 'YouTube Random Key test - 002',
   description:
     'Send random keys to youtube, only to navigate the the UI. No enter is send so the device will never start playback',
   setup() {
@@ -30,15 +30,19 @@ export default {
     {
       description: 'Resume Cobalt Plugin and check resumed or not',
       test() {
-        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+        return suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
+      validate(res) {
+        if (res === null) {
+          return true
+        } else {
+          throw new Error('Youtube not resumed')
+        }
       },
     },
     {
-      description: 'Sleep for 10 seconds to make sure Youtube is loaded',
-      sleep: 10,
-    },
-    {
       description: 'Repeat for 3 hours',
+      sleepOnce: 20,
       repeat: {
         seconds: 3 * 60 * 60, // Three hours
       },

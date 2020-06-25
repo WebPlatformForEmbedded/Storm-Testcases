@@ -2,7 +2,7 @@ import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller
 import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
-import { suspendOrResumeCobaltPlugin, youtubeStartAndResume } from '../../commonMethods/cobalt'
+import { suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 
 export default {
   title: 'Youtube startup robustness test',
@@ -34,7 +34,14 @@ export default {
     {
       description: 'Resume Cobalt Plugin and check resumed or not',
       test() {
-        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+        return suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
+      validate(res) {
+        if (res === null) {
+          return true
+        } else {
+          throw new Error('Youtube not resumed')
+        }
       },
     },
     {
