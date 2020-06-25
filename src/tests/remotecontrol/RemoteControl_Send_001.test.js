@@ -1,6 +1,6 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
-import { sendKeyCodeToDevice} from '../../commonMethods/remoteControl'
+import { sendKeyCodeToDevice } from '../../commonMethods/remoteControl'
 
 export default {
   title: 'RemoteControl Send - 001',
