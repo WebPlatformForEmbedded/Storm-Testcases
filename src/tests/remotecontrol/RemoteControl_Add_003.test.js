@@ -1,15 +1,14 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
-import { modifyRemoteControlKey } from '../../commonMethods/remoteControl'
+import { addRemoteControlKey } from '../../commonMethods/remoteControl'
 
 export default {
-  title: 'RemoteControl Modify - 003',
-  description: 'Modifies invalid key and validates the result',
+  title: 'RemoteControl Add - 003',
+  description: 'Adds key to the invalid device and validates the result',
   context: {
-    deviceName: 'DevInput',
-    keyCode: '10000000000000000000000',
+    deviceName: 'invalidevice',
+    keyCode: '1',
     key: 103,
-    modifier: ['leftshift'],
   },
   setup() {
     return this.$sequence([
@@ -19,18 +18,17 @@ export default {
   },
   steps: [
     {
-      description: 'Modify invalid keycode and validate  the result',
+      description: 'Add remote control validates the result',
       test() {
-        return modifyRemoteControlKey.call(
+        return addRemoteControlKey.call(
           this,
           this.$context.read('deviceName'),
           this.$context.read('keyCode'),
-          this.$context.read('key'),
-          this.$context.read('modifier')
+          this.$context.read('key')
         )
       },
       validate(res) {
-        if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
+        if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
           throw new Error(`Error message is improper and is ${res}`)

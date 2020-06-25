@@ -1,13 +1,12 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
-import { deleteRemoteControlKey } from '../../commonMethods/remoteControl'
+import { loadDeviceKeyMap } from '../../commonMethods/remoteControl'
 
 export default {
-  title: 'RemoteControl Delete - 002',
-  description: 'Deletes key from the invalid device and validates the result',
+  title: 'RemoteControl Load - 002 ',
+  description: 'Loads the device keymap for invalid device and validates the result',
   context: {
     deviceName: 'invalidDevice',
-    keyCode: '1',
   },
   setup() {
     return this.$sequence([
@@ -17,13 +16,9 @@ export default {
   },
   steps: [
     {
-      description: 'Delete key from invalid device and validates the result',
+      description: 'Loads Device key map on invalid device and validates the result',
       test() {
-        return deleteRemoteControlKey.call(
-          this,
-          this.$context.read('deviceName'),
-          this.$context.read('keyCode')
-        )
+        return loadDeviceKeyMap.call(this, this.$context.read('deviceName'))
       },
       validate(res) {
         if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {

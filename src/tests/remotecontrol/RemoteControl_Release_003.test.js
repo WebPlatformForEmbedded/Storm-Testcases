@@ -22,7 +22,7 @@ export default {
         return releaseKey.call(this, this.$context.read('deviceName'), this.$context.read('code'))
       },
       validate(res) {
-        if (res.code == '22' && res.message === 'ERROR_UNKNOWN_KEY') {
+        if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
           throw new Error('Invalid error message shown')
