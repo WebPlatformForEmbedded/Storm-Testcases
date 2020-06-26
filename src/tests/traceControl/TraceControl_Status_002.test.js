@@ -5,19 +5,13 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Trace Control Status - 002',
   description: 'Get default Trace Control status and validate the result',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.traceControlPlugin),
+      () => pluginActivate.call(this, constants.traceControlPlugin),
+    ])
+  },
   steps: [
-    {
-      description: 'Check if Trace Control Plugin is stopped correctly',
-      test: pluginDeactivate,
-      params: constants.traceControlPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Check if Trace Control Plugin is started correctly',
-      test: pluginActivate,
-      params: constants.traceControlPlugin,
-      assert: 'activated',
-    },
     {
       description: 'Invoke get traceControl Status and validate the result',
       test() {
@@ -27,10 +21,12 @@ export default {
         let response = res.settings
         for (let i = 0; i < response.length; i++) {
           let plugin = response[i]
-          if (plugin.module !== null && plugin.category !== null && plugin.state !== null) {
-            return true
-          } else {
-            throw new Error('Mandatory info not in the plugin trace information')
+          if (plugin != null) {
+            if (plugin.module !== null && plugin.category !== null && plugin.state !== null) {
+              return true
+            } else {
+              throw new Error('Mandatory info not in the plugin trace information')
+            }
           }
         }
       },

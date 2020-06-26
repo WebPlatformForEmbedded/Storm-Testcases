@@ -3,28 +3,29 @@ import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
 
 export default {
-  title: 'WebServer Plugin robustness test',
-  description: 'Activates and Deactivates WebServer plugin repeatedly and checks the functionality',
+  title: 'RemoteControl plugin robustness test',
+  description:
+    'Activates and Deactivates Remote Control plugin repeatedly and checks the functionality',
   context: {
     cpuLoad: 90,
   },
   steps: [
     {
-      title: 'Activate and deactivate WebServer plugin for 30 times',
+      title: 'Activate and deactivate RemoteControl plugin for 30 times',
       description: 'Nested test to repeat the test for 30 times',
       repeat: 30,
       steps: [
         {
-          description: 'Deactivate WebServer plugin and check if it is deactivated',
+          description: 'Deactivate Remote Control plugin and check if it is deactivated',
           test: pluginDeactivate,
-          params: constants.webServerPlugin,
+          params: constants.remoteControlPlugin,
           assert: 'deactivated',
         },
         {
-          description: 'Activate WebServer Plugin and check if it is activated',
+          description: 'Activate Remote Control Plugin and check if it is activated',
           test: pluginActivate,
-          params: constants.webServerPlugin,
-          assert: 'resumed',
+          params: constants.remoteControlPlugin,
+          assert: 'activated',
         },
         {
           description: 'Get CPU load',

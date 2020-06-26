@@ -5,23 +5,17 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Power Plugin - 004',
   description: 'Sets the Power state to already existing power state and validate the result',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.powerPlugin),
+      () => pluginActivate.call(this, constants.powerPlugin),
+    ])
+  },
   context: {
     powerState: 'on',
     timeOut: 0,
   },
   steps: [
-    {
-      description: 'Deactivate Power Plugin and check deactivated or not',
-      test: pluginDeactivate,
-      params: constants.powerPlugin,
-      assert: 'deactivated',
-    },
-    {
-      description: 'Activate Power Plugin and check activated or not',
-      test: pluginActivate,
-      params: constants.powerPlugin,
-      assert: 'activated',
-    },
     {
       description: 'Set power state and validate the result',
       test() {

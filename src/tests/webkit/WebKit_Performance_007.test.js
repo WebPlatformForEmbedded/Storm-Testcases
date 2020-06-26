@@ -5,7 +5,7 @@ export default {
   ...{
     context: {
       minFPS: 10,
-      url: 'http://oos.moxiecode.com/js_webgl/particles_morph/',
+      url: 'https://oos.moxiecode.com/js_webgl/particles_morph/',
     },
     title: 'WPEWebkit performance anisotropic',
     description: 'Loads the Particles webGL animation and measures its performance',

@@ -51,6 +51,7 @@ export default {
             attempts++
             if (this.$data.read('activity') === this.$context.read('value')) {
               clearInterval(interval)
+              this.$data.write('res', true)
               resolve()
             } else if (attempts > 10) {
               clearInterval(interval)
@@ -59,6 +60,12 @@ export default {
           }, 1000)
         })
       },
+      test() {
+        if (this.$data.read('res') == true) {
+          return true
+        }
+      },
+      assert: true,
     },
     {
       description: 'Get IO Connector pin value and validate whether its properly set or not',
@@ -69,7 +76,7 @@ export default {
         if (res == this.$context.read('value')) {
           return true
         } else {
-          throw new Error('Pin value not set')
+          throw new Error('Pin value not set to the configured value')
         }
       },
     },

@@ -5,7 +5,7 @@ export default {
   ...{
     context: {
       minFPS: 10,
-      url: 'http://themaninblue.com/experiment/AnimationBenchmark/canvas/',
+      url: 'https://themaninblue.com/experiment/AnimationBenchmark/canvas/',
     },
     title: 'WPEWebkit performance man in blue',
     description: 'Loads the Man in Blue Canvas animation and measures its performance',
