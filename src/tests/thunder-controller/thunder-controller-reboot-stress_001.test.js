@@ -70,9 +70,9 @@ export default {
             ) {
               if (i === pluginDataBeforeReboot.length - 1) {
                 return true
-              } else {
-                throw new Error('Plugin Data after reboot Incorrect')
               }
+            } else {
+              throw new Error('Plugin Data after reboot Incorrect')
             }
           }
         } else throw new Error('Plugins length incorrect after reboot')
