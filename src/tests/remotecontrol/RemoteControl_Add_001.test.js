@@ -35,7 +35,7 @@ export default {
         if (res === null) {
           return true
         } else {
-          throw new Error(`Deleting key doesnt work and the error is ${res.code}`)
+          throw new Error(`Remote Control key not added and the error is ${res.code}`)
         }
       },
     },
