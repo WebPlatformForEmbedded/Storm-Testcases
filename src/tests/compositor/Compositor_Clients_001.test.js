@@ -60,6 +60,7 @@ export default {
     },
     {
       description: 'Get Compositor Clients and validate the result',
+      sleep: 10,
       test() {
         return getCompositorClients.call(this)
       },
