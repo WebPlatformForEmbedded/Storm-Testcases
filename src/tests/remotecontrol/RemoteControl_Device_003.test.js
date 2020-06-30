@@ -16,15 +16,15 @@ export default {
   },
   steps: [
     {
-      description: 'Gets meta data of virtual device and validate the result',
+      description: 'Gets meta data of invalid device and validate the result',
       test() {
         return getMetadataofRemoteControlDevice.call(this, this.$context.read('deviceName'))
       },
       validate(res) {
-        if (res.code == '1' && res.message === 'ERROR_GENERAL') {
+        if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
-          throw new Error(`Metadata is incorrect and is ${res}`)
+          throw new Error(`Error message is incorrect and is ${res}`)
         }
       },
     },
