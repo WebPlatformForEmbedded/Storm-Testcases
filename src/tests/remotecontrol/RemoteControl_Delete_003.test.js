@@ -26,7 +26,7 @@ export default {
         )
       },
       validate(res) {
-        if (res.code == '22' && res.message === 'ERROR_UNKNOWN_KEY') {
+        if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
           throw new Error('Invalid error message shown')

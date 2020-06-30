@@ -4,9 +4,9 @@ import { getMetadataofRemoteControlDevice } from '../../commonMethods/remoteCont
 
 export default {
   title: 'RemoteControl Device - 002',
-  description: 'Gets the metadata of invalid RemoteControl Device and validate the result',
+  description: 'Gets the metadata of virtual RemoteControl Device and validate the result',
   context: {
-    deviceName: 'invalidDevice',
+    deviceName: 'Web',
   },
   setup() {
     return this.$sequence([
@@ -16,15 +16,15 @@ export default {
   },
   steps: [
     {
-      description: 'Gets meta data of invalid remote control device and validate the result',
+      description: 'Gets meta data of virtual remote control device and validate the result',
       test() {
         return getMetadataofRemoteControlDevice.call(this, this.$context.read('deviceName'))
       },
       validate(res) {
-        if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
+        if (res.code == '1' && res.message === 'ERROR_GENERAL') {
           return true
         } else {
-          throw new Error(`Metadata is incorrect and is ${res}`)
+          throw new Error(`Invalid error message and is ${res}`)
         }
       },
     },

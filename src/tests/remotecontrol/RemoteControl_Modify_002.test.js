@@ -30,7 +30,7 @@ export default {
         )
       },
       validate(res) {
-        if (res.code == '2' && res.message === 'ERROR_UNAVAILABLE') {
+        if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
           throw new Error(`Error message is improper and is ${res}`)

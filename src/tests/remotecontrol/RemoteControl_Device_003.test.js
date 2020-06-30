@@ -4,9 +4,9 @@ import { getMetadataofRemoteControlDevice } from '../../commonMethods/remoteCont
 
 export default {
   title: 'RemoteControl Device - 003',
-  description: 'Gets the metadata of virtual Device and validate the result',
+  description: 'Gets the metadata of invalid Device and validate the result',
   context: {
-    deviceName: 'Web',
+    deviceName: 'invalidevice',
   },
   setup() {
     return this.$sequence([
