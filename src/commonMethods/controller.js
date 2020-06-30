@@ -141,3 +141,13 @@ export const getControllerPluginData = function() {
     .then(result => result)
     .catch(err => err)
 }
+
+/**
+ * This function is used to reboot the device
+ * @returns {Promise<T>}
+ */
+export const harakiri = function() {
+  return this.$thunder.api.Controller.harakiri()
+    .then(res => res)
+    .catch(err => err)
+}

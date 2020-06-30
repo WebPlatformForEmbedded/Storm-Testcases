@@ -2,6 +2,9 @@ import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller
 import constants from '../../commonMethods/constants'
 import { getDisplayInfo } from '../../commonMethods/displayInfo'
 
+let hdcpProtectionArr = ['Unencrypted', 'HDCP1x', 'HDCP2x']
+let hdrTypeArr = ['HDROff', 'HDR10', 'HDR10Plus', 'HDRDolbyVision', 'HDRTechnicolor']
+
 export default {
   title: 'DisplayInfo - 001',
   description: 'Get Display Info and validate the result',
@@ -28,7 +31,11 @@ export default {
           res.hdcpprotection !== null &&
           res.hdrtype !== null
         ) {
-          return true
+          if (hdcpProtectionArr.includes(res.hdcpprotection) && hdrTypeArr.includes(res.hdrtype)) {
+            return true
+          } else {
+            throw new Error('HDCP Protection and HDR type are not in the list of expected values')
+          }
         } else {
           throw new Error('Error in getting display Info')
         }
