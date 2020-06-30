@@ -41,4 +41,5 @@ export default {
   suspend: 'suspended',
   WPEFramework: 'WPEFramework',
   blankUrl: 'about:blank',
+  youtubeLongMovieUrl: 'https://www.youtube.com/tv?v=kg3ElG-H7Wo&resume',
 }

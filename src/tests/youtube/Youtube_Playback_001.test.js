@@ -1,19 +1,14 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { screenshot } from '../../commonMethods/commonFunctions'
 import constants from '../../commonMethods/constants'
-import { suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
+import { setCobaltUrl, suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 
-let keysArray = ['left', 'up', 'ok']
-let counter = 0
 let curSameScreenshot = 0
 let maxSameScreenshot = 5
 
 export default {
-  title: 'YouTube Playback test',
-  description: 'Start playback of a movie on YouTube and let it run for 12 hours',
-  context: {
-    url: 'https://www.youtube.com/watch?v=kg3ElG-H7Wo', //12 hour length Youtube Video
-  },
+  title: 'YouTube Playback test - 001',
+  description: 'Starts playback of a movie on YouTube and let it run for 12 hours',
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
@@ -21,6 +16,9 @@ export default {
       () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
       () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
     ])
+  },
+  teardown() {
+    setCobaltUrl.call(this, 'https://www.youtube.com/tv')
   },
   steps: [
     {
@@ -32,58 +30,27 @@ export default {
     {
       description: 'Resume Cobalt Plugin and check resumed or not',
       test() {
-        suspendOrResumeCobaltPlugin.call(this, constants.resume)
-      },
-    },
-    {
-      description: 'Sleep for 10 seconds to make sure Youtube is loaded',
-      sleep: 10,
-    },
-    {
-      description: 'Press keys from Remote Control',
-      repeat: 2,
-      test() {
-        let currCount = counter
-        counter++
-        return this.$thunder.remoteControl.key(keysArray[currCount])
+        return suspendOrResumeCobaltPlugin.call(this, constants.resume)
       },
       validate(res) {
-        if (res === null) return true
-        else {
-          throw new Error(`Result is not as expected and is ${res}`)
+        if (res === null) {
+          return true
+        } else {
+          throw new Error('Youtube not resumed')
         }
       },
     },
     {
-      description: 'Enter the URl for which the video need to be played',
+      description: 'Set Cobalt URL with the video URL which plays for 12 hours',
+      sleep: 20,
       test() {
-        return this.$thunder.remoteControl.key(this.$context.read('url'))
+        return setCobaltUrl.call(this, constants.youtubeLongMovieUrl)
       },
-      validate(res) {
-        if (res === null) return true
-        else {
-          throw new Error(`Result is not as expected and is ${res}`)
-        }
-      },
-    },
-    {
-      description: 'Press keys from Remote Control',
-      repeat: 8,
-      test() {
-        let keyPressCount = ['down', 'down', 'down', 'down', 'down', 'right', 'right', 'ok', 'ok']
-        let currCount = counter
-        counter++
-        return this.$thunder.remoteControl.key(keyPressCount[currCount])
-      },
-      validate(res) {
-        if (res === null) return true
-        else {
-          throw new Error(`Result is not as expected and is ${res}`)
-        }
-      },
+      //TODO - Implement validation for Cobalt URL
     },
     {
       description: 'Check if Youtube is playing for 12 hours',
+      sleepOnce: 20,
       test: screenshot,
       repeat: {
         seconds: 12 * 60 * 60, // Twelve hours
