@@ -23,9 +23,6 @@ export default {
         })),
     ])
   },
-  teardown() {
-    listener.dispose()
-  },
   context: {
     MAX_MEMORY: 85 * 1000 * 1000, //TODO - Need to update max memory
   },
@@ -40,7 +37,7 @@ export default {
       description: 'Sleep until URL is loaded',
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
-        return new Promise((resolve, reject) => {
+        let promise = new Promise((resolve, reject) => {
           const interval = setInterval(() => {
             if (this.$data.read('currentUrl') === constants.blankUrl) {
               clearInterval(interval)
@@ -49,6 +46,7 @@ export default {
             reject('URL not loaded within time limit')
           }, 1000)
         })
+        promise.finally(listener.dispose)
       },
     },
     {

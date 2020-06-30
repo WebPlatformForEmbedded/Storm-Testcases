@@ -40,7 +40,6 @@ export default {
   },
   teardown() {
     setWebKitUrl.call(this, constants.blankUrl)
-    listener.dispose()
   },
   title: 'WPEWebkit performance poster circle',
   description: 'Loads the Poster Circle CSS3 animation and measures its performance',
@@ -59,7 +58,7 @@ export default {
       description: 'Sleep until URL is loaded',
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
-        return new Promise((resolve, reject) => {
+        let promise = new Promise((resolve, reject) => {
           let attempts = 0
           const interval = setInterval(() => {
             attempts++
@@ -72,6 +71,7 @@ export default {
             }
           }, 1000)
         })
+        promise.finally(listener.dispose)
       },
     },
     {

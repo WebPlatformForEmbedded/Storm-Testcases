@@ -39,7 +39,6 @@ export default {
   },
   teardown() {
     setWebKitUrl.call(this, constants.blankUrl)
-    listener.dispose()
   },
   steps: [
     {
@@ -52,7 +51,7 @@ export default {
       description: 'Sleep until URL is loaded',
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
-        return new Promise((resolve, reject) => {
+        let promise = new Promise((resolve, reject) => {
           let attempts = 0
           const interval = setInterval(() => {
             attempts++
@@ -65,15 +64,26 @@ export default {
             }
           }, 1000)
         })
+        promise.finally(listener.dispose)
       },
     },
     {
       description: 'Validate the test by verifying if the url is still loaded',
       sleep() {
+        listener = this.$thunder.api.WebKitBrowser.on(
+          'urlchange',
+          data => {
+            this.$log('Got urlchange event: ', data.url)
+            this.$data.write('currentUrl1', data.url)
+          },
+          e => {
+            this.$log('Error subscribing to urlchange: ', e)
+          }
+        )
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
-        return new Promise((resolve, reject) => {
+        let promise = new Promise((resolve, reject) => {
           const interval = setInterval(() => {
-            let url = this.$data.read('currentUrl')
+            let url = this.$data.read('currentUrl1')
             let krakenBenchmarkUrl = url.split('?')
             if (krakenBenchmarkUrl[0] === this.$context.read('resultURL')) {
               clearInterval(interval)
@@ -82,6 +92,7 @@ export default {
             reject('URL not loaded within time limit')
           }, 480000)
         })
+        promise.finally(listener.dispose)
       },
     },
   ],

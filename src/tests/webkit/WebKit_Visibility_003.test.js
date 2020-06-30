@@ -36,9 +36,6 @@ export default {
       },
     ])
   },
-  teardown() {
-    listener.dispose()
-  },
   steps: [
     {
       description: 'Set Webkit Browser visibility',
@@ -57,7 +54,7 @@ export default {
       description: 'Wait until visiblity change event is changed',
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'visibility change' response from the listener
-        return new Promise((resolve, reject) => {
+        let promise = new Promise((resolve, reject) => {
           let attempts = 0
           const interval = setInterval(() => {
             attempts++
@@ -70,6 +67,7 @@ export default {
             }
           }, 1000)
         })
+        promise.finally(listener.dispose)
       },
     },
     {

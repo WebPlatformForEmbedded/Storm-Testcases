@@ -38,9 +38,6 @@ export default {
   context: {
     url: 'https://cdn.metrological.com/static/testbot/v1/xmlhttprequest_app.html',
   },
-  teardown() {
-    listener.dispose()
-  },
   steps: [
     {
       description: 'Check whether Web Kit Browser Plugin is in resumed state',
@@ -62,7 +59,7 @@ export default {
       description: 'Sleep until URL is loaded',
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
-        return new Promise((resolve, reject) => {
+        let promise = new Promise((resolve, reject) => {
           const interval = setInterval(() => {
             if (this.$data.read('currentUrl') === this.$context.read('url')) {
               clearInterval(interval)
@@ -71,6 +68,7 @@ export default {
             reject('URL not loaded within time limit')
           }, 1000)
         })
+        promise.finally(listener.dispose)
       },
     },
     {

@@ -25,9 +25,6 @@ export default {
     expUrl2:
       'http://cdn.metrological.com/static/storm/app_redirect1.html?run=1&runs=-1&wait=200&requests=20&side=B',
   },
-  teardown() {
-    listener.dispose()
-  },
   steps: [
     {
       description: 'Check whether Web Kit Browser Plugin is in resumed state',
@@ -49,7 +46,7 @@ export default {
       description: 'Sleep until URL is loaded',
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
-        return new Promise((resolve, reject) => {
+        let promise = new Promise((resolve, reject) => {
           let attempts = 0
           const interval = setInterval(() => {
             attempts++
@@ -65,6 +62,7 @@ export default {
             }
           }, 1000)
         })
+        promise.finally(listener.dispose)
       },
     },
     {

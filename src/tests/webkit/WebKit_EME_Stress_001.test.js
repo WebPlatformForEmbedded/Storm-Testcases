@@ -32,7 +32,6 @@ export default {
   },
   teardown() {
     setWebKitUrl.call(this, constants.blankUrl)
-    listener.dispose()
   },
   steps: [
     {
@@ -49,7 +48,7 @@ export default {
       description: 'Sleep until URL is loaded',
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
-        return new Promise((resolve, reject) => {
+        let promise = new Promise((resolve, reject) => {
           const interval = setInterval(() => {
             if (this.$data.read('currentUrl') === this.$context.read('url')) {
               clearInterval(interval)
@@ -58,6 +57,7 @@ export default {
             reject('URL not loaded within time limit')
           }, 1000)
         })
+        promise.finally(listener.dispose)
       },
     },
     {

@@ -19,9 +19,6 @@ export default {
         })),
     ])
   },
-  teardown() {
-    listener.dispose()
-  },
   steps: [
     {
       description: 'Resume Webkit Plugin and check if it is resumed',
@@ -40,7 +37,7 @@ export default {
       description: 'Wait until state change event for resume is detected',
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'state change' response from the listener
-        return new Promise((resolve, reject) => {
+        let promise = new Promise((resolve, reject) => {
           let attempts = 0
           const interval = setInterval(() => {
             attempts++
@@ -53,6 +50,7 @@ export default {
             }
           }, 1000)
         })
+        promise.finally(listener.dispose)
       },
     },
     {
