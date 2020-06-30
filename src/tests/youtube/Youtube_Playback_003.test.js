@@ -44,7 +44,7 @@ export default {
       description: 'Set Cobalt URL with the video URL which plays for 30 minutes',
       sleep: 20,
       test() {
-        return setCobaltUrl.call(this, constants.youtubeUrl)
+        return setCobaltUrl.call(this, constants.youtubeLongMovieUrl)
       },
       //TODO - Implement validation for Cobalt URL
     },
