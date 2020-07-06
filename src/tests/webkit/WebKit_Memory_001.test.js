@@ -1,59 +1,52 @@
-import constants from '../../commonMethods/constants'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
+import { bytesToMb, setUrl, suspendOrResumePlugin } from '../../commonMethods/commonFunctions'
 import { getMonitorInfo } from '../../commonMethods/monitor'
 
-let listener
 export default {
-  title: 'Webkit Memory test 001',
-  description: 'Loads about blank and checks the memory usage',
+  title: 'WPEWebkit Memory test 001',
+  description: 'Check suspended memory usage of WebKitBrowser',
   setup() {
     return this.$sequence([
-      () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser
+      () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
       () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
       () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
       () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
-      () => pluginActivate.call(this, 'WebKitBrowser'),
-      () => {
-        return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
-      },
-      () =>
-        (listener = this.$thunder.api.WebKitBrowser.on('urlchange', data => {
-          this.$data.write('currentUrl', data.url)
-        })),
     ])
   },
-  teardown() {
-    listener.dispose()
-  },
   context: {
-    MAX_MEMORY: 85 * 1000 * 1000, //TODO - Need to update max memory
+    MAX_MEMORY: 25, //Mb
+    CALLSIGN: 'WebKitBrowser',
+    URL: 'about:blank',
+    resume: false,
+    SLEEP: 5,
   },
   steps: [
     {
-      description: 'Set WebKit URL to Blank',
-      test: setWebKitUrl,
-      params: constants.blankUrl,
-      assert: constants.blankUrl,
-    },
-    {
-      description: 'Sleep until URL is loaded',
-      sleep() {
-        // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
-        return new Promise((resolve, reject) => {
-          const interval = setInterval(() => {
-            if (this.$data.read('currentUrl') === constants.blankUrl) {
-              clearInterval(interval)
-              resolve()
-            }
-            reject('URL not loaded within time limit')
-          }, 1000)
-        })
+      description: 'Prepare plugin for measurement',
+      test() {
+        const seq = [
+          () => pluginActivate.call(this, this.$context.read('CALLSIGN')),
+          () => setUrl.call(this, this.$context.read('CALLSIGN'), 'about:blank'),
+        ]
+
+        if (this.$context.read('resume') === true) {
+          this.$log(`Resuming ${this.$context.read('CALLSIGN')}`)
+          seq.push(() =>
+            suspendOrResumePlugin.call(this, this.$context.read('CALLSIGN'), 'resumed')
+          )
+          seq.push(
+            () => setUrl.call(this, this.$context.read('CALLSIGN'), this.$context.read('URL')) //set url again to ensure it is loaded (sometimes it doesnt)
+          )
+        }
+
+        return this.$sequence(seq)
       },
     },
     {
       description: 'Get Monitor Plugin Info',
-      sleep: 5, //This sleep is to make sure that Monitor plugin is activated
+      sleep() {
+        return this.$context.read('SLEEP')
+      },
       test() {
         return getMonitorInfo.call(this)
       },
@@ -64,29 +57,35 @@ export default {
     },
   ],
   validate() {
-    let response = this.$data.read('monitorinfo')
-    for (let i = 0; i < response.length; i++) {
-      let plugin = response[i]
-      if (plugin.observable === constants.webKitBrowserPlugin) {
-        if (
-          plugin !== undefined &&
-          plugin.measurements !== undefined &&
-          plugin.measurements.resident !== undefined &&
-          plugin.measurements.resident.last !== undefined
-        ) {
-          if (plugin.measurements.resident.last < this.$context.read('MAX_MEMORY')) return true
-          else {
-            throw new Error(
-              `WebKitBrowser memory usage ${
-                plugin.measurements.resident.last
-              } is higher than ${this.$context.read('MAX_MEMORY')} while loading about:blank`
-            )
-          }
-        } else {
-          throw new Error('Resident memory measurement not found in monitor response')
-        }
+    let plugin = this.$data.read('monitorinfo').filter(p => {
+      if (p.observable === this.$context.read('CALLSIGN')) return true
+    })[0]
+
+    if (
+      plugin !== undefined &&
+      plugin.measurements !== undefined &&
+      plugin.measurements.resident !== undefined &&
+      plugin.measurements.resident.last !== undefined
+    ) {
+      const committedRSSMemory = bytesToMb(
+        plugin.measurements.resident.last - plugin.measurements.shared.last
+      )
+      this.$log(`${this.$context.read('CALLSIGN')} memory usage ${committedRSSMemory}`)
+
+      if (committedRSSMemory < this.$context.read('MAX_MEMORY')) return true
+      else {
+        this.$log(
+          `${this.$context.read(
+            'CALLSIGN'
+          )} memory usage ${committedRSSMemory} is higher than ${this.$context.read(
+            'MAX_MEMORY'
+          )} while loading ${this.$context.read('URL')}`
+        )
+        return false
       }
+    } else {
+      this.$log('Resident memory measurement not found in monitor response')
+      return false
     }
-    throw new Error('Web kit browser Plugin not found')
   },
 }
