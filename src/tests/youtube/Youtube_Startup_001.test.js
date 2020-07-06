@@ -1,5 +1,5 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
+import { setSshHost, checkIfProcessIsRunning } from '../../commonMethods/ssh.js'
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
 import { suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
@@ -9,6 +9,9 @@ export default {
   description:
     'Starts and stops the Youtube plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
+  setup() {
+    setSshHost(this.$thunder.api.options.host)
+  },
   context: {
     cpuLoad: 90,
   },

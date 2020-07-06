@@ -1,6 +1,6 @@
 import constants from '../../commonMethods/constants'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
+import { setSshHost, checkIfProcessIsRunning } from '../../commonMethods/ssh.js'
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
 
 export default {
@@ -8,6 +8,9 @@ export default {
   description:
     'Starts and stops the OCDM plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
+  setup() {
+    setSshHost(this.$thunder.api.options.host)
+  },
   context: {
     cpuLoad: 90,
   },
