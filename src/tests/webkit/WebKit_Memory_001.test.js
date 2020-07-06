@@ -1,6 +1,4 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
-import constants from '../../commonMethods/constants'
 import { bytesToMb, setUrl, suspendOrResumePlugin } from '../../commonMethods/commonFunctions'
 import { getMonitorInfo } from '../../commonMethods/monitor'
 

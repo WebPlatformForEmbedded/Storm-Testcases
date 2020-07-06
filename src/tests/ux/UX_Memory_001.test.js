@@ -1,5 +1,4 @@
 import baseTest from '../webkit/WebKit_Memory_001.test.js'
-// import { setWebKitUrl } from './commonMethods/commonFunctions'
 
 export default {
   ...baseTest,
