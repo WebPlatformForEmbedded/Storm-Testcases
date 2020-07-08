@@ -13,28 +13,10 @@ export default {
   },
   context: {
     powerState: 'on',
-    timeOut: 0,
   },
   steps: [
     {
-      description: 'Set power state and validate the result',
-      test() {
-        return setPowerState.call(
-          this,
-          this.$context.read('powerState'),
-          this.$context.read('timeOut')
-        )
-      },
-      validate(res) {
-        if (res === null) {
-          return true
-        } else {
-          throw new Error('Error while setting the power state')
-        }
-      },
-    },
-    {
-      description: 'Get power state and validate whether it is as per the setted power state',
+      description: 'Get power state and validate whether it is as per the default power state',
       test() {
         return getPowerState.call(this)
       },
