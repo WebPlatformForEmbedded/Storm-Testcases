@@ -4,7 +4,7 @@ import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Compositor Resolution - 001',
-  description: 'Sets the resolution to 480i and checks whether the same resolution is set or not',
+  description: 'Sets the resolution to 480i and validates the result',
   context: {
     resolution: '480i',
   },
@@ -26,7 +26,7 @@ export default {
         if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
-          throw new Error('Result is not as expected while setting compositor resolution')
+          throw new Error(`Result is not as expected and is ${res}`)
         }
       },
     },

@@ -1,16 +1,30 @@
-import baseTest from './Compositor_Resolution_001.test'
+import { getCompositorResolution } from '../../commonMethods/compositor'
+import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import constants from '../../commonMethods/constants'
 
 export default {
-  ...baseTest,
-  ...{
-    context: {
-      resolution: '720p50',
-    },
-    title: 'Compositor Resolution - 003',
-    description:
-      'Sets the resolution to 720p50 and checks whether the same resolution is set or not',
-    steps: baseTest.steps.map(step => {
-      return step
-    }),
+  title: 'Compositor Resolution - 003',
+  description: 'Gets the resolution and validate the result',
+  setup() {
+    return this.$sequence([
+      () => pluginDeactivate.call(this, constants.compositorPlugin),
+      () => pluginActivate.call(this, constants.compositorPlugin),
+    ])
   },
+  steps: [
+    {
+      description: 'Get Compositor resolution to invalid and validate the result',
+      sleep: 5,
+      test() {
+        return getCompositorResolution.call(this)
+      },
+      validate(res) {
+        if (res !== null && res !== undefined) {
+          return true
+        } else {
+          throw new Error(`Error is is not as expected and is ${res.message}`)
+        }
+      },
+    },
+  ],
 }
