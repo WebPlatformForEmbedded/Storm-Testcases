@@ -1,5 +1,5 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { getCompositorResolution, setCompositorResolution } from '../../commonMethods/compositor'
+import { setCompositorResolution } from '../../commonMethods/compositor'
 import constants from '../../commonMethods/constants'
 
 export default {
@@ -23,24 +23,10 @@ export default {
         return setCompositorResolution.call(this, this.$context.read('resolution'))
       },
       validate(res) {
-        if (res == null) {
+        if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
           throw new Error('Result is not as expected while setting compositor resolution')
-        }
-      },
-    },
-    {
-      description: 'Get Compositor resolution and validate the result',
-      sleep: 10,
-      test() {
-        return getCompositorResolution.call(this)
-      },
-      validate(res) {
-        if (res == this.$context.read('resolution')) {
-          return true
-        } else {
-          throw new Error('Resolution not set to ' + this.$context.read('resolution'))
         }
       },
     },
