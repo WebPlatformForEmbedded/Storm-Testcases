@@ -4,11 +4,11 @@ export default {
   ...baseTest,
   ...{
     context: {
-      resolution: '720p50',
+      resolution: '1080p24',
     },
-    title: 'Compositor Resolution - 003',
+    title: 'Compositor Resolution - 005',
     description:
-      'Sets the resolution to 720p50 and checks whether the same resolution is set or not',
+      'Sets the resolution to 1080p24 and checks whether the same resolution is set or not',
     steps: baseTest.steps.map(step => {
       return step
     }),
