@@ -2,15 +2,18 @@ import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller
 import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 import constants from '../../commonMethods/constants'
 import { AttachToLogs } from '../../commonMethods/remoteWebInspector'
+import Moment from 'moment'
 
 let logger
 let count = 0
+let initialTime
+let finalTime
 
 export default {
-  title: 'Channel Change test - 001',
-  description: 'Loads the Channel Change URL and changes the channel for 1000 times',
+  title: 'Channel Change test - 002',
+  description: 'Loads the Channel Change URL and runs for 12 hours',
   context: {
-    url: 'http://cdn.metrological.com/static/storm/cc_time_v2.html?test_duration=168',
+    url: 'http://cdn.metrological.com/static/storm/cc_time_v2.html?test_duration=720',
   },
   setup() {
     return this.$sequence([
@@ -30,7 +33,7 @@ export default {
   },
   steps: [
     {
-      description: 'Change the channel continuously for 1000 times and check the behavior',
+      description: 'Change the channel continously for 12 hours and check the behavior',
       sleep: 5,
       test() {
         return new Promise((resolve, reject) => {
@@ -43,23 +46,25 @@ export default {
               count = count + 1
             }
             if (testsDone.test(log)) {
-              logger.disconnect()
-              resolve(count)
+              resolve()
             }
           }
           console.log('Attaching to logs', hostIP)
           logger = new AttachToLogs(parseGoogleLogs, hostIP)
           logger.connect()
           setWebKitUrl.call(this, this.$context.read('url'))
+          initialTime = Moment.utc()
         })
       },
     },
   ],
-  validate(res) {
-    if (count > 1000) {
+  validate() {
+    finalTime = Moment.utc()
+    let timeDiff = finalTime.diff(initialTime)
+    if (timeDiff > 1200000) {
       return true
     } else {
-      throw new Error(`Channel change happened only ${res} times`)
+      throw new Error('Channel change does not happened continously for 12 hours')
     }
   },
 }
