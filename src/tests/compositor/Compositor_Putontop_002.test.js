@@ -18,7 +18,7 @@ export default {
         return putOnTop.call(this, constants.invalidPlugin)
       },
       validate(res) {
-        if (res.code == 34 && res.message == 'ERROR_FIRST_RESOURCE_NOT_FOUND') {
+        if (res.code == 2 && res.message == 'ERROR_UNAVAILABLE') {
           return true
         } else {
           throw new Error('Error message improper while putting invalid plugin ontop')

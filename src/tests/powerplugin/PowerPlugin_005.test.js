@@ -26,7 +26,7 @@ export default {
         )
       },
       validate(res) {
-        if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
+        if (res.code === 30 && res.message === 'ERROR_BAD_REQUEST') {
           return true
         } else {
           throw new Error('Proper error message is not shown')

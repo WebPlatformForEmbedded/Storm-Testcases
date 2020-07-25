@@ -19,7 +19,7 @@ export default {
         return selectClient.call(this, constants.invalidPlugin)
       },
       validate(res) {
-        if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
+        if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
           throw new Error('Invalid Error message')

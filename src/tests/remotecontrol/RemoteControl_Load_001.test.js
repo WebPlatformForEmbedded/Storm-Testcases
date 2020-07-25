@@ -17,6 +17,7 @@ export default {
   steps: [
     {
       description: 'Reloads Device key map and validates the result',
+      sleep: 10,
       test() {
         return loadDeviceKeyMap.call(this, this.$context.read('deviceName'))
       },
