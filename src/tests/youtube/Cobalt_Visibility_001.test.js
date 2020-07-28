@@ -1,15 +1,10 @@
 import constants from '../../commonMethods/constants'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import {
-  getCobaltVisibility,
-  setCobaltVisibility,
-  suspendOrResumeCobaltPlugin,
-} from '../../commonMethods/cobalt'
+import { setCobaltVisibility, suspendOrResumeCobaltPlugin } from '../../commonMethods/cobalt'
 
-let listener
 export default {
   title: 'Cobalt Visibility - 001',
-  description: 'Set Cobalt Visibility to Hidden and check the visibility state',
+  description: 'Set Cobalt Visibility to Hidden and validate the result',
   context: {
     visibilityState: 'hidden',
   },
@@ -18,58 +13,20 @@ export default {
       () => pluginDeactivate.call(this, constants.youTubePlugin),
       () => pluginActivate.call(this, constants.youTubePlugin),
       () => suspendOrResumeCobaltPlugin.call(this, constants.resume),
-      () =>
-        (listener = this.$thunder.api.Cobalt.on('visibilitychange', data => {
-          this.$data.write('visibility', data.hidden)
-        })),
     ])
-  },
-  teardown() {
-    listener.dispose()
   },
   steps: [
     {
       description: 'Set Cobalt Browser visibility',
+      sleep: 10,
       test() {
         return setCobaltVisibility.call(this, this.$context.read('visibilityState'))
       },
       validate(res) {
-        if (res === null) {
+        if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
           throw new Error('Proper error message is not shown')
-        }
-      },
-    },
-    {
-      description: 'Wait until visiblity change event is changed',
-      sleep() {
-        // Purpose of this sleep is to wait until current step gets 'visibility change' response from the listener
-        return new Promise((resolve, reject) => {
-          let attempts = 0
-          const interval = setInterval(() => {
-            attempts++
-            if (this.$data.read('visibility') === true) {
-              clearInterval(interval)
-              resolve()
-            } else if (attempts > 10) {
-              clearInterval(interval)
-              reject('Visibility not changed')
-            }
-          }, 1000)
-        })
-      },
-    },
-    {
-      description: 'Get Cobalt visibility and validate the result',
-      test() {
-        return getCobaltVisibility.call(this)
-      },
-      validate(res) {
-        if (res === this.$context.read('visibilityState')) {
-          return true
-        } else {
-          throw new Error(`Visibility is not as expected and is ${res}`)
         }
       },
     },
