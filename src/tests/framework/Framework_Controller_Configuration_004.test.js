@@ -27,7 +27,7 @@ export default {
       description: 'Deactivate Webkit Browser',
       test() {
         let newConfig = this.$data.read('webkitconfig')
-        newConfig.fps = 'hello'
+        newConfig.fps = false
         pluginDeactivate.call(this, constants.webKitBrowserPlugin)
       },
     },
@@ -55,7 +55,7 @@ export default {
         return getPluginConfiguration.call(this, constants.webKitBrowserPlugin)
       },
       validate(res) {
-        if (res.fps == 'hello') {
+        if (res.fps == false) {
           return true
         } else {
           throw new Error('Configuration not available')
