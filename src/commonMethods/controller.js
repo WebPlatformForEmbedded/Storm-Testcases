@@ -151,3 +151,25 @@ export const harakiri = function() {
     .then(res => res)
     .catch(err => err)
 }
+
+/**
+ * This function is used to get Controller discovery results
+ * @returns {Promise<T>}
+ */
+export const getDiscoveryResults = function() {
+  return this.$thunder.api.Controller.discoveryresults()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to set Plugin Configuration
+ * @param pluginName
+ * @returns {Promise<T>}
+ */
+export const setPluginConfiguration = function(pluginName, params) {
+  const methodName = 'configuration@' + pluginName
+  return this.$thunder.api.Controller[methodName](params)
+    .then(res => res)
+    .catch(err => err)
+}
