@@ -3,17 +3,38 @@ import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 import constants from '../../commonMethods/constants'
 import { AttachToLogs } from '../../commonMethods/remoteWebInspector'
 import Moment from 'moment'
+import ThunderJS from 'ThunderJS'
 
 let logger
 let count = 0
 let initialTime
 let finalTime
+let hostIP
+let getDeviceInfo = () => {
+  return new Promise(resolve => {
+    ThunderJS({ hostIP })
+      .DeviceInfo.systeminfo()
+      .then(result => {
+        resolve(result)
+      })
+  })
+}
+
+let getMemoryInfo = () => {
+  return new Promise(resolve => {
+    ThunderJS({ hostIP })
+      .Monitor.status()
+      .then(result => {
+        resolve(result)
+      })
+  })
+}
 
 export default {
   title: 'Channel Change test - 002',
   description: 'Loads the Channel Change URL and runs for 12 hours',
   context: {
-    url: 'http://cdn.metrological.com/static/storm/cc_time_v2.html?test_duration=720',
+    url: 'http://cdn.metrological.com/static/storm/cc_time_v2.html?test_duration=721',
   },
   setup() {
     return this.$sequence([
@@ -38,15 +59,53 @@ export default {
       test() {
         return new Promise((resolve, reject) => {
           let hostIP = this.$thunder.api.options.host
-          function parseGoogleLogs(error, log) {
+          async function parseGoogleLogs(error, log) {
             console.log(log)
             const testStarted = /Tuning to channel/g
             const testsDone = /Test ended/g
             if (testStarted.test(log)) {
-              count = count + 1
+              let cpuLoad = await getDeviceInfo()
+              let pluginMemoryInfo = await getMemoryInfo()
+              if (cpuLoad.cpuload > 90) {
+                logger.disconnect()
+                reject('CPU load is greater than expected')
+              } else {
+                console.log(
+                  `CPU load after changing channel for ${count + 1} times is ${cpuLoad.cpuload}`
+                )
+                let plugin = pluginMemoryInfo.filter(p => {
+                  if (p.observable === 'WebKitBrowser') return true
+                })[0]
+
+                if (
+                  plugin !== undefined &&
+                  plugin.measurements !== undefined &&
+                  plugin.measurements.resident !== undefined &&
+                  plugin.measurements.resident.last !== undefined
+                ) {
+                  const committedRSSMemory =
+                    (plugin.measurements.resident.last - plugin.measurements.shared.last) /
+                    (1024 * 1024)
+                  if (committedRSSMemory < 300) {
+                    console.log(
+                      `Memory after changing channel for ${count +
+                        1} times is ${committedRSSMemory}`
+                    )
+                    count = count + 1
+                    return true
+                  } else {
+                    reject(
+                      `WebKitBrowser memory usage ${committedRSSMemory} is higher than 300 while tuning channel for the ${count} time`
+                    )
+                  }
+                } else {
+                  reject('Resident memory measurement not found in monitor response')
+                }
+              }
             }
             if (testsDone.test(log)) {
-              resolve()
+              logger.disconnect()
+              resolve(count)
             }
           }
           console.log('Attaching to logs', hostIP)
@@ -60,11 +119,11 @@ export default {
   ],
   validate() {
     finalTime = Moment.utc()
-    let timeDiff = finalTime.diff(initialTime)
-    if (timeDiff > 1200000) {
+    let timeDiff = finalTime.diff(initialTime) / (1000 * 60)
+    if (timeDiff > 720) {
       return true
     } else {
-      throw new Error('Channel change does not happened continously for 12 hours')
+      throw new Error('Channel change does not happened continuously for 12 hours')
     }
   },
 }
