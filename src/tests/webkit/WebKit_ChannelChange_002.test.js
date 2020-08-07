@@ -59,7 +59,7 @@ export default {
       test() {
         return new Promise((resolve, reject) => {
           let hostIP = this.$thunder.api.options.host
-          async function parseGoogleLogs(error, log) {
+          async function parseChannelChangeLogs(error, log) {
             console.log(log)
             const testStarted = /Tuning to channel/g
             const testsDone = /Test ended/g
@@ -109,7 +109,7 @@ export default {
             }
           }
           console.log('Attaching to logs', hostIP)
-          logger = new AttachToLogs(parseGoogleLogs, hostIP)
+          logger = new AttachToLogs(parseChannelChangeLogs, hostIP)
           logger.connect()
           setWebKitUrl.call(this, this.$context.read('url'))
           initialTime = Moment.utc()
