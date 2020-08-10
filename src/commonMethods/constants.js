@@ -30,9 +30,9 @@ export default {
   invalidAddress: 'invalidstring',
   invalidPlugin: 'invalidplugin',
   displayInfo: 'DisplayInfo',
-
   hidden: 'hidden',
   visible: 'visible',
+  networkControlPlugin: 'NetworkControl',
 
   //Plugin states
   activate: 'activate',
