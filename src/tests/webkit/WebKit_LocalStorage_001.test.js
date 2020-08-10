@@ -8,7 +8,7 @@ export default {
   title: 'Webkit Local Storage - 001',
   description: 'Set the Local storage status to true and check whether the same is set or not',
   context: {
-    status: 'true',
+    status: true,
   },
   setup() {
     return this.$sequence([
@@ -21,7 +21,7 @@ export default {
   },
   steps: [
     {
-      description: 'Set Local storage status to true and validate the result',
+      description: 'Set Local storage status and validate the result',
       test() {
         return setlocalstorageenabled.call(this, this.$context.read('status'))
       },

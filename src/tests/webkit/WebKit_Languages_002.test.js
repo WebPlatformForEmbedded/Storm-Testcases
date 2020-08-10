@@ -5,7 +5,7 @@ export default {
   title: 'Webkit Languages - 002',
   description: 'Sets the Language of WebKit and validate the same is set or not',
   context: {
-    language: ['en-US'],
+    language: 'en-GB',
   },
   setup() {
     return this.$sequence([

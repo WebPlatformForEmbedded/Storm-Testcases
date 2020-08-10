@@ -164,7 +164,7 @@ export const getHttpCookieAcceptpolicy = function() {
  * @returns {Promise<unknown>}
  */
 export const setHttpCookieAcceptpolicy = function(params) {
-  return this.$thunder.api.WebKitBrowser.useragent(params)
+  return this.$thunder.api.WebKitBrowser.httpcookieacceptpolicy(params)
     .then(res => res)
     .catch(err => err)
 }
@@ -206,7 +206,7 @@ export const getLanguage = function() {
  * @returns {Promise<unknown>}
  */
 export const setLanguage = function(params) {
-  return this.$thunder.api.WebKitBrowser.languages(params)
+  return this.$thunder.api.WebKitBrowser.languages([params])
     .then(res => res)
     .catch(err => err)
 }
@@ -228,7 +228,7 @@ export const getHeaders = function() {
  * @returns {Promise<unknown>}
  */
 export const setHeaders = function(name, value) {
-  return this.$thunder.api.WebKitBrowser.headers({ name, value })
+  return this.$thunder.api.WebKitBrowser.headers([{ name, value }])
     .then(res => res)
     .catch(err => err)
 }

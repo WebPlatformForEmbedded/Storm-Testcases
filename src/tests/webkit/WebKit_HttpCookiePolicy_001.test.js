@@ -39,6 +39,7 @@ export default {
         return getHttpCookieAcceptpolicy.call(this)
       },
       validate(res) {
+        console.log('res is', res)
         if (res === this.$context.read('value')) {
           return true
         } else {

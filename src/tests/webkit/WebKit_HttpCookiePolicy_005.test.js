@@ -1,11 +1,8 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import {
-  getHttpCookieAcceptpolicy,
-  setHttpCookieAcceptpolicy,
-} from '../../commonMethods/webKitBrowser'
+import { setHttpCookieAcceptpolicy } from '../../commonMethods/webKitBrowser'
 
 export default {
-  title: 'Webkit HTTP Cookie Policy- 001',
+  title: 'Webkit HTTP Cookie Policy- 005',
   description: 'Set invalid Cookie policy and validate the result',
   context: {
     value: 'invalid',
@@ -29,7 +26,7 @@ export default {
         if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
-          throw new Error('Proper error message is not shown')
+          throw new Error(`Proper error message is not shown and res is ${res}`)
         }
       },
     },
