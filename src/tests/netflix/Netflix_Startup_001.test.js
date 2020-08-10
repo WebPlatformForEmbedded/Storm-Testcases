@@ -1,13 +1,16 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
+import { setSshHost, checkIfProcessIsRunning } from '../../commonMethods/ssh.js'
 
 export default {
   title: 'Netflix startup robustness test',
   description:
     'Starts and stops the Netflix plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
+  setup() {
+    setSshHost(this.$thunder.api.options.host)
+  },
   steps: [
     {
       description: 'Stop WebKit Browser Plugin',

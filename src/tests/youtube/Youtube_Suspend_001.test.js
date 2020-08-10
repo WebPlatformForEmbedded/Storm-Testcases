@@ -29,7 +29,14 @@ export default {
       description: 'Resume Cobalt Plugin and check resumed or not',
       sleep: 10,
       test() {
-        suspendOrResumeCobaltPlugin.call(this, constants.resume)
+        return suspendOrResumeCobaltPlugin.call(this, constants.resume)
+      },
+      validate(res) {
+        if (res === null) {
+          return true
+        } else {
+          throw new Error('Youtube not resumed')
+        }
       },
     },
     {
@@ -56,7 +63,7 @@ export default {
             return setCobaltState.call(this, constants.resume)
           },
           validate(res) {
-            if (res == null) {
+            if (res === null) {
               return true
             } else {
               throw new Error(`Result is not as expected and is ${res}`)

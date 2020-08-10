@@ -18,6 +18,7 @@ export default {
       () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
       () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
       () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => setWebKitUrl.call(this, constants.blankUrl),
       () => {
         return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
       },
@@ -50,13 +51,14 @@ export default {
       sleep() {
         // Purpose of this sleep is to wait until current step gets 'url change' response from the listener
         return new Promise((resolve, reject) => {
-          const interval = setInterval(() => {
+          const checkFn = () => {
             if (this.$data.read('currentUrl') === this.$context.read('url')) {
               clearInterval(interval)
               resolve()
             }
             reject('URL not loaded within time limit')
-          }, 1000)
+          }
+          const interval = setInterval(checkFn.bind(this), 1000)
         })
       },
     },

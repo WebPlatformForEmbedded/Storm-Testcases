@@ -1,8 +1,6 @@
-import constants from './constants'
 import moment from 'moment'
 import _http from 'http'
 import { Client } from 'ssh2'
-
 import URL from 'url'
 
 /**
@@ -126,64 +124,16 @@ export const screenshot = async function() {
   this.$data.write('screenshotResult', result)
   return result
 }
-/**
- * This function is used to kill the process
- * @param process
- */
-export const killProcess = function(process) {
-  exec({ cmd: `killall -9 ${process}` }, err => {
-    return true
-  })
-}
-
-/**
- * This function is used to stop the process
- * @param process
- */
-export const stopProcess = function(process) {
-  return exec({ cmd: `killall ${process}` }, () => {
-    return true
-  })
-}
-
-export const startFramework = function() {
-  return exec({ cmd: 'nohup WPEFramework WPEProcess -b &', cbWhenStarted: true })
-}
-
-/**
- * This function is used to restart the framework
- */
-export const restartFramework = function() {
-  return this.$sequence([
-    () => killProcess('WPEFramework'),
-    () => killProcess('WPEProcess'),
-    () => startFramework(),
-  ])
-}
 
 /**
  * This function is used to get Plugin Info
  * @param plugin
- * @returns {Promise<AxiosResponse<any>>}
+ * @returns {Promise<AxiosResponse<any>}
  */
 export const getPluginInfo = function(plugin) {
   const hostIP = deviceIP.call(this)
   return this.$http
     .get(`http://${hostIP}:80/Service/${plugin}`)
-    .then(result => result)
-    .catch(err => err)
-}
-
-/**
- * This function is used to Suspend or Resume a plugin
- * @param plugin
- * @param action
- * @returns {Promise<unknown>}
- */
-export const suspendOrResumePlugin = function(plugin, action) {
-  const hostIP = deviceIP.call(this)
-  return this.$http
-    .post(`http://${hostIP}:80/Service/${plugin}/${action}`)
     .then(result => result)
     .catch(err => err)
 }
@@ -197,21 +147,27 @@ export const deviceIP = function() {
 }
 
 /**
- * This function is used to perform GET request operation on the URL
- * @returns {Promise<AxiosResponse<any>>}
+ * This function is used to Suspend or Resume a plugin
+ * @param plugin
+ * @param action
+ * @returns {Promise<unknown>}
  */
-export const getReqURL = function(URL) {
-  return this.$http
-    .get(URL)
-    .then(result => result)
-    .catch(err => err)
+export const suspendOrResumePlugin = function(plugin, action) {
+  return this.$thunder.api.call(plugin, 'state', action)
 }
 
 /**
- * This function stops the WPE Framework Process
- * @returns {boolean}
+ * This function sets the URL
+ * @param URL
+ * @returns URL
  */
-export const stopWPEFramework = function() {
-  stopProcess('WPEFramework')
-  return true
+export const setUrl = function(callsign, URL) {
+  return this.$thunder.api.call(callsign, 'url', URL).catch(err => err)
+}
+
+/**
+ * Converts bytes into Mb's
+ */
+export const bytesToMb = bytes => {
+  return (bytes / 1024 / 1024).toFixed(1)
 }

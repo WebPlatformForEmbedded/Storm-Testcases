@@ -1,6 +1,7 @@
 import constants from '../../commonMethods/constants'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { screenshot } from '../../commonMethods/commonFunctions'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 
 export default {
   title: 'Framework snapshot test with multiple start/stops',
@@ -10,6 +11,7 @@ export default {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
       () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => setWebKitUrl.call(this, constants.blankUrl),
       () => {
         return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
       },

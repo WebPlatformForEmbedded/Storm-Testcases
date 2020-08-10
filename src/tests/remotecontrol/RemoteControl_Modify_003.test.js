@@ -30,8 +30,7 @@ export default {
         )
       },
       validate(res) {
-        this.$log('res is', res)
-        if (res.code == '22' && res.message === 'ERROR_UNKNOWN_KEY') {
+        if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
           throw new Error(`Error message is improper and is ${res}`)

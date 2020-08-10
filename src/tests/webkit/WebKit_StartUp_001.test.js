@@ -1,6 +1,6 @@
 import constants from '../../commonMethods/constants'
 import { pluginDeactivate } from '../../commonMethods/controller'
-import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
+import { setSshHost, checkIfProcessIsRunning } from '../../commonMethods/ssh.js'
 import { webKitBrowserStartAndResume } from '../../commonMethods/webKitBrowser'
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
 
@@ -11,6 +11,7 @@ export default {
   repeat: 30,
   setup() {
     return this.$sequence([
+      () => setSshHost(this.$thunder.api.options.host),
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
       () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off
       () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off

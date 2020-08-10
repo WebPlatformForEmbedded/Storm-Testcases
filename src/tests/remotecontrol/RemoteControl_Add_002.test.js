@@ -1,12 +1,12 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
-import { addRemoteControlKey, deleteRemoteControlKey } from '../../commonMethods/remoteControl'
+import { addRemoteControlKey } from '../../commonMethods/remoteControl'
 
 export default {
   title: 'RemoteControl Add - 002',
-  description: 'Adds key to the invalid device and validates the result',
+  description: 'Add already existing key and validates the result',
   context: {
-    deviceName: 'invalidevice',
+    deviceName: 'DevInput',
     keyCode: '1',
     key: 103,
   },
@@ -28,10 +28,10 @@ export default {
         )
       },
       validate(res) {
-        if (res.code == '2' && res.message === 'ERROR_UNAVAILABLE') {
+        if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
-          throw new Error(`Error message is improper and is ${res}`)
+          throw new Error('Invalid error message shown')
         }
       },
     },

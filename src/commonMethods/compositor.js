@@ -104,13 +104,14 @@ export const getCompositorResolution = function() {
     .then(result => result)
     .catch(err => err)
 }
+
 /**
- * This function is used to kill a client
+ * This function is select a client
  * @param plugin
  * @returns {Promise<unknown>}
  */
-export const killClient = function(plugin) {
-  return this.$thunder.api.Compositor.kill({ client: plugin })
+export const selectClient = function(plugin) {
+  return this.$thunder.api.Compositor.select({ client: plugin })
     .then(result => result)
     .catch(err => err)
 }
