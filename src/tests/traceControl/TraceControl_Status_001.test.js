@@ -47,9 +47,6 @@ export default {
       validate(res) {
         let setting = res.settings[0]
         if (
-          res.console != null &&
-          res.remote.port != null &&
-          res.remote.binding != null &&
           setting.module === this.$context.read('module') &&
           setting.category === this.$context.read('category') &&
           setting.state === this.$context.read('state')

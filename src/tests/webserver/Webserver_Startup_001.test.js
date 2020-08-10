@@ -1,5 +1,5 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
-import { checkIfProcessIsRunning } from '../../commonMethods/commonFunctions'
+import { setSshHost, checkIfProcessIsRunning } from '../../commonMethods/ssh.js'
 import { getCpuLoad } from '../../commonMethods/deviceInfo'
 import constants from '../../commonMethods/constants'
 
@@ -10,6 +10,7 @@ export default {
   repeat: 30,
   setup() {
     return this.$sequence([
+      () => setSshHost(this.$thunder.api.options.host),
       () => pluginDeactivate.call(this, constants.webServerPlugin),
       () => pluginActivate.call(this, constants.webServerPlugin),
     ])

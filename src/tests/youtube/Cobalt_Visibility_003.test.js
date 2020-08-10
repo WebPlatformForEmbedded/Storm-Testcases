@@ -4,10 +4,10 @@ export default {
   ...baseTest,
   ...{
     context: {
-      visibilityState: 'visible',
+      visibilityState: 'invalid',
     },
-    title: 'Cobalt Visibility - 002',
-    description: 'Set Cobalt Visibility to visible and validate the result',
+    title: 'Cobalt Visibility - 003',
+    description: 'Set Cobalt Visibility to invalid and validate the result',
     steps: baseTest.steps.map((step, index) => {
       return step
     }),

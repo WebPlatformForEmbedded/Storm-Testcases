@@ -4,6 +4,7 @@ import {
   pluginDeactivate,
 } from '../../commonMethods/controller'
 import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
+import constants from '../../commonMethods/constants'
 
 let listener
 
@@ -20,6 +21,7 @@ export default {
       () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
       () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
       () => pluginActivate.call(this, 'WebKitBrowser'),
+      () => setWebKitUrl.call(this, constants.blankUrl),
       () => {
         return this.$thunder.api.call('WebKitBrowser', 'state', 'resumed')
       },
