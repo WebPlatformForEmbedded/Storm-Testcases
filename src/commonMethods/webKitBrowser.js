@@ -104,3 +104,131 @@ export const webKitBrowserStartAndResume = function() {
     () => webKitBrowserActions.call(this, constants.resume),
   ])
 }
+
+/**
+ * This function sets the bridge reply
+ * @param string
+ * @returns {Promise<unknown>}
+ */
+export const bridgeReply = function(string) {
+  return this.$thunder.api.WebKitBrowser.bridgereply(string)
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the bridge event
+ * @param string
+ * @returns {Promise<unknown>}
+ */
+export const bridgeEvent = function(string) {
+  return this.$thunder.api.WebKitBrowser.bridgeevent(string)
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function gets UserAgent string used by browser
+ * @returns {Promise<unknown>}
+ */
+export const getUserAgent = function() {
+  return this.$thunder.api.WebKitBrowser.useragent()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function sets UserAgent string used by browser
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export const setUserAgent = function(params) {
+  return this.$thunder.api.WebKitBrowser.useragent(params)
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function gets httpcookieacceptpolicy
+ * @returns {Promise<unknown>}
+ */
+export const getHttpCookieAcceptpolicy = function() {
+  return this.$thunder.api.WebKitBrowser.httpcookieacceptpolicy()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function sets HttpCookieAcceptpolicy
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export const setHttpCookieAcceptpolicy = function(params) {
+  return this.$thunder.api.WebKitBrowser.httpcookieacceptpolicy(params)
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the localstorage enabled/disabled status
+ * @returns {Promise<unknown>}
+ */
+export const getLocalStorageEnabledStatus = function() {
+  return this.$thunder.api.WebKitBrowser.localstorageenabled()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function sets local storage state status
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export const setlocalstorageenabled = function(params) {
+  return this.$thunder.api.WebKitBrowser.localstorageenabled(params)
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function gets the language of Webkit Browser
+ * @returns {Promise<unknown>}
+ */
+export const getLanguage = function() {
+  return this.$thunder.api.WebKitBrowser.languages()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function sets language for WebKit Browser
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export const setLanguage = function(params) {
+  return this.$thunder.api.WebKitBrowser.languages([params])
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function gets headers
+ * @returns {Promise<unknown>}
+ */
+export const getHeaders = function() {
+  return this.$thunder.api.WebKitBrowser.headers()
+    .then(res => res)
+    .catch(err => err)
+}
+
+/**
+ * This function sets header
+ * @param name
+ * @param value
+ * @returns {Promise<unknown>}
+ */
+export const setHeaders = function(name, value) {
+  return this.$thunder.api.WebKitBrowser.headers([{ name, value }])
+    .then(res => res)
+    .catch(err => err)
+}
