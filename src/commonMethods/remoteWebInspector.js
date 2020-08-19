@@ -12,20 +12,22 @@ const WebSocket = require('ws')
  * NOTE: Only 1 webinspector connection can be made per host/agent, limited by the wpe webinspector itself
  */
 export class AttachToLogs {
-  constructor(cb, hostIP) {
+  constructor(cb, hostIP, port) {
     this.cb = cb
+    this.port = port || '9998'
     this.hostIP = hostIP
     this.ws = undefined
   }
 
   connect() {
-    this.ws = new WebSocket(`ws://${this.hostIP}:9998/Main.html?page=1`, {
+    this.ws = new WebSocket(`ws://${this.hostIP}:${this.port}/devtools/page/1`, {
       protocolVersion: 13,
-      origin: `${this.hostIP}:9998`,
+      origin: `${this.hostIP}:${this.port}`,
       perMessageDeflate: true,
     })
 
     this.ws.on('open', () => {
+      //console.log('ws open')
       // Only subscribe to Console.enable messages
       this.ws.send('{"id":1,"method":"Inspector.enable"}')
       this.ws.send('{"id":22,"method":"Console.enable"}')
@@ -48,6 +50,7 @@ export class AttachToLogs {
     })
 
     this.ws.on('error', e => {
+      //console.log('ws error', e)
       throw Error(e)
     })
 
