@@ -42,16 +42,11 @@ export default {
   ],
   validate() {
     let response = this.$data.read('monitorinfo')
-    for (let i = 0; i < response.length; i++) {
-      let plugin = response[i]
-      if (
-        plugin.observable === constants.webKitBrowserPlugin ||
-        plugin.observable === constants.youTubePlugin
-      ) {
-        return true
-      } else {
-        throw new Error('Monitor data is not present for WebKitBrowser and YouTube')
-      }
-    }
+    let pluginData = response.find(
+      plugin => plugin.observable === constants.webKitBrowserPlugin || constants.youTubePlugin
+    )
+    if (pluginData.observable === constants.webKitBrowserPlugin || constants.youTubePlugin)
+      return true
+    else throw new Error('Monitor data is not present for WebKitBrowser and YouTube')
   },
 }
