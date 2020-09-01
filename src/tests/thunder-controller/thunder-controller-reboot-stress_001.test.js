@@ -22,7 +22,7 @@ const removeStateOfPlugin = pluginData => {
 export default {
   title: 'Thunder Controller - Reboot Stress test',
   description: 'Stress tests the Thunder by rebooting 1000 times',
-  repeat: 150,
+  repeat: 1000,
   steps: [
     {
       description: 'Get controller plugin data before reboot',
