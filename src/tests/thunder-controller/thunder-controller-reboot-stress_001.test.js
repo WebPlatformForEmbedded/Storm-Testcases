@@ -4,6 +4,21 @@ import { getNetworkStatus } from '../../commonMethods/networkcontrol'
 let counter = 1
 let pluginDataBeforeReboot = []
 let pluginDataAfterReboot = []
+
+const removeStateOfPlugin = pluginData => {
+  let indexOfWebKit = pluginData
+    .map(function(item) {
+      return item.callsign
+    })
+    .indexOf('WebKitBrowser')
+  let indexOfUX = pluginData
+    .map(function(item) {
+      return item.callsign
+    })
+    .indexOf('UX')
+  delete pluginData[indexOfWebKit].state
+  delete pluginData[indexOfUX].state
+}
 export default {
   title: 'Thunder Controller - Reboot Stress test',
   description: 'Stress tests the Thunder by rebooting 1000 times',
@@ -22,6 +37,7 @@ export default {
             autostart: res[i].autostart,
           })
         }
+        removeStateOfPlugin(pluginDataBeforeReboot)
         return this.$expect(res).to.be.object() === true
       },
     },
@@ -42,7 +58,7 @@ export default {
       },
     },
     {
-      description: 'Get controller plugin data after rebbot',
+      description: 'Get controller plugin data after reboot',
       sleep: 40,
       test() {
         return getControllerPluginData.call(this)
@@ -55,6 +71,7 @@ export default {
             autostart: res[i].autostart,
           })
         }
+        removeStateOfPlugin(pluginDataAfterReboot)
         return true
       },
     },
@@ -65,8 +82,8 @@ export default {
           for (let i = 0; i < pluginDataBeforeReboot.length; i++) {
             if (
               pluginDataBeforeReboot[i].callsign === pluginDataAfterReboot[i].callsign &&
-              pluginDataBeforeReboot[i].state === pluginDataBeforeReboot[i].state &&
-              pluginDataBeforeReboot[i].autostart === pluginDataBeforeReboot[i].autostart
+              pluginDataBeforeReboot[i].state === pluginDataAfterReboot[i].state &&
+              pluginDataBeforeReboot[i].autostart === pluginDataAfterReboot[i].autostart
             ) {
               if (i === pluginDataBeforeReboot.length - 1) {
                 return true
