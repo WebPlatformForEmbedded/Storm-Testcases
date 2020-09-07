@@ -14,7 +14,7 @@ const WebSocket = require('ws')
 export class AttachToLogs {
   constructor(cb, hostIP, port) {
     this.cb = cb
-    this.port = port || '9998'
+    this.port = port || '9224'
     this.hostIP = hostIP
     this.ws = undefined
   }
