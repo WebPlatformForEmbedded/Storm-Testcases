@@ -1,4 +1,8 @@
-import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
+import {
+  getWebInspectorPort,
+  pluginActivate,
+  pluginDeactivate,
+} from '../../commonMethods/controller'
 import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 import constants from '../../commonMethods/constants'
 import { AttachToLogs } from '../../commonMethods/remoteWebInspector'
@@ -56,7 +60,8 @@ export default {
     {
       description: 'Change the channel continously for 12 hours and check the behavior',
       sleep: 5,
-      test() {
+      async test() {
+        let port = await getWebInspectorPort.call(this, constants.webKitBrowserPlugin)
         return new Promise((resolve, reject) => {
           let hostIP = this.$thunder.api.options.host
           async function parseChannelChangeLogs(error, log) {
@@ -108,8 +113,8 @@ export default {
               resolve(count)
             }
           }
-          console.log('Attaching to logs', hostIP)
-          logger = new AttachToLogs(parseChannelChangeLogs, hostIP)
+          console.log('Attaching to logs', hostIP, port)
+          logger = new AttachToLogs(parseChannelChangeLogs, hostIP, port)
           logger.connect()
           setWebKitUrl.call(this, this.$context.read('url'))
           initialTime = Moment.utc()
