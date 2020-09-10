@@ -173,3 +173,15 @@ export const setPluginConfiguration = function(pluginName, params) {
     .then(res => res)
     .catch(err => err)
 }
+
+/**
+ * This function is used to get the webInspector port
+ * @param pluginName
+ * @returns {Promise<T>}
+ */
+export const getWebInspectorPort = async function(pluginName) {
+  let pluginConfig = await getPluginConfiguration.call(this, pluginName)
+  let webInspectorIP = pluginConfig.inspector
+  let port = webInspectorIP.split(':')
+  return port[1]
+}
