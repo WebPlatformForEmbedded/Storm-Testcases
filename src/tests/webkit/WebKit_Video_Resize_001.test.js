@@ -75,7 +75,7 @@ export default {
     {
       description: 'Change the resolution to 320x240',
       test() {
-        this.$thunder.remoteControl.key(1)
+        return this.$thunder.remoteControl.key(1)
       },
       validate(res) {
         if (res === null) return true
@@ -85,7 +85,7 @@ export default {
       },
     },
     {
-      description: 'Get a screenshot',
+      description: 'Get a screenshot after changing the resolution to 320x240',
       test: screenshot,
       validate() {
         let resp = this.$data.read('screenshotResult')
@@ -98,10 +98,10 @@ export default {
       },
     },
     {
-      description: 'verify if the resolution change happened',
+      description: 'Verify if the resolution change happened to 320x240',
       test() {
         let screenshot = this.$data.read('screenshot')
-        resemble('../../resources/res_320x240.png')
+        resemble('../../resources/res_320x240')
           .compareTo(screenshot)
           .ignoreColors()
           .onComplete(function(data) {
@@ -116,7 +116,7 @@ export default {
     {
       description: 'Change the resolution to 640x480',
       test() {
-        this.$thunder.remoteControl.key(2)
+        return this.$thunder.remoteControl.key(2)
       },
       validate(res) {
         if (res === null) return true
@@ -126,7 +126,7 @@ export default {
       },
     },
     {
-      description: 'Get a screenshot',
+      description: 'Get a screenshot after changing the resolution to 640x480',
       test: screenshot,
       validate() {
         let resp = this.$data.read('screenshotResult')
@@ -139,10 +139,10 @@ export default {
       },
     },
     {
-      description: 'verify if the resolution change happened',
+      description: 'Verify if the resolution change happened to 640x480',
       test() {
         let screenshot = this.$data.read('screenshot')
-        resemble('../../resources/res_640x480.png')
+        resemble('../../resources/res_640x480')
           .compareTo(screenshot)
           .ignoreColors()
           .onComplete(function(data) {
@@ -157,7 +157,7 @@ export default {
     {
       description: 'Change the resolution to 1280x720',
       test() {
-        this.$thunder.remoteControl.key(3)
+        return this.$thunder.remoteControl.key(3)
       },
       validate(res) {
         if (res === null) return true
@@ -167,7 +167,7 @@ export default {
       },
     },
     {
-      description: 'Get a screenshot',
+      description: 'Get a screenshot after changing the resolution to 1280x720',
       test: screenshot,
       validate() {
         let resp = this.$data.read('screenshotResult')
@@ -180,10 +180,10 @@ export default {
       },
     },
     {
-      description: 'verify if the resolution change happened',
+      description: 'Verify if the resolution change happened to 1280x720',
       test() {
         let screenshot = this.$data.read('screenshot')
-        resemble('../../resources/res_1280x720.png')
+        resemble('../../resources/res_1280x720')
           .compareTo(screenshot)
           .ignoreColors()
           .onComplete(function(data) {
@@ -198,7 +198,7 @@ export default {
     {
       description: 'Change the resolution to 1920x1080',
       test() {
-        this.$thunder.remoteControl.key(4)
+        return this.$thunder.remoteControl.key(4)
       },
       validate(res) {
         if (res === null) return true
@@ -208,7 +208,7 @@ export default {
       },
     },
     {
-      description: 'Get a screenshot',
+      description: 'Get a screenshot after changing resolution to 1920x1080',
       test: screenshot,
       validate() {
         let resp = this.$data.read('screenshotResult')
@@ -221,10 +221,10 @@ export default {
       },
     },
     {
-      description: 'verify if the resolution change happened',
+      description: 'Verify if the resolution change happened to 1920x1080',
       test() {
         let screenshot = this.$data.read('screenshot')
-        resemble('../../resources/res_1920x1080.png')
+        resemble('../../resources/res_1920x1080')
           .compareTo(screenshot)
           .ignoreColors()
           .onComplete(function(data) {
