@@ -42,4 +42,8 @@ export default {
   WPEFramework: 'WPEFramework',
   blankUrl: 'about:blank',
   youtubeLongMovieUrl: 'https://www.youtube.com/tv?v=kg3ElG-H7Wo&resume',
+  // asset_vp9_1080p60: 'https://www.youtube.com/tv#/watch/video/idle?v=tMMVhUbwK6Q&resume',
+  // asset_vp9_1080p30: 'https://www.youtube.com/tv#/watch/video/idle?v=TdpBRZ0dZhw&resume',
+  // asset_avc_1080p30: 'https://www.youtube.com/tv#/watch/video/control?v=wggaaecdAac&resume',
+  // asset_live_video: 'https://www.youtube.com/tv#/watch/video/idle?v=KGEekP1102g&resume'
 }
