@@ -7,8 +7,8 @@ let curSameScreenshot = 0
 let maxSameScreenshot = 5
 
 export default {
-  title: 'Youtube- Playback of VP9-1080p60Hz Asset for 30 mins',
-  description: 'Start playback of a VP9-1080p60Hz Asset on YouTube and let it run for 30 mins',
+  title: 'YouTube Playback test - 004',
+  description: 'Start playback of a VP9-1080p60Hz Asset and run for 30 mins',
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

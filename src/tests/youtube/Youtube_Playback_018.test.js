@@ -6,10 +6,8 @@ export default {
     context: {
       url: 'https://www.youtube.com/tv#/watch/video/idle?v=TdpBRZ0dZhw&resume',
     },
-    title:
-      'Youtube - Forward/Backward outside buffer of the VP9-1080p30Hz Asset and check for video playback',
-    description:
-      'Start playback of a VP9-1080p30Hz Asset on YouTube and forward/backward outside the buffer',
+    title: 'YouTube Playback test - 018',
+    description: 'Start playback of a VP9-1080p30Hz Asset and forward/backward outside the buffer',
     steps: baseTest.steps.map((step, index) => {
       if (index === 4) {
         return {

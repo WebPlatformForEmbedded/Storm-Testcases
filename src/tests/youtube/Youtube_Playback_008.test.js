@@ -6,8 +6,8 @@ export default {
     context: {
       url: 'https://www.youtube.com/tv#/watch/video/idle?v=KGEekP1102g&resume',
     },
-    title: 'Youtube- Playback of Live Video Asset for 30 mins',
-    description: 'Start playback of a Live Vide Asset on YouTube and let it run for 30 mins',
+    title: 'YouTube Playback test - 008',
+    description: 'Start playback of a Live Vide Asset and run for 30 mins',
     steps: baseTest.steps.map((step, index) => {
       if (index === 4) {
         return {

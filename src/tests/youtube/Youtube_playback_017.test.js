@@ -7,10 +7,8 @@ let curSameScreenshot = 0
 let maxSameScreenshot = 5
 
 export default {
-  title:
-    'Youtube - Forward/Backward outside buffer of the VP9-1080p60Hz Asset and check for video playback',
-  description:
-    'Start playback of a VP9-1080p60Hz Asset on YouTube and forward/backward outside the buffer',
+  title: 'YouTube Playback test - 017',
+  description: 'Start playback of a VP9-1080p60Hz Asset and forward/backward outside the buffer',
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

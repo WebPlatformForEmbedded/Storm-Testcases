@@ -6,8 +6,8 @@ export default {
     context: {
       url: 'https://www.youtube.com/tv#/watch/video/idle?v=TdpBRZ0dZhw&resume',
     },
-    title: 'Youtube- Playback of VP9-1080p30Hz Asset for 30 mins',
-    description: 'Start playback of a VP9-1080p30Hz Asset on YouTube and let it run for 30 mins',
+    title: 'YouTube Playback test - 005',
+    description: 'Start playback of a VP9-1080p30Hz Asset and run for 30 mins',
     steps: baseTest.steps.map((step, index) => {
       if (index === 4) {
         return {

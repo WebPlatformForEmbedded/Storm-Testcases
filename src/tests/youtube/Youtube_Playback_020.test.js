@@ -7,10 +7,8 @@ export default {
       //TODO - URL to be updated to AVC-1080p@60 Asset
       url: 'https://www.youtube.com/tv#/watch/video/control?v=wggaaecdAac&resume',
     },
-    title:
-      'Youtube - Forward/Backward outside buffer of the AVC-1080p@60 Asset and check for video playback',
-    description:
-      'Start playback of a AVC-1080p@60 Asset on YouTube and forward/backward outside the buffer',
+    title: 'YouTube Playback test - 020',
+    description: 'Start playback of a AVC-1080p@60 Asset and forward/backward outside the buffer',
     steps: baseTest.steps.map((step, index) => {
       if (index === 4) {
         return {

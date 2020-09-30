@@ -6,10 +6,8 @@ export default {
     context: {
       url: 'https://www.youtube.com/tv#/watch/video/control?v=wggaaecdAac&resume',
     },
-    title:
-      'Youtube - Forward/Backward outside buffer of the AVC-1080p@30 Asset and check for video playback',
-    description:
-      'Start playback of a AVC-1080p@30 Asset on YouTube and forward/backward outside the buffer',
+    title: 'YouTube Playback test - 019',
+    description: 'Start playback of a AVC-1080p@30 Asset and forward/backward outside the buffer',
     steps: baseTest.steps.map((step, index) => {
       if (index === 4) {
         return {

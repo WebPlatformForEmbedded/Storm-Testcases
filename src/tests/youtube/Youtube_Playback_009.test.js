@@ -7,8 +7,8 @@ let curSameScreenshot = 0
 let maxSameScreenshot = 5
 
 export default {
-  title: 'Youtube - Play-Pause the VP9-1080p60Hz Asset 5 times',
-  description: 'Start playback of a VP9-1080p60Hz Asset on YouTube and play pause it for 5 times',
+  title: 'YouTube Playback test - 009',
+  description: 'Start playback of a VP9-1080p60Hz Asset and play pause it for 5 times',
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
