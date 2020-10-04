@@ -46,7 +46,9 @@ export default {
         if (res.code === 29 && res.message === 'ERROR_DUPLICATE_KEY') {
           return true
         } else {
-          throw new Error('Proper error message is not shown')
+          throw new Error(
+            `Proper error message is not shown and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
