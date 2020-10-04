@@ -26,7 +26,9 @@ export default {
         if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
-          throw new Error(`Proper error message is not shown and res is ${res}`)
+          throw new Error(
+            `Proper error message is not shown while setting Cookie policy and and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

@@ -52,7 +52,7 @@ export default {
         if (res === null) {
           return true
         } else {
-          throw new Error('Proper error message is not shown')
+          throw new Error('Error in setting webkit visibility')
         }
       },
     },
@@ -84,7 +84,7 @@ export default {
         if (res === this.$context.read('visibilityState')) {
           return true
         } else {
-          throw new Error('Proper error message is not shown')
+          throw new Error('Error in getting webkit browser visibility')
         }
       },
     },
