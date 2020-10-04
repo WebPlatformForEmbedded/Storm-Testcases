@@ -21,7 +21,9 @@ export default {
         if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
-          throw new Error(`Error message improper and is ${res.message}`)
+          throw new Error(
+            `Error message improper while setting Cleint visibility to Visible and and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

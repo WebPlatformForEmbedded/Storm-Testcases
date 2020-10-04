@@ -26,9 +26,16 @@ export default {
   steps: [
     {
       description: 'Activate Cobalt Plugin and check suspended or not',
-      test: pluginActivate,
-      params: constants.youTubePlugin,
-      assert: 'suspended',
+      test() {
+        return pluginActivate.call(this, constants.youTubePlugin)
+      },
+      validate(res) {
+        if (res === 'suspended') {
+          return true
+        } else {
+          throw new Error('Cobalt Plugin not activated')
+        }
+      },
     },
     {
       description: 'Resume Cobalt Plugin and check resumed or not',

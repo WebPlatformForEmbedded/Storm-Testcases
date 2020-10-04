@@ -22,7 +22,9 @@ export default {
         if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
-          throw new Error('Invalid error message')
+          throw new Error(
+            `Invalid error message while setting Client Geometry for invalid client and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

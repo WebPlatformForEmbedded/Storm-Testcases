@@ -22,7 +22,7 @@ export default {
           return true
         } else {
           throw new Error(
-            'Proper error message is not shown while getting the Geometry for invalid Client'
+            `Proper error message is not shown while getting the Geometry for invalid Client and Error: {code: ${res.code}, message:${res.message}}`
           )
         }
       },
