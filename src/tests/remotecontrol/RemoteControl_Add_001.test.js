@@ -35,7 +35,9 @@ export default {
         if (res === null) {
           return true
         } else {
-          throw new Error(`Remote Control key not added and the error is ${res.code}`)
+          throw new Error(
+            `Remote Control key not added and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
@@ -53,7 +55,9 @@ export default {
         if (res.code === 10000 && res.key === 10300) {
           return true
         } else {
-          throw new Error('Invalid error message shown')
+          throw new Error(
+            `Invalid error message shown and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
@@ -88,7 +92,9 @@ export default {
         if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
-          throw new Error('Invalid error message shown')
+          throw new Error(
+            `Invalid error message shown while getting deleted keycode details and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

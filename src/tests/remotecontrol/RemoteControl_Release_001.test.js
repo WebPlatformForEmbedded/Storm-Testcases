@@ -29,7 +29,9 @@ export default {
         if (res === null) {
           return true
         } else {
-          throw new Error(`Press key code returned wrong result and is ${res.code}`)
+          throw new Error(
+            `Press key code returned wrong result and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
@@ -46,7 +48,9 @@ export default {
         if (res === null) {
           return true
         } else {
-          throw new Error(`Release key code returned wrong result and is ${res}`)
+          throw new Error(
+            `Release key code returned wrong result and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

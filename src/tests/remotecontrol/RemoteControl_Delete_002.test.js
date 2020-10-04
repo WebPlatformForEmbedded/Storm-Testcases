@@ -29,7 +29,9 @@ export default {
         if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
-          throw new Error(`Error message is improper and is ${res}`)
+          throw new Error(
+            `Error message is improper while deleting key from invalid deviceand Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

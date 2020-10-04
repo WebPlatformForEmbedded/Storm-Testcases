@@ -29,7 +29,9 @@ export default {
         if (res.code == '2' && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
-          throw new Error('Invalid error message shown')
+          throw new Error(
+            `Invalid error message shown when sending keycode to a invalid device and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

@@ -33,7 +33,9 @@ export default {
         if (res === null) {
           return true
         } else {
-          throw new Error(`Modifying existing key doesnt work and the error is ${res.code}`)
+          throw new Error(
+            `Modifying existing key doesnt work and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
@@ -51,7 +53,7 @@ export default {
         if (res.code == '1' && res.key === 103 && res.modifiers[0] == 'leftshift') {
           return true
         } else {
-          throw new Error('Invalid error message shown')
+          throw new Error('Invalid error message shown while getting modified key code details')
         }
       },
     },

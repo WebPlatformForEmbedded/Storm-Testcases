@@ -25,7 +25,9 @@ export default {
         if (res === null) {
           return true
         } else {
-          throw new Error(`Re-Loading the keymap doesnt work and the error is ${res.code}`)
+          throw new Error(
+            `Re-Loading the keymap doesnt work and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

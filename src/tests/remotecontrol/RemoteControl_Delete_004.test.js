@@ -17,7 +17,7 @@ export default {
   },
   steps: [
     {
-      description: 'Invoke Modify with invalid json format and validate the result',
+      description: 'Invoke delete with invalid json format and validate the result',
       test() {
         return deleteRemoteControlKey.call(
           this,
@@ -29,7 +29,9 @@ export default {
         if (res.code === 30 && res.message === 'ERROR_BAD_REQUEST') {
           return true
         } else {
-          throw new Error(`Error message is improper and is ${res}`)
+          throw new Error(
+            `Error message is improper while deleting key with invalid json formaand Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

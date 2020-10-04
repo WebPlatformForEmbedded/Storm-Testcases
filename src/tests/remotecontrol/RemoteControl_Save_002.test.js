@@ -16,7 +16,7 @@ export default {
   },
   steps: [
     {
-      description: 'Save Device key map on invalide device and validates the result',
+      description: 'Save Device key map on invalid device and validates the result',
       test() {
         return saveDeviceKeyMap.call(this, this.$context.read('deviceName'))
       },
@@ -24,7 +24,9 @@ export default {
         if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
-          throw new Error(`Error message is improper and is ${res.code}`)
+          throw new Error(
+            `Error message is improper while saving keymap on invalid device and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
