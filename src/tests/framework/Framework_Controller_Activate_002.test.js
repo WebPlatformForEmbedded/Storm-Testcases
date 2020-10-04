@@ -15,7 +15,7 @@ export default {
           return true
         } else {
           throw new Error(
-            'Proper error message is not shown when we try to activate invalid plugin'
+            `Proper error message is not shown when we try to activate invalid plugin and Error: {code: ${res.code}, message:${res.message}}`
           )
         }
       },

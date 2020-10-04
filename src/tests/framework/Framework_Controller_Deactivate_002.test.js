@@ -14,7 +14,9 @@ export default {
         if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
-          throw new Error('Proper error message is not shown while deactivating invalid plugin')
+          throw new Error(
+            `Proper error message is not shown while deactivating invalid plugin and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
