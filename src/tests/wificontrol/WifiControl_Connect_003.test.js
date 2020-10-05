@@ -12,7 +12,7 @@ export default {
         description: 'Connect to the already connected Wifi and validate the result',
         sleep: 5,
         test() {
-          return connectWifi.call(this)
+          return connectWifi.call(this, this.$data.read('selectedWifi'))
         },
         validate(res) {
           if (res.code === 9 && res.message === 'ERROR_ALREADY_CONNECTED') {

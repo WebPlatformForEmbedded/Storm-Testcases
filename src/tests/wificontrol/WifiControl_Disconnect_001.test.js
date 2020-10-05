@@ -12,7 +12,7 @@ export default {
         description: 'Disconnect the connected Wifi and validate the result',
         sleep: 5,
         test() {
-          return disconnectWifi.call(this)
+          return disconnectWifi.call(this, this.$data.read('selectedWifi'))
         },
         validate(res) {
           if (res === null) {

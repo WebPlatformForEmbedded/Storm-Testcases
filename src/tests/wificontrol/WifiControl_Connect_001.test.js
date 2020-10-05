@@ -26,11 +26,10 @@ export default {
         return scanWifi.call(this)
       },
       validate(res) {
-        console.log('Res in step1 is', res)
         if (res === null) {
           return true
         } else {
-          this.$log('Proper error message is not shown')
+          this.$log(`Proper error message is not shown and is ${res.message}, ${res.code}`)
           return false
         }
       },
@@ -44,7 +43,6 @@ export default {
       validate(res) {
         this.$data.write('wifiNetworks', res)
         wifiNetworks = this.$data.read('wifiNetworks')
-        console.log(typeof wifiNetworks)
         if (typeof wifiNetworks === 'object') {
           return true
         } else {
@@ -56,7 +54,6 @@ export default {
       description: 'Display list of wifi to select',
       sleep: 15,
       test() {
-        console.log('wifiNetworks are)', wifiNetworks.map(ssid => ssid.ssid))
         return this.$prompt.selectChoices(
           'Select from the list of Wifi Networks',
           wifiNetworks.map(ssid => ssid.ssid),
@@ -65,6 +62,7 @@ export default {
       },
       validate(res) {
         this.$data.write('selectedWifi', res[0])
+        console.log(this.$data.read('selectedWifi'))
         return true
       },
     },
@@ -115,14 +113,14 @@ export default {
       description: 'Connect to the WIfi',
       sleep: 20,
       test() {
+        console.log('Selected Wifi is', this.$data.read('selectedWifi'))
         return connectWifi.call(this, this.$data.read('selectedWifi'))
       },
       validate(res) {
-        console.log('Res is', res)
         if (res === null) {
           return true
         } else {
-          throw new Error(`Wifi could not be connected and error is ${res}`)
+          throw new Error(`Wifi could not be connected and error is ${res.code}, ${res.message}`)
         }
       },
     },
