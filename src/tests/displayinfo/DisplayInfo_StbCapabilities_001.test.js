@@ -21,7 +21,7 @@ export default {
       },
       validate(res) {
         if (res !== null) {
-          if (stbCapabilities.includes(res)) {
+          if (stbCapabilities.includes(res[0])) {
             return true
           } else {
             throw new Error('stbCapabilities are not in the list of expected values')

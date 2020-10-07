@@ -1,6 +1,6 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
-import { getHdrSetting, getStbCapabilities } from '../../commonMethods/displayInfo'
+import { getHdrSetting } from '../../commonMethods/displayInfo'
 
 let hdrSettings = ['HdrOff', 'Hdr10', 'Hdr10Plus', 'HdrHlg', 'HdrDolbyvision', 'HdrTechnicolor']
 

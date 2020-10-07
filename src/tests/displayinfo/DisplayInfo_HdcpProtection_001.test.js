@@ -2,7 +2,7 @@ import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller
 import constants from '../../commonMethods/constants'
 import { getHdcpProtection } from '../../commonMethods/displayInfo'
 
-let hdcpProtectionArr = ['Unencrypted', 'HDCP1x', 'HDCP2x']
+let hdcpProtectionArr = ['HdcpUnencrypted', 'HDCP1x', 'HDCP2x']
 
 export default {
   title: 'DisplayInfo - HDCP Protection - 001',
@@ -21,7 +21,7 @@ export default {
       },
       validate(res) {
         if (res.hdcpprotection !== null) {
-          if (hdcpProtectionArr.includes(res.hdcpprotection)) {
+          if (hdcpProtectionArr.includes(res)) {
             return true
           } else {
             throw new Error('HDCP Protection is not in the list of expected values')

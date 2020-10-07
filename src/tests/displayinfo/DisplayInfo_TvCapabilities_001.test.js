@@ -21,7 +21,7 @@ export default {
       },
       validate(res) {
         if (res !== null) {
-          if (TvCapabilities.includes(res)) {
+          if (TvCapabilities.includes(res[0])) {
             return true
           } else {
             throw new Error('TvCapabilities are not in the list of expected values')
