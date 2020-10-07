@@ -75,7 +75,7 @@ export const getWebKitBrowserUrl = function() {
  * @returns {Promise<T>}
  */
 export const getWebKitBrowserVisibility = function() {
-  return this.$thunder.api.WebKitBrowser.visibility()
+  return this.$thunder.api.WebKitBrowser.visible()
     .then(url => url)
     .catch(err => err)
 }
@@ -86,7 +86,7 @@ export const getWebKitBrowserVisibility = function() {
  * @returns {Promise<T>}
  */
 export const setWebKitBrowserVisibility = function(status) {
-  return this.$thunder.api.WebKitBrowser.visibility(status)
+  return this.$thunder.api.WebKitBrowser.visible(status)
     .then(url => url)
     .catch(err => err)
 }
