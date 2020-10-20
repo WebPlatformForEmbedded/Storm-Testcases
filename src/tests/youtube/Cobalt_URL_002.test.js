@@ -8,6 +8,7 @@ export default {
   context: {
     url: 'https://www.google.com/',
   },
+  plugin: [constants.youTubePlugin],
   steps: [
     {
       description: 'Deactivate Cobalt browser',

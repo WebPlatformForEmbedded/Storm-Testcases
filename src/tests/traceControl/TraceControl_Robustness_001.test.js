@@ -9,6 +9,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.traceControlPlugin],
   steps: [
     {
       title: 'Activate and deactivate Trace Control plugin for 30 times',

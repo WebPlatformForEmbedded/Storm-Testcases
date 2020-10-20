@@ -6,6 +6,7 @@ let listener
 export default {
   title: 'Cobalt Suspend functionality test',
   description: 'Suspend Cobalt plugin and check whether Suspended or not',
+  plugin: [constants.youTubePlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.youTubePlugin),

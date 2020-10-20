@@ -10,6 +10,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.youTubePlugin, constants.webKitBrowserPlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

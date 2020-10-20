@@ -11,6 +11,7 @@ let maxSameScreenshot = 5
 export default {
   title: 'YouTube Random Key test - 001',
   description: 'Sends random keys to YouTube and checks if YouTube is still working',
+  plugin: [constants.youTubePlugin, constants.webKitBrowserPlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

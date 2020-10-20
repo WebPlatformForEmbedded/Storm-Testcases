@@ -11,6 +11,7 @@ export default {
       () => pluginActivate.call(this, constants.timeSyncPlugin),
     ])
   },
+  plugin: [constants.timeSyncPlugin],
   steps: [
     {
       description: 'Set Time to Invalid time and validate the error',

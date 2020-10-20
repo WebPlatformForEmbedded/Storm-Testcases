@@ -9,6 +9,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.volumeControl],
   steps: [
     {
       title: 'Activate and deactivate VolumeControl plugin for 30 times',

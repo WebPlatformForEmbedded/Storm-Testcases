@@ -9,6 +9,7 @@ export default {
   description:
     'Starts and stops the Youtube plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
+  plugin: [constants.youTubePlugin, constants.webKitBrowserPlugin, constants.uxplugin],
   setup() {
     setSshHost(this.$thunder.api.options.host)
   },

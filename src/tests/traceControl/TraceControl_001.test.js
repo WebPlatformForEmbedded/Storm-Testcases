@@ -12,6 +12,7 @@ export default {
       () => pluginActivate.call(this, constants.traceControlPlugin),
     ])
   },
+  plugin: [constants.traceControlPlugin],
   context: {
     module: 'Plugin_Monitor',
     category: 'Information',

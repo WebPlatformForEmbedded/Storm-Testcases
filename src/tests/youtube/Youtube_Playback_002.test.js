@@ -9,6 +9,7 @@ let maxSameScreenshot = 5
 export default {
   title: 'YouTube Playback test - 002',
   description: 'Start playback of a movie on YouTube and let it run for 8 hours',
+  plugin: [constants.youTubePlugin, constants.webKitBrowserPlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
