@@ -49,6 +49,20 @@ export default {
       //TODO - Implement validation for Cobalt URL
     },
     {
+      description: 'Press Ok to continue playing video',
+      sleep: 20,
+      test() {
+        return this.$thunder.remoteControl.key('ok')
+      },
+      validate(res) {
+        if (res === null) {
+          return true
+        } else {
+          throw new Error('Ok button not pressed')
+        }
+      },
+    },
+    {
       description: 'Check if Youtube is playing for 12 hours',
       sleepOnce: 20,
       test: screenshot,
