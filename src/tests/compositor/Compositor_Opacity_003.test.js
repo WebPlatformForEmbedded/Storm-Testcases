@@ -10,6 +10,7 @@ export default {
     opacityValue: '255',
     opacityInitialValue: '20',
   },
+  plugin: [constants.compositorPlugin, constants.webKitBrowserPlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.compositorPlugin),

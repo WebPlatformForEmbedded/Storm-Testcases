@@ -6,6 +6,7 @@ import { getClientGeometry, setClientGeometry } from '../../commonMethods/compos
 export default {
   title: 'Compositor Geometry - 001',
   description: 'Sets and gets the Geometry of client',
+  plugin: [constants.compositorPlugin, constants.webKitBrowserPlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.compositorPlugin),

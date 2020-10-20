@@ -19,6 +19,7 @@ export default {
       },
     ])
   },
+  plugin: [constants.compositorPlugin, constants.webKitBrowserPlugin, constants.uxplugin],
   teardown() {
     pluginDeactivate.call(this, constants.youTubePlugin)
   },

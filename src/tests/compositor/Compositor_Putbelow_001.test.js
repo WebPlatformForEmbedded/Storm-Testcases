@@ -7,6 +7,12 @@ import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 export default {
   title: 'Compositor Putbelow Functionality - 001',
   description: 'Checks the putbelow functionality of compositor plugin',
+  plugin: [
+    constants.compositorPlugin,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+    constants.youTubePlugin,
+  ],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),

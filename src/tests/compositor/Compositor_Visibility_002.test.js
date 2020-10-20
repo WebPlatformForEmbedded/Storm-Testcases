@@ -11,6 +11,7 @@ export default {
       () => pluginActivate.call(this, constants.compositorPlugin),
     ])
   },
+  plugin: [constants.compositorPlugin],
   steps: [
     {
       description: 'Set Client Visibility to Visibile for invalid plugin and validate the result',

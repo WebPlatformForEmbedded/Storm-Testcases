@@ -9,6 +9,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.compositorPlugin],
   steps: [
     {
       title: 'Activate and deactivate Compositor plugin for 30 times',

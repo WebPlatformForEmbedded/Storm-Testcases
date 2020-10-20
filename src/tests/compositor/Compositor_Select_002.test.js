@@ -11,6 +11,7 @@ export default {
       () => pluginActivate.call(this, constants.compositorPlugin),
     ])
   },
+  plugin: [constants.compositorPlugin],
   steps: [
     {
       description: 'Select invalid Client and validate the result',

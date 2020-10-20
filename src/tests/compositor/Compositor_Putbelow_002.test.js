@@ -5,6 +5,7 @@ import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller
 export default {
   title: 'Compositor Putbelow Functionality - 002',
   description: 'Checks the putbelow functionality for invalid plugin',
+  plugin: [constants.compositorPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.compositorPlugin),

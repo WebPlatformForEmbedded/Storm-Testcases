@@ -8,6 +8,7 @@ export default {
   context: {
     resolution: 'invalidres',
   },
+  plugin: [constants.compositorPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.compositorPlugin),
