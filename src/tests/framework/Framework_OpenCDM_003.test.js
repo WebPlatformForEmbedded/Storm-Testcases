@@ -13,7 +13,7 @@ export default {
     url: 'http://cdn.metrological.com/static/eme-v3-clean.html',
     blankUrl: 'about:blank',
   },
-  plugin: [constants.ocdmPlugin],
+  plugin: [constants.ocdmPlugin, constants.snapshotPlugin],
   setup() {
     return this.$sequence([
       () => this.$data.write('prevScreenshot', null),
