@@ -9,6 +9,7 @@ export default {
   context: {
     visibilityState: 'hidden',
   },
+  plugin: [constants.netFlixPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.netFlixPlugin),

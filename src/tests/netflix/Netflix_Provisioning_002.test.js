@@ -6,6 +6,7 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Netflix provisioning tests',
   description: 'Validate if Netflix can start without provisioning',
+  plugin: [constants.netFlixPlugin],
   steps: [
     {
       description: 'Stop Provisioning',

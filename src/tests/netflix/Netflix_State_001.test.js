@@ -6,6 +6,7 @@ let listener
 export default {
   title: 'Netflix Suspend functionality test',
   description: 'Suspend Netflix plugin and check whether Suspended or not',
+  plugin: [constants.netFlixPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.netFlixPlugin),
