@@ -28,6 +28,7 @@ export default {
         })),
     ])
   },
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   context: {
     url: 'http://cdn.metrological.com/static/eme-v3-clean.html',
   },

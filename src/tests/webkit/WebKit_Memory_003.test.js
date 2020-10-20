@@ -1,4 +1,5 @@
 import baseTest from './WebKit_Memory_001.test.js'
+import constants from '../../commonMethods/constants'
 
 export default {
   ...baseTest,
@@ -11,6 +12,7 @@ export default {
       resume: true,
       SLEEP: 30,
     },
+    plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
     title: 'WPEWebkit Memory test 003',
     description: 'Load appstore and check memory usage',
   },

@@ -1,9 +1,11 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { bridgeEvent } from '../../commonMethods/webKitBrowser'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Webkit Bridge Event - 001  ',
   description: 'Sends legacy badger event and validates the result',
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser

@@ -1,5 +1,6 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { getUserAgent } from '../../commonMethods/webKitBrowser'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Webkit User Agent - 001',
@@ -13,6 +14,7 @@ export default {
       () => pluginActivate.call(this, 'WebKitBrowser'),
     ])
   },
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   steps: [
     {
       description: 'Gets User agent details and validates the result',

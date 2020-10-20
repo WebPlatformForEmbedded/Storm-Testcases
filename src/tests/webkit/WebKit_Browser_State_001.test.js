@@ -6,6 +6,7 @@ let listener
 export default {
   title: 'Webkit Resume functionality test  ',
   description: 'Resume WPEWebkit plugin and check whether Resumed or not',
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser

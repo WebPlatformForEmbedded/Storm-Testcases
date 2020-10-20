@@ -1,5 +1,6 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { getUserAgent, setUserAgent } from '../../commonMethods/webKitBrowser'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Webkit User Agent - 002',
@@ -8,6 +9,7 @@ export default {
     useragent:
       'Mozilla/5.0 (Linux; x86_64 GNU/Linux) AppleWebKit/601.1 (KHTML, like Gecko) Version/8.0 Safari/601.1 WP',
   },
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser

@@ -9,6 +9,7 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Webkit URL - 001',
   description: 'Loads valid URL and check the webkit behavior',
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

@@ -6,6 +6,7 @@ let listener
 export default {
   title: 'Webkit Suspend functionality test  ',
   description: 'Suspends WPEWebkit plugin and check whether suspended or not',
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser

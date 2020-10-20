@@ -9,6 +9,7 @@ export default {
   title: 'WPEWebkit stability xmlhttprequest test',
   description:
     'Stress loads the system with xmlhttprequests and see if the WPEWebkit process continues to operate nominally',
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser
