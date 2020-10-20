@@ -14,12 +14,14 @@ export default {
     keyCode: '10000',
     key: 10300,
   },
+
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.remoteControlPlugin),
       () => pluginActivate.call(this, constants.remoteControlPlugin),
     ])
   },
+  plugin: [constants.remoteControlPlugin],
   steps: [
     {
       description: 'Add remote control validates the result',

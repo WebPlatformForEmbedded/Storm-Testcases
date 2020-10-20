@@ -14,6 +14,7 @@ export default {
       () => pluginActivate.call(this, constants.remoteControlPlugin),
     ])
   },
+  plugin: [constants.locationSyncPlugin],
   steps: [
     {
       description: 'Gets meta data of invalid device and validate the result',

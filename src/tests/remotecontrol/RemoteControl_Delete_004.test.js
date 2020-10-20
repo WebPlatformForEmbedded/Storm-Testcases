@@ -15,6 +15,7 @@ export default {
       () => pluginActivate.call(this, constants.remoteControlPlugin),
     ])
   },
+  plugin: [constants.locationSyncPlugin],
   steps: [
     {
       description: 'Invoke Modify with invalid json format and validate the result',

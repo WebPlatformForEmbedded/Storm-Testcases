@@ -11,6 +11,7 @@ export default {
     key: 103,
     modifier: ['leftshift'],
   },
+  plugin: [constants.locationSyncPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.remoteControlPlugin),

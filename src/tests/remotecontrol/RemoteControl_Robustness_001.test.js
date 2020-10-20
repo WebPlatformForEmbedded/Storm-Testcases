@@ -9,6 +9,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.locationSyncPlugin],
   steps: [
     {
       title: 'Activate and deactivate RemoteControl plugin for 30 times',

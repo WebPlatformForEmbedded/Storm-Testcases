@@ -9,6 +9,7 @@ export default {
     deviceName: 'Web',
     code: '10000000000000000000000',
   },
+  plugin: [constants.locationSyncPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.remoteControlPlugin),

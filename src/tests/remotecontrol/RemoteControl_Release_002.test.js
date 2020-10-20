@@ -9,6 +9,7 @@ export default {
     deviceName: 'invalidDevice',
     keyCode: '1',
   },
+  plugin: [constants.locationSyncPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.remoteControlPlugin),
