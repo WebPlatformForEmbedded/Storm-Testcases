@@ -1,6 +1,9 @@
+import constants from '../../commonMethods/constants'
+
 export default {
   title: 'Thunder Controller - Duplicate plugins',
   description: 'Gets the list of plugins and validates if there are no duplicate plugins',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Get loaded plugins',

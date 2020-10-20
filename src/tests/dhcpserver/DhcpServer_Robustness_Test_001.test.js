@@ -9,6 +9,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.dhcpserver],
   steps: [
     {
       title: 'Activate and deactivate DHCP Server plugin for 30 times',

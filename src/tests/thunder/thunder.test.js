@@ -4,6 +4,13 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Thunder',
   description: 'Testing that we can use the ThunderJS to make calls to a Thunder enabled device',
+  plugin: [
+    constants.controllerPlugin,
+    constants.deviceInfo,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+    constants.youTubePlugin,
+  ],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.webKitBrowserPlugin), //make sure the browser is turned off

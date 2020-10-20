@@ -8,6 +8,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.powerPlugin],
   steps: [
     {
       title: 'Activate and deactivate Power plugin for 30 times',

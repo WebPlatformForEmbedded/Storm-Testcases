@@ -8,6 +8,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.ocdmPlugin],
   steps: [
     {
       title: 'Activate and deactivate OCDM plugin for 30 times',

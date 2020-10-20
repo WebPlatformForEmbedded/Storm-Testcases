@@ -1,6 +1,9 @@
+import constants from '../../commonMethods/constants'
+
 export default {
   title: 'Thunder Controller - Test Controller methods',
   description: 'Tests various controller methods',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Get loaded plugins',

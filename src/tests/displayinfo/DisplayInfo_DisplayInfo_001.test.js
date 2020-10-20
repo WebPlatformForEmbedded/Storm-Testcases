@@ -14,6 +14,7 @@ export default {
       () => pluginActivate.call(this, constants.displayInfo),
     ])
   },
+  plugin: [constants.displayInfo],
   steps: [
     {
       description: 'Get Display Info and validate the result',

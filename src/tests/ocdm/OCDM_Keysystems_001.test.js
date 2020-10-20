@@ -11,6 +11,7 @@ export default {
       () => pluginActivate.call(this, constants.ocdmPlugin),
     ])
   },
+  plugin: [constants.ocdmPlugin],
   steps: [
     {
       description: 'Get DRMS list',

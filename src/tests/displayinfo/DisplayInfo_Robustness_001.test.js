@@ -9,6 +9,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.displayInfo],
   steps: [
     {
       title: 'Activate and deactivate DisplayInfo plugin for 30 times',
