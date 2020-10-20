@@ -4,6 +4,7 @@ import { getPluginStatus } from '../../commonMethods/controller'
 export default {
   title: 'Framework Controller Status - 001',
   description: 'Get status of invalid plugin',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Get status of invalid plugin and check error message',

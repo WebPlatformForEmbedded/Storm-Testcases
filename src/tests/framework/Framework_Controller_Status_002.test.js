@@ -4,6 +4,7 @@ import { getPluginStatus } from '../../commonMethods/controller'
 export default {
   title: 'Framework Controller Status - 002',
   description: 'Get status of multiple plugins',
+  plugin: [constants.controllerPlugin, constants.webKitBrowserPlugin],
   steps: [
     {
       description: 'Get status of webkitbrowser plugin and validate the result',

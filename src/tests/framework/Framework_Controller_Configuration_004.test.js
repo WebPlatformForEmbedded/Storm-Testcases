@@ -8,6 +8,7 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Framework Controller Configuration - 004',
   description: 'Set the plugin configuration and check whether it is set or not',
+  plugin: [constants.controllerPlugin, constants.webKitBrowserPlugin],
   steps: [
     {
       description: 'Get Plugin Configuration and validate the result',

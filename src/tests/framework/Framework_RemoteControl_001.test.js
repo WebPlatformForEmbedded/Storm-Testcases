@@ -10,6 +10,12 @@ let data
 export default {
   title: 'Remote control keys test',
   description: 'Sends and verifies key through the remote control plugin',
+  plugin: [
+    constants.remoteControlPlugin,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+    constants.youTubePlugin,
+  ],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

@@ -1,8 +1,10 @@
 import { getControllerEnvironment } from '../../commonMethods/controller'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework Controller Environment - 002',
   description: 'Get Framework Environment with invalid environment and check framework behavior',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Get framework environment with invalid environment and check the error',

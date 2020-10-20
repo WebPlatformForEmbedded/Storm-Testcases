@@ -8,6 +8,7 @@ export default {
   ...{
     title: 'Framework Monitor test 003',
     description: 'Tests if the Framework Monitor module returns measurement values for YouTube',
+    plugin: [constants.monitorPlugin, constants.youTubePlugin],
     setup() {
       pluginActivate.call(this, constants.youTubePlugin)
     },

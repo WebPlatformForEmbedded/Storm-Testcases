@@ -8,6 +8,7 @@ export default {
   description:
     'Starts and stops the OCDM plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
+  plugin: [constants.ocdmPlugin],
   setup() {
     setSshHost(this.$thunder.api.options.host)
   },

@@ -13,6 +13,12 @@ export default {
     metrologicalURL: 'https://www.metrological.com/',
     googleURL: 'https://www.google.com/',
   },
+  plugin: [
+    constants.snapshotPlugin,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+    constants.youTubePlugin,
+  ],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

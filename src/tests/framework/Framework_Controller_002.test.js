@@ -3,10 +3,12 @@ import {
   pluginActivate,
   pluginDeactivate,
 } from '../../commonMethods/controller'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework Controller test 02',
   description: 'Tests basic functionality of the controller module',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Get /Service/Controller and validate whether it is Object or not',

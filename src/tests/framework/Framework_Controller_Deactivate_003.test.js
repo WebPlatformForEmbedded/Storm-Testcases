@@ -4,6 +4,7 @@ import { pluginDeactivate } from '../../commonMethods/controller'
 export default {
   title: 'Framework Controller Deactivate - 003',
   description: 'Deactivates Controller plugin and check framework behavior',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Deactivating Controller plugin and check error message',

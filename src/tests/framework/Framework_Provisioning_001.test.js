@@ -5,6 +5,7 @@ import { getProvisioningPluginData } from '../../commonMethods/provisioning'
 export default {
   title: 'Framework provision test 001',
   description: 'Tests if the Framework provision module works',
+  plugin: [constants.provisioningPlugin],
   steps: [
     {
       description: 'Deactivating Provisioning and check whether deactivated or not',

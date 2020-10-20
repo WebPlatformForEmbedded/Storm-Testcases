@@ -10,6 +10,7 @@ import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 export default {
   title: 'Framework Controller Configuration - 005',
   description: 'Set the plugin configuration when plugin is active and validate the result',
+  plugin: [constants.controllerPlugin, constants.webKitBrowserPlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser

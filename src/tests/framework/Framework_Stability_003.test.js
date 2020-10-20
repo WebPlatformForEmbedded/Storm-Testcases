@@ -7,6 +7,12 @@ export default {
   title: 'Framework stability set URL test',
   description:
     'Stress loads the system by setting the URL in a loop and see if the Framework process continues to operate nominally',
+  plugin: [
+    constants.controllerPlugin,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+    constants.youTubePlugin,
+  ],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

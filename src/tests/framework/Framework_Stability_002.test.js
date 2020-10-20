@@ -11,6 +11,13 @@ export default {
   title: 'Framework stability key test',
   description:
     'Stress loads the system with keys and see if the Framework process continues to operate nominally',
+  plugin: [
+    constants.controllerPlugin,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+    constants.youTubePlugin,
+  ],
+
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

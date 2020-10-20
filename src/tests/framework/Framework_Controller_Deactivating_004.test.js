@@ -11,6 +11,7 @@ export default {
       listenerArray.push(data.state)
     })
   },
+  plugin: [constants.controllerPlugin],
   teardown() {
     listener.dispose()
   },

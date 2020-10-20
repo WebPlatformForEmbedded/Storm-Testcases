@@ -7,6 +7,12 @@ export default {
   title: 'Framework snapshot test with multiple start/stops',
   description: 'Tests if the Framework snapshot module works',
   repeat: 30,
+  plugin: [
+    constants.snapshotPlugin,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+    constants.youTubePlugin,
+  ],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

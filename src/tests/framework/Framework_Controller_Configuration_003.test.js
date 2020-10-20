@@ -4,6 +4,7 @@ import { getPluginConfiguration } from '../../commonMethods/controller'
 export default {
   title: 'Framework Controller Configuration - 003',
   description: 'Get Configuration for Invalid Plugin ',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Get Configuration of Invalid Plugin and validate the result',

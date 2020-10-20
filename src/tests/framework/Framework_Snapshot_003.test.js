@@ -5,6 +5,12 @@ import { screenshot } from '../../commonMethods/commonFunctions'
 export default {
   title: 'Framework snapshot Test 003',
   description: 'Tests if the Framework snapshot module works',
+  plugin: [
+    constants.snapshotPlugin,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+    constants.youTubePlugin,
+  ],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

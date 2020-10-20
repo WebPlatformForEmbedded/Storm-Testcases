@@ -1,8 +1,10 @@
 import { getControllerEnvironment } from '../../commonMethods/controller'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework Controller Environment - 001',
   description: 'Get Framework Environment',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Get framework environment',
