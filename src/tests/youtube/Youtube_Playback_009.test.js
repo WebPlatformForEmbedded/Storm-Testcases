@@ -7,8 +7,8 @@ let curSameScreenshot = 0
 let maxSameScreenshot = 5
 
 export default {
-  title: 'YouTube Playback test - 001',
-  description: 'Starts playback of a movie on YouTube and let it run for 12 hours',
+  title: 'YouTube Playback test - 009',
+  description: 'Start playback of a VP9-1080p60Hz Asset and play pause it for 5 times',
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off
@@ -16,6 +16,9 @@ export default {
       () => pluginDeactivate.call(this, 'Netflix'), //make sure Netflix is turned off
       () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
     ])
+  },
+  context: {
+    url: 'https://www.youtube.com/tv#/watch/video/idle?v=tMMVhUbwK6Q&resume',
   },
   teardown() {
     setCobaltUrl.call(this, 'https://www.youtube.com/tv')
@@ -41,10 +44,10 @@ export default {
       },
     },
     {
-      description: 'Set Cobalt URL with the video URL which plays for 12 hours',
+      description: 'Set Cobalt URL with the video URL which plays for 30 minutes',
       sleep: 20,
       test() {
-        return setCobaltUrl.call(this, constants.youtubeLongMovieUrl)
+        return setCobaltUrl.call(this, this.$context.read('url'))
       },
       //TODO - Implement validation for Cobalt URL
     },
@@ -63,11 +66,28 @@ export default {
       },
     },
     {
-      description: 'Check if Youtube is playing for 12 hours',
+      description: 'Play and pause the asset for 5 times',
       sleepOnce: 20,
-      test: screenshot,
+      repeat: 10,
+      test() {
+        return this.$thunder.remoteControl.key('ok')
+      },
+      validate(res) {
+        if (res === null) {
+          return true
+        } else {
+          throw new Error('Ok button not pressed to play/pause the video')
+        }
+      },
+    },
+    {
+      description:
+        'Check if Youtube is playing VP9-1080p60Hz Asset even if it is play-paused for 5 times',
       repeat: {
-        seconds: 12 * 60 * 60, // Twelve hours
+        seconds: 1 * 60, // 1 minute
+      },
+      test() {
+        return screenshot.call(this)
       },
       validate() {
         let resp = this.$data.read('screenshotResult')
