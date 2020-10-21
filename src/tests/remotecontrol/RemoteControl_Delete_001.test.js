@@ -34,7 +34,9 @@ export default {
         if (res === null) {
           return true
         } else {
-          throw new Error(`Deleting key doesnt work and the error is ${res.code}`)
+          throw new Error(
+            `Deleting key doesnt work and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
@@ -52,7 +54,9 @@ export default {
         if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
-          throw new Error('Invalid error message shown')
+          throw new Error(
+            `Error message improper while getting keycode details of deleted keycode and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
@@ -70,7 +74,9 @@ export default {
         if (res === null) {
           return true
         } else {
-          throw new Error(`Deleting key doesnt work and the error is ${res.code}`)
+          throw new Error(
+            `Deleting key doesnt work and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
@@ -88,7 +94,9 @@ export default {
         if (res.code == '1' && res.key === 103) {
           return true
         } else {
-          throw new Error('Invalid error message shown')
+          throw new Error(
+            `Invalid error message shown while getting added key code details and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

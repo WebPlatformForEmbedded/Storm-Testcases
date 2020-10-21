@@ -24,7 +24,9 @@ export default {
         if (res === null) {
           return true
         } else {
-          throw new Error(`Saving key map doesnt work and the error is ${res.code}`)
+          throw new Error(
+            `Saving key map doesnt work and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

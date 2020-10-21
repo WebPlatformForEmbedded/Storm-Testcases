@@ -51,7 +51,7 @@ export default {
           return true
         } else {
           throw new Error(
-            `Error message is improper, code is ${res.code} , message is ${res.message} `
+            `Error message is improper when setting active plugin configuration and Error: {code: ${res.code}, message:${res.message}}`
           )
         }
       },

@@ -53,7 +53,7 @@ export default {
           return true
         } else {
           throw new Error(
-            'Proper error message is not shown when we deactivate the already deactivate DHCP interface'
+            `Proper error message is not shown when we deactivate the already deactivate DHCP interface and Error: {code: ${res.code}, message:${res.message}}`
           )
         }
       },

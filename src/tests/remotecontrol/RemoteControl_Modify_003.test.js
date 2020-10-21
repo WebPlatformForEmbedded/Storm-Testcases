@@ -33,7 +33,9 @@ export default {
         if (res.code === 22 && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
-          throw new Error(`Error message is improper and is ${res}`)
+          throw new Error(
+            `Error message is improper while modifying invalid keycode details and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

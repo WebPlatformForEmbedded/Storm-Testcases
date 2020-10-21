@@ -33,7 +33,9 @@ export default {
         if (res == null) {
           return true
         } else {
-          throw new Error('Client geometry not set')
+          throw new Error(
+            `Client geometry not set and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
@@ -46,7 +48,9 @@ export default {
         if (res.x == '1' && res.y == '1' && res.width == '480' && res.height == '360') {
           return true
         } else {
-          throw new Error('Client Geometry not set correctly')
+          throw new Error(
+            `Client Geometry not set correctly and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },
