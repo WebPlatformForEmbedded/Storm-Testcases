@@ -8,6 +8,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.webServerPlugin],
   steps: [
     {
       title: 'Activate and deactivate WebServer plugin for 30 times',

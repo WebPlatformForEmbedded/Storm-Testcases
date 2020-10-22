@@ -16,6 +16,7 @@ export default {
   context: {
     volume: '100',
   },
+  plugin: [constants.volumeControl],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.volumeControl),

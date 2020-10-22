@@ -10,6 +10,12 @@ export default {
   context: {
     url: 'http://cdn.metrological.com/static/testbot/v1/resize_video.html',
   },
+  plugin: [
+    constants.webKitBrowserPlugin,
+    constants.snapshotPlugin,
+    constants.youTubePlugin,
+    constants.uxplugin,
+  ],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

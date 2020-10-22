@@ -9,6 +9,7 @@ export default {
   description:
     'Starts and stops the WPEWebkit plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => setSshHost(this.$thunder.api.options.host),

@@ -1,12 +1,14 @@
 import baseTest from './TimeSync_Synchronize_001.test'
 import Moment from 'moment'
 import { getLatestSyncTime } from '../../commonMethods/timeSync'
+import constants from '../../commonMethods/constants'
 
 export default {
   ...baseTest,
   ...{
     title: 'TimeSync - SyncTime 001',
     description: 'Check the latest Synchronized time',
+    plugin: [constants.timeSyncPlugin],
     steps: [
       baseTest,
       {

@@ -9,6 +9,7 @@ export default {
     title: 'Framework Monitor test 002',
     description:
       'Tests if the Framework Monitor module return measurement values for WebKitBrowser',
+    plugin: [constants.monitorPlugin, constants.webKitBrowserPlugin],
     setup() {
       return this.$sequence([
         () => pluginActivate.call(this, 'WebKitBrowser'),

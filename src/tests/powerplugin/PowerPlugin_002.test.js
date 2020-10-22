@@ -11,6 +11,7 @@ export default {
       () => pluginActivate.call(this, constants.powerPlugin),
     ])
   },
+  plugin: [constants.powerPlugin],
   context: {
     powerState: 'activestandby',
     powerStateOn: 'on',

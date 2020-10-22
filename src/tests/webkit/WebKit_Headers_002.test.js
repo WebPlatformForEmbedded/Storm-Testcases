@@ -1,5 +1,6 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { getHeaders, setHeaders } from '../../commonMethods/webKitBrowser'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Webkit Headers - 002',
@@ -8,6 +9,7 @@ export default {
     name: 'X-Forwarded-For',
     value: '::1',
   },
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser

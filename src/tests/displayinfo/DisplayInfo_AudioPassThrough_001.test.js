@@ -5,6 +5,7 @@ import { getPassthroughAudioStatus } from '../../commonMethods/displayInfo'
 export default {
   title: 'DisplayInfo - Audio Pass Through - 001',
   description: 'Get Status of Audio Passthrough and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

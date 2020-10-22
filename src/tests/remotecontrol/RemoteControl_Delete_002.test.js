@@ -15,6 +15,7 @@ export default {
       () => pluginActivate.call(this, constants.remoteControlPlugin),
     ])
   },
+  plugin: [constants.locationSyncPlugin],
   steps: [
     {
       description: 'Delete key from invalid device and validates the result',

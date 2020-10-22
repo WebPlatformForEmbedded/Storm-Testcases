@@ -1,5 +1,6 @@
 import { getControllerPluginData, getControllerUI, harakiri } from '../../commonMethods/controller'
 import { getNetworkStatus } from '../../commonMethods/networkcontrol'
+import constants from '../../commonMethods/constants'
 
 let counter = 1
 let pluginDataBeforeReboot = []
@@ -22,6 +23,7 @@ const removeStateOfPlugin = pluginData => {
 export default {
   title: 'Thunder Controller - Reboot Stress test',
   description: 'Stress tests the Thunder by rebooting 1000 times',
+  plugin: [constants.controllerPlugin],
   repeat: 1000,
   steps: [
     {

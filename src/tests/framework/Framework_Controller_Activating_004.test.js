@@ -12,6 +12,7 @@ export default {
       listenerArray.push(data.state)
     })
   },
+  plugin: [constants.controllerPlugin, constants.deviceInfo],
   teardown() {
     listener.dispose()
   },

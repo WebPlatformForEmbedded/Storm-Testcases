@@ -8,7 +8,7 @@ export default {
   context: {
     resolution: '480i',
   },
-
+  plugin: [constants.compositorPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.compositorPlugin),

@@ -4,6 +4,7 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Framework Controller Activate - 003',
   description: 'Activate Controller plugin and check framework behavior',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Activating Controller plugin and check error message',

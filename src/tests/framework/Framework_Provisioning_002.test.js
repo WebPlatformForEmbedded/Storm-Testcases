@@ -5,6 +5,7 @@ import { getProvisioningPluginData, startProvisioning } from '../../commonMethod
 export default {
   title: 'Framework provision test 002',
   description: 'Check if device is provisioned',
+  plugin: [constants.provisioningPlugin],
   steps: [
     {
       description: 'Deactivating Provisioning and check whether deactivated or not',

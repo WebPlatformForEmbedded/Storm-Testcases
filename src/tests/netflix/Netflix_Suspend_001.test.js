@@ -10,6 +10,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.netFlixPlugin],
   steps: [
     {
       description: 'Deactivate Webkit Browser Plugin and Check if is stopped correctly',

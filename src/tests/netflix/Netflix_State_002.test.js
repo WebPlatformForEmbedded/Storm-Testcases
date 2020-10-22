@@ -6,6 +6,7 @@ let listener
 export default {
   title: 'Netflix Resume functionality test',
   description: 'Resume Netflix plugin and check whether Resumed or not',
+  plugin: [constants.netFlixPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.netFlixPlugin),

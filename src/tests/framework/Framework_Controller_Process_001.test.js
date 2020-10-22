@@ -1,8 +1,10 @@
 import { setSshHost, checkIfProcessIsRunning } from '../../commonMethods/ssh.js'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework process check - 001',
   description: 'Check if Framework process is running',
+  plugin: [constants.controllerPlugin],
   setup() {
     setSshHost(this.$thunder.api.options.host)
   },

@@ -14,6 +14,12 @@ export default {
   repeat: {
     seconds: 1 * 60 * 60, //One hour
   },
+  plugin: [
+    constants.controllerPlugin,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+    constants.youTubePlugin,
+  ],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

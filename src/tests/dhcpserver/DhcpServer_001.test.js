@@ -12,6 +12,7 @@ export default {
   context: {
     interface: 'eth0',
   },
+  plugin: [constants.dhcpserver],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.dhcpserver),

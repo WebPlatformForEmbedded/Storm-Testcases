@@ -1,8 +1,10 @@
 import { storeconfig } from '../../commonMethods/controller'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework Store Config test - 001',
   description: 'Check Framework Store Config Functionality ',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Stores Config and validate the result',

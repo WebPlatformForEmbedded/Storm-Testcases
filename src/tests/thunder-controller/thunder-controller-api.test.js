@@ -1,3 +1,5 @@
+import constants from '../../commonMethods/constants'
+
 const apiCalls = [
   { plugin: 'foo', method: 'foo', params: 'bar' },
   { plugin: ' ', method: ' ', params: ' ' },
@@ -49,6 +51,7 @@ const apiCalls = [
 export default {
   title: 'Thunder JSON-RPC API tests',
   description: 'Test the JSON RPC interface',
+  plugin: [constants.controllerPlugin],
   setup() {
     this.$data.write('calls', apiCalls)
   },

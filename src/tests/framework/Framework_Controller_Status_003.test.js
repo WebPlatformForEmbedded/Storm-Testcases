@@ -1,8 +1,10 @@
 import { getPluginsStatus } from '../../commonMethods/controller'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Framework Controller Status - 003',
   description: 'Get status of multiple plugins plugin',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Get status of multiple plugins   and validate the result',

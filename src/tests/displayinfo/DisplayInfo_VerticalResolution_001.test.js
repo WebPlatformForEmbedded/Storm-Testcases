@@ -5,6 +5,7 @@ import { getVerticalResolution } from '../../commonMethods/displayInfo'
 export default {
   title: 'DisplayInfo - Vertical Resolution - 001',
   description: 'Get Vertical Resolution and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

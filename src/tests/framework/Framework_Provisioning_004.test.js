@@ -5,6 +5,7 @@ import { getProvisioningPluginData, startProvisioning } from '../../commonMethod
 export default {
   title: 'Framework request provision stress test',
   description: 'Perform multiple device provision requests and see if it is still running',
+  plugin: [constants.provisioningPlugin],
   steps: [
     {
       description: 'Deactivating Provisioning and check whether deactivated or not',

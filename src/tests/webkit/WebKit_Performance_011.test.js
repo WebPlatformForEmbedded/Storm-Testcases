@@ -11,6 +11,7 @@ export default {
   context: {
     resultURL: 'https://krakenbenchmark.mozilla.org/kraken-1.1/results.html',
   },
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser

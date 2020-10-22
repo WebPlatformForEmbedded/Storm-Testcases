@@ -9,6 +9,7 @@ export default {
   title: 'TimeSync - Synchronize 003',
   description:
     'Check whether date is correctly synchronized when Sync time is triggered with past date',
+  plugin: [constants.timeSyncPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.timeSyncPlugin),

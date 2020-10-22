@@ -6,6 +6,12 @@ import { screenshot } from '../../commonMethods/commonFunctions'
 export default {
   title: 'Framework snapshot test',
   description: 'Tests if the Framework snapshot module works',
+  plugin: [
+    constants.snapshotPlugin,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+    constants.youTubePlugin,
+  ],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'UX'), //make sure UX is turned off

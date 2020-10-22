@@ -7,6 +7,7 @@ export default {
   title: 'Netflix provisioning tests',
   repeat: 30,
   description: 'Validate if Framework does not crash if you start Netflix plugin repeatedly',
+  plugin: [constants.netFlixPlugin],
   steps: [
     {
       description: 'Stop Provisioning',

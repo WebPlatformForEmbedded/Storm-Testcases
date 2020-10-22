@@ -19,6 +19,7 @@ export default {
       },
     ])
   },
+  plugin: [constants.compositorPlugin],
   steps: [
     {
       description: 'Select Client and validate the result',

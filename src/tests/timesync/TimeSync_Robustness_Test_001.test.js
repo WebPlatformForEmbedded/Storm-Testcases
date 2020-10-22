@@ -8,6 +8,7 @@ export default {
   context: {
     cpuLoad: 90,
   },
+  plugin: [constants.timeSyncPlugin],
   steps: [
     {
       title: 'Activate and deactivate TimeSync plugin for 30 times',

@@ -5,6 +5,7 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Framework Device Info test to check Socket Info',
   description: 'Check if there is a valid socket info returned',
+  plugin: [constants.deviceInfo],
   steps: [
     {
       description: 'Deactivating DeviceInfo plugin',

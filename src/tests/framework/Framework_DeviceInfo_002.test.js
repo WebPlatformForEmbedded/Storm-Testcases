@@ -5,6 +5,7 @@ import { getAddressesInfo } from '../../commonMethods/deviceInfo'
 export default {
   title: 'Framework Device Info test to check valid IP',
   description: 'Check if there is a valid IP returned',
+  plugin: [constants.deviceInfo],
   steps: [
     {
       description: 'Deactivating DeviceInfo plugin',

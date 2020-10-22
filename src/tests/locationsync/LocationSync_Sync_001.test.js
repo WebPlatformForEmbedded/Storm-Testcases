@@ -12,6 +12,7 @@ export default {
       () => pluginActivate.call(this, constants.locationSyncPlugin),
     ])
   },
+  plugin: [constants.locationSyncPlugin],
   steps: [
     {
       description: 'Invoke Sync',

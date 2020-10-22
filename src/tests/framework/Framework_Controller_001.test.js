@@ -4,6 +4,7 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Framework Controller test 01',
   description: 'Tests basic functionality of the controller module',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Check if response is a JSON response',

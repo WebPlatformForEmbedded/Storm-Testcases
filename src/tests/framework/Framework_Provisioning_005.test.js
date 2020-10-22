@@ -5,6 +5,7 @@ import constants from '../../commonMethods/constants'
 export default {
   title: 'Framework Controller Provisioning - 005',
   description: 'Get Provisioning ID and validate the result',
+  plugin: [constants.provisioningPlugin],
   setup() {
     return this.$sequence([
       () => {

@@ -5,6 +5,7 @@ import { getVerticalFrequency } from '../../commonMethods/displayInfo'
 export default {
   title: 'DisplayInfo - Vertical Frequency - 001',
   description: 'Get Vertical Frequency and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

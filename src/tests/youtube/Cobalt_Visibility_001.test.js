@@ -8,6 +8,7 @@ export default {
   context: {
     visibilityState: 'hidden',
   },
+  plugin: [constants.youTubePlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.youTubePlugin),

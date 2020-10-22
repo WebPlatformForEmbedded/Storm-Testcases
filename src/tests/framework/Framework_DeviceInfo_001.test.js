@@ -5,6 +5,7 @@ import { getDeviceInfo } from '../../commonMethods/deviceInfo'
 export default {
   title: 'Framework Device Info test',
   description: 'Validates functionality of the Device Info plugin',
+  plugin: [constants.deviceInfo],
   steps: [
     {
       description: 'Deactivating DeviceInfo plugin',

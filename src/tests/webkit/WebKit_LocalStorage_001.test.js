@@ -3,6 +3,7 @@ import {
   setlocalstorageenabled,
   getLocalStorageEnabledStatus,
 } from '../../commonMethods/webKitBrowser'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Webkit Local Storage - 001',
@@ -10,6 +11,7 @@ export default {
   context: {
     status: true,
   },
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //cycle the browser

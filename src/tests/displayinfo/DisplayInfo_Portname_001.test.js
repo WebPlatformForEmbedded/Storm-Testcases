@@ -5,6 +5,7 @@ import { getPortName } from '../../commonMethods/displayInfo'
 export default {
   title: 'DisplayInfo - Port Name - 001',
   description: 'Get PortName and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

@@ -8,6 +8,7 @@ export default {
   context: {
     visibilityState: 'hidden',
   },
+  plugin: [constants.netFlixPlugin],
   steps: [
     {
       description: 'Deactivate Netflix Plugin',

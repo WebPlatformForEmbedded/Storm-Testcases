@@ -7,6 +7,7 @@ let TvCapabilities = ['HDROff', 'HDR10', 'HDR10Plus', 'HDRDolbyVision', 'HDRTech
 export default {
   title: 'DisplayInfo - TV Capabilities 001',
   description: 'Get TV Capabilities and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

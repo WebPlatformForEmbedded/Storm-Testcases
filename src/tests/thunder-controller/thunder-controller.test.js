@@ -1,6 +1,9 @@
+import constants from '../../commonMethods/constants'
+
 export default {
   title: 'Thunder Controller - Validate basic elements',
   description: 'Retrieves response from Controller and validates results',
+  plugin: [constants.controllerPlugin],
   steps: [
     {
       description: 'Get Controller status',

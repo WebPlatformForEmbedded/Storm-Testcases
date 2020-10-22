@@ -15,6 +15,7 @@ export default {
       () => pluginActivate.call(this, constants.webServerPlugin),
     ])
   },
+  plugin: [constants.webServerPlugin],
   context: {
     cpuLoad: 90,
   },

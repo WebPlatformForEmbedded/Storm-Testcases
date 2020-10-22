@@ -6,6 +6,7 @@ let listener
 export default {
   title: 'Cobalt Resume functionality test',
   description: 'Resume Cobalt plugin and check whether Resumed or not',
+  plugin: [constants.youTubePlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.youTubePlugin),

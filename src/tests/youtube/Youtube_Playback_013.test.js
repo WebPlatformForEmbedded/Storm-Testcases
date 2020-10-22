@@ -17,6 +17,12 @@ export default {
       () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
     ])
   },
+  plugin: [
+    constants.youTubePlugin,
+    constants.snapshotPlugin,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+  ],
   context: {
     url: 'https://www.youtube.com/tv#/watch/video/idle?v=tMMVhUbwK6Q&resume',
   },

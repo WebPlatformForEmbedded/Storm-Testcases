@@ -1,6 +1,7 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { bytesToMb, setUrl, suspendOrResumePlugin } from '../../commonMethods/commonFunctions'
 import { getMonitorInfo } from '../../commonMethods/monitor'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'WPEWebkit Memory test 001',
@@ -13,6 +14,7 @@ export default {
       () => pluginDeactivate.call(this, 'Cobalt'), //make sure Cobalt is turned off
     ])
   },
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   context: {
     MAX_MEMORY: 25, //Mb
     CALLSIGN: 'WebKitBrowser',

@@ -8,6 +8,7 @@ export default {
   context: {
     deviceName: 'DevInput',
   },
+  plugin: [constants.locationSyncPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.remoteControlPlugin),

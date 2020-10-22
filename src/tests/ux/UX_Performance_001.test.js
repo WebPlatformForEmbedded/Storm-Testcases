@@ -1,5 +1,6 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { calcAvgFPS, setUrl } from '../../commonMethods/commonFunctions'
+import constants from '../../commonMethods/constants'
 
 let listener
 
@@ -24,6 +25,7 @@ export default {
     url:
       'https://widgets.metrological.com/lightning/metrological/f5d28e6d86c88193fcbf50602c6a30ec#app:com.metrological.app.VimeoRelease',
   },
+  plugin: [constants.uxplugin],
   setup() {
     this.$data.write('samples', [])
     return this.$sequence([

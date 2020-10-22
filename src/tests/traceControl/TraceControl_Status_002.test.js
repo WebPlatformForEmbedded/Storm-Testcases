@@ -11,6 +11,7 @@ export default {
       () => pluginActivate.call(this, constants.traceControlPlugin),
     ])
   },
+  plugin: [constants.traceControlPlugin],
   steps: [
     {
       description: 'Invoke get traceControl Status and validate the result',

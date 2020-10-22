@@ -12,6 +12,12 @@ export default {
   title: 'YouTube Random Key test - 002',
   description:
     'Send random keys to youtube, only to navigate the the UI. No enter is send so the device will never start playback',
+  plugin: [
+    constants.youTubePlugin,
+    constants.snapshotPlugin,
+    constants.webKitBrowserPlugin,
+    constants.uxplugin,
+  ],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

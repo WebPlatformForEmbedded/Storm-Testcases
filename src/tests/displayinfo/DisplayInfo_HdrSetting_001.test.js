@@ -7,6 +7,7 @@ let hdrSettings = ['HdrOff', 'Hdr10', 'Hdr10Plus', 'HdrHlg', 'HdrDolbyvision', '
 export default {
   title: 'DisplayInfo - HDR Settings 001',
   description: 'Get HDR Settings and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

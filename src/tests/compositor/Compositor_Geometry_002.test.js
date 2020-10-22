@@ -5,6 +5,7 @@ import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller
 export default {
   title: 'Compositor Geometry - 002',
   description: 'Gets Geometry of invalid client and validates the result',
+  plugin: [constants.compositorPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.compositorPlugin),

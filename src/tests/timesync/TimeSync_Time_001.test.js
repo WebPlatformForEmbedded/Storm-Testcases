@@ -12,6 +12,7 @@ export default {
       () => pluginActivate.call(this, constants.timeSyncPlugin),
     ])
   },
+  plugin: [constants.timeSyncPlugin],
   steps: [
     {
       description: 'Invoke Time to get current time',

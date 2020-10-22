@@ -11,6 +11,7 @@ export default {
     minFPS: 30,
     url: 'https://webkit.org/blog-files/3d-transforms/poster-circle.html',
   },
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     this.$data.write('samples', [])
     return this.$sequence([

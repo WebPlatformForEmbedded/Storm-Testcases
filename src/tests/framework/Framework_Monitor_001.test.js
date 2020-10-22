@@ -5,6 +5,7 @@ import { getMonitorInfo } from '../../commonMethods/monitor'
 export default {
   title: 'Framework Monitor test 001',
   description: 'Tests if the Framework Monitor module works',
+  plugin: [constants.monitorPlugin],
   setup() {
     this.$data.write('samples', [])
     return this.$sequence([

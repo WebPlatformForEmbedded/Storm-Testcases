@@ -5,6 +5,7 @@ import { getTotalGPURam } from '../../commonMethods/displayInfo'
 export default {
   title: 'DisplayInfo - TotalGpuRam - 001',
   description: 'Get TotalGpuRam and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

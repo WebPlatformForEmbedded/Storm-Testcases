@@ -7,6 +7,7 @@ let hdcpProtectionArr = ['HdcpUnencrypted', 'HDCP1x', 'HDCP2x']
 export default {
   title: 'DisplayInfo - HDCP Protection - 001',
   description: 'Get HDCP Protection and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

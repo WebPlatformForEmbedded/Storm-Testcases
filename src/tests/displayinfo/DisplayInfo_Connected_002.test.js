@@ -5,6 +5,7 @@ import { getCurrentHDMIStatus } from '../../commonMethods/displayInfo'
 export default {
   title: 'DisplayInfo - Connected - 002',
   description: 'Get HDMI Connection Status and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

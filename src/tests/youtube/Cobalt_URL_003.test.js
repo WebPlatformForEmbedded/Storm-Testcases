@@ -8,6 +8,7 @@ export default {
   context: {
     url: '',
   },
+  plugin: [constants.youTubePlugin],
   steps: [
     {
       description: 'Deactivate Cobalt Plugin',

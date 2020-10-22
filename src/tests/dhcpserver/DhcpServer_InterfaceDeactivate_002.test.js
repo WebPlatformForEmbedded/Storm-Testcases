@@ -12,6 +12,7 @@ export default {
       () => pluginActivate.call(this, constants.dhcpserver),
     ])
   },
+  plugin: [constants.dhcpserver],
   context: {
     interface: 'eth0',
   },

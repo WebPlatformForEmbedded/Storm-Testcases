@@ -9,6 +9,7 @@ export default {
   title: 'WPEWebkit stability redirect test',
   description:
     'Stress loads the system with redirects and see if the WPEWebkit process continues to operate nominally',
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => webKitBrowserStartAndResume.call(this),

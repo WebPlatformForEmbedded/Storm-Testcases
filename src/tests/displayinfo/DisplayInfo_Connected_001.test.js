@@ -7,6 +7,7 @@ let connectionStatus = [true, false]
 export default {
   title: 'DisplayInfo - Connected - 001',
   description: 'Get HDMI Connection Status and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

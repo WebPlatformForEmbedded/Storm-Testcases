@@ -37,6 +37,7 @@ export default {
   context: {
     url: 'http://cdn.metrological.com/static/storm/cc_time_v2.html?test_duration=168',
   },
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, 'WebKitBrowser'), //make sure the browser is turned off

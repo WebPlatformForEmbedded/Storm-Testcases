@@ -11,6 +11,7 @@ export default {
       () => pluginActivate.call(this, constants.volumeControl),
     ])
   },
+  plugin: [constants.volumeControl],
   steps: [
     {
       description: 'Set volume to Mute',

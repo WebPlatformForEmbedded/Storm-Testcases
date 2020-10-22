@@ -5,6 +5,7 @@ import { setHdcpProtection, getHdcpProtection } from '../../commonMethods/displa
 export default {
   title: 'DisplayInfo - HDCP Protection - 002',
   description: 'Set HDCP Protection to HDCP1x and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

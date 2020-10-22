@@ -7,6 +7,7 @@ let stbCapabilities = ['HDROff', 'HDR10', 'HDR10Plus', 'HDRDolbyVision', 'HDRTec
 export default {
   title: 'DisplayInfo - STB Capabilities 001',
   description: 'Get STB Capabilities and validate the result',
+  plugin: [constants.displayInfo],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.displayInfo),

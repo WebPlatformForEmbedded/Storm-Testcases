@@ -1,5 +1,6 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import { getLanguage } from '../../commonMethods/webKitBrowser'
+import constants from '../../commonMethods/constants'
 
 export default {
   title: 'Webkit Languages - 001  ',
@@ -13,6 +14,7 @@ export default {
       () => pluginActivate.call(this, 'WebKitBrowser'),
     ])
   },
+  plugin: [constants.webKitBrowserPlugin, constants.youTubePlugin, constants.uxplugin],
   steps: [
     {
       description: 'Get Language and validate the result',
