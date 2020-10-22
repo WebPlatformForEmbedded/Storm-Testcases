@@ -9,7 +9,7 @@ export default {
   description:
     'Starts and stops the Youtube plugin repeatedly and checks if everything is started correctly',
   repeat: 30,
-  plugin: [constants.youTubePlugin, constants.webKitBrowserPlugin, constants.uxplugin],
+  plugin: [constants.youTubePlugin],
   setup() {
     setSshHost(this.$thunder.api.options.host)
   },
@@ -57,7 +57,7 @@ export default {
   validate() {
     let cpuload = this.$data.read('cpuload')
     if (cpuload > 90) {
-      throw new Error('CPU load is greater than 90')
+      throw new Error(`CPU load is greater than 90 and is ${cpuload}`)
     } else {
       return true
     }

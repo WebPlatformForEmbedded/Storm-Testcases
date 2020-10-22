@@ -30,7 +30,9 @@ export default {
         if (res.code === 30 && res.message === 'ERROR_BAD_REQUEST') {
           return true
         } else {
-          throw new Error('Proper error message is not shown')
+          throw new Error(
+            `Proper error message is not shown and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

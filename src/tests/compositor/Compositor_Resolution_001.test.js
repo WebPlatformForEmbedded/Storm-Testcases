@@ -40,7 +40,7 @@ export default {
         if (res == this.$context.read('resolution')) {
           return true
         } else {
-          throw new Error('Resolution not set to ' + this.$context.read('resolution'))
+          throw new Error(`Resolution not set to  ${this.$context.read('resolution')}`)
         }
       },
     },

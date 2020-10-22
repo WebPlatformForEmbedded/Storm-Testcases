@@ -55,7 +55,7 @@ export default {
         if (res == this.$context.read('volume')) {
           return true
         } else {
-          throw new Error('Volume not set to ' + this.$context.read('volume'))
+          throw new Error(`Volume not set to ${this.$context.read('volume')}`)
         }
       },
     },

@@ -32,7 +32,9 @@ export default {
         if (res.code === 30 && res.message === 'ERROR_BAD_REQUEST') {
           return true
         } else {
-          throw new Error(`Error message is improper and is ${res}`)
+          throw new Error(
+            `Error message is improper while adding a key with invalid json format and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

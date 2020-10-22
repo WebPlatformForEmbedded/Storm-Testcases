@@ -38,7 +38,7 @@ export default {
         if (res === null) {
           return true
         } else {
-          throw new Error('Response is not as expected')
+          throw new Error('Response is not as expected while setting Cobalt URl')
         }
       },
     },
@@ -51,7 +51,7 @@ export default {
         if (res === this.$context.read('url')) {
           return true
         } else {
-          throw new Error('Response is ' + res + ' which is not as expected')
+          throw new Error(`Response is ${res} which is not as expected`)
         }
       },
     },

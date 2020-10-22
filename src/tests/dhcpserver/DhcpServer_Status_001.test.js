@@ -26,7 +26,7 @@ export default {
           return true
         } else {
           throw new Error(
-            'Proper error message is not shown when we try to get the dhcp status of invalid DHCP interface'
+            `Proper error message is not shown when we try to get the dhcp status of invalid DHCP interface and Error: {code: ${res.code}, message:${res.message}}`
           )
         }
       },

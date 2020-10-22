@@ -25,7 +25,9 @@ export default {
         if (res.code == '1' && res.message === 'ERROR_GENERAL') {
           return true
         } else {
-          throw new Error(`Invalid error message and is ${res}`)
+          throw new Error(
+            `Invalid error message in getting metadata of virtual remote and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

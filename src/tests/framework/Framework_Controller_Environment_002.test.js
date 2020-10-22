@@ -16,7 +16,7 @@ export default {
           return true
         } else {
           throw new Error(
-            'Proper error message is not shown while getting environment of invalid Environment'
+            `Proper error message is not shown while getting environment of invalid Environment and Error: {code: ${res.code}, message:${res.message}}`
           )
         }
       },

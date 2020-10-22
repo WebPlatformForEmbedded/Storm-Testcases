@@ -39,7 +39,7 @@ export default {
           return true
         } else {
           throw new Error(
-            'Proper error message is not shown when we activate already activated DHCP interface'
+            `Proper error message is not shown when we activate already activated DHCP interface and Error: {code: ${res.code}, message:${res.message}}`
           )
         }
       },

@@ -30,7 +30,9 @@ export default {
         if (res.code == '22' && res.message === 'ERROR_UNKNOWN_KEY') {
           return true
         } else {
-          throw new Error('Invalid error message shown')
+          throw new Error(
+            `Invalid error message shown while sending invalid keycode to device and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

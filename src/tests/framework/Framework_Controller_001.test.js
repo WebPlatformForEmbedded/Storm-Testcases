@@ -43,7 +43,7 @@ export default {
       validate(result) {
         let status = result.status
         if (status === 200) return true
-        else throw new Error('Status is not as expected')
+        else throw new Error(`Status is not as expected and is ${status}`)
       },
     },
   ],

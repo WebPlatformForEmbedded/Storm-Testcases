@@ -35,7 +35,7 @@ export default {
             let cpuload = this.$data.read('cpuload')
             this.$log('Cpu Load is', cpuload)
             if (cpuload > 90) {
-              throw new Error('CPU load is greater than 90')
+              throw new Error(`CPU load is greater than 90 and ${cpuload}`)
             } else {
               return true
             }

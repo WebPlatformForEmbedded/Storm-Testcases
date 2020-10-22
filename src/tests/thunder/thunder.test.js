@@ -61,7 +61,7 @@ export default {
           })
           .catch(err => err)
       },
-      params: 'https://www.metrological.com',
+      params: 'https://www.metrological.com/',
       assert: true,
     },
     {

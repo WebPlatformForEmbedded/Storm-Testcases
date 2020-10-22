@@ -16,7 +16,7 @@ export default {
           return true
         } else {
           throw new Error(
-            'Proper error message is not shown while getting plugin status for invalid plugin'
+            `Proper error message is not shown while getting plugin status for invalid plugin and Error: {code: ${res.code}, message:${res.message}}`
           )
         }
       },

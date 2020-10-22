@@ -29,7 +29,9 @@ export default {
         if (res.code === 2 && res.message === 'ERROR_UNAVAILABLE') {
           return true
         } else {
-          throw new Error('Error message improper while setting the opacity for invalid cli1ent')
+          throw new Error(
+            `Error message improper while setting the opacity for invalid cli1ent and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

@@ -4,6 +4,30 @@ let host
 export const setSshHost = h => (host = h)
 
 /**
+ * This function is used to get the HostIP address
+ * @returns {*}
+ */
+export const deviceIP = function() {
+  return this.thunderJS.api.options.host
+}
+
+import ThunderJS from 'ThunderJS'
+const thunderJS = ThunderJS(deviceIP)
+/**
+ * This method is used to get device Name
+ * @returns {Promise<unknown>}
+ */
+const getDeviceName = () => {
+  return new Promise(resolve => {
+    thunderJS.DeviceInfo.systeminfo()
+      .then(result => {
+        resolve(result.devicename)
+      })
+      .catch(err => console.log('error is', err))
+  })
+}
+
+/**
  * Generic ssh execute function, used mostly internally
  */
 const exec = opts => {
@@ -67,9 +91,18 @@ export const killProcess = process => {
 /**
  * check if process is running on the device
  */
-export const checkIfProcessIsRunning = process => {
-  let opts = {
-    cmd: `ps w | grep ${process} | grep -v grep | awk ` + "'{printf(" + '"%i \\n\\r", $1)}' + "'",
+export const checkIfProcessIsRunning = async process => {
+  let deviceName = await getDeviceName.call()
+  let opts
+  if (deviceName.includes('rdk')) {
+    opts = {
+      cmd:
+        `ps -ef | grep ${process} | grep -v grep | awk ` + "'{printf(" + '"%i \\n\\r", $1)}' + "'",
+    }
+  } else {
+    opts = {
+      cmd: `ps w | grep ${process} | grep -v grep | awk ` + "'{printf(" + '"%i \\n\\r", $1)}' + "'",
+    }
   }
 
   return exec(opts).then(res => {

@@ -1,4 +1,4 @@
-import { setPowerState } from '../../commonMethods/powerPlugin'
+import { getPowerState, setPowerState } from '../../commonMethods/powerPlugin'
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
 
@@ -20,11 +20,16 @@ export default {
     {
       description: 'Set power state and validate the result',
       test() {
-        return setPowerState.call(
-          this,
-          this.$context.read('powerState'),
-          this.$context.read('timeOut')
-        )
+        let currentPowerState = getPowerState.call(this)
+        if (currentPowerState != this.$context.read('powerState')) {
+          return setPowerState.call(
+            this,
+            this.$context.read('powerState'),
+            this.$context.read('timeOut')
+          )
+        } else {
+          return null
+        }
       },
       validate(res) {
         if (res === null) {
@@ -47,7 +52,9 @@ export default {
         if (res.code === 29 && res.message === 'ERROR_DUPLICATE_KEY') {
           return true
         } else {
-          throw new Error('Proper error message is not shown')
+          throw new Error(
+            `Proper error message is not shown and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

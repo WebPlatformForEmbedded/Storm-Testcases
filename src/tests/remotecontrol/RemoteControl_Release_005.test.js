@@ -18,7 +18,7 @@ export default {
   },
   steps: [
     {
-      description: 'Invoke Send with invalid json format and validate the result',
+      description: 'Invoke Release with invalid json format and validate the result',
       test() {
         return releaseKey.call(this, this.$context.read('deviceName'), this.$context.read('code'))
       },
@@ -26,7 +26,9 @@ export default {
         if (res.code === 30 && res.message === 'ERROR_BAD_REQUEST') {
           return true
         } else {
-          throw new Error(`Error message is improper and is ${res}`)
+          throw new Error(
+            `Error message is improper while releasing keycode with invalid json format and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

@@ -47,6 +47,20 @@ export default {
       },
     },
     {
+      description: 'Press Ok to continue playing video',
+      sleep: 20,
+      test() {
+        return this.$thunder.remoteControl.key('ok')
+      },
+      validate(res) {
+        if (res === null) {
+          return true
+        } else {
+          throw new Error('Ok button not pressed')
+        }
+      },
+    },
+    {
       description: 'Set Cobalt URL with the video URL which plays for 8 hours',
       sleep: 20,
       test() {

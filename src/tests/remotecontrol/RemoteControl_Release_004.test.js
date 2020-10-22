@@ -26,7 +26,9 @@ export default {
         if (res.code === 36 && res.message === 'ERROR_ALREADY_RELEASED') {
           return true
         } else {
-          throw new Error(`Release key code returned wrong result and is ${res}`)
+          throw new Error(
+            `Release key code returned wrong result and Error: {code: ${res.code}, message:${res.message}}`
+          )
         }
       },
     },

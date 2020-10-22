@@ -55,6 +55,20 @@ export default {
       //TODO - Implement validation for Cobalt URL
     },
     {
+      description: 'Press Ok to continue playing video',
+      sleep: 20,
+      test() {
+        return this.$thunder.remoteControl.key('ok')
+      },
+      validate(res) {
+        if (res === null) {
+          return true
+        } else {
+          throw new Error('Ok button not pressed')
+        }
+      },
+    },
+    {
       description: 'Check if Youtube is playing for 30 minutes',
       sleep: 20,
       test: screenshot,
@@ -63,6 +77,7 @@ export default {
       },
       validate() {
         let resp = this.$data.read('screenshotResult')
+        console.log('Response is', resp)
         if (resp !== undefined && resp.length > 0) {
           let prevScreenshot = this.$data.read('prevScreenshot')
           if (

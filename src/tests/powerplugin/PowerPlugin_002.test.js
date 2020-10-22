@@ -22,11 +22,16 @@ export default {
       description: 'Set power state and validate the result',
       sleep: 5,
       test() {
-        return setPowerState.call(
-          this,
-          this.$context.read('powerState'),
-          this.$context.read('timeOut')
-        )
+        let currentPowerState = getPowerState.call(this)
+        if (currentPowerState != this.$context.read('powerState')) {
+          return setPowerState.call(
+            this,
+            this.$context.read('powerState'),
+            this.$context.read('timeOut')
+          )
+        } else {
+          return null
+        }
       },
       validate(res) {
         if (res === null) {

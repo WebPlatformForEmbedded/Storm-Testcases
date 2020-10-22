@@ -33,7 +33,7 @@ export default {
         if (res == null) {
           return true
         } else {
-          throw new Error(`Result is not as expected and is ${res}`)
+          throw new Error(`Result is not as expected while resuming webkit and is ${res}`)
         }
       },
     },
