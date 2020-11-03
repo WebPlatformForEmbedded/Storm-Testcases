@@ -1,5 +1,6 @@
 import { pluginActivate, pluginDeactivate } from '../../commonMethods/controller'
 import constants from '../../commonMethods/constants'
+import { setWebKitUrl } from '../../commonMethods/webKitBrowser'
 
 export default {
   title: 'Thunder',
@@ -20,6 +21,7 @@ export default {
       () => pluginDeactivate.call(this, constants.deviceInfo),
       () => pluginActivate.call(this, constants.deviceInfo),
       () => pluginActivate.call(this, constants.webKitBrowserPlugin),
+      () => setWebKitUrl.call(this, constants.blankUrl),
       () => {
         return this.$thunder.api.call(constants.webKitBrowserPlugin, 'state', constants.resume)
       },

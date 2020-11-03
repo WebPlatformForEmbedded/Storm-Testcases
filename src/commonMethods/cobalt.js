@@ -118,3 +118,14 @@ export const suspendOrResumeCobaltPlugin = function(state) {
     .then(result => result)
     .catch(err => err)
 }
+
+/**
+ * This function deletes the content from persistent storage
+ * @param status
+ * @returns {Promise<T>}
+ */
+export const deleteFromDirectory = function(status) {
+  return this.$thunder.api.Cobalt.visibility(status)
+    .then(res => res)
+    .catch(err => err)
+}
