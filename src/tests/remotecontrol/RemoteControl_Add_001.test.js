@@ -14,7 +14,6 @@ export default {
     keyCode: '10000',
     key: 10300,
   },
-
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.remoteControlPlugin),

@@ -10,7 +10,7 @@ export default {
     keyCode: '1,',
     key: 103,
   },
-  plugin: [constants.locationSyncPlugin],
+  plugin: [constants.remoteControlPlugin],
   setup() {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.remoteControlPlugin),

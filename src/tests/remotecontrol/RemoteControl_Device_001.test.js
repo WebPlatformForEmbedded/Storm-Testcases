@@ -14,7 +14,7 @@ export default {
       () => pluginActivate.call(this, constants.remoteControlPlugin),
     ])
   },
-  plugin: [constants.locationSyncPlugin],
+  plugin: [constants.remoteControlPlugin],
   steps: [
     {
       description: 'Gets meta data of remote control device and validate the result',
