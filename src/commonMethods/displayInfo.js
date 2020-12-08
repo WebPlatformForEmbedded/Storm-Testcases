@@ -1,14 +1,4 @@
 /**
- * This function is used to get Display Info
- * @returns {Promise<T>}
- */
-export const getDisplayInfo = function() {
-  return this.$thunder.api.DisplayInfo.displayinfo()
-    .then(result => result)
-    .catch(err => err)
-}
-
-/**
  * This function is used to get Edid Info
  * @param edid
  * @returns {Promise<*>}
@@ -146,6 +136,26 @@ export const getStbCapabilities = function() {
  */
 export const getHdrSetting = function() {
   return this.$thunder.api.DisplayInfo.hdrsetting()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Width in Centimeters
+ * @returns {Promise<*>}
+ */
+export const getWidthInCentimeters = function() {
+  return this.$thunder.api.DisplayInfo.widthincentimeters()
+    .then(result => result)
+    .catch(err => err)
+}
+
+/**
+ * This function is used to get Height in Centimeters
+ * @returns {Promise<*>}
+ */
+export const getHeightInCentimeters = function() {
+  return this.$thunder.api.DisplayInfo.heightincentimeters()
     .then(result => result)
     .catch(err => err)
 }
