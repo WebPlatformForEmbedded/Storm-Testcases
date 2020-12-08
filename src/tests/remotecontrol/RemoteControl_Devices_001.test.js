@@ -11,7 +11,7 @@ export default {
       () => pluginActivate.call(this, constants.remoteControlPlugin),
     ])
   },
-  plugin: [constants.locationSyncPlugin],
+  plugin: [constants.remoteControlPlugin],
   steps: [
     {
       description: 'Get remote control devices and validate the result',
