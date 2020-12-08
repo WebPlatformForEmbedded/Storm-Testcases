@@ -30,6 +30,7 @@ export default {
   invalidAddress: 'invalidstring',
   invalidPlugin: 'invalidplugin',
   displayInfo: 'DisplayInfo',
+  performanceMonitor: 'PerformanceMonitor',
 
   hidden: 'hidden',
   visible: 'visible',
