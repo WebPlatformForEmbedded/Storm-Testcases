@@ -17,6 +17,8 @@ export default {
     return this.$sequence([
       () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
       () => pluginDeactivate.call(this, constants.uxplugin),
+      () => pluginDeactivate.call(this, constants.compositorPlugin),
+      () => pluginActivate.call(this, constants.compositorPlugin),
       () => pluginDeactivate.call(this, constants.netFlixPlugin),
       () => pluginDeactivate.call(this, constants.youTubePlugin),
       () => pluginActivate.call(this, constants.webKitBrowserPlugin),

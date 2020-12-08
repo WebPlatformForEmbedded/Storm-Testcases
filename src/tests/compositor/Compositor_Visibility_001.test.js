@@ -8,10 +8,10 @@ export default {
   description: 'Sets the client visibility and validates the result',
   setup() {
     return this.$sequence([
-      () => pluginDeactivate.call(this, constants.compositorPlugin),
-      () => pluginActivate.call(this, constants.compositorPlugin),
       () => pluginDeactivate.call(this, constants.webKitBrowserPlugin),
       () => pluginDeactivate.call(this, constants.uxplugin),
+      () => pluginDeactivate.call(this, constants.compositorPlugin),
+      () => pluginActivate.call(this, constants.compositorPlugin),
       () => pluginActivate.call(this, constants.webKitBrowserPlugin),
       () => setWebKitUrl.call(this, constants.blankUrl),
       () => {
