@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "http": "0.0.0",
-    "http-server": "^0.12.3",
+    "http-server": "^14.1.1",
     "httpclient": "^0.1.0",
     "moment": "^2.29.4",
     "node-resemble-js": "^0.2.0",
